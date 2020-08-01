@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Khachhang" table="khachhang" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maKh" type="int">
+            <column name="maKH" />
+            <generator class="assigned" />
+        </id>
+        <property name="hoTen" type="string">
+            <column name="HoTen" />
+        </property>
+        <property name="sdt" type="string">
+            <column name="SDT" />
+        </property>
+        <property name="gioiTinh" type="string">
+            <column name="GioiTinh" />
+        </property>
+        <property name="ngaySinh" type="date">
+            <column name="NgaySinh" length="10" />
+        </property>
+        <one-to-one name="khachvietnam" class="pojos.Khachvietnam"></one-to-one>
+        <one-to-one name="khachnuocngoai" class="pojos.Khachnuocngoai"></one-to-one>
+        <set name="phieus" table="phieu" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maKH" />
+            </key>
+            <one-to-many class="pojos.Phieu" />
+        </set>
+        <set name="hoadonmuaves" table="hoadonmuave" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maKH" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Hoadonmuave" />
+        </set>
+    </class>
+</hibernate-mapping>

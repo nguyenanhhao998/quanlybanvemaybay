@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Giahangvetheocb" table="giahangvetheocb" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <composite-id name="id" class="pojos.GiahangvetheocbId">
+            <key-property name="maCb" type="string">
+                <column name="MaCB" />
+            </key-property>
+            <key-property name="maHangVe" type="string">
+                <column name="MaHangVe" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" update="false" insert="false" fetch="select">
+            <column name="MaCB" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hangve" class="pojos.Hangve" update="false" insert="false" fetch="select">
+            <column name="MaHangVe" not-null="true" />
+        </many-to-one>
+        <property name="giaHienTai" type="big_decimal">
+            <column name="GiaHienTai" precision="65" scale="0" not-null="true" />
+        </property>
+        <set name="lichsugiahangvecbs" table="lichsugiahangvecb" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaCB" not-null="true" />
+                <column name="MaHangVe" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Lichsugiahangvecb" />
+        </set>
+    </class>
+</hibernate-mapping>

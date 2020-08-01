@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Nhanvien" table="nhanvien" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="idNhanVien" type="int">
+            <column name="idNhanVien" />
+            <generator class="assigned" />
+        </id>
+        <property name="hoTen" type="string">
+            <column name="HoTen" not-null="true" />
+        </property>
+        <property name="gioiTinh" type="string">
+            <column name="GioiTinh" />
+        </property>
+        <property name="ngaySinh" type="date">
+            <column name="NgaySinh" length="10" />
+        </property>
+        <property name="sdt" type="string">
+            <column name="SDT" />
+        </property>
+        <property name="cmnd" type="string">
+            <column name="CMND" />
+        </property>
+        <one-to-one name="nvbanve" class="pojos.Nvbanve"></one-to-one>
+        <one-to-one name="taikhoan" class="pojos.Taikhoan"></one-to-one>
+        <one-to-one name="admin" class="pojos.Admin"></one-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Hoadonmuave" table="hoadonmuave" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="idHoaDon" type="java.lang.Integer">
+            <column name="idHoaDon" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="khachhang" class="pojos.Khachhang" fetch="select">
+            <column name="maKH" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vechuyenbay" class="pojos.Vechuyenbay" fetch="select">
+            <column name="MaSoVe" not-null="true" />
+        </many-to-one>
+        <property name="ngayMua" type="timestamp">
+            <column name="NgayMua" length="26" not-null="true" />
+        </property>
+        <property name="giaVe" type="double">
+            <column name="GiaVe" precision="255" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

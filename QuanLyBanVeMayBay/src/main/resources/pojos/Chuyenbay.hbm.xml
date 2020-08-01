@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Chuyenbay" table="chuyenbay" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maCb" type="string">
+            <column name="MaCB" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="sanbayByMaSbden" class="pojos.Sanbay" fetch="select">
+            <column name="MaSBDen" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sanbayByMaSbdi" class="pojos.Sanbay" fetch="select">
+            <column name="MaSBDi" not-null="true" />
+        </many-to-one>
+        <property name="ngayKhoiHanh" type="timestamp">
+            <column name="NgayKhoiHanh" length="26" />
+        </property>
+        <property name="thoiGianBay" type="java.lang.Float">
+            <column name="ThoiGianBay" precision="255" scale="0" />
+        </property>
+        <property name="tinhTrang" type="string">
+            <column name="TinhTrang" />
+        </property>
+        <set name="giahangvetheocbs" table="giahangvetheocb" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaCB" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Giahangvetheocb" />
+        </set>
+        <set name="vechuyenbays" table="vechuyenbay" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaCB" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Vechuyenbay" />
+        </set>
+        <set name="sanbaytrunggians" table="sanbaytrunggian" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaCB" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Sanbaytrunggian" />
+        </set>
+        <set name="phieuchos" table="phieucho" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maCB" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Phieucho" />
+        </set>
+    </class>
+</hibernate-mapping>

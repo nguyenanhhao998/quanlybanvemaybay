@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Khachnuocngoai" table="khachnuocngoai" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maKh" type="int">
+            <column name="maKH" />
+            <generator class="foreign">
+                <param name="property">khachhang</param>
+            </generator>
+        </id>
+        <one-to-one name="khachhang" class="pojos.Khachhang" constrained="true"></one-to-one>
+        <property name="quocTich" type="string">
+            <column name="QuocTich" />
+        </property>
+        <property name="hoChieu" type="string">
+            <column name="HoChieu" />
+        </property>
+    </class>
+</hibernate-mapping>
