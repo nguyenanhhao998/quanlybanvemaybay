@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 01/08/2020 21:50:43
+ Date: 01/08/2020 22:43:16
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `hoadonmuave`;
 CREATE TABLE `hoadonmuave`  (
   `idHoaDon` int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NgayMua` datetime(6) NOT NULL,
-  `GiaVe` double(255, 0) NOT NULL,
+  `GiaVe` decimal(65, 0) NOT NULL,
   `maKH` int(255) UNSIGNED NOT NULL,
   `MaSoVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`idHoaDon`) USING BTREE,
