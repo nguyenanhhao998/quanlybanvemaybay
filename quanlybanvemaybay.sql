@@ -2,6 +2,28 @@ DROP database if exists `quanlybanvemaybay`;
 CREATE database `quanlybanvemaybay`;
 USE `quanlybanvemaybay`;
 
+<<<<<<< HEAD:quanlybanvemaybay.sql
+=======
+ Source Server         : qlbanvemaybay
+ Source Server Type    : MySQL
+ Source Server Version : 80017
+ Source Host           : localhost:3306
+ Source Schema         : qlbanvemaybay
+
+ Target Server Type    : MySQL
+ Target Server Version : 80017
+ File Encoding         : 65001
+
+ Date: 02/08/2020 22:06:57
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+>>>>>>> 6b19ebc8e7c019bdde1d8c12bd6ad630b4cabc48:qlbanvemaybay.sql
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
   `idNhanVien` int(255) UNSIGNED NOT NULL,
@@ -33,7 +55,11 @@ DROP TABLE IF EXISTS `giahangvetheocb`;
 CREATE TABLE `giahangvetheocb`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaHangVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+<<<<<<< HEAD:quanlybanvemaybay.sql
   `GiaHienTai` double NOT NULL,
+=======
+  `GiaHienTai` double(255, 0) NOT NULL,
+>>>>>>> 6b19ebc8e7c019bdde1d8c12bd6ad630b4cabc48:qlbanvemaybay.sql
   PRIMARY KEY (`MaCB`, `MaHangVe`) USING BTREE,
   INDEX `MaHangVe`(`MaHangVe`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
@@ -61,8 +87,15 @@ CREATE TABLE `hoadonmuave`  (
   `MaSoVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`idHoaDon`) USING BTREE,
   INDEX `maKH`(`maKH`) USING BTREE,
+<<<<<<< HEAD:quanlybanvemaybay.sql
   INDEX `hoadonmuave_ibfk_2`(`MaSoVe`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+=======
+  INDEX `hoadonmuave_ibfk_2`(`MaSoVe`) USING BTREE,
+  CONSTRAINT `hoadonmuave_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `hoadonmuave_ibfk_2` FOREIGN KEY (`MaSoVe`) REFERENCES `vechuyenbay` (`MaSoVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+>>>>>>> 6b19ebc8e7c019bdde1d8c12bd6ad630b4cabc48:qlbanvemaybay.sql
 
 
 
@@ -77,7 +110,7 @@ CREATE TABLE `khachhang`  (
   `GioiTinh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `NgaySinh` date NULL DEFAULT NULL,
   PRIMARY KEY (`maKH`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 
 -- ----------------------------
@@ -115,10 +148,18 @@ CREATE TABLE `lichsugiahangvecb`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaHangVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `NgayCapNhat` datetime(6) NOT NULL,
+<<<<<<< HEAD:quanlybanvemaybay.sql
   `GiaCapNhat` double NOT NULL,
   PRIMARY KEY (`idCapNhat`) USING BTREE,
   INDEX `MaCB`(`MaCB`, `MaHangVe`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+=======
+  `GiaCapNhat` double(255, 0) NOT NULL,
+  PRIMARY KEY (`idCapNhat`) USING BTREE,
+  INDEX `MaCB`(`MaCB`, `MaHangVe`) USING BTREE,
+  CONSTRAINT `lichsugiahangvecb_ibfk_1` FOREIGN KEY (`MaCB`, `MaHangVe`) REFERENCES `giahangvetheocb` (`MaCB`, `MaHangVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+>>>>>>> 6b19ebc8e7c019bdde1d8c12bd6ad630b4cabc48:qlbanvemaybay.sql
 
 
 
@@ -134,7 +175,7 @@ CREATE TABLE `nhanvien`  (
   `SDT` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `CMND` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idNhanVien`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nvbanve
@@ -157,8 +198,14 @@ CREATE TABLE `phieu`  (
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `maKH` int(255) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`idPhieu`) USING BTREE,
+<<<<<<< HEAD:quanlybanvemaybay.sql
   INDEX `maKH`(`maKH`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+=======
+  INDEX `maKH`(`maKH`) USING BTREE,
+  CONSTRAINT `phieu_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+>>>>>>> 6b19ebc8e7c019bdde1d8c12bd6ad630b4cabc48:qlbanvemaybay.sql
 
 
 
@@ -197,7 +244,7 @@ CREATE TABLE `quydinh`  (
   `GiaTri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idQuyDinh`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sanbay
@@ -208,7 +255,7 @@ CREATE TABLE `sanbay`  (
   `TenSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `ThanhPho` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaSB`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sanbaytrunggian
