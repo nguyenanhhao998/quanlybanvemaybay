@@ -1,33 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Vechuyenbay" table="vechuyenbay" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="maSoVe" type="string">
-            <column name="MaSoVe" />
-            <generator class="assigned" />
-        </id>
-        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" fetch="select">
-            <column name="MaCB" not-null="true" />
-        </many-to-one>
-        <many-to-one name="hangve" class="pojos.Hangve" fetch="select">
-            <column name="MaHangVe" not-null="true" />
-        </many-to-one>
-        <property name="tinhTrang" type="string">
-            <column name="TinhTrang" />
-        </property>
-        <set name="phieudatchos" table="phieudatcho" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="MaSoVe" not-null="true" />
-            </key>
-            <one-to-many class="pojos.Phieudatcho" />
-        </set>
-        <set name="hoadonmuaves" table="hoadonmuave" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="MaSoVe" not-null="true" />
-            </key>
-            <one-to-many class="pojos.Hoadonmuave" />
-        </set>
-    </class>
+  <class catalog="quanlybanvemaybay" name="pojos.Vechuyenbay" optimistic-lock="version" table="vechuyenbay">
+    <id name="maSoVe" type="string">
+      <column name="MaSoVe"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="pojos.Chuyenbay" fetch="select" name="chuyenbay">
+      <column name="MaCB" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="pojos.Hangve" fetch="select" name="hangve">
+      <column name="MaHangVe" not-null="true"/>
+    </many-to-one>
+    <property name="tinhTrang" type="string">
+      <column name="TinhTrang"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="phieudatchos" table="phieudatcho">
+      <key>
+        <column name="MaSoVe" not-null="true"/>
+      </key>
+      <one-to-many class="pojos.Phieudatcho"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="hoadonmuaves" table="hoadonmuave">
+      <key>
+        <column name="MaSoVe" not-null="true"/>
+      </key>
+      <one-to-many class="pojos.Hoadonmuave"/>
+    </set>
+  </class>
 </hibernate-mapping>

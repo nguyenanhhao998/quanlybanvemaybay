@@ -46,25 +46,24 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quanlybanvemaybay</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <mapping resource="pojos/Lichsugiahangvecb.hbm.xml"/>
     <mapping resource="pojos/Quydinh.hbm.xml"/>
-    <mapping resource="pojos/Sanbaytrunggian.hbm.xml"/>
+    <mapping resource="pojos/Phieu.hbm.xml"/>
+    <mapping resource="pojos/Phieucho.hbm.xml"/>
+    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>
     <mapping resource="pojos/Taikhoan.hbm.xml"/>
     <mapping resource="pojos/Sanbay.hbm.xml"/>
-    <mapping resource="pojos/Chuyenbay.hbm.xml"/>
+    <mapping resource="pojos/Hoadonmuave.hbm.xml"/>
     <mapping resource="pojos/Nvbanve.hbm.xml"/>
     <mapping resource="pojos/Admin.hbm.xml"/>
+    <mapping resource="pojos/Chuyenbay.hbm.xml"/>
     <mapping resource="pojos/Khachnuocngoai.hbm.xml"/>
-    <mapping resource="pojos/Nhanvien.hbm.xml"/>
-    <mapping resource="pojos/Phieucho.hbm.xml"/>
     <mapping resource="pojos/Khachhang.hbm.xml"/>
-    <mapping resource="pojos/Phieu.hbm.xml"/>
     <mapping resource="pojos/Hangve.hbm.xml"/>
-    <mapping resource="pojos/Giahangvetheocb.hbm.xml"/>
-    <mapping resource="pojos/Hoadonmuave.hbm.xml"/>
-    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>
+    <mapping resource="pojos/Sanbaytrunggian.hbm.xml"/>
     <mapping resource="pojos/Phieudatcho.hbm.xml"/>
+    <mapping resource="pojos/Giahangvetheocb.hbm.xml"/>
+    <mapping resource="pojos/Lichsugiahangvecb.hbm.xml"/>
+    <mapping resource="pojos/Nhanvien.hbm.xml"/>
     <mapping resource="pojos/Khachvietnam.hbm.xml"/>
   </session-factory>
-  <session-factory/>
 </hibernate-configuration>

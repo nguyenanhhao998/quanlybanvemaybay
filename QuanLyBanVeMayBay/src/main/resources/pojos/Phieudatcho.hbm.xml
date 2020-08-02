@@ -1,18 +1,17 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Phieudatcho" table="phieudatcho" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="idPhieu" type="int">
-            <column name="idPhieu" />
-            <generator class="foreign">
-                <param name="property">phieu</param>
-            </generator>
-        </id>
-        <one-to-one name="phieu" class="pojos.Phieu" constrained="true"></one-to-one>
-        <many-to-one name="vechuyenbay" class="pojos.Vechuyenbay" fetch="select">
-            <column name="MaSoVe" not-null="true" />
-        </many-to-one>
-    </class>
+  <class catalog="quanlybanvemaybay" name="pojos.Phieudatcho" optimistic-lock="version" table="phieudatcho">
+    <id name="idPhieu" type="int">
+      <column name="idPhieu"/>
+      <generator class="foreign">
+        <param name="property">phieu</param>
+      </generator>
+    </id>
+    <one-to-one class="pojos.Phieu" constrained="true" name="phieu"/>
+    <many-to-one class="pojos.Vechuyenbay" fetch="select" name="vechuyenbay">
+      <column name="MaSoVe" not-null="true"/>
+    </many-to-one>
+  </class>
 </hibernate-mapping>

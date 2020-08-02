@@ -41,23 +41,23 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="quanlybanvemaybay"/>
-  <table-filter match-name="phieudatcho"/>
-  <table-filter match-name="sanbaytrunggian"/>
-  <table-filter match-name="khachnuocngoai"/>
   <table-filter match-name="quydinh"/>
-  <table-filter match-name="hoadonmuave"/>
-  <table-filter match-name="nhanvien"/>
-  <table-filter match-name="taikhoan"/>
-  <table-filter match-name="sanbay"/>
-  <table-filter match-name="hangve"/>
-  <table-filter match-name="khachvietnam"/>
-  <table-filter match-name="phieucho"/>
-  <table-filter match-name="lichsugiahangvecb"/>
-  <table-filter match-name="nvbanve"/>
-  <table-filter match-name="khachhang"/>
+  <table-filter match-name="khachnuocngoai"/>
   <table-filter match-name="giahangvetheocb"/>
   <table-filter match-name="chuyenbay"/>
-  <table-filter match-name="phieu"/>
+  <table-filter match-name="lichsugiahangvecb"/>
+  <table-filter match-name="hoadonmuave"/>
+  <table-filter match-name="khachhang"/>
+  <table-filter match-name="khachvietnam"/>
+  <table-filter match-name="nvbanve"/>
+  <table-filter match-name="hangve"/>
   <table-filter match-name="admin"/>
+  <table-filter match-name="nhanvien"/>
+  <table-filter match-name="taikhoan"/>
+  <table-filter match-name="phieu"/>
+  <table-filter match-name="phieudatcho"/>
+  <table-filter match-name="sanbaytrunggian"/>
   <table-filter match-name="vechuyenbay"/>
+  <table-filter match-name="sanbay"/>
+  <table-filter match-name="phieucho"/>
 </hibernate-reverse-engineering>

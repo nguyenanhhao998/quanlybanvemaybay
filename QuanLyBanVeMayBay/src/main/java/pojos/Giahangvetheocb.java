@@ -1,8 +1,7 @@
 package pojos;
-// Generated Aug 2, 2020, 12:12:11 AM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,20 +14,20 @@ public class Giahangvetheocb  implements java.io.Serializable {
      private GiahangvetheocbId id;
      private Chuyenbay chuyenbay;
      private Hangve hangve;
-     private BigDecimal giaHienTai;
+     private double giaHienTai;
      private Set lichsugiahangvecbs = new HashSet(0);
 
     public Giahangvetheocb() {
     }
 
 	
-    public Giahangvetheocb(GiahangvetheocbId id, Chuyenbay chuyenbay, Hangve hangve, BigDecimal giaHienTai) {
+    public Giahangvetheocb(GiahangvetheocbId id, Chuyenbay chuyenbay, Hangve hangve, double giaHienTai) {
         this.id = id;
         this.chuyenbay = chuyenbay;
         this.hangve = hangve;
         this.giaHienTai = giaHienTai;
     }
-    public Giahangvetheocb(GiahangvetheocbId id, Chuyenbay chuyenbay, Hangve hangve, BigDecimal giaHienTai, Set lichsugiahangvecbs) {
+    public Giahangvetheocb(GiahangvetheocbId id, Chuyenbay chuyenbay, Hangve hangve, double giaHienTai, Set lichsugiahangvecbs) {
        this.id = id;
        this.chuyenbay = chuyenbay;
        this.hangve = hangve;
@@ -57,11 +56,11 @@ public class Giahangvetheocb  implements java.io.Serializable {
     public void setHangve(Hangve hangve) {
         this.hangve = hangve;
     }
-    public BigDecimal getGiaHienTai() {
+    public double getGiaHienTai() {
         return this.giaHienTai;
     }
     
-    public void setGiaHienTai(BigDecimal giaHienTai) {
+    public void setGiaHienTai(double giaHienTai) {
         this.giaHienTai = giaHienTai;
     }
     public Set getLichsugiahangvecbs() {

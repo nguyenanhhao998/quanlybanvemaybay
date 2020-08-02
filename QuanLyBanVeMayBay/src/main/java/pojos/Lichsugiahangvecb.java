@@ -1,8 +1,7 @@
 package pojos;
-// Generated Aug 2, 2020, 12:12:11 AM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,12 +13,12 @@ public class Lichsugiahangvecb  implements java.io.Serializable {
      private Integer idCapNhat;
      private Giahangvetheocb giahangvetheocb;
      private Date ngayCapNhat;
-     private BigDecimal giaCapNhat;
+     private double giaCapNhat;
 
     public Lichsugiahangvecb() {
     }
 
-    public Lichsugiahangvecb(Giahangvetheocb giahangvetheocb, Date ngayCapNhat, BigDecimal giaCapNhat) {
+    public Lichsugiahangvecb(Giahangvetheocb giahangvetheocb, Date ngayCapNhat, double giaCapNhat) {
        this.giahangvetheocb = giahangvetheocb;
        this.ngayCapNhat = ngayCapNhat;
        this.giaCapNhat = giaCapNhat;
@@ -46,11 +45,11 @@ public class Lichsugiahangvecb  implements java.io.Serializable {
     public void setNgayCapNhat(Date ngayCapNhat) {
         this.ngayCapNhat = ngayCapNhat;
     }
-    public BigDecimal getGiaCapNhat() {
+    public double getGiaCapNhat() {
         return this.giaCapNhat;
     }
     
-    public void setGiaCapNhat(BigDecimal giaCapNhat) {
+    public void setGiaCapNhat(double giaCapNhat) {
         this.giaCapNhat = giaCapNhat;
     }
 

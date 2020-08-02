@@ -1,23 +1,22 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 12:12:12 AM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Phieu" table="phieu" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="idPhieu" type="java.lang.Integer">
-            <column name="idPhieu" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="khachhang" class="pojos.Khachhang" fetch="select">
-            <column name="maKH" />
-        </many-to-one>
-        <property name="ngayDat" type="timestamp">
-            <column name="NgayDat" length="26" not-null="true" />
-        </property>
-        <property name="tinhTrang" type="string">
-            <column name="TinhTrang" />
-        </property>
-        <one-to-one name="phieudatcho" class="pojos.Phieudatcho"></one-to-one>
-        <one-to-one name="phieucho" class="pojos.Phieucho"></one-to-one>
-    </class>
+  <class catalog="quanlybanvemaybay" name="pojos.Phieu" optimistic-lock="version" table="phieu">
+    <id name="idPhieu" type="java.lang.Integer">
+      <column name="idPhieu"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojos.Khachhang" fetch="select" name="khachhang">
+      <column name="maKH"/>
+    </many-to-one>
+    <property name="ngayDat" type="timestamp">
+      <column length="26" name="NgayDat" not-null="true"/>
+    </property>
+    <property name="tinhTrang" type="string">
+      <column name="TinhTrang"/>
+    </property>
+    <one-to-one class="pojos.Phieudatcho" name="phieudatcho"/>
+    <one-to-one class="pojos.Phieucho" name="phieucho"/>
+  </class>
 </hibernate-mapping>
