@@ -1,5 +1,5 @@
 package pojos;
-// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 11:17:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
 public class Nhanvien  implements java.io.Serializable {
 
 
-     private int idNhanVien;
+     private Integer idNhanVien;
      private String hoTen;
      private String gioiTinh;
      private Date ngaySinh;
@@ -24,12 +24,10 @@ public class Nhanvien  implements java.io.Serializable {
     }
 
 	
-    public Nhanvien(int idNhanVien, String hoTen) {
-        this.idNhanVien = idNhanVien;
+    public Nhanvien(String hoTen) {
         this.hoTen = hoTen;
     }
-    public Nhanvien(int idNhanVien, String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Nvbanve nvbanve, Taikhoan taikhoan, Admin admin) {
-       this.idNhanVien = idNhanVien;
+    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Nvbanve nvbanve, Taikhoan taikhoan, Admin admin) {
        this.hoTen = hoTen;
        this.gioiTinh = gioiTinh;
        this.ngaySinh = ngaySinh;
@@ -40,11 +38,11 @@ public class Nhanvien  implements java.io.Serializable {
        this.admin = admin;
     }
    
-    public int getIdNhanVien() {
+    public Integer getIdNhanVien() {
         return this.idNhanVien;
     }
     
-    public void setIdNhanVien(int idNhanVien) {
+    public void setIdNhanVien(Integer idNhanVien) {
         this.idNhanVien = idNhanVien;
     }
     public String getHoTen() {

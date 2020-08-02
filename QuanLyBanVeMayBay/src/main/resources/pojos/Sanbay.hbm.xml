@@ -1,35 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Sanbay" optimistic-lock="version" table="sanbay">
-    <id name="maSb" type="int">
-      <column name="MaSB"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="tenSb" type="string">
-      <column name="TenSB"/>
-    </property>
-    <property name="thanhPho" type="string">
-      <column name="ThanhPho"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="chuyenbaysForMaSbden" table="chuyenbay">
-      <key>
-        <column name="MaSBDen" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Chuyenbay"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="chuyenbaysForMaSbdi" table="chuyenbay">
-      <key>
-        <column name="MaSBDi" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Chuyenbay"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="sanbaytrunggians" table="sanbaytrunggian">
-      <key>
-        <column name="MaSB" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Sanbaytrunggian"/>
-    </set>
-  </class>
+    <class name="pojos.Sanbay" table="sanbay" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maSb" type="java.lang.Integer">
+            <column name="MaSB" />
+            <generator class="identity" />
+        </id>
+        <property name="tenSb" type="string">
+            <column name="TenSB" />
+        </property>
+        <property name="thanhPho" type="string">
+            <column name="ThanhPho" />
+        </property>
+        <set name="chuyenbaysForMaSbden" table="chuyenbay" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaSBDen" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Chuyenbay" />
+        </set>
+        <set name="chuyenbaysForMaSbdi" table="chuyenbay" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaSBDi" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Chuyenbay" />
+        </set>
+        <set name="sanbaytrunggians" table="sanbaytrunggian" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaSB" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Sanbaytrunggian" />
+        </set>
+    </class>
 </hibernate-mapping>

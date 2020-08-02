@@ -1,5 +1,5 @@
 package pojos;
-// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 11:17:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class Khachhang  implements java.io.Serializable {
 
 
-     private int maKh;
+     private Integer maKh;
      private String hoTen;
      private String sdt;
      private String gioiTinh;
@@ -25,12 +25,7 @@ public class Khachhang  implements java.io.Serializable {
     public Khachhang() {
     }
 
-	
-    public Khachhang(int maKh) {
-        this.maKh = maKh;
-    }
-    public Khachhang(int maKh, String hoTen, String sdt, String gioiTinh, Date ngaySinh, Khachvietnam khachvietnam, Khachnuocngoai khachnuocngoai, Set phieus, Set hoadonmuaves) {
-       this.maKh = maKh;
+    public Khachhang(String hoTen, String sdt, String gioiTinh, Date ngaySinh, Khachvietnam khachvietnam, Khachnuocngoai khachnuocngoai, Set phieus, Set hoadonmuaves) {
        this.hoTen = hoTen;
        this.sdt = sdt;
        this.gioiTinh = gioiTinh;
@@ -41,11 +36,11 @@ public class Khachhang  implements java.io.Serializable {
        this.hoadonmuaves = hoadonmuaves;
     }
    
-    public int getMaKh() {
+    public Integer getMaKh() {
         return this.maKh;
     }
     
-    public void setMaKh(int maKh) {
+    public void setMaKh(Integer maKh) {
         this.maKh = maKh;
     }
     public String getHoTen() {

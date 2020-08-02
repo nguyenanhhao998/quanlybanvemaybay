@@ -1,31 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Giahangvetheocb" optimistic-lock="version" table="giahangvetheocb">
-    <composite-id class="pojos.GiahangvetheocbId" name="id">
-      <key-property name="maCb" type="string">
-        <column name="MaCB"/>
-      </key-property>
-      <key-property name="maHangVe" type="string">
-        <column name="MaHangVe"/>
-      </key-property>
-    </composite-id>
-    <many-to-one class="pojos.Chuyenbay" fetch="select" insert="false" name="chuyenbay" update="false">
-      <column name="MaCB" not-null="true"/>
-    </many-to-one>
-    <many-to-one class="pojos.Hangve" fetch="select" insert="false" name="hangve" update="false">
-      <column name="MaHangVe" not-null="true"/>
-    </many-to-one>
-    <property name="giaHienTai" type="double">
-      <column name="GiaHienTai" not-null="true" precision="22" scale="0"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="lichsugiahangvecbs" table="lichsugiahangvecb">
-      <key>
-        <column name="MaCB" not-null="true"/>
-        <column name="MaHangVe" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Lichsugiahangvecb"/>
-    </set>
-  </class>
+    <class name="pojos.Giahangvetheocb" table="giahangvetheocb" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <composite-id name="id" class="pojos.GiahangvetheocbId">
+            <key-property name="maCb" type="string">
+                <column name="MaCB" />
+            </key-property>
+            <key-property name="maHangVe" type="string">
+                <column name="MaHangVe" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" update="false" insert="false" fetch="select">
+            <column name="MaCB" not-null="true" />
+        </many-to-one>
+        <many-to-one name="hangve" class="pojos.Hangve" update="false" insert="false" fetch="select">
+            <column name="MaHangVe" not-null="true" />
+        </many-to-one>
+        <property name="giaHienTai" type="double">
+            <column name="GiaHienTai" precision="255" scale="0" not-null="true" />
+        </property>
+        <set name="lichsugiahangvecbs" table="lichsugiahangvecb" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaCB" not-null="true" />
+                <column name="MaHangVe" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Lichsugiahangvecb" />
+        </set>
+    </class>
 </hibernate-mapping>

@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Hangve" optimistic-lock="version" table="hangve">
-    <id name="maHangVe" type="string">
-      <column name="MaHangVe"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="tenHangVe" type="string">
-      <column name="TenHangVe"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="vechuyenbays" table="vechuyenbay">
-      <key>
-        <column name="MaHangVe" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Vechuyenbay"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="giahangvetheocbs" table="giahangvetheocb">
-      <key>
-        <column name="MaHangVe" not-null="true"/>
-      </key>
-      <one-to-many class="pojos.Giahangvetheocb"/>
-    </set>
-  </class>
+    <class name="pojos.Hangve" table="hangve" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maHangVe" type="string">
+            <column name="MaHangVe" />
+            <generator class="assigned" />
+        </id>
+        <property name="tenHangVe" type="string">
+            <column name="TenHangVe" />
+        </property>
+        <set name="vechuyenbays" table="vechuyenbay" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaHangVe" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Vechuyenbay" />
+        </set>
+        <set name="giahangvetheocbs" table="giahangvetheocb" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="MaHangVe" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Giahangvetheocb" />
+        </set>
+    </class>
 </hibernate-mapping>

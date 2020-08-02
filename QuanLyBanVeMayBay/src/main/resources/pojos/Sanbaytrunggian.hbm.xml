@@ -1,27 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Sanbaytrunggian" optimistic-lock="version" table="sanbaytrunggian">
-    <composite-id class="pojos.SanbaytrunggianId" name="id">
-      <key-property name="maCb" type="string">
-        <column name="MaCB"/>
-      </key-property>
-      <key-property name="maSb" type="int">
-        <column name="MaSB"/>
-      </key-property>
-    </composite-id>
-    <many-to-one class="pojos.Chuyenbay" fetch="select" insert="false" name="chuyenbay" update="false">
-      <column name="MaCB" not-null="true"/>
-    </many-to-one>
-    <many-to-one class="pojos.Sanbay" fetch="select" insert="false" name="sanbay" update="false">
-      <column name="MaSB" not-null="true"/>
-    </many-to-one>
-    <property name="thoiGianDung" type="float">
-      <column name="ThoiGianDung" not-null="true" precision="255" scale="0"/>
-    </property>
-    <property name="ghiChu" type="string">
-      <column name="GhiChu"/>
-    </property>
-  </class>
+    <class name="pojos.Sanbaytrunggian" table="sanbaytrunggian" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <composite-id name="id" class="pojos.SanbaytrunggianId">
+            <key-property name="maCb" type="string">
+                <column name="MaCB" />
+            </key-property>
+            <key-property name="maSb" type="int">
+                <column name="MaSB" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" update="false" insert="false" fetch="select">
+            <column name="MaCB" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sanbay" class="pojos.Sanbay" update="false" insert="false" fetch="select">
+            <column name="MaSB" not-null="true" />
+        </many-to-one>
+        <property name="thoiGianDung" type="float">
+            <column name="ThoiGianDung" precision="255" scale="0" not-null="true" />
+        </property>
+        <property name="ghiChu" type="string">
+            <column name="GhiChu" />
+        </property>
+    </class>
 </hibernate-mapping>

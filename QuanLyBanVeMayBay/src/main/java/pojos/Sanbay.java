@@ -1,5 +1,5 @@
 package pojos;
-// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 11:17:00 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Sanbay  implements java.io.Serializable {
 
 
-     private int maSb;
+     private Integer maSb;
      private String tenSb;
      private String thanhPho;
      private Set chuyenbaysForMaSbden = new HashSet(0);
@@ -21,12 +21,7 @@ public class Sanbay  implements java.io.Serializable {
     public Sanbay() {
     }
 
-	
-    public Sanbay(int maSb) {
-        this.maSb = maSb;
-    }
-    public Sanbay(int maSb, String tenSb, String thanhPho, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
-       this.maSb = maSb;
+    public Sanbay(String tenSb, String thanhPho, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
        this.tenSb = tenSb;
        this.thanhPho = thanhPho;
        this.chuyenbaysForMaSbden = chuyenbaysForMaSbden;
@@ -34,11 +29,11 @@ public class Sanbay  implements java.io.Serializable {
        this.sanbaytrunggians = sanbaytrunggians;
     }
    
-    public int getMaSb() {
+    public Integer getMaSb() {
         return this.maSb;
     }
     
-    public void setMaSb(int maSb) {
+    public void setMaSb(Integer maSb) {
         this.maSb = maSb;
     }
     public String getTenSb() {

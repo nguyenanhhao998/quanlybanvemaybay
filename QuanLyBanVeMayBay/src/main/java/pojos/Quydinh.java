@@ -1,5 +1,5 @@
 package pojos;
-// Generated Aug 2, 2020, 10:12:15 PM by Hibernate Tools 4.3.1
+// Generated Aug 2, 2020, 11:17:00 PM by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package pojos;
 public class Quydinh  implements java.io.Serializable {
 
 
-     private int idQuyDinh;
+     private Integer idQuyDinh;
      private String tenQuyDinh;
      private String kieu;
      private String giaTri;
@@ -18,23 +18,18 @@ public class Quydinh  implements java.io.Serializable {
     public Quydinh() {
     }
 
-	
-    public Quydinh(int idQuyDinh) {
-        this.idQuyDinh = idQuyDinh;
-    }
-    public Quydinh(int idQuyDinh, String tenQuyDinh, String kieu, String giaTri, String tinhTrang) {
-       this.idQuyDinh = idQuyDinh;
+    public Quydinh(String tenQuyDinh, String kieu, String giaTri, String tinhTrang) {
        this.tenQuyDinh = tenQuyDinh;
        this.kieu = kieu;
        this.giaTri = giaTri;
        this.tinhTrang = tinhTrang;
     }
    
-    public int getIdQuyDinh() {
+    public Integer getIdQuyDinh() {
         return this.idQuyDinh;
     }
     
-    public void setIdQuyDinh(int idQuyDinh) {
+    public void setIdQuyDinh(Integer idQuyDinh) {
         this.idQuyDinh = idQuyDinh;
     }
     public String getTenQuyDinh() {

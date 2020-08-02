@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Admin" optimistic-lock="version" table="admin">
-    <id name="idNhanVien" type="int">
-      <column name="idNhanVien"/>
-      <generator class="foreign">
-        <param name="property">nhanvien</param>
-      </generator>
-    </id>
-    <one-to-one class="pojos.Nhanvien" constrained="true" name="nhanvien"/>
-  </class>
+    <class name="pojos.Admin" table="admin" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="idNhanVien" type="int">
+            <column name="idNhanVien" />
+            <generator class="foreign">
+                <param name="property">nhanvien</param>
+            </generator>
+        </id>
+        <one-to-one name="nhanvien" class="pojos.Nhanvien" constrained="true"></one-to-one>
+    </class>
 </hibernate-mapping>

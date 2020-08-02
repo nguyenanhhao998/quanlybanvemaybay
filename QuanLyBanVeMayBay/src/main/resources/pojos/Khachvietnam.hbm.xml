@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 2, 2020, 10:12:16 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="quanlybanvemaybay" name="pojos.Khachvietnam" optimistic-lock="version" table="khachvietnam">
-    <id name="maKh" type="int">
-      <column name="maKH"/>
-      <generator class="foreign">
-        <param name="property">khachhang</param>
-      </generator>
-    </id>
-    <one-to-one class="pojos.Khachhang" constrained="true" name="khachhang"/>
-    <property name="cmnd" type="string">
-      <column name="CMND"/>
-    </property>
-    <property name="ngheNghiep" type="string">
-      <column name="NgheNghiep"/>
-    </property>
-    <property name="diaChi" type="string">
-      <column name="DiaChi"/>
-    </property>
-  </class>
+    <class name="pojos.Khachvietnam" table="khachvietnam" catalog="quanlybanvemaybay" optimistic-lock="version">
+        <id name="maKh" type="int">
+            <column name="maKH" />
+            <generator class="foreign">
+                <param name="property">khachhang</param>
+            </generator>
+        </id>
+        <one-to-one name="khachhang" class="pojos.Khachhang" constrained="true"></one-to-one>
+        <property name="cmnd" type="string">
+            <column name="CMND" />
+        </property>
+        <property name="ngheNghiep" type="string">
+            <column name="NgheNghiep" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="DiaChi" />
+        </property>
+    </class>
 </hibernate-mapping>
