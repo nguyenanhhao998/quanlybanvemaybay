@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 01/08/2020 22:43:16
+ Date: 02/08/2020 22:06:57
 */
 
 SET NAMES utf8mb4;
@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `giahangvetheocb`;
 CREATE TABLE `giahangvetheocb`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaHangVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `GiaHienTai` decimal(65, 0) NOT NULL,
+  `GiaHienTai` double(255, 0) NOT NULL,
   PRIMARY KEY (`MaCB`, `MaHangVe`) USING BTREE,
   INDEX `MaHangVe`(`MaHangVe`) USING BTREE,
   CONSTRAINT `giahangvetheocb_ibfk_1` FOREIGN KEY (`MaHangVe`) REFERENCES `hangve` (`MaHangVe`) ON DELETE RESTRICT ON UPDATE RESTRICT,
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `hoadonmuave`;
 CREATE TABLE `hoadonmuave`  (
   `idHoaDon` int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
   `NgayMua` datetime(6) NOT NULL,
-  `GiaVe` decimal(65, 0) NOT NULL,
+  `GiaVe` double(255, 0) NOT NULL,
   `maKH` int(255) UNSIGNED NOT NULL,
   `MaSoVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`idHoaDon`) USING BTREE,
@@ -84,7 +84,7 @@ CREATE TABLE `hoadonmuave`  (
   INDEX `hoadonmuave_ibfk_2`(`MaSoVe`) USING BTREE,
   CONSTRAINT `hoadonmuave_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `hoadonmuave_ibfk_2` FOREIGN KEY (`MaSoVe`) REFERENCES `vechuyenbay` (`MaSoVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for khachhang
@@ -97,7 +97,7 @@ CREATE TABLE `khachhang`  (
   `GioiTinh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `NgaySinh` date NULL DEFAULT NULL,
   PRIMARY KEY (`maKH`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for khachnuocngoai
@@ -133,11 +133,11 @@ CREATE TABLE `lichsugiahangvecb`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaHangVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `NgayCapNhat` datetime(6) NOT NULL,
-  `GiaCapNhat` decimal(65, 0) NOT NULL,
+  `GiaCapNhat` double(255, 0) NOT NULL,
   PRIMARY KEY (`idCapNhat`) USING BTREE,
   INDEX `MaCB`(`MaCB`, `MaHangVe`) USING BTREE,
   CONSTRAINT `lichsugiahangvecb_ibfk_1` FOREIGN KEY (`MaCB`, `MaHangVe`) REFERENCES `giahangvetheocb` (`MaCB`, `MaHangVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nhanvien
@@ -151,7 +151,7 @@ CREATE TABLE `nhanvien`  (
   `SDT` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `CMND` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idNhanVien`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nvbanve
@@ -175,7 +175,7 @@ CREATE TABLE `phieu`  (
   PRIMARY KEY (`idPhieu`) USING BTREE,
   INDEX `maKH`(`maKH`) USING BTREE,
   CONSTRAINT `phieu_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for phieucho
@@ -214,7 +214,7 @@ CREATE TABLE `quydinh`  (
   `GiaTri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idQuyDinh`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sanbay
@@ -225,7 +225,7 @@ CREATE TABLE `sanbay`  (
   `TenSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `ThanhPho` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaSB`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sanbaytrunggian
