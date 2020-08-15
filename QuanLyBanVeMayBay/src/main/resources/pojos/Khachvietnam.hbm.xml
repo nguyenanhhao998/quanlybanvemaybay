@@ -3,14 +3,8 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Khachvietnam" table="khachvietnam" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="maKh" type="int">
-            <column name="maKH" />
-            <generator class="foreign">
-                <param name="property">khachhang</param>
-            </generator>
-        </id>
-        <one-to-one name="khachhang" class="pojos.Khachhang" constrained="true"></one-to-one>
+    <joined-subclass name="pojos.Khachvietnam" extends="pojos.Khachhang" table="khachvietnam">
+        <key column="maKH" />
         <property name="cmnd" type="string">
             <column name="CMND" />
         </property>
@@ -20,5 +14,5 @@
         <property name="diaChi" type="string">
             <column name="DiaChi" />
         </property>
-    </class>
+    </joined-subclass>
 </hibernate-mapping>

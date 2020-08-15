@@ -3,16 +3,10 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Phieucho" table="phieucho" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="idPhieu" type="int">
-            <column name="idPhieu" />
-            <generator class="foreign">
-                <param name="property">phieu</param>
-            </generator>
-        </id>
+    <joined-subclass name="pojos.Phieucho" extends="pojos.Phieu" table="phieucho">
+        <key column="idPhieu" />
         <many-to-one name="chuyenbay" class="pojos.Chuyenbay" fetch="select">
             <column name="maCB" not-null="true" />
         </many-to-one>
-        <one-to-one name="phieu" class="pojos.Phieu" constrained="true"></one-to-one>
-    </class>
+    </joined-subclass>
 </hibernate-mapping>

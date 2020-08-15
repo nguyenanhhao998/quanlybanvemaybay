@@ -10,12 +10,10 @@ import java.util.Date;
 public class Phieu  implements java.io.Serializable {
 
 
-     private Integer idPhieu;
-     private Khachhang khachhang;
-     private Date ngayDat;
-     private String tinhTrang;
-     private Phieudatcho phieudatcho;
-     private Phieucho phieucho;
+    protected Integer idPhieu;
+    protected Khachhang khachhang;
+    protected Date ngayDat;
+    protected String tinhTrang;
 
     public Phieu() {
     }
@@ -24,12 +22,10 @@ public class Phieu  implements java.io.Serializable {
     public Phieu(Date ngayDat) {
         this.ngayDat = ngayDat;
     }
-    public Phieu(Khachhang khachhang, Date ngayDat, String tinhTrang, Phieudatcho phieudatcho, Phieucho phieucho) {
+    public Phieu(Khachhang khachhang, Date ngayDat, String tinhTrang) {
        this.khachhang = khachhang;
        this.ngayDat = ngayDat;
-       this.tinhTrang = tinhTrang;
-       this.phieudatcho = phieudatcho;
-       this.phieucho = phieucho;
+        this.tinhTrang = tinhTrang;
     }
    
     public Integer getIdPhieu() {
@@ -60,20 +56,7 @@ public class Phieu  implements java.io.Serializable {
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-    public Phieudatcho getPhieudatcho() {
-        return this.phieudatcho;
-    }
-    
-    public void setPhieudatcho(Phieudatcho phieudatcho) {
-        this.phieudatcho = phieudatcho;
-    }
-    public Phieucho getPhieucho() {
-        return this.phieucho;
-    }
-    
-    public void setPhieucho(Phieucho phieucho) {
-        this.phieucho = phieucho;
-    }
+
 
 
 

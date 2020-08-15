@@ -17,7 +17,5 @@
         <property name="tinhTrang" type="string">
             <column name="TinhTrang" />
         </property>
-        <one-to-one name="phieudatcho" class="pojos.Phieudatcho"></one-to-one>
-        <one-to-one name="phieucho" class="pojos.Phieucho"></one-to-one>
     </class>
 </hibernate-mapping>
