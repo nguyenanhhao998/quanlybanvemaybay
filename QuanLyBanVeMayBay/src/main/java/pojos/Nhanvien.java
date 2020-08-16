@@ -10,15 +10,15 @@ import java.util.Date;
 public class Nhanvien  implements java.io.Serializable {
 
 
-     private Integer idNhanVien;
-     private String hoTen;
-     private String gioiTinh;
-     private Date ngaySinh;
-     private String sdt;
-     private String cmnd;
-     private Nvbanve nvbanve;
-     private Taikhoan taikhoan;
-     private Admin admin;
+    protected Integer idNhanVien;
+    protected String hoTen;
+    protected String gioiTinh;
+    protected Date ngaySinh;
+    protected String sdt;
+    protected String cmnd;
+
+    protected Taikhoan taikhoan;
+
 
     public Nhanvien() {
     }
@@ -27,15 +27,13 @@ public class Nhanvien  implements java.io.Serializable {
     public Nhanvien(String hoTen) {
         this.hoTen = hoTen;
     }
-    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Nvbanve nvbanve, Taikhoan taikhoan, Admin admin) {
+    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Taikhoan taikhoan) {
        this.hoTen = hoTen;
        this.gioiTinh = gioiTinh;
        this.ngaySinh = ngaySinh;
        this.sdt = sdt;
-       this.cmnd = cmnd;
-       this.nvbanve = nvbanve;
-       this.taikhoan = taikhoan;
-       this.admin = admin;
+        this.cmnd = cmnd;
+        this.taikhoan = taikhoan;
     }
    
     public Integer getIdNhanVien() {
@@ -80,13 +78,7 @@ public class Nhanvien  implements java.io.Serializable {
     public void setCmnd(String cmnd) {
         this.cmnd = cmnd;
     }
-    public Nvbanve getNvbanve() {
-        return this.nvbanve;
-    }
-    
-    public void setNvbanve(Nvbanve nvbanve) {
-        this.nvbanve = nvbanve;
-    }
+
     public Taikhoan getTaikhoan() {
         return this.taikhoan;
     }
@@ -94,15 +86,6 @@ public class Nhanvien  implements java.io.Serializable {
     public void setTaikhoan(Taikhoan taikhoan) {
         this.taikhoan = taikhoan;
     }
-    public Admin getAdmin() {
-        return this.admin;
-    }
-    
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-
 
 
 }

@@ -5,10 +5,54 @@
  */
 package daos;
 
+import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojos.Khachhang;
+import pojos.Khachvietnam;
+import util.HibernateUtil;
+
 /**
  *
  * @author HAO
  */
 public class KhachhangDAO {
+
+    public static List<Khachhang> getListKhachhang() {
+        List<Khachhang> listKhachhang = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String sql = "from Khachhang";
+            Query query = session.createQuery(sql);
+            listKhachhang = query.list();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return listKhachhang;
+
+    }
+
+    public static void themKhachhang(Khachhang khachhang) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.saveOrUpdate(khachhang);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+    }
 
 }

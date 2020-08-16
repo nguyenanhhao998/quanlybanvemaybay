@@ -20,8 +20,6 @@
         <property name="ngaySinh" type="date">
             <column name="NgaySinh" length="10" />
         </property>
-        <one-to-one name="khachvietnam" class="pojos.Khachvietnam"></one-to-one>
-        <one-to-one name="khachnuocngoai" class="pojos.Khachnuocngoai"></one-to-one>
         <set name="phieus" table="phieu" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maKH" />

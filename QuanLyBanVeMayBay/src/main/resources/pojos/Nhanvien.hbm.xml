@@ -23,8 +23,6 @@
         <property name="cmnd" type="string">
             <column name="CMND" />
         </property>
-        <one-to-one name="nvbanve" class="pojos.Nvbanve"></one-to-one>
         <one-to-one name="taikhoan" class="pojos.Taikhoan"></one-to-one>
-        <one-to-one name="admin" class="pojos.Admin"></one-to-one>
     </class>
 </hibernate-mapping>

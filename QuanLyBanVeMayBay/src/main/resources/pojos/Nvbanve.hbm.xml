@@ -3,13 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Aug 2, 2020, 11:17:01 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Nvbanve" table="nvbanve" catalog="quanlybanvemaybay" optimistic-lock="version">
-        <id name="idNhanVien" type="int">
-            <column name="idNhanVien" />
-            <generator class="foreign">
-                <param name="property">nhanvien</param>
-            </generator>
-        </id>
-        <one-to-one name="nhanvien" class="pojos.Nhanvien" constrained="true"></one-to-one>
-    </class>
+    <joined-subclass name="pojos.Nvbanve" extends="pojos.Nhanvien" table="nvbanve" >
+        <key column="idNhanvien" />
+    </joined-subclass>
 </hibernate-mapping>
