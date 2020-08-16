@@ -5,10 +5,6 @@
  */
 package ui.user.tracuucb;
 
-import java.awt.CardLayout;
-import javax.swing.JPanel;
-import ui.user.tracuucb.ketqua.ChiTietVeCBPanel;
-
 /**
  *
  * @author HAO
@@ -18,17 +14,8 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
     /**
      * Creates new form TraCuuChuyenBay
      */
-    boolean IsTraCuu = true;
-    CardLayout cardLayout;
-    private JPanel jpnTraCuu;
     public TraCuuChuyenBayPane() {
         initComponents();
-        jpnTraCuu = new JPNTraCuu();
-        
-        jpnCards.add(jpnTraCuu, "JPNTraCuu");
-        cardLayout = (CardLayout)(jpnCards.getLayout());
-        cardLayout.show(jpnCards, "JPNTraCuu");
-    
     }
 
     /**
@@ -40,27 +27,31 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpnCards = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setLayout(new java.awt.BorderLayout());
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Tra cuu");
 
-        jpnCards.setLayout(new java.awt.CardLayout());
-        add(jpnCards, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(jLabel1)
+                .addContainerGap(208, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jLabel1)
+                .addContainerGap(177, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void changeLayout(ChiTietVeCBPanel ct){
-        if(IsTraCuu){
-            IsTraCuu = false;
-            jpnCards.add(ct, "cardChiTiet");
-            cardLayout.show(jpnCards, "cardChiTiet"); 
-        }else{
-            IsTraCuu = true;
-            cardLayout.removeLayoutComponent(ct);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jpnCards;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

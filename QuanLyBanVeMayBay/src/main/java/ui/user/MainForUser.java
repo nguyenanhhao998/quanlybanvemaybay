@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import ui.admin.MainForAdmin;
 import ui.user.tracuucb.TraCuuChuyenBayPane;
 
 /**
@@ -22,10 +23,9 @@ public class MainForUser extends javax.swing.JFrame {
     /**
      * Creates new form MainForUser
      */
-    private static MainForUser instance;
-    private TraCuuChuyenBayPane traCuuChuyenBayPane;
-    
-    private MainForUser() {
+    TraCuuChuyenBayPane traCuuChuyenBayPane;
+
+    public MainForUser() {
         initComponents();
 
         setLocationRelativeTo(null);
@@ -34,18 +34,7 @@ public class MainForUser extends javax.swing.JFrame {
         traCuuChuyenBayPane = new TraCuuChuyenBayPane();
         tabbedPane.addTab("Home", traCuuChuyenBayPane);
     }
-    
-    public static MainForUser getInstance() {
-        if (instance == null) {
-            instance = new MainForUser();
-        }
-        return instance;
-    }
-    
-    public TraCuuChuyenBayPane getTraCuuPane(){
-        return traCuuChuyenBayPane;
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,7 +73,7 @@ public class MainForUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainForUser.getInstance().setVisible(true);
+                new MainForUser().setVisible(true);
             }
         });
     }
