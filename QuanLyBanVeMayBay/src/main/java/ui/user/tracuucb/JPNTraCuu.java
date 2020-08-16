@@ -201,6 +201,9 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel10.setMaximumSize(new java.awt.Dimension(250, 70));
+        jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
+        jPanel10.setPreferredSize(new java.awt.Dimension(250, 70));
         jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
@@ -218,6 +221,9 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel3.add(filler13);
 
         jpnNgayVe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày về", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jpnNgayVe.setMaximumSize(new java.awt.Dimension(250, 70));
+        jpnNgayVe.setMinimumSize(new java.awt.Dimension(250, 70));
+        jpnNgayVe.setPreferredSize(new java.awt.Dimension(250, 70));
         jpnNgayVe.setLayout(new javax.swing.BoxLayout(jpnNgayVe, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
