@@ -243,9 +243,9 @@ public class JPNTraCuu extends javax.swing.JPanel {
         btnFind.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
         btnFind.setText("Tìm chuyến bay");
-        btnFind.setMaximumSize(new java.awt.Dimension(210, 40));
-        btnFind.setMinimumSize(new java.awt.Dimension(210, 40));
-        btnFind.setPreferredSize(new java.awt.Dimension(210, 40));
+        btnFind.setMaximumSize(new java.awt.Dimension(240, 40));
+        btnFind.setMinimumSize(new java.awt.Dimension(240, 40));
+        btnFind.setPreferredSize(new java.awt.Dimension(240, 40));
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
