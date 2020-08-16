@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import sun.security.jca.GetInstance;
 import ui.admin.quanlycb.QuanLyChuyenBayPane;
 import ui.admin.quanlynhanvien.QuanLyNhanVienPane;
 import ui.admin.statistic.ThongKePane;
@@ -25,11 +26,20 @@ public class MainForAdmin extends javax.swing.JFrame {
     /**
      * Creates new form MainForAdmin
      */
+    private static MainForAdmin INSTANCE = null;
+
+    public static MainForAdmin getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new MainForAdmin();
+        }
+        return INSTANCE;
+    }
+
     private QuanLyChuyenBayPane quanLyChuyenBayPane;
     private QuanLyNhanVienPane quanLyNhanVienPane;
     private ThongKePane thongKePane;
 
-    public MainForAdmin() {
+    private MainForAdmin() {
         initComponents();
 
         setLocationRelativeTo(null);
@@ -83,7 +93,7 @@ public class MainForAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainForAdmin().setVisible(true);
+                MainForAdmin.getInstance().setVisible(true);
             }
         });
     }

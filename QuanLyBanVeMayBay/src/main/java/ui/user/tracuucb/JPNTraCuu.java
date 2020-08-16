@@ -68,12 +68,10 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateStart = new com.toedter.calendar.JDateChooser();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jpnNgayVe = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateEnd = new com.toedter.calendar.JDateChooser();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         btnFind = new javax.swing.JButton();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -210,13 +208,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel10.add(jLabel7);
         jPanel10.add(filler8);
 
-        jDateStart.setDateFormatString("dd/MM/yyyy");
-        jDateStart.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jDateStart.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel10.add(jDateStart);
-
         jPanel3.add(jPanel10);
         jPanel3.add(filler13);
 
@@ -229,13 +220,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
         jpnNgayVe.add(jLabel8);
         jpnNgayVe.add(filler12);
-
-        jDateEnd.setDateFormatString("dd/MM/yyyy");
-        jDateEnd.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jDateEnd.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateEnd.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateEnd.setPreferredSize(new java.awt.Dimension(200, 40));
-        jpnNgayVe.add(jDateEnd);
 
         jPanel3.add(jpnNgayVe);
         jPanel3.add(filler9);
@@ -330,8 +314,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
-    private com.toedter.calendar.JDateChooser jDateEnd;
-    private com.toedter.calendar.JDateChooser jDateStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
