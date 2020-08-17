@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 17/08/2020 21:25:53
+ Date: 17/08/2020 22:35:34
 */
 
 SET NAMES utf8mb4;
@@ -33,8 +33,8 @@ CREATE TABLE `admin`  (
 DROP TABLE IF EXISTS `chuyenbay`;
 CREATE TABLE `chuyenbay`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `MaSBDi` int(255) UNSIGNED NOT NULL,
-  `MaSBDen` int(255) UNSIGNED NOT NULL,
+  `MaSBDi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `MaSBDen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `NgayKhoiHanh` datetime(6) NULL DEFAULT NULL,
   `ThoiGianBay` float(255, 0) NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -68,6 +68,14 @@ CREATE TABLE `hangve`  (
   `TenHangVe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaHangVe`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of hangve
+-- ----------------------------
+INSERT INTO `hangve` VALUES ('hv_hn', 'Hạng nhất');
+INSERT INTO `hangve` VALUES ('hv_pt', 'Phổ thông');
+INSERT INTO `hangve` VALUES ('hv_ptdb', 'Phổ thông đặc biệt');
+INSERT INTO `hangve` VALUES ('hv_tg', 'Thương gia');
 
 -- ----------------------------
 -- Table structure for hoadonmuave
@@ -221,9 +229,8 @@ CREATE TABLE `quydinh`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sanbay`;
 CREATE TABLE `sanbay`  (
-  `MaSB` int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `MaSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `TenSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `KiHieu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `ThanhPho` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `QuocGia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaSB`) USING BTREE
@@ -232,10 +239,10 @@ CREATE TABLE `sanbay`  (
 -- ----------------------------
 -- Records of sanbay
 -- ----------------------------
-INSERT INTO `sanbay` VALUES (1, 'Sân bay Tân Sơn nhất', 'SGN', 'TPHCM', 'Việt Nam');
-INSERT INTO `sanbay` VALUES (2, 'Sân bay Nội Bài', 'HAN', 'Hà Nội', 'Việt Nam');
-INSERT INTO `sanbay` VALUES (3, 'Sân bay quốc tế Incheon', 'ICN', 'Seoul', 'Hàn Quốc');
-INSERT INTO `sanbay` VALUES (4, 'Sân bay Đà nẵng', 'DAD', 'Đà Nẵng', 'Việt Nam');
+INSERT INTO `sanbay` VALUES ('DAD', 'Sân bay Đà nẵng', 'Đà Nẵng', 'Việt Nam');
+INSERT INTO `sanbay` VALUES ('HAN', 'Sân bay Nội Bài', 'Hà Nội', 'Việt Nam');
+INSERT INTO `sanbay` VALUES ('ICN', 'Sân bay quốc tế Incheon', 'Seoul', 'Hàn Quốc');
+INSERT INTO `sanbay` VALUES ('SGN', 'Sân bay Tân Sơn nhất', 'TPHCM', 'Việt Nam');
 
 -- ----------------------------
 -- Table structure for sanbaytrunggian
@@ -243,7 +250,7 @@ INSERT INTO `sanbay` VALUES (4, 'Sân bay Đà nẵng', 'DAD', 'Đà Nẵng', 'V
 DROP TABLE IF EXISTS `sanbaytrunggian`;
 CREATE TABLE `sanbaytrunggian`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `MaSB` int(255) UNSIGNED NOT NULL,
+  `MaSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ThoiGianDung` float(255, 0) NOT NULL,
   `GhiChu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaCB`, `MaSB`) USING BTREE,

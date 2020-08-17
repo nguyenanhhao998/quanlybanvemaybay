@@ -11,11 +11,10 @@ import java.util.Set;
 public class Sanbay  implements java.io.Serializable {
 
 
-     private Integer maSb;
+     private String maSb;
      private String tenSb;
      private String thanhPho;
      private String quocGia;
-     private String kiHieu;
      private Set chuyenbaysForMaSbden = new HashSet(0);
      private Set chuyenbaysForMaSbdi = new HashSet(0);
      private Set sanbaytrunggians = new HashSet(0);
@@ -23,7 +22,8 @@ public class Sanbay  implements java.io.Serializable {
     public Sanbay() {
     }
 
-    public Sanbay(String tenSb, String thanhPho, String quocGia, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
+    public Sanbay(String maSb, String tenSb, String thanhPho, String quocGia, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
+       this.maSb = maSb;
        this.tenSb = tenSb;
        this.thanhPho = thanhPho;
        this.quocGia = quocGia;
@@ -32,11 +32,11 @@ public class Sanbay  implements java.io.Serializable {
        this.sanbaytrunggians = sanbaytrunggians;
     }
    
-    public Integer getMaSb() {
+    public String getMaSb() {
         return this.maSb;
     }
     
-    public void setMaSb(Integer maSb) {
+    public void setMaSb(String maSb) {
         this.maSb = maSb;
     }
     public String getTenSb() {
@@ -61,14 +61,6 @@ public class Sanbay  implements java.io.Serializable {
     
     public void setQuocGia(String quocGia) {
         this.quocGia = quocGia;
-    }
-    
-    public String getKiHieu() {
-        return this.kiHieu;
-    }
-    
-    public void setKiHieu(String kiHieu) {
-        this.kiHieu = kiHieu;
     }
     
     public Set getChuyenbaysForMaSbden() {

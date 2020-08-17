@@ -8,7 +8,7 @@
             <key-property name="maCb" type="string">
                 <column name="MaCB" />
             </key-property>
-            <key-property name="maSb" type="int">
+            <key-property name="maSb" type="string">
                 <column name="MaSB" />
             </key-property>
         </composite-id>

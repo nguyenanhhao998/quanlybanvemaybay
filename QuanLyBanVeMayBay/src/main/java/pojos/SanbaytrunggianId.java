@@ -10,12 +10,12 @@ public class SanbaytrunggianId  implements java.io.Serializable {
 
 
      private String maCb;
-     private int maSb;
+     private String maSb;
 
     public SanbaytrunggianId() {
     }
 
-    public SanbaytrunggianId(String maCb, int maSb) {
+    public SanbaytrunggianId(String maCb, String maSb) {
        this.maCb = maCb;
        this.maSb = maSb;
     }
@@ -27,11 +27,11 @@ public class SanbaytrunggianId  implements java.io.Serializable {
     public void setMaCb(String maCb) {
         this.maCb = maCb;
     }
-    public int getMaSb() {
+    public String getMaSb() {
         return this.maSb;
     }
     
-    public void setMaSb(int maSb) {
+    public void setMaSb(String maSb) {
         this.maSb = maSb;
     }
 
@@ -50,7 +50,7 @@ public class SanbaytrunggianId  implements java.io.Serializable {
          int result = 17;
          
          result = 37 * result + ( getMaCb() == null ? 0 : this.getMaCb().hashCode() );
-         result = 37 * result + this.getMaSb();
+         result = 37 * result + ( getMaSb() == null ? 0 : this.getMaSb().hashCode() );
          return result;
    }   
 
