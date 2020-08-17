@@ -5,7 +5,11 @@
  */
 package ui.user.tracuucb.ketqua;
 
+import javax.swing.JPanel;
 import ui.user.MainForUser;
+import ui.user.datve.DatVePanel;
+import ui.user.datve.PhieuChoPanel;
+import ui.user.muave.MuaVePanel;
 
 /**
  *
@@ -326,16 +330,21 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //this.setVisible(false);
-        MainForUser.getInstance().getTraCuuPane().changeLayout(this);
+        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "back");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(), "muave");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        JPanel phieu;
+        if(false){
+            phieu = new DatVePanel();
+        }else{
+            phieu = new PhieuChoPanel();
+        }
+        MainForUser.getInstance().getTraCuuPane().changeLayout(phieu, "phieu");
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

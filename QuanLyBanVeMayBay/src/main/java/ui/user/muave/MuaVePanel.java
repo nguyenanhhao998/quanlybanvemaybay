@@ -5,6 +5,8 @@
  */
 package ui.user.muave;
 
+import ui.user.MainForUser;
+
 /**
  *
  * @author DELL
@@ -16,6 +18,10 @@ public class MuaVePanel extends javax.swing.JPanel {
      */
     public MuaVePanel() {
         initComponents();
+        
+        for(int i = 0; i < 2; i++){
+            jpnThongTinKHs.add(new DienThongTinKHPanel(i+1));
+        }
     }
 
     /**
@@ -27,19 +33,261 @@ public class MuaVePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 932, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
-        );
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jpnThongTinKHs = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jlbSBDi = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jButton1 = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jButton2 = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel1.setText("Nhập thông tin khách hàng");
+        jPanel1.add(jLabel1);
+        jPanel1.add(filler1);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jpnThongTinKHs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jpnThongTinKHs.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        add(jpnThongTinKHs, java.awt.BorderLayout.CENTER);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết vé", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jPanel6.setMaximumSize(new java.awt.Dimension(450, 400));
+        jPanel6.setMinimumSize(new java.awt.Dimension(450, 400));
+        jPanel6.setPreferredSize(new java.awt.Dimension(450, 400));
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel7.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel7.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel9.setMaximumSize(new java.awt.Dimension(200, 40));
+        jPanel9.setMinimumSize(new java.awt.Dimension(200, 40));
+        jPanel9.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jlbSBDi.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSBDi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_takeoff.png"))); // NOI18N
+        jlbSBDi.setText("Hà nội (HAN)");
+        jlbSBDi.setMaximumSize(new java.awt.Dimension(200, 40));
+        jlbSBDi.setMinimumSize(new java.awt.Dimension(200, 40));
+        jlbSBDi.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel9.add(jlbSBDi);
+
+        jPanel7.add(jPanel9);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/flight.png"))); // NOI18N
+        jLabel7.setMaximumSize(new java.awt.Dimension(60, 40));
+        jLabel7.setMinimumSize(new java.awt.Dimension(60, 40));
+        jLabel7.setPreferredSize(new java.awt.Dimension(60, 40));
+        jPanel7.add(jLabel7);
+
+        jPanel13.setMaximumSize(new java.awt.Dimension(200, 40));
+        jPanel13.setMinimumSize(new java.awt.Dimension(200, 40));
+        jPanel13.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
+        jLabel11.setText("TPHCM (SGN)");
+        jLabel11.setMaximumSize(new java.awt.Dimension(200, 40));
+        jLabel11.setMinimumSize(new java.awt.Dimension(200, 40));
+        jLabel11.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel13.add(jLabel11);
+
+        jPanel7.add(jPanel13);
+
+        jPanel6.add(jPanel7);
+
+        jPanel8.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel8.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Ngày khởi hành: ");
+        jPanel8.add(jLabel6);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel25.setText("18/08/2020");
+        jPanel8.add(jLabel25);
+
+        jPanel6.add(jPanel8);
+
+        jPanel21.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel21.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel29.setText("Giờ bay: ");
+        jPanel21.add(jLabel29);
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel30.setText("07h00");
+        jPanel21.add(jLabel30);
+
+        jPanel6.add(jPanel21);
+
+        jPanel2.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel2.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Số lượng vé: ");
+        jPanel2.add(jLabel5);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("02");
+        jPanel2.add(jLabel8);
+
+        jPanel6.add(jPanel2);
+
+        jPanel10.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel10.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Hạng vé: ");
+        jPanel10.add(jLabel10);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setText("Phổ thông");
+        jPanel10.add(jLabel17);
+
+        jPanel6.add(jPanel10);
+
+        jPanel4.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel4.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Giá vé: ");
+        jPanel4.add(jLabel9);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel14.setText("500.000 VND");
+        jPanel4.add(jLabel14);
+
+        jPanel6.add(jPanel4);
+
+        jPanel3.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel3.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("Thành tiền: ");
+        jPanel3.add(jLabel15);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel16.setText("1.000.000 VND");
+        jPanel3.add(jLabel16);
+
+        jPanel6.add(jPanel3);
+
+        jPanel5.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel5.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel5.add(filler4);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jButton1.setText("Back");
+        jButton1.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton1.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton1.setPreferredSize(new java.awt.Dimension(150, 40));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton1);
+        jPanel5.add(filler2);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton2.setText("Thanh toán");
+        jButton2.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton2.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton2.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel5.add(jButton2);
+        jPanel5.add(filler3);
+
+        jPanel6.add(jPanel5);
+
+        add(jPanel6, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "backChiTiet");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jlbSBDi;
+    private javax.swing.JPanel jpnThongTinKHs;
     // End of variables declaration//GEN-END:variables
 }

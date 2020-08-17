@@ -18,7 +18,6 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
     /**
      * Creates new form TraCuuChuyenBay
      */
-    boolean IsTraCuu = true;
     CardLayout cardLayout;
     private JPanel jpnTraCuu;
     public TraCuuChuyenBayPane() {
@@ -49,16 +48,31 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public void changeLayout(ChiTietVeCBPanel ct){
-        if(IsTraCuu){
-            IsTraCuu = false;
-            jpnCards.add(ct, "cardChiTiet");
-            cardLayout.show(jpnCards, "cardChiTiet"); 
-        }else{
-            IsTraCuu = true;
-            cardLayout.removeLayoutComponent(ct);
+    public void changeLayout(JPanel panel, String type){
+        switch(type){
+            case "chitiet":
+                jpnCards.add(panel, "cardChiTiet");
+                cardLayout.show(jpnCards, "cardChiTiet");
+                break;
+            case "muave":
+                jpnCards.add(panel, "cardMuaVe");
+                cardLayout.show(jpnCards, "cardMuaVe");
+                break;
+            case "phieu":
+                jpnCards.add(panel, "cardPhieu");
+                cardLayout.show(jpnCards, "cardPhieu");
+                break;
+            case "backChiTiet":
+                cardLayout.removeLayoutComponent(panel);
+                cardLayout.show(jpnCards, "cardChiTiet");
+                break;
+            case "back":
+                cardLayout.removeLayoutComponent(panel);
+                cardLayout.show(jpnCards, "JPNTraCuu");
+                break;
         }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jpnCards;

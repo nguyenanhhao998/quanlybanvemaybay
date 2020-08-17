@@ -224,7 +224,7 @@ public class FlightPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
-        MainForUser.getInstance().getTraCuuPane().changeLayout(new ChiTietVeCBPanel());
+        MainForUser.getInstance().getTraCuuPane().changeLayout(new ChiTietVeCBPanel(),"chitiet");
     }//GEN-LAST:event_btnChonActionPerformed
 
 
