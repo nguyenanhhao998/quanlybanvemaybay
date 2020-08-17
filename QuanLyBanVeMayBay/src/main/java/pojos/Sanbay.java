@@ -14,6 +14,7 @@ public class Sanbay  implements java.io.Serializable {
      private Integer maSb;
      private String tenSb;
      private String thanhPho;
+     private String quocGia;
      private Set chuyenbaysForMaSbden = new HashSet(0);
      private Set chuyenbaysForMaSbdi = new HashSet(0);
      private Set sanbaytrunggians = new HashSet(0);
@@ -21,9 +22,10 @@ public class Sanbay  implements java.io.Serializable {
     public Sanbay() {
     }
 
-    public Sanbay(String tenSb, String thanhPho, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
+    public Sanbay(String tenSb, String thanhPho, String quocGia, Set chuyenbaysForMaSbden, Set chuyenbaysForMaSbdi, Set sanbaytrunggians) {
        this.tenSb = tenSb;
        this.thanhPho = thanhPho;
+       this.quocGia = quocGia;
        this.chuyenbaysForMaSbden = chuyenbaysForMaSbden;
        this.chuyenbaysForMaSbdi = chuyenbaysForMaSbdi;
        this.sanbaytrunggians = sanbaytrunggians;
@@ -43,6 +45,7 @@ public class Sanbay  implements java.io.Serializable {
     public void setTenSb(String tenSb) {
         this.tenSb = tenSb;
     }
+    
     public String getThanhPho() {
         return this.thanhPho;
     }
@@ -50,6 +53,11 @@ public class Sanbay  implements java.io.Serializable {
     public void setThanhPho(String thanhPho) {
         this.thanhPho = thanhPho;
     }
+    
+    public String getQuocGia() {
+        return this.quocGia;
+    }
+    
     public Set getChuyenbaysForMaSbden() {
         return this.chuyenbaysForMaSbden;
     }

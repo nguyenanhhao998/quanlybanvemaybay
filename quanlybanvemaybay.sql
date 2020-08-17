@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 02/08/2020 22:33:12
+ Date: 17/08/2020 19:35:40
 */
 
 SET NAMES utf8mb4;
@@ -84,7 +84,7 @@ CREATE TABLE `hoadonmuave`  (
   INDEX `hoadonmuave_ibfk_2`(`MaSoVe`) USING BTREE,
   CONSTRAINT `hoadonmuave_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `hoadonmuave_ibfk_2` FOREIGN KEY (`MaSoVe`) REFERENCES `vechuyenbay` (`MaSoVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for khachhang
@@ -97,7 +97,7 @@ CREATE TABLE `khachhang`  (
   `GioiTinh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `NgaySinh` date NULL DEFAULT NULL,
   PRIMARY KEY (`maKH`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for khachnuocngoai
@@ -137,7 +137,7 @@ CREATE TABLE `lichsugiahangvecb`  (
   PRIMARY KEY (`idCapNhat`) USING BTREE,
   INDEX `MaCB`(`MaCB`, `MaHangVe`) USING BTREE,
   CONSTRAINT `lichsugiahangvecb_ibfk_1` FOREIGN KEY (`MaCB`, `MaHangVe`) REFERENCES `giahangvetheocb` (`MaCB`, `MaHangVe`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nhanvien
@@ -151,7 +151,7 @@ CREATE TABLE `nhanvien`  (
   `SDT` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `CMND` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idNhanVien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for nvbanve
@@ -175,7 +175,7 @@ CREATE TABLE `phieu`  (
   PRIMARY KEY (`idPhieu`) USING BTREE,
   INDEX `maKH`(`maKH`) USING BTREE,
   CONSTRAINT `phieu_ibfk_1` FOREIGN KEY (`maKH`) REFERENCES `khachhang` (`maKH`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for phieucho
@@ -214,7 +214,7 @@ CREATE TABLE `quydinh`  (
   `GiaTri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idQuyDinh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sanbay
@@ -224,8 +224,17 @@ CREATE TABLE `sanbay`  (
   `MaSB` int(255) UNSIGNED NOT NULL AUTO_INCREMENT,
   `TenSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `ThanhPho` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `QuocGia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaSB`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sanbay
+-- ----------------------------
+INSERT INTO `sanbay` VALUES (1, 'Tân Sơn nhất', 'TPHCM', 'Việt Nam');
+INSERT INTO `sanbay` VALUES (2, 'Nội Bài', 'Hà Nội', 'Việt Nam');
+INSERT INTO `sanbay` VALUES (3, 'Incheon', 'Seoul', 'Hàn Quốc');
+INSERT INTO `sanbay` VALUES (4, 'Đà nẵng', 'Đà Nẵng', 'Việt Nam');
 
 -- ----------------------------
 -- Table structure for sanbaytrunggian
