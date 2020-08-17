@@ -17,6 +17,9 @@
         <property name="quocGia" type="string">
             <column name="QuocGia" />
         </property>
+        <property name="kiHieu" type="string">
+            <column name="KiHieu" />
+        </property>
         <set name="chuyenbaysForMaSbden" table="chuyenbay" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="MaSBDen" not-null="true" />

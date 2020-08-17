@@ -15,6 +15,7 @@ public class Sanbay  implements java.io.Serializable {
      private String tenSb;
      private String thanhPho;
      private String quocGia;
+     private String kiHieu;
      private Set chuyenbaysForMaSbden = new HashSet(0);
      private Set chuyenbaysForMaSbdi = new HashSet(0);
      private Set sanbaytrunggians = new HashSet(0);
@@ -56,6 +57,18 @@ public class Sanbay  implements java.io.Serializable {
     
     public String getQuocGia() {
         return this.quocGia;
+    }
+    
+    public void setQuocGia(String quocGia) {
+        this.quocGia = quocGia;
+    }
+    
+    public String getKiHieu() {
+        return this.kiHieu;
+    }
+    
+    public void setKiHieu(String kiHieu) {
+        this.kiHieu = kiHieu;
     }
     
     public Set getChuyenbaysForMaSbden() {
