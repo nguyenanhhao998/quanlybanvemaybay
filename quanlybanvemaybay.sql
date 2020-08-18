@@ -36,7 +36,7 @@ CREATE TABLE `chuyenbay`  (
   `MaSBDi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaSBDen` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `NgayKhoiHanh` datetime(6) NULL DEFAULT NULL,
-  `ThoiGianBay` float(255, 0) NULL DEFAULT NULL,
+  `ThoiGianBay` float(255, 1) NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaCB`) USING BTREE,
   INDEX `MaSBDi`(`MaSBDi`) USING BTREE,
@@ -251,7 +251,7 @@ DROP TABLE IF EXISTS `sanbaytrunggian`;
 CREATE TABLE `sanbaytrunggian`  (
   `MaCB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `MaSB` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `ThoiGianDung` float(255, 0) NOT NULL,
+  `ThoiGianDung` float(255, 1) NOT NULL,
   `GhiChu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`MaCB`, `MaSB`) USING BTREE,
   INDEX `MaSB`(`MaSB`) USING BTREE,
