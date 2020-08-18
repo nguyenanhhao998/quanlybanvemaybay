@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import sun.security.jca.GetInstance;
+import javax.swing.table.TableRowSorter;
 import ui.admin.quanlycb.QuanLyChuyenBayPane;
 import ui.admin.quanlynhanvien.QuanLyNhanVienPane;
 import ui.admin.statistic.ThongKePane;
@@ -67,10 +67,13 @@ public class MainForAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 700));
+
+        tabbedPane.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     /**
      * @param args the command line arguments
