@@ -5,14 +5,23 @@
  */
 package ui.admin.quanlycb;
 
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableRowSorter;
+import util.ui.CustomCenterAlignmentRenderer;
+import util.ui.CustomLeftAlignmentRenderer;
+import util.ui.CustomTaskButtonRenderer;
 
 /**
  *
@@ -20,7 +29,11 @@ import javax.swing.table.TableColumnModel;
  */
 public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
-    DefaultTableModel dtm;
+    private DefaultTableModel dtm;
+    private TableRowSorter sorter;
+    public static final Color SELCECTED_COLOR = new Color(208, 218, 253);
+    public static final Color EVEN_COLOR = new Color(255, 255, 255);
+    public static final Color ODD_COLOR = new Color(230, 230, 230);
     /**
      * Creates new form QuanLyChuyenBay
      */
@@ -37,9 +50,50 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         parentPane = new javax.swing.JPanel();
         homePane = new javax.swing.JPanel();
         controlPanel = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        cbbSanBayDi = new javax.swing.JComboBox<>();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
+        jPanel7 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        cbbSanBayDen = new javax.swing.JComboBox<>();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
+        jPanel8 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        jLabel5 = new javax.swing.JLabel();
+        jtfSL = new javax.swing.JTextField();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        cbbHangGhe = new javax.swing.JComboBox<>();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
+        jPanel10 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        jDateStart = new com.toedter.calendar.JDateChooser();
+        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        addButton = new javax.swing.JButton();
         tablePane = new javax.swing.JPanel();
         tableScrollPane = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        table = new javax.swing.JTable(){
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+                if (isRowSelected(row)) {
+                    c.setBackground(SELCECTED_COLOR);
+                } else {
+
+                    Color color = row % 2 == 0? EVEN_COLOR : ODD_COLOR;
+                    c.setBackground(color);
+                }
+                return c;
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -50,16 +104,118 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
         homePane.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
-        controlPanel.setLayout(controlPanelLayout);
-        controlPanelLayout.setHorizontalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
-        );
-        controlPanelLayout.setVerticalGroup(
-            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        controlPanel.setLayout(new javax.swing.BoxLayout(controlPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        jPanel4.setMaximumSize(new java.awt.Dimension(32767, 100));
+        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm khởi hành", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_takeoff.png"))); // NOI18N
+        jPanel6.add(jLabel2);
+        jPanel6.add(filler1);
+
+        cbbSanBayDi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbSanBayDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbSanBayDi.setMaximumSize(new java.awt.Dimension(200, 40));
+        cbbSanBayDi.setMinimumSize(new java.awt.Dimension(200, 40));
+        cbbSanBayDi.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel6.add(cbbSanBayDi);
+
+        jPanel4.add(jPanel6);
+        jPanel4.add(filler4);
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
+        jPanel7.add(jLabel3);
+        jPanel7.add(filler2);
+
+        cbbSanBayDen.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbSanBayDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbSanBayDen.setMaximumSize(new java.awt.Dimension(200, 40));
+        cbbSanBayDen.setMinimumSize(new java.awt.Dimension(200, 40));
+        cbbSanBayDen.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel7.add(cbbSanBayDen);
+
+        jPanel4.add(jPanel7);
+        jPanel4.add(filler5);
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số hành khách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/passengers.png"))); // NOI18N
+        jPanel8.add(jLabel4);
+        jPanel8.add(filler3);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel5.setText("Số lượng: ");
+        jPanel8.add(jLabel5);
+
+        jtfSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jtfSL.setMaximumSize(new java.awt.Dimension(50, 35));
+        jtfSL.setMinimumSize(new java.awt.Dimension(50, 35));
+        jtfSL.setPreferredSize(new java.awt.Dimension(50, 35));
+        jPanel8.add(jtfSL);
+
+        jPanel4.add(jPanel8);
+        jPanel4.add(filler7);
+
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
+        jPanel9.add(jLabel6);
+        jPanel9.add(filler6);
+
+        cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbHangGhe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
+        cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
+        cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel9.add(cbbHangGhe);
+
+        jPanel4.add(jPanel9);
+        jPanel4.add(filler8);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel10.setMaximumSize(new java.awt.Dimension(250, 70));
+        jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
+        jPanel10.setPreferredSize(new java.awt.Dimension(250, 70));
+        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
+        jPanel10.add(jLabel7);
+        jPanel10.add(filler9);
+
+        jDateStart.setDateFormatString("dd/MM/yyyy");
+        jDateStart.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jDateStart.setMaximumSize(new java.awt.Dimension(200, 40));
+        jDateStart.setMinimumSize(new java.awt.Dimension(200, 40));
+        jDateStart.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel10.add(jDateStart);
+
+        jPanel4.add(jPanel10);
+        jPanel4.add(filler14);
+
+        addButton.setBackground(new java.awt.Color(140, 197, 66));
+        addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus_math.png"))); // NOI18N
+        addButton.setText("Thêm");
+        addButton.setMaximumSize(new java.awt.Dimension(120, 50));
+        addButton.setPreferredSize(new java.awt.Dimension(120, 50));
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(addButton);
+
+        controlPanel.add(jPanel4);
 
         homePane.add(controlPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -74,22 +230,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                 {"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
                 {"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
                 {"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
-                {"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                {"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                {"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                {"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                {"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                {"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                {"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                {"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                {"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                {"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                {"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"}
+                {"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"}
             },
             new String [] {
                 "Mã chuyến bay", "Sân bay đi", "Sân bay đến", "Ngày khởi hành", "Thời gian bay", "Tình trạng"
@@ -104,6 +245,8 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             }
         });
         table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        table.setFillsViewportHeight(true);
+        table.setShowVerticalLines(false);
         table.getTableHeader().setReorderingAllowed(false);
         tableScrollPane.setViewportView(table);
 
@@ -145,7 +288,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 689, Short.MAX_VALUE)
+            .addGap(0, 1592, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +304,48 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         add(parentPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        ThemChuyenBayPane themChuyenBayPane = new ThemChuyenBayPane(this);
+        parentPane.add(themChuyenBayPane, themChuyenBayPane.getName());
+        CardLayout cl = (CardLayout) parentPane.getLayout();
+        cl.show(parentPane, themChuyenBayPane.getName());
+    }//GEN-LAST:event_addButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JComboBox<String> cbbHangGhe;
+    private javax.swing.JComboBox<String> cbbSanBayDen;
+    private javax.swing.JComboBox<String> cbbSanBayDi;
     private javax.swing.JPanel controlPanel;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler14;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
+    private javax.swing.Box.Filler filler9;
     private javax.swing.JPanel homePane;
+    private com.toedter.calendar.JDateChooser jDateStart;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTextField jtfSL;
     private javax.swing.JPanel parentPane;
     private javax.swing.JTable table;
     private javax.swing.JPanel tablePane;
@@ -179,72 +357,118 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         setupUIForTable();
     }
     private void setupModelForTable() {
-        dtm = new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Đang bay"},
-                    {"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
-                    {"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
-                    {"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đã bay"},
-                    {"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                    {"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                    {"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                    {"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Đang bay"},
-                    {"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                    {"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                    {"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                    {"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                    {"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", "Sắp khởi hành"},
-                    {"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"},
-                    {"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", "Sắp khởi hành"}
-                },
-                new String[]{
-                    "Mã chuyến bay", "Sân bay đi", "Sân bay đến", "Ngày khởi hành", "Thời gian bay", "Tình trạng"
-                }
-        ) {
+        dtm = new DefaultTableModel() {
+            String[] columnsNames = new String[]{
+                "Mã chuyến bay", "Sân bay đi", "Sân bay đến", "Ngày khởi hành", "Thời gian bay", "SL ghế", "Tình trạng", "Tác vụ"
+            };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, Integer.class, Object.class
             };
 
+            @Override
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
             }
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == (columnsNames.length - 1);
+            }
+
+            @Override
+            public String getColumnName(int column) {
+                return columnsNames[column];
+            }
+
+            @Override
+            public int getColumnCount() {
+                return columnsNames.length;
             }
         };
 
+        dtm.addRow(new Object[]{"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+        dtm.addRow(new Object[]{"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+
         table.setModel(dtm);
+
     }
 
     private void setupUIForTable() {
+
+        //Column
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                TableColumnModel tableColumnModel = table.getColumnModel();
+                tableColumnModel.getColumn(0).setPreferredWidth(190);
+                tableColumnModel.getColumn(1).setPreferredWidth(400);
+                tableColumnModel.getColumn(2).setPreferredWidth(400);
+                tableColumnModel.getColumn(3).setPreferredWidth(300);
+                tableColumnModel.getColumn(4).setPreferredWidth(200);
+                tableColumnModel.getColumn(5).setPreferredWidth(200);
+                tableColumnModel.getColumn(6).setPreferredWidth(200);
+                tableColumnModel.getColumn(7).setPreferredWidth(200);
+
+                tableColumnModel.getColumn(0).setCellRenderer(new CustomLeftAlignmentRenderer());
+                for (int i = 1; i <= 6; i++) {
+                    tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
+                }
+
+                PanelCellEditorRenderer PanelCellEditorRenderer = new PanelCellEditorRenderer();
+                int finalIndex = tableColumnModel.getColumnCount() - 1;
+                tableColumnModel.getColumn(finalIndex).setCellRenderer(PanelCellEditorRenderer);
+                tableColumnModel.getColumn(finalIndex).setCellEditor(PanelCellEditorRenderer);
+
+                //tableColumnModel.getColumn(6).setCellRenderer(new CustomTaskButtonRenderer());
+
+                setSorterTable();
+
+            }
+        });
         table.setGridColor(Color.BLACK);
         table.setShowGrid(true);
-        table.setRowHeight(50);
+        table.setShowVerticalLines(false);
+        table.setRowHeight(60);
+
 
         //Header
         JTableHeader tableHeader = table.getTableHeader();
-        tableHeader.setPreferredSize(new Dimension(80, 50));
+        tableHeader.setPreferredSize(new Dimension(80, 60));
         tableHeader.setFont(new Font("Tahoma", 1, 16));
-        tableHeader.setForeground(Color.BLACK);
+        tableHeader.setForeground(new Color(34, 103, 190));
+        tableHeader.setBackground(new Color(210, 227, 240));
         tableHeader.setReorderingAllowed(false);
         tableHeader.setBorder(BorderFactory.createLineBorder(new Color(102, 102, 102), 1));
 
-        //Column
-        TableColumnModel tableColumnModel = table.getColumnModel();
-        tableColumnModel.getColumn(0).setPreferredWidth(100);
-        tableColumnModel.getColumn(1).setPreferredWidth(200);
-        tableColumnModel.getColumn(2).setPreferredWidth(300);
-        tableColumnModel.getColumn(3).setPreferredWidth(300);
-        tableColumnModel.getColumn(4).setPreferredWidth(300);
-        tableColumnModel.getColumn(5).setPreferredWidth(200);
-
     }
+    private void setSorterTable() {
+        sorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(sorter);
+        int finalIndex = table.getColumnCount() - 1;
+        sorter.setSortable(finalIndex, false);
+    }
+
+    public JPanel getParentPane() {
+        return parentPane;
+    }
+
 
 }

@@ -183,6 +183,9 @@ public class MotChieuPanel extends javax.swing.JPanel {
         jpnContainFlights.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách các chuyến bay", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jpnContainFlights.setMaximumSize(new java.awt.Dimension(2200, 1500));
         jpnContainFlights.setLayout(new javax.swing.BoxLayout(jpnContainFlights, javax.swing.BoxLayout.Y_AXIS));
+
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+
         jScrollPane1.setViewportView(jpnContainFlights);
 
         add(jScrollPane1);
