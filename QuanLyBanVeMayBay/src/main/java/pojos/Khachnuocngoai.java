@@ -18,7 +18,7 @@ public class Khachnuocngoai extends Khachhang implements java.io.Serializable {
     }
 
     public Khachnuocngoai(String hoTen, String sdt, String gioiTinh, Date ngaySinh, Set phieus, Set hoadonmuaves, String quocTich, String hoChieu) {
-        super(hoTen, sdt, gioiTinh, ngaySinh, phieus, hoadonmuaves);
+       super(hoTen, sdt, gioiTinh, ngaySinh, phieus, hoadonmuaves);
        this.quocTich = quocTich;
        this.hoChieu = hoChieu;
     }

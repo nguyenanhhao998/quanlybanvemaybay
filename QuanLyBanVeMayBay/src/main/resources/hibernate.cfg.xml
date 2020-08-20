@@ -56,14 +56,14 @@ Contributor(s):
     <mapping resource="pojos/Admin.hbm.xml"/>
     <mapping resource="pojos/Khachnuocngoai.hbm.xml"/>
     <mapping resource="pojos/Nhanvien.hbm.xml"/>
-    <mapping resource="pojos/Phieucho.hbm.xml"/>
     <mapping resource="pojos/Khachhang.hbm.xml"/>
     <mapping resource="pojos/Phieu.hbm.xml"/>
+    <mapping resource="pojos/Phieucho.hbm.xml"/>
+    <mapping resource="pojos/Phieudatcho.hbm.xml"/>
     <mapping resource="pojos/Hangve.hbm.xml"/>
     <mapping resource="pojos/Giahangvetheocb.hbm.xml"/>
     <mapping resource="pojos/Hoadonmuave.hbm.xml"/>
-    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>
-    <mapping resource="pojos/Phieudatcho.hbm.xml"/>
+    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>    
     <mapping resource="pojos/Khachvietnam.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

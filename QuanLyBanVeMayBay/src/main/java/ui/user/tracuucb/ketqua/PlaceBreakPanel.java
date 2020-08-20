@@ -5,6 +5,9 @@
  */
 package ui.user.tracuucb.ketqua;
 
+import daos.SanbayDAO;
+import pojos.Sanbaytrunggian;
+
 /**
  *
  * @author DELL
@@ -14,8 +17,16 @@ public class PlaceBreakPanel extends javax.swing.JPanel {
     /**
      * Creates new form PlaceBreakPanel
      */
-    public PlaceBreakPanel() {
+    public PlaceBreakPanel(Sanbaytrunggian sbtg) {
         initComponents();
+        
+        String masb = sbtg.getSanbay().getMaSb();
+        String tp = SanbayDAO.getAirportNameById(masb);
+        jlbSBTG.setText(tp + " (" + masb +")");
+        
+        jlbThoiGian.setText(String.format("%.1f giờ", sbtg.getThoiGianDung()));
+        
+        jlbGhiChu.setText(sbtg.getGhiChu());
     }
 
     /**
@@ -28,13 +39,13 @@ public class PlaceBreakPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jlbSBTG = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jlbThoiGian = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jlbGhiChu = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setMaximumSize(new java.awt.Dimension(98830, 40));
@@ -46,27 +57,27 @@ public class PlaceBreakPanel extends javax.swing.JPanel {
         jLabel5.setText("Tên: ");
         add(jLabel5);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Đà Nẵng (DN)");
-        add(jLabel8);
+        jlbSBTG.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSBTG.setText("Đà Nẵng (DN)");
+        add(jlbSBTG);
         add(filler2);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Thời gian: ");
         add(jLabel9);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("20 phút");
-        add(jLabel14);
+        jlbThoiGian.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbThoiGian.setText("20 phút");
+        add(jlbThoiGian);
         add(filler3);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Lý do: ");
         add(jLabel15);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setText("Tiếp nhiên liệu");
-        add(jLabel16);
+        jlbGhiChu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGhiChu.setText("Tiếp nhiên liệu");
+        add(jlbGhiChu);
         add(filler4);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -75,11 +86,11 @@ public class PlaceBreakPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jlbGhiChu;
+    private javax.swing.JLabel jlbSBTG;
+    private javax.swing.JLabel jlbThoiGian;
     // End of variables declaration//GEN-END:variables
 }

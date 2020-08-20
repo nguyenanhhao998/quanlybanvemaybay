@@ -23,25 +23,25 @@
         <property name="tinhTrang" type="string">
             <column name="TinhTrang" />
         </property>
-        <set name="giahangvetheocbs" table="giahangvetheocb" inverse="true" lazy="true" fetch="select">
+        <set name="giahangvetheocbs" table="giahangvetheocb" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="MaCB" not-null="true" />
             </key>
             <one-to-many class="pojos.Giahangvetheocb" />
         </set>
-        <set name="vechuyenbays" table="vechuyenbay" inverse="true" lazy="true" fetch="select">
+        <set name="vechuyenbays" table="vechuyenbay" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="MaCB" not-null="true" />
             </key>
             <one-to-many class="pojos.Vechuyenbay" />
         </set>
-        <set name="sanbaytrunggians" table="sanbaytrunggian" inverse="true" lazy="true" fetch="select">
+        <set name="sanbaytrunggians" table="sanbaytrunggian" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="MaCB" not-null="true" />
             </key>
             <one-to-many class="pojos.Sanbaytrunggian" />
         </set>
-        <set name="phieuchos" table="phieucho" inverse="true" lazy="true" fetch="select">
+        <set name="phieuchos" table="phieucho" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="maCB" not-null="true" />
             </key>

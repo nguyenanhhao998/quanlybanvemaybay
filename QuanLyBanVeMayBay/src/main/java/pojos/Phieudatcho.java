@@ -1,6 +1,9 @@
 package pojos;
 // Generated Aug 2, 2020, 11:17:00 PM by Hibernate Tools 4.3.1
 
+import java.util.Date;
+
+
 
 
 /**
@@ -12,9 +15,15 @@ public class Phieudatcho extends Phieu implements java.io.Serializable {
 
     public Phieudatcho() {
     }
+    
+    public Phieudatcho(Date ngayDat, Vechuyenbay vechuyenbay) {
+        super(ngayDat);
+        this.vechuyenbay = vechuyenbay;
+    }
 
-    public Phieudatcho(Vechuyenbay vechuyenbay) {
-       this.vechuyenbay = vechuyenbay;
+    public Phieudatcho(Khachhang khachhang, Date ngayDat, String tinhTrang, Vechuyenbay vechuyenbay) {
+        super(khachhang, ngayDat, tinhTrang);
+        this.vechuyenbay = vechuyenbay;
     }
    
     public Vechuyenbay getVechuyenbay() {

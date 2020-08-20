@@ -5,6 +5,18 @@
  */
 package ui.user.tracuucb;
 
+import daos.ChuyenbayDAO;
+import daos.HangveDAO;
+import daos.SanbayDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import pojos.Chuyenbay;
+import pojos.Hangve;
+import pojos.Sanbay;
 import ui.user.tracuucb.ketqua.MotChieuPanel;
 
 /**
@@ -16,8 +28,25 @@ public class JPNTraCuu extends javax.swing.JPanel {
     /**
      * Creates new form JPNTraCuu
      */
+    
+    List<Sanbay> listSanBay;
+    List<Hangve> listHangVe;
+    boolean isKhuHoi = false;
     public JPNTraCuu() {
         initComponents();
+        listSanBay = SanbayDAO.getAll();
+        listHangVe = HangveDAO.getAll();
+        
+        for(int i = 0; i < listSanBay.size(); i++){
+            Sanbay sb = listSanBay.get(i);
+            cbbSanBayDi.addItem(sb.getThanhPho() +" (" + sb.getMaSb() + ")");
+            cbbSanBayDen.addItem(sb.getThanhPho() +" (" + sb.getMaSb() + ")");
+        }
+        
+        for(int i = 0; i < listHangVe.size(); i++){
+            cbbHangGhe.addItem(listHangVe.get(i).getTenHangVe());
+        }
+        
         jpnNgayVe.setVisible(false);
         jpnKetQua.setVisible(false);
         jtabbedPaneKhuHoi.setVisible(false);
@@ -52,7 +81,7 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         jLabel5 = new javax.swing.JLabel();
-        jtfSL = new javax.swing.JTextField();
+        sl = new javax.swing.JSpinner();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel9 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -103,7 +132,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel6.add(filler1);
 
         cbbSanBayDi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbSanBayDi.setMaximumSize(new java.awt.Dimension(200, 40));
         cbbSanBayDi.setMinimumSize(new java.awt.Dimension(200, 40));
         cbbSanBayDi.setPreferredSize(new java.awt.Dimension(200, 40));
@@ -120,7 +148,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel7.add(filler2);
 
         cbbSanBayDen.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbSanBayDen.setMaximumSize(new java.awt.Dimension(200, 40));
         cbbSanBayDen.setMinimumSize(new java.awt.Dimension(200, 40));
         cbbSanBayDen.setPreferredSize(new java.awt.Dimension(200, 40));
@@ -140,11 +167,12 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jLabel5.setText("Số lượng: ");
         jPanel8.add(jLabel5);
 
-        jtfSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jtfSL.setMaximumSize(new java.awt.Dimension(50, 35));
-        jtfSL.setMinimumSize(new java.awt.Dimension(50, 35));
-        jtfSL.setPreferredSize(new java.awt.Dimension(50, 35));
-        jPanel8.add(jtfSL);
+        sl.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sl.setModel(new javax.swing.SpinnerNumberModel(1, 1, 300, 1));
+        sl.setMaximumSize(new java.awt.Dimension(80, 35));
+        sl.setMinimumSize(new java.awt.Dimension(80, 35));
+        sl.setPreferredSize(new java.awt.Dimension(80, 35));
+        jPanel8.add(sl);
 
         jPanel4.add(jPanel8);
         jPanel4.add(filler7);
@@ -157,7 +185,6 @@ public class JPNTraCuu extends javax.swing.JPanel {
         jPanel9.add(filler6);
 
         cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbHangGhe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
         cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
         cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
@@ -276,36 +303,108 @@ public class JPNTraCuu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbtnMotChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnMotChieuActionPerformed
+        isKhuHoi = false;
+        rbtnMotChieu.setSelected(true);
         if(rbtnKhuHoi.isSelected()){
             rbtnKhuHoi.setSelected(false);
             jpnNgayVe.setVisible(false);
-        } else
-        rbtnMotChieu.setSelected(true);
+        }
     }//GEN-LAST:event_rbtnMotChieuActionPerformed
 
     private void rbtnKhuHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnKhuHoiActionPerformed
+        isKhuHoi = true;
+        rbtnKhuHoi.setSelected(true);
         if(rbtnMotChieu.isSelected()){
             rbtnMotChieu.setSelected(false);
             jpnNgayVe.setVisible(true);
-        }else {
-            rbtnKhuHoi.setSelected(true);
         }
     }//GEN-LAST:event_rbtnKhuHoiActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        //Lấy dữ liệu từ giao diện
+        String masbdi = listSanBay.get(cbbSanBayDi.getSelectedIndex()).getMaSb();
+        String masbden = listSanBay.get(cbbSanBayDen.getSelectedIndex()).getMaSb();
+        int SL = Integer.parseInt(String.valueOf(sl.getValue()));
+        String hangghe = String.valueOf(cbbHangGhe.getSelectedItem());
+        String mahangghe = null;
+        Date DateStart = null;
+        Date DateEnd = null;
+
+        for(int i = 0; i < listHangVe.size(); i++){
+            Hangve hv = listHangVe.get(i);
+            if(hv.getTenHangVe().equalsIgnoreCase(hangghe)){
+                mahangghe = hv.getMaHangVe();
+                break;
+            }
+        }
+        
+        try{
+            DateStart = jDateStart.getCalendar().getTime();
+            if(isKhuHoi)
+                DateEnd = jDateEnd.getCalendar().getTime();
+        }catch(NullPointerException ex){
+            JLabel label = new JLabel("Bạn phải chọn thời gian bay.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label,"ERROR",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        //kiểm tra
+        //sân bay đi trùng sân bay đến
+        if(masbdi.equalsIgnoreCase(masbden)){
+            JLabel label = new JLabel("Sân bay đi phải khác sân bay đến.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //ngày đi phải trước ngày về
+        if(isKhuHoi && DateStart.compareTo(DateEnd) >= 0){
+            JLabel label = new JLabel("Ngày khởi hành phải trước ngày về.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        //Tìm kiếm trong database
+        List<Chuyenbay> listcbdi = ChuyenbayDAO.findFlights(masbdi, masbden, SL, mahangghe, DateStart);
+        List<Chuyenbay> listcbve = null;
+        
+        if(isKhuHoi){
+            listcbve = ChuyenbayDAO.findFlights(masbden, masbdi, SL, mahangghe, DateEnd);
+            if(listcbve.isEmpty()){
+                JLabel label = new JLabel("Không tìm thấy chuyến bay.");
+                label.setFont(new Font("Arial", Font.BOLD, 18));
+                label.setForeground(Color.blue);
+                JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+        
+        if(listcbdi.isEmpty()){
+            JLabel label = new JLabel("Không tìm thấy chuyến bay.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.blue);
+            JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         if(rbtnMotChieu.isSelected()){
             jpnKetQua.setVisible(true);
             jtabbedPaneKhuHoi.setVisible(false);
             jpnKetQua.removeAll();
-            jpnKetQua.add(new MotChieuPanel());
+            jpnKetQua.add(new MotChieuPanel(listcbdi, SL, mahangghe));
             jpnKetQua.validate();
             jpnKetQua.repaint();
         } else if(rbtnKhuHoi.isSelected()){
             jtabbedPaneKhuHoi.setVisible(true);
             jpnKetQua.setVisible(false);
             jtabbedPaneKhuHoi.removeAll();
-            jtabbedPaneKhuHoi.add("Chọn chuyến đi",new MotChieuPanel());
-            jtabbedPaneKhuHoi.add("Chọn chuyến về",new MotChieuPanel());
+            jtabbedPaneKhuHoi.add("Chọn chuyến đi",new MotChieuPanel(listcbdi, SL, mahangghe));
+            jtabbedPaneKhuHoi.add("Chọn chuyến về",new MotChieuPanel(listcbve, SL, mahangghe));
         }
     }//GEN-LAST:event_btnFindActionPerformed
 
@@ -355,8 +454,8 @@ public class JPNTraCuu extends javax.swing.JPanel {
     private javax.swing.JPanel jpnNgayVe;
     private javax.swing.JPanel jpnTraCuu;
     private javax.swing.JTabbedPane jtabbedPaneKhuHoi;
-    private javax.swing.JTextField jtfSL;
     private javax.swing.JRadioButton rbtnKhuHoi;
     private javax.swing.JRadioButton rbtnMotChieu;
+    private javax.swing.JSpinner sl;
     // End of variables declaration//GEN-END:variables
 }

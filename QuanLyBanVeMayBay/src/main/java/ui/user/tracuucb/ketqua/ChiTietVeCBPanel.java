@@ -5,7 +5,18 @@
  */
 package ui.user.tracuucb.ketqua;
 
+import daos.HangveDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JPanel;
+import pojos.Chuyenbay;
+import pojos.Giahangvetheocb;
+import pojos.Sanbaytrunggian;
 import ui.user.MainForUser;
 import ui.user.datve.DatVePanel;
 import ui.user.datve.PhieuChoPanel;
@@ -20,12 +31,74 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     /**
      * Creates new form ChiTietVeCBPanel
      */
-    public ChiTietVeCBPanel() {
+    
+    Chuyenbay cb;
+    int sl;
+    String mahangve;
+    public ChiTietVeCBPanel(Chuyenbay cb, int sl, String mahangve) {
         initComponents();
+        this.cb = cb;
+        this.sl = sl;
+        this.mahangve = mahangve;
+        
         //jpnContainPlaceBreaks.setVisible(false);
-        for(int i = 0; i < 2; i++){
-            jpnPlaceBreaks.add(new PlaceBreakPanel());
+        String[] dayOfWeek = {"Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(cb.getNgayKhoiHanh());
+        String thu = dayOfWeek[cal.get(Calendar.DAY_OF_WEEK) - 1];
+        DateFormat df1 = new SimpleDateFormat("'ngày' dd 'tháng' MM 'năm' yyyy");
+        jlbNgay.setText(thu + ", " + df1.format(cb.getNgayKhoiHanh()));
+        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        
+        int sodiemdung = 0;
+        if(!cb.getSanbaytrunggians().isEmpty())
+            sodiemdung = cb.getSanbaytrunggians().size();
+        
+        if(sodiemdung == 0)
+            jlbSoDiemDung.setText("Bay thẳng");
+        else
+            jlbSoDiemDung.setText(String.format("%d điểm dừng",sodiemdung));
+        
+        
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String timeStart = df.format(cb.getNgayKhoiHanh());
+        jlbTimeStart.setText(timeStart);
+        
+        float time = cb.getThoiGianBay();
+        Iterator<Sanbaytrunggian> tgs = cb.getSanbaytrunggians().iterator();
+        
+        while(tgs.hasNext()){
+            Sanbaytrunggian tg = tgs.next();
+            time+=tg.getThoiGianDung();
+            jpnPlaceBreaks.add(new PlaceBreakPanel(tg));
         }
+        //thoigianbay = time;
+        time *= 60;// đổi thời gian bay sang phút 
+        //JOptionPane.showMessageDialog(null, time);
+        String timeEnd = df.format(new Date(cb.getNgayKhoiHanh().getTime() + TimeUnit.MINUTES.toMillis((long) time)));
+        
+        jlbTimeEnd.setText(timeEnd);
+        
+        String tenhv = HangveDAO.getTicketLevelName(mahangve);
+        
+        jlbHangVe.setText(tenhv);
+        
+        Iterator<Giahangvetheocb> tgs1 = cb.getGiahangvetheocbs().iterator();
+        
+        while(tgs1.hasNext()){
+            Giahangvetheocb giahv = tgs1.next();
+            if(giahv.getHangve().getMaHangVe().equalsIgnoreCase(mahangve)){
+                jlbGia.setText(String.format("%,.0f VND",giahv.getGiaHienTai()));
+                jlbTongTien.setText(String.format("%,.0f VND",giahv.getGiaHienTai()*sl));
+            }       
+        }
+
+        jlbTimeFly.setText(String.format("%.0f giờ %.0f phút",time/60,time%60));
+        if(sl < 10)
+            jlbSL.setText(String.format("%02d", sl));
+        else
+            jlbSL.setText(String.format("%d", sl));
     }
 
     /**
@@ -38,40 +111,40 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jlbNgay = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jlbHangVe = new javax.swing.JLabel();
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel1 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jlbSBDi = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jlbTimeStart = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        jlbSBDen = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        jlbTimeEnd = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jlbSoDiemDung = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        jlbTimeFly = new javax.swing.JLabel();
         filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpnContainPlaceBreaks = new javax.swing.JPanel();
         jpnPlaceBreaks = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jlbSL = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jlbGia = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jlbTongTien = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel7 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -90,18 +163,18 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 50));
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Chủ nhật Ngày 16 tháng 8 năm 2020");
-        jPanel2.add(jLabel2);
+        jlbNgay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNgay.setText("Chủ nhật Ngày 16 tháng 8 năm 2020");
+        jPanel2.add(jlbNgay);
         jPanel2.add(filler1);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Hạng vé: ");
         jPanel2.add(jLabel3);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Phổ thông");
-        jPanel2.add(jLabel4);
+        jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbHangVe.setText("Phổ thông");
+        jPanel2.add(jlbHangVe);
         jPanel2.add(filler18);
 
         add(jPanel2);
@@ -137,14 +210,14 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel5.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clock.png"))); // NOI18N
-        jLabel10.setText("07:00");
-        jLabel10.setAlignmentY(0.0F);
-        jLabel10.setMaximumSize(new java.awt.Dimension(150, 35));
-        jLabel10.setMinimumSize(new java.awt.Dimension(150, 35));
-        jLabel10.setPreferredSize(new java.awt.Dimension(150, 35));
-        jPanel5.add(jLabel10);
+        jlbTimeStart.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbTimeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clock.png"))); // NOI18N
+        jlbTimeStart.setText("07:00");
+        jlbTimeStart.setAlignmentY(0.0F);
+        jlbTimeStart.setMaximumSize(new java.awt.Dimension(150, 35));
+        jlbTimeStart.setMinimumSize(new java.awt.Dimension(150, 35));
+        jlbTimeStart.setPreferredSize(new java.awt.Dimension(150, 35));
+        jPanel5.add(jlbTimeStart);
 
         jPanel8.add(jPanel5);
 
@@ -166,13 +239,13 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel13.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
-        jLabel11.setText("TPHCM (SGN)");
-        jLabel11.setMaximumSize(new java.awt.Dimension(200, 40));
-        jLabel11.setMinimumSize(new java.awt.Dimension(200, 40));
-        jLabel11.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel13.add(jLabel11);
+        jlbSBDen.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSBDen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
+        jlbSBDen.setText("TPHCM (SGN)");
+        jlbSBDen.setMaximumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setMinimumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel13.add(jlbSBDen);
 
         jPanel12.add(jPanel13);
 
@@ -181,14 +254,14 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel14.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clock.png"))); // NOI18N
-        jLabel12.setText("09:00");
-        jLabel12.setAlignmentY(0.0F);
-        jLabel12.setMaximumSize(new java.awt.Dimension(150, 35));
-        jLabel12.setMinimumSize(new java.awt.Dimension(150, 35));
-        jLabel12.setPreferredSize(new java.awt.Dimension(150, 35));
-        jPanel14.add(jLabel12);
+        jlbTimeEnd.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbTimeEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clock.png"))); // NOI18N
+        jlbTimeEnd.setText("09:00");
+        jlbTimeEnd.setAlignmentY(0.0F);
+        jlbTimeEnd.setMaximumSize(new java.awt.Dimension(150, 35));
+        jlbTimeEnd.setMinimumSize(new java.awt.Dimension(150, 35));
+        jlbTimeEnd.setPreferredSize(new java.awt.Dimension(150, 35));
+        jPanel14.add(jlbTimeEnd);
 
         jPanel12.add(jPanel14);
 
@@ -204,12 +277,12 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel10.setPreferredSize(new java.awt.Dimension(150, 40));
         jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel6.setText("Bay thẳng");
-        jLabel6.setMaximumSize(new java.awt.Dimension(150, 40));
-        jLabel6.setMinimumSize(new java.awt.Dimension(150, 40));
-        jLabel6.setPreferredSize(new java.awt.Dimension(150, 40));
-        jPanel10.add(jLabel6);
+        jlbSoDiemDung.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSoDiemDung.setText("Bay thẳng");
+        jlbSoDiemDung.setMaximumSize(new java.awt.Dimension(150, 40));
+        jlbSoDiemDung.setMinimumSize(new java.awt.Dimension(150, 40));
+        jlbSoDiemDung.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel10.add(jlbSoDiemDung);
 
         jPanel9.add(jPanel10);
 
@@ -218,14 +291,13 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel11.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clock.png"))); // NOI18N
-        jLabel13.setText("02:00");
-        jLabel13.setAlignmentY(0.0F);
-        jLabel13.setMaximumSize(new java.awt.Dimension(100, 35));
-        jLabel13.setMinimumSize(new java.awt.Dimension(100, 35));
-        jLabel13.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel11.add(jLabel13);
+        jlbTimeFly.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbTimeFly.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/timefly.png"))); // NOI18N
+        jlbTimeFly.setText("Bay thẳng");
+        jlbTimeFly.setMaximumSize(new java.awt.Dimension(150, 40));
+        jlbTimeFly.setMinimumSize(new java.awt.Dimension(150, 40));
+        jlbTimeFly.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel11.add(jlbTimeFly);
 
         jPanel9.add(jPanel11);
 
@@ -254,28 +326,28 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jLabel5.setText("Số lượng vé: ");
         jPanel6.add(jLabel5);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("02");
-        jPanel6.add(jLabel8);
+        jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSL.setText("02");
+        jPanel6.add(jlbSL);
         jPanel6.add(filler2);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Giá vé: ");
         jPanel6.add(jLabel9);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("500.000 VND");
-        jPanel6.add(jLabel14);
+        jlbGia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGia.setText("500.000 VND");
+        jPanel6.add(jlbGia);
         jPanel6.add(filler3);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Thành tiền: ");
         jPanel6.add(jLabel15);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel16.setText("1.000.000 VND");
-        jPanel6.add(jLabel16);
+        jlbTongTien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTongTien.setForeground(new java.awt.Color(255, 0, 0));
+        jlbTongTien.setText("1.000.000 VND");
+        jPanel6.add(jlbTongTien);
         jPanel6.add(filler4);
 
         add(jPanel6);
@@ -334,13 +406,13 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(), "muave");
+        MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve), "muave");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         JPanel phieu;
-        if(false){
-            phieu = new DatVePanel();
+        if(true){
+            phieu = new DatVePanel(cb,sl,mahangve);
         }else{
             phieu = new PhieuChoPanel();
         }
@@ -362,20 +434,10 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -390,7 +452,17 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jlbGia;
+    private javax.swing.JLabel jlbHangVe;
+    private javax.swing.JLabel jlbNgay;
+    private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
+    private javax.swing.JLabel jlbSL;
+    private javax.swing.JLabel jlbSoDiemDung;
+    private javax.swing.JLabel jlbTimeEnd;
+    private javax.swing.JLabel jlbTimeFly;
+    private javax.swing.JLabel jlbTimeStart;
+    private javax.swing.JLabel jlbTongTien;
     private javax.swing.JPanel jpnContainPlaceBreaks;
     private javax.swing.JPanel jpnPlaceBreaks;
     // End of variables declaration//GEN-END:variables

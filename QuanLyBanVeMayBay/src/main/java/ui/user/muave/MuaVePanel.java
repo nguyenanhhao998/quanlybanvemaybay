@@ -5,6 +5,12 @@
  */
 package ui.user.muave;
 
+import daos.HangveDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import pojos.Chuyenbay;
+import pojos.Giahangvetheocb;
 import ui.user.MainForUser;
 
 /**
@@ -16,11 +22,39 @@ public class MuaVePanel extends javax.swing.JPanel {
     /**
      * Creates new form MuaVePanel
      */
-    public MuaVePanel() {
+    public MuaVePanel(Chuyenbay cb, int sl, String mahangve) {
         initComponents();
         
-        for(int i = 0; i < 2; i++){
+        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String timeStart = df.format(cb.getNgayKhoiHanh());
+        jlbTimeStart.setText(timeStart);
+        for(int i = 0; i < sl; i++){
             jpnThongTinKHs.add(new DienThongTinKHPanel(i+1));
+        }
+        
+        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+        jlbNgay.setText(df1.format(cb.getNgayKhoiHanh()));
+        
+        if(sl < 10)
+            jlbSL.setText(String.format("%02d", sl));
+        else
+            jlbSL.setText(String.format("%d", sl));
+        
+        String tenhv = HangveDAO.getTicketLevelName(mahangve);
+        
+        jlbHangVe.setText(tenhv);
+        
+        Iterator<Giahangvetheocb> tgs1 = cb.getGiahangvetheocbs().iterator();
+        
+        while(tgs1.hasNext()){
+            Giahangvetheocb giahv = tgs1.next();
+            if(giahv.getHangve().getMaHangVe().equalsIgnoreCase(mahangve)){
+                jlbGia.setText(String.format("%,.0f VND",giahv.getGiaHienTai()));
+                jlbTongTien.setText(String.format("%,.0f VND",giahv.getGiaHienTai()*sl));
+            }       
         }
     }
 
@@ -43,25 +77,25 @@ public class MuaVePanel extends javax.swing.JPanel {
         jlbSBDi = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        jlbSBDen = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        jlbNgay = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        jlbTimeStart = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jlbSL = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jlbHangVe = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jlbGia = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jlbTongTien = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton1 = new javax.swing.JButton();
@@ -120,13 +154,13 @@ public class MuaVePanel extends javax.swing.JPanel {
         jPanel13.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
-        jLabel11.setText("TPHCM (SGN)");
-        jLabel11.setMaximumSize(new java.awt.Dimension(200, 40));
-        jLabel11.setMinimumSize(new java.awt.Dimension(200, 40));
-        jLabel11.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel13.add(jLabel11);
+        jlbSBDen.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSBDen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
+        jlbSBDen.setText("TPHCM (SGN)");
+        jlbSBDen.setMaximumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setMinimumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel13.add(jlbSBDen);
 
         jPanel7.add(jPanel13);
 
@@ -140,9 +174,9 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel6.setText("Ngày khởi hành: ");
         jPanel8.add(jLabel6);
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel25.setText("18/08/2020");
-        jPanel8.add(jLabel25);
+        jlbNgay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNgay.setText("18/08/2020");
+        jPanel8.add(jlbNgay);
 
         jPanel6.add(jPanel8);
 
@@ -154,9 +188,9 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel29.setText("Giờ bay: ");
         jPanel21.add(jLabel29);
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel30.setText("07h00");
-        jPanel21.add(jLabel30);
+        jlbTimeStart.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTimeStart.setText("07h00");
+        jPanel21.add(jlbTimeStart);
 
         jPanel6.add(jPanel21);
 
@@ -168,9 +202,9 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel5.setText("Số lượng vé: ");
         jPanel2.add(jLabel5);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("02");
-        jPanel2.add(jLabel8);
+        jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSL.setText("02");
+        jPanel2.add(jlbSL);
 
         jPanel6.add(jPanel2);
 
@@ -182,9 +216,9 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel10.setText("Hạng vé: ");
         jPanel10.add(jLabel10);
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel17.setText("Phổ thông");
-        jPanel10.add(jLabel17);
+        jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbHangVe.setText("Phổ thông");
+        jPanel10.add(jlbHangVe);
 
         jPanel6.add(jPanel10);
 
@@ -196,9 +230,9 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel9.setText("Giá vé: ");
         jPanel4.add(jLabel9);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel14.setText("500.000 VND");
-        jPanel4.add(jLabel14);
+        jlbGia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGia.setText("500.000 VND");
+        jPanel4.add(jlbGia);
 
         jPanel6.add(jPanel4);
 
@@ -210,10 +244,10 @@ public class MuaVePanel extends javax.swing.JPanel {
         jLabel15.setText("Thành tiền: ");
         jPanel3.add(jLabel15);
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel16.setText("1.000.000 VND");
-        jPanel3.add(jLabel16);
+        jlbTongTien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTongTien.setForeground(new java.awt.Color(255, 0, 0));
+        jlbTongTien.setText("1.000.000 VND");
+        jPanel3.add(jlbTongTien);
 
         jPanel6.add(jPanel3);
 
@@ -262,18 +296,11 @@ public class MuaVePanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -287,7 +314,14 @@ public class MuaVePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jlbGia;
+    private javax.swing.JLabel jlbHangVe;
+    private javax.swing.JLabel jlbNgay;
+    private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
+    private javax.swing.JLabel jlbSL;
+    private javax.swing.JLabel jlbTimeStart;
+    private javax.swing.JLabel jlbTongTien;
     private javax.swing.JPanel jpnThongTinKHs;
     // End of variables declaration//GEN-END:variables
 }

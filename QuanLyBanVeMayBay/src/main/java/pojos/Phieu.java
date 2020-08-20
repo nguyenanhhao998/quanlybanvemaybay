@@ -17,7 +17,6 @@ public class Phieu  implements java.io.Serializable {
 
     public Phieu() {
     }
-
 	
     public Phieu(Date ngayDat) {
         this.ngayDat = ngayDat;
@@ -25,7 +24,7 @@ public class Phieu  implements java.io.Serializable {
     public Phieu(Khachhang khachhang, Date ngayDat, String tinhTrang) {
        this.khachhang = khachhang;
        this.ngayDat = ngayDat;
-        this.tinhTrang = tinhTrang;
+       this.tinhTrang = tinhTrang;
     }
    
     public Integer getIdPhieu() {
@@ -56,11 +55,6 @@ public class Phieu  implements java.io.Serializable {
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-
-
-
-
-
 }
 
 
