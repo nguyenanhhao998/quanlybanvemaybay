@@ -7,6 +7,8 @@ package ui.admin;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -49,9 +51,9 @@ public class MainForAdmin extends javax.swing.JFrame {
         quanLyNhanVienPane = new QuanLyNhanVienPane();
         thongKePane = new ThongKePane();
 
-        tabbedPane.addTab("Quản lý chuyến bay", quanLyChuyenBayPane);
-        tabbedPane.add("Quản lý nhân viên", quanLyNhanVienPane);
-        tabbedPane.add("Thống kê doanh thu", thongKePane);
+        tabbedPane.addTab("Quản lý chuyến bay".toUpperCase(), quanLyChuyenBayPane);
+        tabbedPane.add("Quản lý nhân viên".toUpperCase(), quanLyNhanVienPane);
+        tabbedPane.add("Thống kê doanh thu".toUpperCase(), thongKePane);
     }
 
     /**
@@ -68,7 +70,7 @@ public class MainForAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 700));
 
-        tabbedPane.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tabbedPane.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
 
         pack();

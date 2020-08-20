@@ -106,10 +106,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
         controlPanel.setLayout(new javax.swing.BoxLayout(controlPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 20, 15, 20));
         jPanel4.setMaximumSize(new java.awt.Dimension(32767, 100));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
+        jPanel6.setBackground(new java.awt.Color(250, 250, 250));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm khởi hành", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -127,6 +129,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel4.add(jPanel6);
         jPanel4.add(filler4);
 
+        jPanel7.setBackground(new java.awt.Color(250, 250, 250));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -144,6 +147,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel4.add(jPanel7);
         jPanel4.add(filler5);
 
+        jPanel8.setBackground(new java.awt.Color(250, 250, 250));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Số hành khách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -164,6 +168,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel4.add(jPanel8);
         jPanel4.add(filler7);
 
+        jPanel9.setBackground(new java.awt.Color(250, 250, 250));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -181,6 +186,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel4.add(jPanel9);
         jPanel4.add(filler8);
 
+        jPanel10.setBackground(new java.awt.Color(250, 250, 250));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel10.setMaximumSize(new java.awt.Dimension(250, 70));
         jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
@@ -252,6 +258,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
         tablePane.add(tableScrollPane, java.awt.BorderLayout.CENTER);
 
+        jPanel1.setBackground(new java.awt.Color(250, 250, 250));
         jPanel1.setPreferredSize(new java.awt.Dimension(20, 427));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -267,6 +274,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
         tablePane.add(jPanel1, java.awt.BorderLayout.LINE_END);
 
+        jPanel2.setBackground(new java.awt.Color(250, 250, 250));
         jPanel2.setPreferredSize(new java.awt.Dimension(20, 427));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
