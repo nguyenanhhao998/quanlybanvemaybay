@@ -132,7 +132,6 @@ public class BCDTNamPane extends javax.swing.JPanel {
         addButton.setBackground(new java.awt.Color(140, 197, 66));
         addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus_math.png"))); // NOI18N
         addButton.setText("Tìm kiếm");
         addButton.setMaximumSize(new java.awt.Dimension(250, 50));
         addButton.setPreferredSize(new java.awt.Dimension(250, 50));

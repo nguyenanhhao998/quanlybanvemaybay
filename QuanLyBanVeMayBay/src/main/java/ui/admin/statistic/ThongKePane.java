@@ -53,12 +53,11 @@ public class ThongKePane extends javax.swing.JPanel {
         logoPanel = new javax.swing.JPanel();
         labelForBCThangPane = new javax.swing.JPanel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55));
-        filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 55), new java.awt.Dimension(30, 55), new java.awt.Dimension(30, 55));
         jLabel2 = new javax.swing.JLabel();
+        filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55));
         logoPanel1 = new javax.swing.JPanel();
         labelForBaoCaoNamPane = new javax.swing.JPanel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55), new java.awt.Dimension(20, 55));
-        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 55), new java.awt.Dimension(30, 55), new java.awt.Dimension(30, 55));
         jLabel10 = new javax.swing.JLabel();
         mainPane = new javax.swing.JPanel();
 
@@ -67,7 +66,7 @@ public class ThongKePane extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(9, 115, 185));
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 20, 15, 20));
         jPanel4.setMaximumSize(new java.awt.Dimension(32767, 200));
-        jPanel4.setPreferredSize(new java.awt.Dimension(120, 100));
+        jPanel4.setPreferredSize(new java.awt.Dimension(120, 80));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
         jPanel4.add(filler1);
 
@@ -81,11 +80,11 @@ public class ThongKePane extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        sidePane.setBackground(new java.awt.Color(9, 115, 185));
-        sidePane.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(204, 204, 204)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20)));
+        sidePane.setBackground(new java.awt.Color(204, 204, 204));
+        sidePane.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 1, new java.awt.Color(204, 204, 204)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 20)));
         sidePane.setFocusable(false);
         sidePane.setMaximumSize(new java.awt.Dimension(32767, 620));
-        sidePane.setPreferredSize(new java.awt.Dimension(420, 620));
+        sidePane.setPreferredSize(new java.awt.Dimension(360, 620));
         sidePane.setLayout(new javax.swing.BoxLayout(sidePane, javax.swing.BoxLayout.PAGE_AXIS));
 
         logoPanel.setBackground(new java.awt.Color(18, 18, 18));
@@ -110,8 +109,8 @@ public class ThongKePane extends javax.swing.JPanel {
         labelForBCThangPane.setBackground(new java.awt.Color(1, 153, 252));
         labelForBCThangPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         labelForBCThangPane.setForeground(new java.awt.Color(255, 255, 255));
-        labelForBCThangPane.setMaximumSize(new java.awt.Dimension(32767, 100));
-        labelForBCThangPane.setPreferredSize(new java.awt.Dimension(188, 100));
+        labelForBCThangPane.setMaximumSize(new java.awt.Dimension(32767, 80));
+        labelForBCThangPane.setPreferredSize(new java.awt.Dimension(188, 80));
         labelForBCThangPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 labelForBCThangPaneMouseEntered(evt);
@@ -125,12 +124,12 @@ public class ThongKePane extends javax.swing.JPanel {
         });
         labelForBCThangPane.setLayout(new javax.swing.BoxLayout(labelForBCThangPane, javax.swing.BoxLayout.LINE_AXIS));
         labelForBCThangPane.add(filler11);
-        labelForBCThangPane.add(filler12);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Báo cáo doanh thu theo tháng");
         labelForBCThangPane.add(jLabel2);
+        labelForBCThangPane.add(filler13);
 
         sidePane.add(labelForBCThangPane);
 
@@ -155,8 +154,8 @@ public class ThongKePane extends javax.swing.JPanel {
 
         labelForBaoCaoNamPane.setBackground(new java.awt.Color(9, 115, 185));
         labelForBaoCaoNamPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        labelForBaoCaoNamPane.setMaximumSize(new java.awt.Dimension(32767, 100));
-        labelForBaoCaoNamPane.setPreferredSize(new java.awt.Dimension(135, 100));
+        labelForBaoCaoNamPane.setMaximumSize(new java.awt.Dimension(32767, 80));
+        labelForBaoCaoNamPane.setPreferredSize(new java.awt.Dimension(135, 80));
         labelForBaoCaoNamPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 labelForBaoCaoNamPaneMouseEntered(evt);
@@ -170,7 +169,6 @@ public class ThongKePane extends javax.swing.JPanel {
         });
         labelForBaoCaoNamPane.setLayout(new javax.swing.BoxLayout(labelForBaoCaoNamPane, javax.swing.BoxLayout.LINE_AXIS));
         labelForBaoCaoNamPane.add(filler9);
-        labelForBaoCaoNamPane.add(filler10);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -181,6 +179,7 @@ public class ThongKePane extends javax.swing.JPanel {
 
         jPanel1.add(sidePane, java.awt.BorderLayout.WEST);
 
+        mainPane.setBackground(new java.awt.Color(250, 250, 250));
         mainPane.setLayout(new java.awt.CardLayout());
         jPanel1.add(mainPane, java.awt.BorderLayout.CENTER);
 
@@ -243,9 +242,8 @@ public class ThongKePane extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
-    private javax.swing.Box.Filler filler12;
+    private javax.swing.Box.Filler filler13;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JLabel jLabel1;

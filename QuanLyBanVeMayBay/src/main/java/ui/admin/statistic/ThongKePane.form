@@ -30,7 +30,7 @@
           <Dimension value="[32767, 200]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[120, 100]"/>
+          <Dimension value="[120, 80]"/>
         </Property>
       </Properties>
       <Constraints>
@@ -86,13 +86,13 @@
         <Container class="javax.swing.JPanel" name="sidePane">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b9" green="73" red="9" type="rgb"/>
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
                 <CompoundBorder>
                   <Border PropertyName="outside" info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                    <MatteColorBorder bottom="0" left="0" right="0" top="1">
+                    <MatteColorBorder bottom="0" left="0" right="1" top="1">
                       <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
                     </MatteColorBorder>
                   </Border>
@@ -107,7 +107,7 @@
               <Dimension value="[32767, 620]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[420, 620]"/>
+              <Dimension value="[360, 620]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -164,10 +164,10 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[32767, 100]"/>
+                  <Dimension value="[32767, 80]"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[188, 100]"/>
+                  <Dimension value="[188, 80]"/>
                 </Property>
               </Properties>
               <Events>
@@ -194,22 +194,6 @@
                     <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.RigidArea"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.Box$Filler" name="filler12">
-                  <Properties>
-                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.RigidArea"/>
-                  </AuxValues>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -220,6 +204,22 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o doanh thu theo th&#xe1;ng"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.Box$Filler" name="filler13">
+                  <Properties>
+                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[20, 55]"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[20, 55]"/>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[20, 55]"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.RigidArea"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -264,10 +264,10 @@
                   </Border>
                 </Property>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[32767, 100]"/>
+                  <Dimension value="[32767, 80]"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[135, 100]"/>
+                  <Dimension value="[135, 80]"/>
                 </Property>
               </Properties>
               <Events>
@@ -294,22 +294,6 @@
                     <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.RigidArea"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.Box$Filler" name="filler10">
-                  <Properties>
-                    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[30, 55]"/>
-                    </Property>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.RigidArea"/>
-                  </AuxValues>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -326,6 +310,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="mainPane">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fa" green="fa" red="fa" type="rgb"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
