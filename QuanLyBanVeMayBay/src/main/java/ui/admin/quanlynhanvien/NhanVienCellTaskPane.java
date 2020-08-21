@@ -93,18 +93,18 @@ public class NhanVienCellTaskPane extends javax.swing.JPanel {
     }//GEN-LAST:event_editButtonMouseExited
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-//        JTable table = (JTable) SwingUtilities.getAncestorOfClass(JTable.class, (Component) evt.getSource());
-//        int row = table.getEditingRow();
-//
-//        QuanLyChuyenBayPane quanLyChuyenBayPane
-//                = (QuanLyChuyenBayPane) SwingUtilities.getAncestorOfClass(QuanLyChuyenBayPane.class, (Component) evt.getSource());
-//
-//        EditChuyenBayPane editChuyenBayPane = new EditChuyenBayPane((String) table.getValueAt(row, 0), quanLyChuyenBayPane);
-//        quanLyChuyenBayPane.getParentPane().add(editChuyenBayPane, editChuyenBayPane.getName());
-//        CardLayout cl = (CardLayout) quanLyChuyenBayPane.getParentPane().getLayout();
-//        cl.show(quanLyChuyenBayPane.getParentPane(), editChuyenBayPane.getName());
-//
-//        table.getCellEditor().stopCellEditing();
+        JTable table = (JTable) SwingUtilities.getAncestorOfClass(JTable.class, (Component) evt.getSource());
+        int row = table.getEditingRow();
+
+        QuanLyNhanVienPane quanLyNhanVienPane
+                = (QuanLyNhanVienPane) SwingUtilities.getAncestorOfClass(QuanLyNhanVienPane.class, (Component) evt.getSource());
+
+        EditNhanVienPane editNhanVienPane = new EditNhanVienPane((String) table.getValueAt(row, 0), quanLyNhanVienPane);
+        quanLyNhanVienPane.getParentPane().add(editNhanVienPane, editNhanVienPane.getName());
+        CardLayout cl = (CardLayout) quanLyNhanVienPane.getParentPane().getLayout();
+        cl.show(quanLyNhanVienPane.getParentPane(), editNhanVienPane.getName());
+
+        table.getCellEditor().stopCellEditing();
 
     }//GEN-LAST:event_editButtonActionPerformed
 

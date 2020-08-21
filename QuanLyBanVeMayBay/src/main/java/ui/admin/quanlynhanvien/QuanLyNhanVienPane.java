@@ -5,6 +5,7 @@
  */
 package ui.admin.quanlynhanvien;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -253,10 +254,10 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-//        ThemChuyenBayPane themChuyenBayPane = new ThemChuyenBayPane(this);
-//        parentPane.add(themChuyenBayPane, themChuyenBayPane.getName());
-//        CardLayout cl = (CardLayout) parentPane.getLayout();
-//        cl.show(parentPane, themChuyenBayPane.getName());
+        ThemNhanVienPane themNhanVienPane = new ThemNhanVienPane(this);
+        parentPane.add(themNhanVienPane, themNhanVienPane.getName());
+        CardLayout cl = (CardLayout) parentPane.getLayout();
+        cl.show(parentPane, themNhanVienPane.getName());
     }//GEN-LAST:event_addButtonActionPerformed
 
 
@@ -295,10 +296,10 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
     private void setupModelForTable() {
         dtm = new DefaultTableModel() {
             String[] columnsNames = new String[]{
-                "Mã nhân viên", "Họ tên", "Tên tài khoản", "Giới tính", "Ngày sinh", "SDT", "CMND", "Tác vụ"
+                "Mã nhân viên", "Họ tên", "Tên tài khoản", "Giới tính", "Ngày sinh", "SDT", "Email", "CMND", "Trạng thái", "Tác vụ"
             };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, Object.class
             };
 
             @Override
@@ -322,10 +323,10 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"1", "Nguyễn Anh Hào", "nguyenanhhaous", "Nam", "27-03-1999", "022390239", "232313112312"});
-        dtm.addRow(new Object[]{"2", "Nguyễn Anh Hào", "nguyenanhhaous1", "Nam", "27-03-1999", "022390239", "232313112312"});
-        dtm.addRow(new Object[]{"3", "Nguyễn Anh Hào", "nguyenanhhaous2", "Nam", "27-03-1999", "022390239", "232313112312"});
-        dtm.addRow(new Object[]{"4", "Nguyễn Anh Hào", "ushcm", "Nam", "27-03-1999", "022390239", "232313112312"});
+        dtm.addRow(new Object[]{"1", "Nguyễn Anh Hào", "nguyenanhhaous", "Nam", "27-03-1999", "022390239", "nguyenanhhao.hcmus@gmail.com", "232313112312", "Đang hoạt động"});
+        dtm.addRow(new Object[]{"2", "Nguyễn Anh Hào", "nguyenanhhaous1", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
+        dtm.addRow(new Object[]{"3", "Nguyễn Anh Hào", "nguyenanhhaous2", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
+        dtm.addRow(new Object[]{"4", "Nguyễn Anh Hào", "ushcm", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Đang hoạt động"});
 
         table.setModel(dtm);
 
@@ -339,16 +340,18 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
             public void run() {
                 TableColumnModel tableColumnModel = table.getColumnModel();
                 tableColumnModel.getColumn(0).setPreferredWidth(150);
-                tableColumnModel.getColumn(1).setPreferredWidth(300);
+                tableColumnModel.getColumn(1).setPreferredWidth(250);
                 tableColumnModel.getColumn(2).setPreferredWidth(250);
-                tableColumnModel.getColumn(3).setPreferredWidth(150);
-                tableColumnModel.getColumn(4).setPreferredWidth(250);
-                tableColumnModel.getColumn(5).setPreferredWidth(250);
-                tableColumnModel.getColumn(6).setPreferredWidth(250);
+                tableColumnModel.getColumn(3).setPreferredWidth(130);
+                tableColumnModel.getColumn(4).setPreferredWidth(150);
+                tableColumnModel.getColumn(5).setPreferredWidth(200);
+                tableColumnModel.getColumn(6).setPreferredWidth(350);
                 tableColumnModel.getColumn(7).setPreferredWidth(200);
-
+                tableColumnModel.getColumn(7).setPreferredWidth(250);
+                tableColumnModel.getColumn(8).setPreferredWidth(250);
+                tableColumnModel.getColumn(9).setPreferredWidth(250);
                 tableColumnModel.getColumn(0).setCellRenderer(new CustomLeftAlignmentRenderer());
-                for (int i = 1; i <= 6; i++) {
+                for (int i = 1; i <= 8; i++) {
                     tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
                 }
 
