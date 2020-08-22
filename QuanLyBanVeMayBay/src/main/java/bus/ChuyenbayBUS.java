@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package daos;
+package bus;
 
+import daos.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,27 +27,7 @@ import util.HibernateUtil;
  *
  * @author HAO
  */
-public class ChuyenbayDAO {
-
-    public static List<Chuyenbay> getListChuyenbays() {
-        List<Chuyenbay> ds = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
-        try {
-            String hql = "From Chuyenbay";
-            Query query = session.createQuery(hql);
-            ds = query.list();
-        } catch (HibernateException ex) {
-            //Log the exception
-            System.err.println(ex);
-
-        } finally {
-            session.close();
-        }
-
-        return ds;
-    }
-
+public class ChuyenbayBUS {/*
     public static List<Chuyenbay> findFlights(String masbdi, String masbden,int SL, String MaHangGhe, Date date) {
         List<Chuyenbay> ds = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -82,5 +63,5 @@ public class ChuyenbayDAO {
         }
         
         return ds;
-    }
+    }*/
 }

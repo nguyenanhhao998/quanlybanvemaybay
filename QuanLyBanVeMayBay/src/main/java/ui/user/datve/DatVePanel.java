@@ -89,9 +89,7 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton1 = new javax.swing.JRadioButton();
-        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton2 = new javax.swing.JRadioButton();
+        cbbGioiTinh = new javax.swing.JComboBox<>();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel18 = new javax.swing.JPanel();
@@ -121,9 +119,7 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel16 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         filler30 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton3 = new javax.swing.JRadioButton();
-        filler31 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton4 = new javax.swing.JRadioButton();
+        cbbGioiTinh1 = new javax.swing.JComboBox<>();
         filler32 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler33 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel17 = new javax.swing.JPanel();
@@ -265,14 +261,12 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel10.add(jLabel4);
         jPanel10.add(filler12);
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton1.setText("Nam");
-        jPanel10.add(jRadioButton1);
-        jPanel10.add(filler14);
-
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton2.setText("Nữ");
-        jPanel10.add(jRadioButton2);
+        cbbGioiTinh.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinh.setMaximumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh.setMinimumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel10.add(cbbGioiTinh);
         jPanel10.add(filler13);
 
         jpnKhachNuocNgoai.add(jPanel10);
@@ -379,14 +373,12 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel16.add(jLabel13);
         jPanel16.add(filler30);
 
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton3.setText("Nam");
-        jPanel16.add(jRadioButton3);
-        jPanel16.add(filler31);
-
-        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton4.setText("Nữ");
-        jPanel16.add(jRadioButton4);
+        cbbGioiTinh1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbGioiTinh1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinh1.setMaximumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh1.setMinimumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh1.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel16.add(cbbGioiTinh1);
         jPanel16.add(filler32);
 
         jpnKhachVietNam.add(jPanel16);
@@ -629,11 +621,12 @@ public class DatVePanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbbGioiTinh;
+    private javax.swing.JComboBox<String> cbbGioiTinh1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler13;
-    private javax.swing.Box.Filler filler14;
     private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler19;
     private javax.swing.Box.Filler filler2;
@@ -646,7 +639,6 @@ public class DatVePanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler28;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler30;
-    private javax.swing.Box.Filler filler31;
     private javax.swing.Box.Filler filler32;
     private javax.swing.Box.Filler filler33;
     private javax.swing.Box.Filler filler34;
@@ -711,10 +703,6 @@ public class DatVePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;

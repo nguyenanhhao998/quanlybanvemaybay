@@ -70,6 +70,17 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
                 cardLayout.removeLayoutComponent(panel);
                 cardLayout.show(jpnCards, "JPNTraCuu");
                 break;
+            case "inve":
+                jpnCards.add(panel, "cardInVe");
+                cardLayout.show(jpnCards, "cardInVe");
+                break;
+            case "ketthuc":
+                cardLayout.removeLayoutComponent(panel);
+                cardLayout.removeLayoutComponent(jpnTraCuu);
+                jpnTraCuu = new JPNTraCuu();
+                jpnCards.add(jpnTraCuu, "JPNTraCuu");
+                cardLayout.show(jpnCards, "JPNTraCuu");
+                break;
         }
     }
     

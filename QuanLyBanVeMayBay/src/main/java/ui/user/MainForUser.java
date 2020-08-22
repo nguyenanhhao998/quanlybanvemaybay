@@ -6,11 +6,17 @@
 package ui.user;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import ui.user.datve.QuanLyPhieuChoPanel;
+import ui.user.datve.XuLyDatVePanel;
+import ui.user.muave.DoiVePanel;
 import ui.user.tracuucb.TraCuuChuyenBayPane;
 
 /**
@@ -24,15 +30,28 @@ public class MainForUser extends javax.swing.JFrame {
      */
     private static MainForUser instance;
     private TraCuuChuyenBayPane traCuuChuyenBayPane;
-    
+    private XuLyDatVePanel xuLyDatVePane;
+    private DoiVePanel doiVePane;
+    private QuanLyPhieuChoPanel qlPhieuCho;
     private MainForUser() {
         initComponents();
 
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        
         traCuuChuyenBayPane = new TraCuuChuyenBayPane();
-        tabbedPane.addTab("Home", traCuuChuyenBayPane);
+        tabbedPane.addTab("Tra cứu vé", traCuuChuyenBayPane);
+        
+        xuLyDatVePane = new XuLyDatVePanel();
+        tabbedPane.addTab("Quản lý đặt vé", xuLyDatVePane);
+        
+        doiVePane = new DoiVePanel();
+        tabbedPane.addTab("Quản lý vé đã mua", doiVePane);
+        
+        qlPhieuCho = new QuanLyPhieuChoPanel();
+        tabbedPane.addTab("Quản lý phiếu chờ", qlPhieuCho);
+        
+        tabbedPane.setFont( new Font( "Arial", Font.BOLD, 18 ) );
     }
     
     public static MainForUser getInstance() {
@@ -46,6 +65,22 @@ public class MainForUser extends javax.swing.JFrame {
         return traCuuChuyenBayPane;
     }
     
+    public XuLyDatVePanel getXuLyDatVePane(){
+        return xuLyDatVePane;
+    }
+    
+    public DoiVePanel getDoiVePane(){
+        return doiVePane;
+    }
+    
+    public QuanLyPhieuChoPanel getqlPhieuChoPane(){
+        return qlPhieuCho;
+    }
+    
+    public int getCurrentPaneIndex(){
+        return tabbedPane.getSelectedIndex();
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

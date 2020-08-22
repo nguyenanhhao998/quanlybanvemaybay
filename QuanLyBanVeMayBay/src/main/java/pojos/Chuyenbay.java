@@ -4,6 +4,7 @@ package pojos;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -116,7 +117,19 @@ public class Chuyenbay  implements java.io.Serializable {
         this.phieuchos = phieuchos;
     }
 
-
+    public int laySoGheTrongTheoHangVe(String mahv){
+        int res = 0;
+        Iterator<Vechuyenbay> ves = this.getVechuyenbays().iterator();
+        
+        while(ves.hasNext()){
+            Vechuyenbay ve = ves.next();
+            if(ve.getHangve().getMaHangVe().equals(mahv) && ve.getTinhTrang().equals("Chưa được mua")){
+                res++;
+            }
+        }
+        
+        return res;
+    }
 
 
 }

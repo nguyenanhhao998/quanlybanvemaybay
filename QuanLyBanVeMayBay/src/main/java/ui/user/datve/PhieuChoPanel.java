@@ -6,6 +6,10 @@
 package ui.user.datve;
 
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import pojos.Chuyenbay;
 import ui.user.MainForUser;
 
 /**
@@ -18,8 +22,19 @@ public class PhieuChoPanel extends javax.swing.JPanel {
      * Creates new form PhieuChoPanel
      */
     CardLayout cardLayout;
-    public PhieuChoPanel() {
+    public PhieuChoPanel(Chuyenbay cb) {
         initComponents();
+        
+        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String timeStart = df.format(cb.getNgayKhoiHanh());
+        jlbTimeStart.setText(timeStart);
+        
+        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+        jlbNgayKH.setText(df1.format(cb.getNgayKhoiHanh()));
+        jlbNgayDat.setText(df1.format(new Date()));
         
         cardLayout = (CardLayout) jpnCards.getLayout();
         
@@ -63,9 +78,7 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton1 = new javax.swing.JRadioButton();
-        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton2 = new javax.swing.JRadioButton();
+        cbbGioiTinh = new javax.swing.JComboBox<>();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel18 = new javax.swing.JPanel();
@@ -95,9 +108,7 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel16 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         filler30 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton3 = new javax.swing.JRadioButton();
-        filler31 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jRadioButton4 = new javax.swing.JRadioButton();
+        cbbGioiTinh1 = new javax.swing.JComboBox<>();
         filler32 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler33 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel17 = new javax.swing.JPanel();
@@ -124,16 +135,16 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jlbSBDi = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
-        jLabel26 = new javax.swing.JLabel();
+        jlbSBDen = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        jlbNgayKH = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        jlbTimeStart = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        jlbNgayDat = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton1 = new javax.swing.JButton();
@@ -233,14 +244,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel10.add(jLabel4);
         jPanel10.add(filler12);
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton1.setText("Nam");
-        jPanel10.add(jRadioButton1);
-        jPanel10.add(filler14);
-
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton2.setText("Nữ");
-        jPanel10.add(jRadioButton2);
+        cbbGioiTinh.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinh.setMaximumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh.setMinimumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel10.add(cbbGioiTinh);
         jPanel10.add(filler13);
 
         jpnKhachNuocNgoai.add(jPanel10);
@@ -347,14 +356,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel16.add(jLabel13);
         jPanel16.add(filler30);
 
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton3.setText("Nam");
-        jPanel16.add(jRadioButton3);
-        jPanel16.add(filler31);
-
-        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jRadioButton4.setText("Nữ");
-        jPanel16.add(jRadioButton4);
+        cbbGioiTinh1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbGioiTinh1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinh1.setMaximumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh1.setMinimumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinh1.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel16.add(cbbGioiTinh1);
         jPanel16.add(filler32);
 
         jpnKhachVietNam.add(jPanel16);
@@ -470,13 +477,13 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel20.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel20.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
-        jLabel26.setText("TPHCM (SGN)");
-        jLabel26.setMaximumSize(new java.awt.Dimension(200, 40));
-        jLabel26.setMinimumSize(new java.awt.Dimension(200, 40));
-        jLabel26.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel20.add(jLabel26);
+        jlbSBDen.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbSBDen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
+        jlbSBDen.setText("TPHCM (SGN)");
+        jlbSBDen.setMaximumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setMinimumSize(new java.awt.Dimension(200, 40));
+        jlbSBDen.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel20.add(jlbSBDen);
 
         jPanel9.add(jPanel20);
 
@@ -490,9 +497,9 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel27.setText("Ngày khởi hành: ");
         jPanel12.add(jLabel27);
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel28.setText("20/08/2020");
-        jPanel12.add(jLabel28);
+        jlbNgayKH.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNgayKH.setText("20/08/2020");
+        jPanel12.add(jlbNgayKH);
 
         jPanel6.add(jPanel12);
 
@@ -504,9 +511,9 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel29.setText("Giờ bay: ");
         jPanel21.add(jLabel29);
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel30.setText("07h00");
-        jPanel21.add(jLabel30);
+        jlbTimeStart.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTimeStart.setText("07h00");
+        jPanel21.add(jlbTimeStart);
 
         jPanel6.add(jPanel21);
 
@@ -518,9 +525,9 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel6.setText("Ngày đặt: ");
         jPanel8.add(jLabel6);
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel25.setText("18/08/2020");
-        jPanel8.add(jLabel25);
+        jlbNgayDat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNgayDat.setText("18/08/2020");
+        jPanel8.add(jlbNgayDat);
 
         jPanel6.add(jPanel8);
 
@@ -569,11 +576,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbbGioiTinh;
+    private javax.swing.JComboBox<String> cbbGioiTinh1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler13;
-    private javax.swing.Box.Filler filler14;
     private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler19;
     private javax.swing.Box.Filler filler2;
@@ -586,7 +594,6 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler28;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler30;
-    private javax.swing.Box.Filler filler31;
     private javax.swing.Box.Filler filler32;
     private javax.swing.Box.Filler filler33;
     private javax.swing.Box.Filler filler34;
@@ -624,12 +631,8 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -651,10 +654,6 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -666,7 +665,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbtnKHNuocNgoai;
     private javax.swing.JButton jbtnKHVN;
+    private javax.swing.JLabel jlbNgayDat;
+    private javax.swing.JLabel jlbNgayKH;
+    private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
+    private javax.swing.JLabel jlbTimeStart;
     private javax.swing.JPanel jpnCards;
     private javax.swing.JPanel jpnChonLoaiKhach;
     private javax.swing.JPanel jpnKhachNuocNgoai;
