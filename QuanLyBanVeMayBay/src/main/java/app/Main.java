@@ -7,12 +7,14 @@ package app;
 
 import daos.KhachhangDAO;
 import daos.KhachvietnamDAO;
+import daos.PhieuchoDAO;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import pojos.Khachhang;
 import pojos.Khachnuocngoai;
 import pojos.Khachvietnam;
+import pojos.Phieucho;
 
 /**
  *
@@ -21,13 +23,18 @@ import pojos.Khachvietnam;
 public class Main {
     public static void main(String[] args) {
 
-        Khachhang khachhangMoi = new Khachnuocngoai("Tom", "231323", "Nam", new Date(), new HashSet(0), new HashSet(0), "Anh", "2422");
-        KhachhangDAO.themKhachhang(khachhangMoi);
+//        Khachhang khachhangMoi = new Khachnuocngoai("Tom", "231323", "Nam", new Date(), new HashSet(0), new HashSet(0), "Anh", "2422");
+//        KhachhangDAO.themKhachhang(khachhangMoi);
+//
+//        List<Khachhang> listKhachhangs = KhachhangDAO.getListKhachhang();
+//        for (Khachhang kh : listKhachhangs) {
+//            System.out.println(kh);
+//            System.out.println();
+//        }
 
-        List<Khachhang> listKhachhangs = KhachhangDAO.getListKhachhang();
-        for (Khachhang kh : listKhachhangs) {
-            System.out.println(kh);
-            System.out.println();
+        List<Phieucho> listPhieuchos = PhieuchoDAO.getListPhieuCho();
+        for (Phieucho pc : listPhieuchos) {
+            System.out.println("Ma phieu cho: " + pc.getIdPhieu());
         }
     }
 }

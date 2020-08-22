@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.admin.quanlycb;
+package ui.admin.quanlynhanvien;
 
+import ui.admin.quanlycb.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -17,12 +18,12 @@ import util.ui.ImageIconUtil;
  *
  * @author HAO
  */
-public class CellTaskPane extends javax.swing.JPanel {
+public class NhanVienCellTaskPane extends javax.swing.JPanel {
 
     /**
      * Creates new form CellTaskPane
      */
-    public CellTaskPane() {
+    public NhanVienCellTaskPane() {
         initComponents();
     }
 
@@ -35,8 +36,6 @@ public class CellTaskPane extends javax.swing.JPanel {
     private void initComponents() {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        viewDetailButton = new javax.swing.JButton();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0));
         editButton = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0), new java.awt.Dimension(15, 0));
         deleteButton = new javax.swing.JButton();
@@ -44,27 +43,6 @@ public class CellTaskPane extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
         add(filler1);
-
-        viewDetailButton.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        viewDetailButton.setToolTipText("Xem chi tiết");
-        viewDetailButton.setMaximumSize(new java.awt.Dimension(39, 39));
-        viewDetailButton.setPreferredSize(new java.awt.Dimension(39, 39));
-        viewDetailButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                viewDetailButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                viewDetailButtonMouseExited(evt);
-            }
-        });
-        viewDetailButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewDetailButtonActionPerformed(evt);
-            }
-        });
-        viewDetailButton.setIcon(ImageIconUtil.ResizeImage("src/main/resources/icon/view_details.png", 18, 18));
-        add(viewDetailButton);
-        add(filler5);
 
         editButton.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         editButton.setToolTipText("Chỉnh sửa");
@@ -118,40 +96,17 @@ public class CellTaskPane extends javax.swing.JPanel {
         JTable table = (JTable) SwingUtilities.getAncestorOfClass(JTable.class, (Component) evt.getSource());
         int row = table.getEditingRow();
 
-        QuanLyChuyenBayPane quanLyChuyenBayPane
-                = (QuanLyChuyenBayPane) SwingUtilities.getAncestorOfClass(QuanLyChuyenBayPane.class, (Component) evt.getSource());
+        QuanLyNhanVienPane quanLyNhanVienPane
+                = (QuanLyNhanVienPane) SwingUtilities.getAncestorOfClass(QuanLyNhanVienPane.class, (Component) evt.getSource());
 
-        EditChuyenBayPane editChuyenBayPane = new EditChuyenBayPane((String) table.getValueAt(row, 0), quanLyChuyenBayPane);
-        quanLyChuyenBayPane.getParentPane().add(editChuyenBayPane, editChuyenBayPane.getName());
-        CardLayout cl = (CardLayout) quanLyChuyenBayPane.getParentPane().getLayout();
-        cl.show(quanLyChuyenBayPane.getParentPane(), editChuyenBayPane.getName());
+        EditNhanVienPane editNhanVienPane = new EditNhanVienPane((String) table.getValueAt(row, 0), quanLyNhanVienPane);
+        quanLyNhanVienPane.getParentPane().add(editNhanVienPane, editNhanVienPane.getName());
+        CardLayout cl = (CardLayout) quanLyNhanVienPane.getParentPane().getLayout();
+        cl.show(quanLyNhanVienPane.getParentPane(), editNhanVienPane.getName());
 
         table.getCellEditor().stopCellEditing();
 
     }//GEN-LAST:event_editButtonActionPerformed
-
-    private void viewDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailButtonActionPerformed
-        JTable table = (JTable) SwingUtilities.getAncestorOfClass(JTable.class, (Component) evt.getSource());
-        int row = table.getEditingRow();
-
-        QuanLyChuyenBayPane quanLyChuyenBayPane
-        = (QuanLyChuyenBayPane) SwingUtilities.getAncestorOfClass(QuanLyChuyenBayPane.class, (Component) evt.getSource());
-
-        ChiTietChuyenBayPane chiTietChuyenBayPane = new ChiTietChuyenBayPane((String) table.getValueAt(row, 0), quanLyChuyenBayPane);
-        quanLyChuyenBayPane.getParentPane().add(chiTietChuyenBayPane, chiTietChuyenBayPane.getName());
-        CardLayout cl = (CardLayout) quanLyChuyenBayPane.getParentPane().getLayout();
-        cl.show(quanLyChuyenBayPane.getParentPane(), chiTietChuyenBayPane.getName());
-
-        table.getCellEditor().stopCellEditing();
-    }//GEN-LAST:event_viewDetailButtonActionPerformed
-
-    private void viewDetailButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewDetailButtonMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_viewDetailButtonMouseExited
-
-    private void viewDetailButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewDetailButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_viewDetailButtonMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -160,7 +115,5 @@ public class CellTaskPane extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler5;
-    private javax.swing.JButton viewDetailButton;
     // End of variables declaration//GEN-END:variables
 }
