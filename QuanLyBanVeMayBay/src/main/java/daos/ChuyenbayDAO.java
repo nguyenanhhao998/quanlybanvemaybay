@@ -40,12 +40,13 @@ public class ChuyenbayDAO {
                     + "left join cb.giahangvetheocbs as gia "
                     + "left join cb.vechuyenbays as ve "
                     + "left join cb.sanbaytrunggians as sbtg "
-                    + "WHERE gia.id.maHangVe = '%s' and ve.hangve = '%s' and ve.tinhTrang = '%s' "
+                    + "WHERE gia.id.maHangVe = '%s' and ve.hangve = '%s' "
+          //          + "WHERE gia.id.maHangVe = '%s' and ve.hangve = '%s' and ve.tinhTrang = '%s' "
                     + "and MaSBDi = '%s' and MaSBDen = '%s' and Date(NgayKhoiHanh) = '%s' "
                     + "and cb.tinhTrang = '%s' "
                     + "GROUP BY cb.maCb "
-                    + "HAVING COUNT(cb.maCb) >= %d"
-                    + "ORDER BY NgayKhoiHanh asc",MaHangGhe,MaHangGhe,tinhtrangve,masbdi,masbden, ngay, tinhtrangcb, SL);
+//                    + "HAVING COUNT(cb.maCb) >= %d"
+                    + "ORDER BY NgayKhoiHanh asc",MaHangGhe,MaHangGhe,masbdi,masbden, ngay, tinhtrangcb);
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             ds = query.list();
             

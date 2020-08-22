@@ -5,22 +5,23 @@
  */
 package ui.user.tracuucb.ketqua;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import pojos.Chuyenbay;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -37,18 +38,28 @@ public class MotChieuPanel extends javax.swing.JPanel {
     String locDiemDung = "";
     int loctgBay = 0; //0 => tất cả, 1 => 00:00-06:00, 2 => 06:00-12:00, 3 => 12:00-18:00, 4 => 18:00-24:00
     int loctgDen = 0;
+    boolean isNoneFlight = false;
     String tieuchisapxep = "";
     public MotChieuPanel(List<Chuyenbay> listcb, int sl, String mahangve) {
         initComponents();
-        listcbpanel = new ArrayList();
-        listcbpanelhientai = new ArrayList();
-        listcbpanelhientaichuasapxep = new ArrayList();
-        for(int i = 0; i < listcb.size(); i++){
-            Chuyenbay cb = listcb.get(i);
-            listcbpanel.add(new FlightPanel(cb, sl, mahangve));
-            jpnContainFlights.add(listcbpanel.get(i));
-            listcbpanelhientai.add(listcbpanel.get(i));
-            listcbpanelhientaichuasapxep.add(listcbpanelhientai.get(i));
+        
+        if(listcb.isEmpty()){
+            isNoneFlight = true;
+            JLabel label = new JLabel("Không tìm thấy chuyến bay phù hợp");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            jpnContainFlights.add(label);
+        }else{
+            listcbpanel = new ArrayList();
+            listcbpanelhientai = new ArrayList();
+            listcbpanelhientaichuasapxep = new ArrayList();
+            for(int i = 0; i < listcb.size(); i++){
+                Chuyenbay cb = listcb.get(i);
+                listcbpanel.add(new FlightPanel(cb, sl, mahangve));
+                jpnContainFlights.add(listcbpanel.get(i));
+                listcbpanelhientai.add(listcbpanel.get(i));
+                listcbpanelhientaichuasapxep.add(listcbpanelhientai.get(i));
+            }
         }
     }
 
@@ -192,6 +203,8 @@ public class MotChieuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loc(){
+        if(isNoneFlight)
+            return;
         //xóa hết các panel cb hiện tại và thêm lại tất cả panel từ list ban đầu
         jpnContainFlights.removeAll();
         
@@ -393,7 +406,9 @@ public class MotChieuPanel extends javax.swing.JPanel {
         loc();
     }//GEN-LAST:event_cbbLocTheoTimeEndActionPerformed
 
-    private void sapxep(){       
+    private void sapxep(){
+        if(isNoneFlight)
+            return;
         if(tieuchisapxep.equalsIgnoreCase("Giá vé thấp nhất")){
             sapxepTheoGia();
         } else if(tieuchisapxep.equalsIgnoreCase("Thời gian bay ngắn nhất")){

@@ -3,115 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.user.tracuucb.ketqua;
+package ui.user.muave;
 
-import daos.HangveDAO;
-import java.awt.Color;
-import java.awt.Font;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import pojos.Chuyenbay;
-import pojos.Giahangvetheocb;
-import pojos.Sanbaytrunggian;
 import ui.user.MainForUser;
-import ui.user.datve.DatVePanel;
-import ui.user.datve.PhieuChoPanel;
-import ui.user.muave.MuaVePanel;
 
 /**
  *
  * @author DELL
  */
-public class ChiTietVeCBPanel extends javax.swing.JPanel {
+public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form ChiTietVeCBPanel
+     * Creates new form XuLyVeDaMuaPanel
      */
-    
-    Chuyenbay cb;
-    int sl;
-    String mahangve;
-    boolean isConVe = true;
-    public ChiTietVeCBPanel(Chuyenbay cb, int sl, String mahangve) {
+    public XuLyVeDaMuaPanel() {
         initComponents();
-        this.cb = cb;
-        this.sl = sl;
-        this.mahangve = mahangve;
-        isConVe = cb.laySoGheTrongTheoHangVe(mahangve) >= sl;
-        //jpnContainPlaceBreaks.setVisible(false);
-        String[] dayOfWeek = {"Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"};
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(cb.getNgayKhoiHanh());
-        String thu = dayOfWeek[cal.get(Calendar.DAY_OF_WEEK) - 1];
-        DateFormat df1 = new SimpleDateFormat("'ngày' dd 'tháng' MM 'năm' yyyy");
-        jlbNgay.setText(thu + ", " + df1.format(cb.getNgayKhoiHanh()));
-        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
-        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
-        
-        int sodiemdung = 0;
-        if(!cb.getSanbaytrunggians().isEmpty())
-            sodiemdung = cb.getSanbaytrunggians().size();
-        
-        if(sodiemdung == 0){
-            jlbSoDiemDung.setText("Bay thẳng");
-            jpnContainPlaceBreaks.setVisible(false);
-        }
-        else
-            jlbSoDiemDung.setText(String.format("%d điểm dừng",sodiemdung));
-        
-        
-        DateFormat df = new SimpleDateFormat("HH:mm");
-        String timeStart = df.format(cb.getNgayKhoiHanh());
-        jlbTimeStart.setText(timeStart);
-        
-        float time = cb.getThoiGianBay();
-        Iterator<Sanbaytrunggian> tgs = cb.getSanbaytrunggians().iterator();
-        
-        while(tgs.hasNext()){
-            Sanbaytrunggian tg = tgs.next();
-            time+=tg.getThoiGianDung();
-            jpnPlaceBreaks.add(new PlaceBreakPanel(tg));
-        }
-        //thoigianbay = time;
-        time *= 60;// đổi thời gian bay sang phút 
-        //JOptionPane.showMessageDialog(null, time);
-        String timeEnd = df.format(new Date(cb.getNgayKhoiHanh().getTime() + TimeUnit.MINUTES.toMillis((long) time)));
-        
-        jlbTimeEnd.setText(timeEnd);
-        
-        String tenhv = HangveDAO.getTicketLevelName(mahangve);
-        
-        jlbHangVe.setText(tenhv);
-        
-        Iterator<Giahangvetheocb> tgs1 = cb.getGiahangvetheocbs().iterator();
-        
-        while(tgs1.hasNext()){
-            Giahangvetheocb giahv = tgs1.next();
-            if(giahv.getHangve().getMaHangVe().equalsIgnoreCase(mahangve)){
-                jlbGia.setText(String.format("%,.0f VND",giahv.getGiaHienTai()));
-                jlbTongTien.setText(String.format("%,.0f VND",giahv.getGiaHienTai()*sl));
-            }       
-        }
-
-        float h = time/60;
-        float m = time%60;
-        if(h == 0)
-            jlbTimeFly.setText(String.format("%.0f phút",m));
-        else if(m == 0)
-            jlbTimeFly.setText(String.format("%.0f giờ",h));
-        else
-            jlbTimeFly.setText(String.format("%.0f giờ %.0f phút",h,m));
-        if(sl < 10)
-            jlbSL.setText(String.format("%02d", sl));
-        else
-            jlbSL.setText(String.format("%d", sl));
     }
 
     /**
@@ -125,9 +31,6 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jlbNgay = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jLabel3 = new javax.swing.JLabel();
-        jlbHangVe = new javax.swing.JLabel();
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel1 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -152,20 +55,23 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jlbSL = new javax.swing.JLabel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0));
         jLabel9 = new javax.swing.JLabel();
         jlbGia = new javax.swing.JLabel();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jLabel15 = new javax.swing.JLabel();
-        jlbTongTien = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jPanel15 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jlbSL1 = new javax.swing.JLabel();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jLabel10 = new javax.swing.JLabel();
+        jlbGia1 = new javax.swing.JLabel();
+        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jLabel16 = new javax.swing.JLabel();
+        jlbGia2 = new javax.swing.JLabel();
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel7 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton1 = new javax.swing.JButton();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton4 = new javax.swing.JButton();
-        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton5 = new javax.swing.JButton();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
@@ -179,15 +85,6 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jlbNgay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbNgay.setText("Chủ nhật Ngày 16 tháng 8 năm 2020");
         jPanel2.add(jlbNgay);
-        jPanel2.add(filler1);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Hạng vé: ");
-        jPanel2.add(jLabel3);
-
-        jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbHangVe.setText("Phổ thông");
-        jPanel2.add(jlbHangVe);
         jPanel2.add(filler18);
 
         add(jPanel2);
@@ -336,13 +233,13 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Số lượng vé: ");
+        jLabel5.setText("Hạng vé: ");
         jPanel6.add(jLabel5);
 
         jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbSL.setText("02");
+        jlbSL.setText("Phổ thông");
         jPanel6.add(jlbSL);
-        jPanel6.add(filler2);
+        jPanel6.add(filler7);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Giá vé: ");
@@ -351,40 +248,49 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         jlbGia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbGia.setText("500.000 VND");
         jPanel6.add(jlbGia);
-        jPanel6.add(filler3);
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel15.setText("Thành tiền: ");
-        jPanel6.add(jLabel15);
-
-        jlbTongTien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbTongTien.setForeground(new java.awt.Color(255, 0, 0));
-        jlbTongTien.setText("1.000.000 VND");
-        jPanel6.add(jlbTongTien);
         jPanel6.add(filler4);
 
         add(jPanel6);
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jPanel15.setMaximumSize(new java.awt.Dimension(1000, 100));
+        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Họ và tên: ");
+        jPanel15.add(jLabel6);
+
+        jlbSL1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSL1.setText("Trần Văn B");
+        jPanel15.add(jlbSL1);
+        jPanel15.add(filler8);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("CMND/Hộ chiếu: ");
+        jPanel15.add(jLabel10);
+
+        jlbGia1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGia1.setText("025467333");
+        jPanel15.add(jlbGia1);
+        jPanel15.add(filler9);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel16.setText("SDT: ");
+        jPanel15.add(jLabel16);
+
+        jlbGia2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbGia2.setText("0123456789");
+        jPanel15.add(jlbGia2);
+        jPanel15.add(filler10);
+
+        add(jPanel15);
 
         jPanel7.setMaximumSize(new java.awt.Dimension(1000, 100));
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
         jPanel7.add(filler6);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Back");
-        jButton1.setMaximumSize(new java.awt.Dimension(150, 50));
-        jButton1.setMinimumSize(new java.awt.Dimension(150, 50));
-        jButton1.setOpaque(false);
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jButton1);
-        jPanel7.add(filler7);
-
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton4.setText("Mua vé");
+        jButton4.setText("Hủy vé");
         jButton4.setMaximumSize(new java.awt.Dimension(150, 50));
         jButton4.setMinimumSize(new java.awt.Dimension(150, 50));
         jButton4.setOpaque(false);
@@ -395,68 +301,40 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
             }
         });
         jPanel7.add(jButton4);
-        jPanel7.add(filler8);
-
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton5.setText("Đặt vé");
-        jButton5.setMaximumSize(new java.awt.Dimension(150, 50));
-        jButton5.setMinimumSize(new java.awt.Dimension(150, 50));
-        jButton5.setOpaque(false);
-        jButton5.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jButton5);
         jPanel7.add(filler5);
 
         add(jPanel7);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "back");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        /*
         if(isConVe)
-            MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve), "muave");
+        MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve), "muave");
         else{
             JLabel label = new JLabel("Hiện tại vé chuyến bay đã được mua/đặt hết. Bạn có thể lập phiếu chờ.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.blue);
             JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
-        }
+        }*/
+        MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JPanel phieu;
-        if(isConVe){
-            phieu = new DatVePanel(cb,sl,mahangve);
-        }else{
-            phieu = new PhieuChoPanel(cb);
-        }
-        MainForUser.getInstance().getTraCuuPane().changeLayout(phieu, "phieu");
-    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler17;
     private javax.swing.Box.Filler filler18;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
-    private javax.swing.JButton jButton1;
+    private javax.swing.Box.Filler filler9;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -465,6 +343,7 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
@@ -473,16 +352,17 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel jlbGia;
-    private javax.swing.JLabel jlbHangVe;
+    private javax.swing.JLabel jlbGia1;
+    private javax.swing.JLabel jlbGia2;
     private javax.swing.JLabel jlbNgay;
     private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
     private javax.swing.JLabel jlbSL;
+    private javax.swing.JLabel jlbSL1;
     private javax.swing.JLabel jlbSoDiemDung;
     private javax.swing.JLabel jlbTimeEnd;
     private javax.swing.JLabel jlbTimeFly;
     private javax.swing.JLabel jlbTimeStart;
-    private javax.swing.JLabel jlbTongTien;
     private javax.swing.JPanel jpnContainPlaceBreaks;
     private javax.swing.JPanel jpnPlaceBreaks;
     // End of variables declaration//GEN-END:variables
