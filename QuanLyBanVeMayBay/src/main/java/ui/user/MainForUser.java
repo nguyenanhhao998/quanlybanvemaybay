@@ -50,6 +50,8 @@ public class MainForUser extends javax.swing.JFrame {
         
         qlPhieuCho = new QuanLyPhieuChoPanel();
         tabbedPane.addTab("Quản lý phiếu chờ", qlPhieuCho);
+        
+        tabbedPane.setFont( new Font( "Arial", Font.BOLD, 18 ) );
     }
     
     public static MainForUser getInstance() {

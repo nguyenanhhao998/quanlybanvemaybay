@@ -30,7 +30,7 @@ public class MuaVePanel extends javax.swing.JPanel {
         
         //set width + height jsp and jpn
         int width = 3*400 + 50;
-        int height = ((sl*15)/3 + 1)*300 + 50;
+        int height = (sl/3 + 1)*300 + 50;
         Dimension size = new Dimension(width, height);
         jsp.setMinimumSize(size);
         jsp.setPreferredSize(size);
@@ -56,7 +56,7 @@ public class MuaVePanel extends javax.swing.JPanel {
         DateFormat df = new SimpleDateFormat("HH:mm");
         String timeStart = df.format(cb.getNgayKhoiHanh());
         jlbTimeStart.setText(timeStart);
-        for(int i = 0; i < sl*15; i++){
+        for(int i = 0; i < sl; i++){
             jpnThongTinKHs.add(new DienThongTinKHPanel(i+1));
         }
         
