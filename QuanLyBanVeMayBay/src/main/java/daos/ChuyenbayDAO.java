@@ -27,6 +27,26 @@ import util.HibernateUtil;
  * @author HAO
  */
 public class ChuyenbayDAO {
+
+    public static List<Chuyenbay> getListChuyenbays() {
+        List<Chuyenbay> ds = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            String hql = "From Chuyenbay";
+            Query query = session.createQuery(hql);
+            ds = query.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+
+        } finally {
+            session.close();
+        }
+
+        return ds;
+    }
+
     public static List<Chuyenbay> findFlights(String masbdi, String masbden,int SL, String MaHangGhe, Date date) {
         List<Chuyenbay> ds = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

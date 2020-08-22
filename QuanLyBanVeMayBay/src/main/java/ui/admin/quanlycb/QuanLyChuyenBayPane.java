@@ -385,6 +385,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     private void setupTable() {
         setupModelForTable();
         setupUIForTable();
+        fillUpDataTable();
     }
     private void setupModelForTable() {
         dtm = new DefaultTableModel() {
@@ -416,26 +417,26 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-        dtm.addRow(new Object[]{"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+//        dtm.addRow(new Object[]{"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
 
         table.setModel(dtm);
 
@@ -500,5 +501,8 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         return parentPane;
     }
 
+    private void fillUpDataTable() {
+
+    }
 
 }

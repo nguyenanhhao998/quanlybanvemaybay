@@ -700,8 +700,6 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 sanBayTGInnerPane.revalidate();
                 sanBayTGInnerPane.repaint();
 
-
-
             }
         });
 

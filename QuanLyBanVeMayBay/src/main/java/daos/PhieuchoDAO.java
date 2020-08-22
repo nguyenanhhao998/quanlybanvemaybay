@@ -30,6 +30,10 @@ public class PhieuchoDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
 
         return listPhieucho;
