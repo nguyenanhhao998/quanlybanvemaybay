@@ -63,7 +63,7 @@ Contributor(s):
     <mapping resource="pojos/Hangve.hbm.xml"/>
     <mapping resource="pojos/Giahangvetheocb.hbm.xml"/>
     <mapping resource="pojos/Hoadonmuave.hbm.xml"/>
-    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>    
+    <mapping resource="pojos/Vechuyenbay.hbm.xml"/>
     <mapping resource="pojos/Khachvietnam.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

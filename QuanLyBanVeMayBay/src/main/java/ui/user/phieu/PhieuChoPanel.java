@@ -3,35 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.user.datve;
+package ui.user.phieu;
 
-import daos.HangveDAO;
 import java.awt.CardLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import pojos.Chuyenbay;
 import ui.user.MainForUser;
-import ui.user.muave.DienThongTinKHPanel;
 
 /**
  *
  * @author DELL
  */
-public class DatVePanel extends javax.swing.JPanel {
+public class PhieuChoPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form DatVePanel
+     * Creates new form PhieuChoPanel
      */
-    
     CardLayout cardLayout;
-    public DatVePanel(Chuyenbay cb, int sl, String mahangve) {
+    public PhieuChoPanel(Chuyenbay cb) {
         initComponents();
-        cardLayout = (CardLayout) jpnCards.getLayout();
-        
-        cardLayout = (CardLayout) jpnCards.getLayout();
-        
-        cardLayout.show(jpnCards, "CardChonLoaiKH");
         
         jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
         jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
@@ -44,14 +36,11 @@ public class DatVePanel extends javax.swing.JPanel {
         jlbNgayKH.setText(df1.format(cb.getNgayKhoiHanh()));
         jlbNgayDat.setText(df1.format(new Date()));
         
-        if(sl < 10)
-            jlbSL.setText(String.format("%02d", sl));
-        else
-            jlbSL.setText(String.format("%d", sl));
+        cardLayout = (CardLayout) jpnCards.getLayout();
         
-        String tenhv = HangveDAO.getTicketLevelName(mahangve);
+        cardLayout = (CardLayout) jpnCards.getLayout();
         
-        jlbHangVe.setText(tenhv);
+        cardLayout.show(jpnCards, "CardChonLoaiKH");
     }
 
     /**
@@ -63,7 +52,7 @@ public class DatVePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpnThongTinKHs = new javax.swing.JPanel();
@@ -147,21 +136,15 @@ public class DatVePanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jlbSBDen = new javax.swing.JLabel();
-        jPanel21 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
-        jlbNgayKH = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
+        jlbNgayKH = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
         jlbTimeStart = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jlbNgayDat = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jlbSL = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jlbHangVe = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton1 = new javax.swing.JButton();
@@ -171,14 +154,14 @@ public class DatVePanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel1.setText("Nhập thông tin phiếu đặt vé");
-        jPanel1.add(jLabel1);
-        jPanel1.add(filler1);
+        jLabel1.setText("Nhập thông tin phiếu chờ vé");
+        jPanel2.add(jLabel1);
+        jPanel2.add(filler1);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         jpnThongTinKHs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin liên hệ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
         jpnThongTinKHs.setLayout(new java.awt.BorderLayout());
@@ -458,7 +441,7 @@ public class DatVePanel extends javax.swing.JPanel {
 
         add(jpnThongTinKHs, java.awt.BorderLayout.CENTER);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết phiếu đặt", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi tiết phiếu chờ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
         jPanel6.setMaximumSize(new java.awt.Dimension(450, 400));
         jPanel6.setMinimumSize(new java.awt.Dimension(450, 400));
         jPanel6.setPreferredSize(new java.awt.Dimension(450, 400));
@@ -506,33 +489,33 @@ public class DatVePanel extends javax.swing.JPanel {
 
         jPanel6.add(jPanel9);
 
-        jPanel21.setMaximumSize(new java.awt.Dimension(32767, 40));
-        jPanel21.setMinimumSize(new java.awt.Dimension(100, 40));
-        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel29.setText("Ngày khởi hành: ");
-        jPanel21.add(jLabel29);
-
-        jlbNgayKH.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbNgayKH.setText("18/08/2020");
-        jPanel21.add(jlbNgayKH);
-
-        jPanel6.add(jPanel21);
-
         jPanel12.setMaximumSize(new java.awt.Dimension(32767, 40));
         jPanel12.setMinimumSize(new java.awt.Dimension(100, 40));
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel27.setText("Giờ bay: ");
+        jLabel27.setText("Ngày khởi hành: ");
         jPanel12.add(jLabel27);
+
+        jlbNgayKH.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbNgayKH.setText("20/08/2020");
+        jPanel12.add(jlbNgayKH);
+
+        jPanel6.add(jPanel12);
+
+        jPanel21.setMaximumSize(new java.awt.Dimension(32767, 40));
+        jPanel21.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel21.setLayout(new javax.swing.BoxLayout(jPanel21, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel29.setText("Giờ bay: ");
+        jPanel21.add(jLabel29);
 
         jlbTimeStart.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbTimeStart.setText("07h00");
-        jPanel12.add(jlbTimeStart);
+        jPanel21.add(jlbTimeStart);
 
-        jPanel6.add(jPanel12);
+        jPanel6.add(jPanel21);
 
         jPanel8.setMaximumSize(new java.awt.Dimension(32767, 40));
         jPanel8.setMinimumSize(new java.awt.Dimension(100, 40));
@@ -547,34 +530,6 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel8.add(jlbNgayDat);
 
         jPanel6.add(jPanel8);
-
-        jPanel2.setMaximumSize(new java.awt.Dimension(32767, 40));
-        jPanel2.setMinimumSize(new java.awt.Dimension(100, 40));
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("Số lượng vé: ");
-        jPanel2.add(jLabel5);
-
-        jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbSL.setText("02");
-        jPanel2.add(jlbSL);
-
-        jPanel6.add(jPanel2);
-
-        jPanel3.setMaximumSize(new java.awt.Dimension(32767, 40));
-        jPanel3.setMinimumSize(new java.awt.Dimension(100, 40));
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setText("Hạng vé: ");
-        jPanel3.add(jLabel9);
-
-        jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbHangVe.setText("Phổ thông");
-        jPanel3.add(jlbHangVe);
-
-        jPanel6.add(jPanel3);
 
         jPanel5.setMaximumSize(new java.awt.Dimension(32767, 40));
         jPanel5.setMinimumSize(new java.awt.Dimension(100, 40));
@@ -595,7 +550,7 @@ public class DatVePanel extends javax.swing.JPanel {
         jPanel5.add(filler2);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setText("Đặt vé");
+        jButton2.setText("Chờ vé");
         jButton2.setMaximumSize(new java.awt.Dimension(150, 40));
         jButton2.setMinimumSize(new java.awt.Dimension(150, 40));
         jButton2.setPreferredSize(new java.awt.Dimension(150, 40));
@@ -607,10 +562,6 @@ public class DatVePanel extends javax.swing.JPanel {
         add(jPanel6, java.awt.BorderLayout.EAST);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "backChiTiet");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jbtnKHVNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnKHVNActionPerformed
         cardLayout.show(jpnCards, "cardKHVietNam");
     }//GEN-LAST:event_jbtnKHVNActionPerformed
@@ -618,6 +569,10 @@ public class DatVePanel extends javax.swing.JPanel {
     private void jbtnKHNuocNgoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnKHNuocNgoaiActionPerformed
         cardLayout.show(jpnCards, "cardKHNuocNgoai");
     }//GEN-LAST:event_jbtnKHNuocNgoaiActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "backChiTiet");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -679,11 +634,8 @@ public class DatVePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -697,7 +649,6 @@ public class DatVePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -714,12 +665,10 @@ public class DatVePanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbtnKHNuocNgoai;
     private javax.swing.JButton jbtnKHVN;
-    private javax.swing.JLabel jlbHangVe;
     private javax.swing.JLabel jlbNgayDat;
     private javax.swing.JLabel jlbNgayKH;
     private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
-    private javax.swing.JLabel jlbSL;
     private javax.swing.JLabel jlbTimeStart;
     private javax.swing.JPanel jpnCards;
     private javax.swing.JPanel jpnChonLoaiKhach;

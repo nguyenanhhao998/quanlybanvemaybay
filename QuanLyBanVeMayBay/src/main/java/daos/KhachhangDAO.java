@@ -55,4 +55,21 @@ public class KhachhangDAO {
         }
     }
 
+    public static Khachhang getKHbyID(int id) {
+        Khachhang kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachhang where maKh = %d",id);
+            Query query = session.createQuery(hql);
+            kh = (Khachhang)query.getSingleResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return kh;
+    }
+    
 }

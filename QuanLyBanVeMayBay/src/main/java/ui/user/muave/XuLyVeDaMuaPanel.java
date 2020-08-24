@@ -5,7 +5,20 @@
  */
 package ui.user.muave;
 
+import bus.ChuyenbayBUS;
+import daos.HangveDAO;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
+import pojos.Chuyenbay;
+import pojos.Giahangvetheocb;
+import pojos.Hoadonmuave;
+import pojos.Sanbaytrunggian;
 import ui.user.MainForUser;
+import ui.user.tracuucb.ketqua.PlaceBreakPanel;
 
 /**
  *
@@ -16,8 +29,77 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
     /**
      * Creates new form XuLyVeDaMuaPanel
      */
-    public XuLyVeDaMuaPanel() {
+    Hoadonmuave hd;
+    public XuLyVeDaMuaPanel(Hoadonmuave hd, String idNumber) {
         initComponents();
+        this.hd = hd;
+        Chuyenbay cb = ChuyenbayBUS.getChuyenBayByID(hd.getVechuyenbay().getChuyenbay().getMaCb());
+        
+        String[] dayOfWeek = {"Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(cb.getNgayKhoiHanh());
+        String thu = dayOfWeek[cal.get(Calendar.DAY_OF_WEEK) - 1];
+        DateFormat df1 = new SimpleDateFormat("'ngày' dd 'tháng' MM 'năm' yyyy");
+        jlbNgay.setText(thu + ", " + df1.format(cb.getNgayKhoiHanh()));
+        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        
+        int sodiemdung = 0;
+        if(!cb.getSanbaytrunggians().isEmpty())
+            sodiemdung = cb.getSanbaytrunggians().size();
+        
+        if(sodiemdung == 0){
+            jlbSoDiemDung.setText("Bay thẳng");
+            jpnContainPlaceBreaks.setVisible(false);
+        }
+        else
+            jlbSoDiemDung.setText(String.format("%d điểm dừng",sodiemdung));
+        
+        
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        String timeStart = df.format(cb.getNgayKhoiHanh());
+        jlbTimeStart.setText(timeStart);
+        
+        float time = cb.getThoiGianBay();
+        Iterator<Sanbaytrunggian> tgs = cb.getSanbaytrunggians().iterator();
+        
+        while(tgs.hasNext()){
+            Sanbaytrunggian tg = tgs.next();
+            time+=tg.getThoiGianDung();
+            jpnPlaceBreaks.add(new PlaceBreakPanel(tg));
+        }
+        //thoigianbay = time;
+        time *= 60;// đổi thời gian bay sang phút 
+        //JOptionPane.showMessageDialog(null, time);
+        String timeEnd = df.format(new Date(cb.getNgayKhoiHanh().getTime() + TimeUnit.MINUTES.toMillis((long) time)));
+        
+        jlbTimeEnd.setText(timeEnd);
+        
+        String tenhv = HangveDAO.getTicketLevelName(hd.getVechuyenbay().getHangve().getMaHangVe());
+        
+        jlbHangVe.setText(tenhv);
+        
+        Iterator<Giahangvetheocb> tgs1 = cb.getGiahangvetheocbs().iterator();
+        
+        while(tgs1.hasNext()){
+            Giahangvetheocb giahv = tgs1.next();
+            if(giahv.getHangve().getMaHangVe().equalsIgnoreCase(hd.getVechuyenbay().getHangve().getMaHangVe())){
+                jlbGia.setText(String.format("%,.0f VND",giahv.getGiaHienTai()));
+            }       
+        }
+
+        float h = time/60;
+        float m = time%60;
+        if(h == 0)
+            jlbTimeFly.setText(String.format("%.0f phút",m));
+        else if(m == 0)
+            jlbTimeFly.setText(String.format("%.0f giờ",h));
+        else
+            jlbTimeFly.setText(String.format("%.0f giờ %.0f phút",h,m));
+        
+        jlbTen.setText(hd.getKhachhang().getHoTen());
+        jlbIdNumber.setText(idNumber);
+        jlbsdt.setText(hd.getKhachhang().getSdt());
     }
 
     /**
@@ -54,23 +136,25 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
         jpnPlaceBreaks = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jlbSL = new javax.swing.JLabel();
+        jlbHangVe = new javax.swing.JLabel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0));
         jLabel9 = new javax.swing.JLabel();
         jlbGia = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jlbSL1 = new javax.swing.JLabel();
+        jlbTen = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel10 = new javax.swing.JLabel();
-        jlbGia1 = new javax.swing.JLabel();
+        jlbIdNumber = new javax.swing.JLabel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel16 = new javax.swing.JLabel();
-        jlbGia2 = new javax.swing.JLabel();
+        jlbsdt = new javax.swing.JLabel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel7 = new javax.swing.JPanel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jButton5 = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0));
         jButton4 = new javax.swing.JButton();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
@@ -236,9 +320,9 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
         jLabel5.setText("Hạng vé: ");
         jPanel6.add(jLabel5);
 
-        jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbSL.setText("Phổ thông");
-        jPanel6.add(jlbSL);
+        jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbHangVe.setText("Phổ thông");
+        jPanel6.add(jlbHangVe);
         jPanel6.add(filler7);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -260,27 +344,27 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
         jLabel6.setText("Họ và tên: ");
         jPanel15.add(jLabel6);
 
-        jlbSL1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbSL1.setText("Trần Văn B");
-        jPanel15.add(jlbSL1);
+        jlbTen.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTen.setText("Trần Văn B");
+        jPanel15.add(jlbTen);
         jPanel15.add(filler8);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("CMND/Hộ chiếu: ");
         jPanel15.add(jLabel10);
 
-        jlbGia1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbGia1.setText("025467333");
-        jPanel15.add(jlbGia1);
+        jlbIdNumber.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbIdNumber.setText("xxxxxx");
+        jPanel15.add(jlbIdNumber);
         jPanel15.add(filler9);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("SDT: ");
         jPanel15.add(jLabel16);
 
-        jlbGia2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbGia2.setText("0123456789");
-        jPanel15.add(jlbGia2);
+        jlbsdt.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbsdt.setText("0123456789");
+        jPanel15.add(jlbsdt);
         jPanel15.add(filler10);
 
         add(jPanel15);
@@ -288,6 +372,20 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
         jPanel7.setMaximumSize(new java.awt.Dimension(1000, 100));
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
         jPanel7.add(filler6);
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton5.setText("Trở về");
+        jButton5.setMaximumSize(new java.awt.Dimension(150, 50));
+        jButton5.setMinimumSize(new java.awt.Dimension(150, 50));
+        jButton5.setOpaque(false);
+        jButton5.setPreferredSize(new java.awt.Dimension(150, 50));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton5);
+        jPanel7.add(filler1);
 
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton4.setText("Hủy vé");
@@ -316,11 +414,16 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
             label.setForeground(Color.blue);
             JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
         }*/
-        MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe();
+        MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe(hd);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        MainForUser.getInstance().getDoiVePane().trove();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler17;
     private javax.swing.Box.Filler filler18;
@@ -331,6 +434,7 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel5;
@@ -352,17 +456,17 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel jlbGia;
-    private javax.swing.JLabel jlbGia1;
-    private javax.swing.JLabel jlbGia2;
+    private javax.swing.JLabel jlbHangVe;
+    private javax.swing.JLabel jlbIdNumber;
     private javax.swing.JLabel jlbNgay;
     private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
-    private javax.swing.JLabel jlbSL;
-    private javax.swing.JLabel jlbSL1;
     private javax.swing.JLabel jlbSoDiemDung;
+    private javax.swing.JLabel jlbTen;
     private javax.swing.JLabel jlbTimeEnd;
     private javax.swing.JLabel jlbTimeFly;
     private javax.swing.JLabel jlbTimeStart;
+    private javax.swing.JLabel jlbsdt;
     private javax.swing.JPanel jpnContainPlaceBreaks;
     private javax.swing.JPanel jpnPlaceBreaks;
     // End of variables declaration//GEN-END:variables

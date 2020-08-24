@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.user.datve;
+package ui.user.phieu;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;

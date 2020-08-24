@@ -6,9 +6,14 @@
 package daos;
 
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import pojos.Khachhang;
+import pojos.Khachnuocngoai;
 import pojos.Khachvietnam;
 import util.HibernateUtil;
 
@@ -36,4 +41,66 @@ public class KhachvietnamDAO {
 
     }
 
+    public static int insert(Khachvietnam khvn) {
+        int id = getIDKH(khvn.getHoTen(),khvn.getSdt(),khvn.getCmnd());
+        //neu da co luu khach hang nay thi tra ve id khach hang
+        if(id != -1)
+            return id;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            id = (Integer)session.save(khvn);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+        
+        return id;
+    }
+    
+    public static int getIDKH(String hoten, String sdt, String cmnd) {
+        int id = -1;
+        Khachvietnam kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachvietnam where hoTen = '%s' and sdt = '%s' "
+                    + "and cmnd = '%s'",hoten, sdt, cmnd);
+            Query query = session.createQuery(hql);
+            kh = (Khachvietnam)query.uniqueResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        if(kh != null)
+            id = kh.getMaKh();
+        return id;
+    }
+    
+    public static boolean kiemTraIdNumberKH(int makh, String idNumber){
+        Khachvietnam kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachvietnam where maKh = %d and cmnd = '%s'",makh, idNumber);
+            Query query = session.createQuery(hql);
+            kh = (Khachvietnam)query.getSingleResult();
+            
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            return false;
+        }
+        
+        return true;
+    }
 }

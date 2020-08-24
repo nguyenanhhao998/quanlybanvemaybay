@@ -8,6 +8,7 @@ package bus;
 import daos.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -64,4 +65,26 @@ public class ChuyenbayBUS {/*
         
         return ds;
     }*/
+    
+    public static List<Vechuyenbay> getXVe(Chuyenbay cb, int sl, String mahangve){
+        List<Vechuyenbay> ves = new ArrayList();
+        
+        Iterator<Vechuyenbay> vecbs = cb.getVechuyenbays().iterator();
+        
+        while(vecbs.hasNext()){
+            Vechuyenbay ve = vecbs.next();
+            //JOptionPane.showMessageDialog(null,sl+"/"+mahangve+"/"+ ve.getMaSoVe() +"/"+ ve.getHangve().getMaHangVe()+"/"+ve.getTinhTrang());
+            if(ve.getHangve().getMaHangVe().equals(mahangve) && ve.getTinhTrang().equals("Chưa được mua")){
+                ves.add(ve);
+                sl--;
+                if(sl == 0)
+                    break;
+            }     
+        }
+        return ves;
+    }
+    
+    public static Chuyenbay getChuyenBayByID(String macb){
+        return ChuyenbayDAO.getChuyenBayByID(macb);
+    }
 }

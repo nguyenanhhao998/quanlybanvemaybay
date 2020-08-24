@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -41,11 +42,9 @@ public class ChuyenbayDAO {
                     + "left join cb.vechuyenbays as ve "
                     + "left join cb.sanbaytrunggians as sbtg "
                     + "WHERE gia.id.maHangVe = '%s' and ve.hangve = '%s' "
-          //          + "WHERE gia.id.maHangVe = '%s' and ve.hangve = '%s' and ve.tinhTrang = '%s' "
                     + "and MaSBDi = '%s' and MaSBDen = '%s' and Date(NgayKhoiHanh) = '%s' "
                     + "and cb.tinhTrang = '%s' "
                     + "GROUP BY cb.maCb "
-//                    + "HAVING COUNT(cb.maCb) >= %d"
                     + "ORDER BY NgayKhoiHanh asc",MaHangGhe,MaHangGhe,masbdi,masbden, ngay, tinhtrangcb);
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             ds = query.list();
@@ -62,5 +61,30 @@ public class ChuyenbayDAO {
         }
         
         return ds;
+    }
+
+    public static Chuyenbay getChuyenBayByID(String macb){
+        Chuyenbay cb = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = String.format("SELECT cb FROM Chuyenbay cb "                 
+                    + "left join cb.sanbaytrunggians as sbtg "
+                    + "WHERE cb.maCb = '%s'",macb);
+            Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+            cb = (Chuyenbay)query.getSingleResult();
+
+            Hibernate.initialize(cb.getSanbayByMaSbdi());
+            Hibernate.initialize(cb.getSanbayByMaSbden());          
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        }catch (NoResultException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        
+        return cb;
     }
 }

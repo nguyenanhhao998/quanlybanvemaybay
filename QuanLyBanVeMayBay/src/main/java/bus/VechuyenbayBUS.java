@@ -6,11 +6,18 @@
 package bus;
 
 import daos.*;
+import java.util.HashSet;
+import java.util.Set;
+import pojos.Vechuyenbay;
 
 /**
  *
  * @author HAO
  */
 public class VechuyenbayBUS {
-
+    public static boolean updateStatus(Vechuyenbay ve, String status){
+        ve.setTinhTrang(status);
+        
+        return VechuyenbayDAO.updateStatus(ve);
+    }
 }

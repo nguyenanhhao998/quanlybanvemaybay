@@ -14,8 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import ui.user.datve.QuanLyPhieuChoPanel;
-import ui.user.datve.XuLyDatVePanel;
+import ui.user.phieu.QuanLyPhieuChoPanel;
+import ui.user.phieu.XuLyDatVePanel;
 import ui.user.muave.DoiVePanel;
 import ui.user.tracuucb.TraCuuChuyenBayPane;
 

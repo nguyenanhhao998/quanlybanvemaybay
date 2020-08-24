@@ -5,7 +5,22 @@
  */
 package ui.user.muave;
 
+import bus.HoadonmuaveBUS;
+import bus.VechuyenbayBUS;
+import bus.KhachhangBUS;
+import daos.HangveDAO;
+import daos.SanbayDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.List;
 import javax.swing.JTextField;
+import pojos.Hangve;
+import pojos.Sanbay;
+import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import pojos.Hoadonmuave;
+import pojos.Vechuyenbay;
 
 /**
  *
@@ -19,7 +34,6 @@ public class DoiVePanel extends javax.swing.JPanel {
     XuLyVeDaMuaPanel ve;
     public DoiVePanel() {
         initComponents();
-        ((JTextField)jDateStart.getDateEditor().getUiComponent()).setText("Chọn ngày đi");
     }
 
     /**
@@ -35,35 +49,6 @@ public class DoiVePanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbSanBayDi = new javax.swing.JComboBox<>();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel7 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbSanBayDen = new javax.swing.JComboBox<>();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbHangGhe = new javax.swing.JComboBox<>();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateStart = new com.toedter.calendar.JDateChooser();
-        filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel11 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        gio = new javax.swing.JSpinner();
-        jLabel8 = new javax.swing.JLabel();
-        phut = new javax.swing.JSpinner();
-        jLabel10 = new javax.swing.JLabel();
-        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel3 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -73,7 +58,12 @@ public class DoiVePanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jtfcmnd = new javax.swing.JTextField();
+        jtfidNumber = new javax.swing.JTextField();
+        filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
+        jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        jtfmasove = new javax.swing.JTextField();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         btnFind = new javax.swing.JButton();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -88,111 +78,6 @@ public class DoiVePanel extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
-
-        jPanel4.setMaximumSize(new java.awt.Dimension(32767, 100));
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm khởi hành", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_takeoff.png"))); // NOI18N
-        jPanel6.add(jLabel2);
-        jPanel6.add(filler1);
-
-        cbbSanBayDi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDi.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDi.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDi.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel6.add(cbbSanBayDi);
-
-        jPanel4.add(jPanel6);
-        jPanel4.add(filler4);
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Điểm đến", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_landing.png"))); // NOI18N
-        jPanel7.add(jLabel3);
-        jPanel7.add(filler2);
-
-        cbbSanBayDen.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDen.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDen.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDen.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel7.add(cbbSanBayDen);
-
-        jPanel4.add(jPanel7);
-        jPanel4.add(filler5);
-
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
-        jPanel9.add(jLabel6);
-        jPanel9.add(filler6);
-
-        cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel9.add(cbbHangGhe);
-
-        jPanel4.add(jPanel9);
-        jPanel4.add(filler7);
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel10.setMaximumSize(new java.awt.Dimension(250, 70));
-        jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
-        jPanel10.setPreferredSize(new java.awt.Dimension(250, 70));
-        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
-        jPanel10.add(jLabel7);
-        jPanel10.add(filler8);
-
-        jDateStart.setDateFormatString("dd/MM/yyyy");
-        jDateStart.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jDateStart.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel10.add(jDateStart);
-
-        jPanel4.add(jPanel10);
-        jPanel4.add(filler13);
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thời gian cất cánh", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_takeoff.png"))); // NOI18N
-        jPanel11.add(jLabel9);
-        jPanel11.add(filler15);
-
-        gio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        gio.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
-        gio.setMaximumSize(new java.awt.Dimension(70, 35));
-        gio.setMinimumSize(new java.awt.Dimension(70, 35));
-        gio.setPreferredSize(new java.awt.Dimension(70, 35));
-        jPanel11.add(gio);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel8.setText(" giờ ");
-        jPanel11.add(jLabel8);
-
-        phut.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        phut.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
-        phut.setMaximumSize(new java.awt.Dimension(70, 35));
-        phut.setMinimumSize(new java.awt.Dimension(70, 35));
-        phut.setPreferredSize(new java.awt.Dimension(70, 35));
-        jPanel11.add(phut);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel10.setText(" phút");
-        jPanel11.add(jLabel10);
-
-        jPanel4.add(jPanel11);
-        jPanel4.add(filler14);
-
-        jPanel2.add(jPanel4);
 
         jPanel3.setMaximumSize(new java.awt.Dimension(32767, 100));
         jPanel3.setPreferredSize(new java.awt.Dimension(1140, 100));
@@ -217,7 +102,7 @@ public class DoiVePanel extends javax.swing.JPanel {
         jPanel3.add(jPanel13);
         jPanel3.add(filler12);
 
-        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CMND / Hộ chiếu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CMND/Hộ chiếu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel14.setMaximumSize(new java.awt.Dimension(250, 70));
         jPanel14.setMinimumSize(new java.awt.Dimension(250, 70));
         jPanel14.setPreferredSize(new java.awt.Dimension(250, 70));
@@ -227,18 +112,37 @@ public class DoiVePanel extends javax.swing.JPanel {
         jPanel14.add(jLabel12);
         jPanel14.add(filler16);
 
-        jtfcmnd.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jtfcmnd.setMaximumSize(new java.awt.Dimension(200, 40));
-        jtfcmnd.setMinimumSize(new java.awt.Dimension(200, 40));
-        jtfcmnd.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel14.add(jtfcmnd);
+        jtfidNumber.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfidNumber.setMaximumSize(new java.awt.Dimension(200, 40));
+        jtfidNumber.setMinimumSize(new java.awt.Dimension(200, 40));
+        jtfidNumber.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel14.add(jtfidNumber);
 
         jPanel3.add(jPanel14);
+        jPanel3.add(filler18);
+
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mã số vé", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel15.setMaximumSize(new java.awt.Dimension(250, 70));
+        jPanel15.setMinimumSize(new java.awt.Dimension(250, 70));
+        jPanel15.setPreferredSize(new java.awt.Dimension(250, 70));
+        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ticket-flight.png"))); // NOI18N
+        jPanel15.add(jLabel13);
+        jPanel15.add(filler17);
+
+        jtfmasove.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfmasove.setMaximumSize(new java.awt.Dimension(200, 40));
+        jtfmasove.setMinimumSize(new java.awt.Dimension(200, 40));
+        jtfmasove.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel15.add(jtfmasove);
+
+        jPanel3.add(jPanel15);
         jPanel3.add(filler9);
 
         btnFind.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
-        btnFind.setText("Tìm vé chuyến bay");
+        btnFind.setText("Tra cứu vé");
         btnFind.setMaximumSize(new java.awt.Dimension(240, 40));
         btnFind.setMinimumSize(new java.awt.Dimension(240, 40));
         btnFind.setPreferredSize(new java.awt.Dimension(240, 40));
@@ -261,90 +165,69 @@ public class DoiVePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        /*//Lấy dữ liệu từ giao diện
-        String masbdi = listSanBay.get(cbbSanBayDi.getSelectedIndex()).getMaSb();
-        String masbden = listSanBay.get(cbbSanBayDen.getSelectedIndex()).getMaSb();
-        int SL = Integer.parseInt(String.valueOf(sl.getValue()));
-        String hangghe = String.valueOf(cbbHangGhe.getSelectedItem());
-        String mahangghe = null;
-        Date DateStart = null;
-        Date DateEnd = null;
-
-        for(int i = 0; i < listHangVe.size(); i++){
-            Hangve hv = listHangVe.get(i);
-            if(hv.getTenHangVe().equalsIgnoreCase(hangghe)){
-                mahangghe = hv.getMaHangVe();
-                break;
-            }
-        }
-
-        try{
-            DateStart = jDateStart.getCalendar().getTime();
-            if(isKhuHoi)
-            DateEnd = jDateEnd.getCalendar().getTime();
-        }catch(NullPointerException ex){
-            JLabel label = new JLabel("Bạn phải chọn thời gian bay.");
-            label.setFont(new Font("Arial", Font.BOLD, 18));
-            label.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null,label,"ERROR",JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        //Lấy dữ liệu từ giao diện     
+        String tenkh = jtfTen.getText();
+        String cmndOrHoChieu = jtfidNumber.getText();
+        String masove = jtfmasove.getText();
 
         //kiểm tra
-        //sân bay đi trùng sân bay đến
-        if(masbdi.equalsIgnoreCase(masbden)){
-            JLabel label = new JLabel("Sân bay đi phải khác sân bay đến.");
+        
+        //điền đủ thông tin
+        if(tenkh.isEmpty() || cmndOrHoChieu.isEmpty() || masove.isEmpty()){
+            JLabel label = new JLabel("Bạn phải điền đầy đủ thông tin.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        //ngày đi phải trước ngày về
-        if(isKhuHoi && DateStart.compareTo(DateEnd) >= 0){
-            JLabel label = new JLabel("Ngày khởi hành phải trước ngày về.");
+        
+        Hoadonmuave hd = HoadonmuaveBUS.getHoaDonByMaVe(masove);
+        if(hd == null){
+            JLabel label = new JLabel("Không tìm thấy vé tương ứng.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        //Tìm kiếm trong database
-        List<Chuyenbay> listcbdi = ChuyenbayDAO.findFlights(masbdi, masbden, SL, mahangghe, DateStart);
-        List<Chuyenbay> listcbve = null;
-
-        if(isKhuHoi){
-            listcbve = ChuyenbayDAO.findFlights(masbden, masbdi, SL, mahangghe, DateEnd);
+        
+        //kiem tra chuyen bay
+        
+        //kiem tra khach hang dat ve
+        
+        boolean checkIdNumber = KhachhangBUS.kiemTraIdNumberKH(hd.getKhachhang().getMaKh(),cmndOrHoChieu);
+        
+        if(!hd.getKhachhang().getHoTen().equalsIgnoreCase(tenkh) || !checkIdNumber){
+            JLabel label = new JLabel("Không tìm thấy vé tương ứng với khách hàng.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-
-        if(rbtnMotChieu.isSelected()){
-            jpnKetQua.setVisible(true);
-            jtabbedPaneKhuHoi.setVisible(false);
-            jpnKetQua.removeAll();
-            jpnKetQua.add(new MotChieuPanel(listcbdi, SL, mahangghe));
-            jpnKetQua.validate();
-            jpnKetQua.repaint();
-        } else if(rbtnKhuHoi.isSelected()){
-            jtabbedPaneKhuHoi.setVisible(true);
-            jpnKetQua.setVisible(false);
-            jtabbedPaneKhuHoi.removeAll();
-            jtabbedPaneKhuHoi.add("Chọn chuyến đi",new MotChieuPanel(listcbdi, SL, mahangghe));
-            jtabbedPaneKhuHoi.add("Chọn chuyến về",new MotChieuPanel(listcbve, SL, mahangghe));
-        }*/
-        ve = new XuLyVeDaMuaPanel();
+        
+        ve = new XuLyVeDaMuaPanel(hd, cmndOrHoChieu);
         jpnKetQua.add(ve);
         jpnKetQua.invalidate();
         jpnKetQua.revalidate();
         jpnKetQua.repaint();
     }//GEN-LAST:event_btnFindActionPerformed
 
-    public void hoanThanhHuyVe(){
+    public void hoanThanhHuyVe(Hoadonmuave hd){
+        VechuyenbayBUS.updateStatus(hd.getVechuyenbay(),"Chưa được mua");
+        HoadonmuaveBUS.delete(hd);
         jpnKetQua.remove(ve);
-        ((JTextField)jDateStart.getDateEditor().getUiComponent()).setText("Chọn ngày đi");
-        gio.setValue(0);
-        phut.setValue(0);
         jtfTen.setText("");
-        jtfcmnd.setText("");
+        jtfidNumber.setText("");
+        jtfmasove.setText("");
+        jpnKetQua.invalidate();
+        jpnKetQua.revalidate();
+        jpnKetQua.repaint();
+    }
+    
+    public void trove(){
+        jpnKetQua.remove(ve);
+        jtfTen.setText("");
+        jtfidNumber.setText("");
+        jtfmasove.setText("");
         jpnKetQua.invalidate();
         jpnKetQua.revalidate();
         jpnKetQua.repaint();
@@ -352,51 +235,27 @@ public class DoiVePanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
-    private javax.swing.JComboBox<String> cbbHangGhe;
-    private javax.swing.JComboBox<String> cbbSanBayDen;
-    private javax.swing.JComboBox<String> cbbSanBayDi;
-    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
-    private javax.swing.Box.Filler filler13;
-    private javax.swing.Box.Filler filler14;
-    private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler16;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler4;
-    private javax.swing.Box.Filler filler5;
-    private javax.swing.Box.Filler filler6;
-    private javax.swing.Box.Filler filler7;
-    private javax.swing.Box.Filler filler8;
+    private javax.swing.Box.Filler filler17;
+    private javax.swing.Box.Filler filler18;
     private javax.swing.Box.Filler filler9;
-    private javax.swing.JSpinner gio;
-    private com.toedter.calendar.JDateChooser jDateStart;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jpnKetQua;
     private javax.swing.JTextField jtfTen;
-    private javax.swing.JTextField jtfcmnd;
-    private javax.swing.JSpinner phut;
+    private javax.swing.JTextField jtfidNumber;
+    private javax.swing.JTextField jtfmasove;
     // End of variables declaration//GEN-END:variables
 }

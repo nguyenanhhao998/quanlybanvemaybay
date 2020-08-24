@@ -21,8 +21,8 @@ import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
 import pojos.Sanbaytrunggian;
 import ui.user.MainForUser;
-import ui.user.datve.DatVePanel;
-import ui.user.datve.PhieuChoPanel;
+import ui.user.phieu.DatVePanel;
+import ui.user.phieu.PhieuChoPanel;
 import ui.user.muave.MuaVePanel;
 
 /**

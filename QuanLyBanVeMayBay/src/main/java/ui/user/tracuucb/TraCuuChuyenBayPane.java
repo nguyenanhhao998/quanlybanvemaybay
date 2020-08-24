@@ -19,7 +19,7 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
      * Creates new form TraCuuChuyenBay
      */
     CardLayout cardLayout;
-    private JPanel jpnTraCuu;
+    private JPNTraCuu jpnTraCuu;
     public TraCuuChuyenBayPane() {
         initComponents();
         jpnTraCuu = new JPNTraCuu();
@@ -76,10 +76,12 @@ public class TraCuuChuyenBayPane extends javax.swing.JPanel {
                 break;
             case "ketthuc":
                 cardLayout.removeLayoutComponent(panel);
-                cardLayout.removeLayoutComponent(jpnTraCuu);
-                jpnTraCuu = new JPNTraCuu();
-                jpnCards.add(jpnTraCuu, "JPNTraCuu");
-                cardLayout.show(jpnCards, "JPNTraCuu");
+                if(jpnTraCuu.hoanThanhMuaVe() == 0){
+                    cardLayout.removeLayoutComponent(jpnTraCuu);
+                    jpnTraCuu = new JPNTraCuu();
+                    jpnCards.add(jpnTraCuu, "JPNTraCuu");
+                    cardLayout.show(jpnCards, "JPNTraCuu");
+                }
                 break;
         }
     }

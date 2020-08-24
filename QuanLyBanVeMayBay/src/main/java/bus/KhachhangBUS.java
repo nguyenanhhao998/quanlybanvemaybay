@@ -56,4 +56,12 @@ public class KhachhangBUS {
         }
     }*/
 
+    public static Khachhang getKHbyID(int id){
+        return KhachhangDAO.getKHbyID(id);
+    }
+    
+    public static boolean kiemTraIdNumberKH(int makh,String idNumber){
+        boolean kq = KhachvietnamBUS.kiemTraIdNumberKH(makh,idNumber) || KhachnuocngoaiBUS.kiemTraIdNumberKH(makh,idNumber);
+        return kq;
+    }
 }

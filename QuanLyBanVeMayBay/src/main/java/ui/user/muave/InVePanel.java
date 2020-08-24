@@ -6,6 +6,7 @@
 package ui.user.muave;
 
 import java.awt.Dimension;
+import java.util.List;
 import ui.user.MainForUser;
 
 /**
@@ -17,7 +18,7 @@ public class InVePanel extends javax.swing.JPanel {
     /**
      * Creates new form InVePanel
      */
-    public InVePanel() {
+    public InVePanel(List<Integer> mahds) {
         initComponents();
         
         int sl = 10;
@@ -29,8 +30,10 @@ public class InVePanel extends javax.swing.JPanel {
         
         jpnThongTinVes.setMinimumSize(size);
         jpnThongTinVes.setPreferredSize(size);
-        for(int i = 0; i < 10; i++){
-            jpnThongTinVes.add(new ThongTinVePanel());
+        
+        
+        for(int i = 0; i < mahds.size(); i++){
+            jpnThongTinVes.add(new ThongTinVePanel(mahds.get(i)));
         }
     }
 
