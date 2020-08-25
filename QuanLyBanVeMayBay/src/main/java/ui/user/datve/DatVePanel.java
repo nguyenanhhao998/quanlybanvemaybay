@@ -33,8 +33,8 @@ public class DatVePanel extends javax.swing.JPanel {
         
         cardLayout.show(jpnCards, "CardChonLoaiKH");
         
-        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
-        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        jlbSBDi.setText(cb.getSanbaydi().getThanhPho() + " (" + cb.getSanbaydi().getMaSb() + ")");
+        jlbSBDen.setText(cb.getSanbayden().getThanhPho() + " (" + cb.getSanbayden().getMaSb() + ")");
         
         DateFormat df = new SimpleDateFormat("HH:mm");
         String timeStart = df.format(cb.getNgayKhoiHanh());

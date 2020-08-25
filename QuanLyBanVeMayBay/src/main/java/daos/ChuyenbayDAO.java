@@ -71,8 +71,8 @@ public class ChuyenbayDAO {
             ds = query.list();
             
             for(int i = 0; i < ds.size(); i++){
-                Hibernate.initialize(ds.get(i).getSanbayByMaSbdi());
-                Hibernate.initialize(ds.get(i).getSanbayByMaSbden());
+                Hibernate.initialize(ds.get(i).getSanbaydi());
+                Hibernate.initialize(ds.get(i).getSanbayden());
             }          
         } catch (HibernateException ex) {
             //Log the exception

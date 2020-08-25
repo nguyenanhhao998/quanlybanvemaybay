@@ -14,8 +14,8 @@ public class Chuyenbay  implements java.io.Serializable {
 
 
      private String maCb;
-     private Sanbay sanbayByMaSbden;
-     private Sanbay sanbayByMaSbdi;
+    private Sanbay sanbayden;
+    private Sanbay sanbaydi;
      private Date ngayKhoiHanh;
      private Float thoiGianBay;
      private String tinhTrang;
@@ -28,15 +28,15 @@ public class Chuyenbay  implements java.io.Serializable {
     }
 
 	
-    public Chuyenbay(String maCb, Sanbay sanbayByMaSbden, Sanbay sanbayByMaSbdi) {
+    public Chuyenbay(String maCb, Sanbay sanbayden, Sanbay sanbaydi) {
         this.maCb = maCb;
-        this.sanbayByMaSbden = sanbayByMaSbden;
-        this.sanbayByMaSbdi = sanbayByMaSbdi;
+        this.sanbayden = sanbayden;
+        this.sanbaydi = sanbaydi;
     }
-    public Chuyenbay(String maCb, Sanbay sanbayByMaSbden, Sanbay sanbayByMaSbdi, Date ngayKhoiHanh, Float thoiGianBay, String tinhTrang, Set giahangvetheocbs, Set vechuyenbays, Set sanbaytrunggians, Set phieuchos) {
+    public Chuyenbay(String maCb, Sanbay sanbayden, Sanbay sanbaydi, Date ngayKhoiHanh, Float thoiGianBay, String tinhTrang, Set giahangvetheocbs, Set vechuyenbays, Set sanbaytrunggians, Set phieuchos) {
        this.maCb = maCb;
-       this.sanbayByMaSbden = sanbayByMaSbden;
-       this.sanbayByMaSbdi = sanbayByMaSbdi;
+        this.sanbayden = sanbayden;
+        this.sanbaydi = sanbaydi;
        this.ngayKhoiHanh = ngayKhoiHanh;
        this.thoiGianBay = thoiGianBay;
        this.tinhTrang = tinhTrang;
@@ -53,19 +53,19 @@ public class Chuyenbay  implements java.io.Serializable {
     public void setMaCb(String maCb) {
         this.maCb = maCb;
     }
-    public Sanbay getSanbayByMaSbden() {
-        return this.sanbayByMaSbden;
+    public Sanbay getSanbayden() {
+        return this.sanbayden;
     }
     
-    public void setSanbayByMaSbden(Sanbay sanbayByMaSbden) {
-        this.sanbayByMaSbden = sanbayByMaSbden;
+    public void setSanbayden(Sanbay sanbayByMaSbden) {
+        this.sanbayden = sanbayByMaSbden;
     }
-    public Sanbay getSanbayByMaSbdi() {
-        return this.sanbayByMaSbdi;
+    public Sanbay getSanbaydi() {
+        return this.sanbaydi;
     }
     
-    public void setSanbayByMaSbdi(Sanbay sanbayByMaSbdi) {
-        this.sanbayByMaSbdi = sanbayByMaSbdi;
+    public void setSanbaydi(Sanbay sanbayByMaSbdi) {
+        this.sanbaydi = sanbayByMaSbdi;
     }
     public Date getNgayKhoiHanh() {
         return this.ngayKhoiHanh;

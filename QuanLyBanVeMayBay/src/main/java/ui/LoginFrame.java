@@ -16,6 +16,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -27,21 +28,129 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        parentPane = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nameTextFeild = new javax.swing.JTextField();
+        passwordTextField = new javax.swing.JPasswordField();
+        submitButton = new javax.swing.JButton();
+        nameWarning = new javax.swing.JLabel();
+        passwordWarning = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(530, 320));
+        setMinimumSize(new java.awt.Dimension(530, 320));
+        setPreferredSize(new java.awt.Dimension(530, 320));
+
+        parentPane.setBackground(new java.awt.Color(18, 18, 18));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Username:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password:");
+
+        nameTextFeild.setBackground(new java.awt.Color(0, 0, 0));
+        nameTextFeild.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        nameTextFeild.setForeground(new java.awt.Color(255, 255, 255));
+        nameTextFeild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFeildActionPerformed(evt);
+            }
+        });
+
+        passwordTextField.setBackground(new java.awt.Color(0, 0, 0));
+        passwordTextField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        passwordTextField.setForeground(new java.awt.Color(255, 255, 255));
+        passwordTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTextFieldActionPerformed(evt);
+            }
+        });
+
+        submitButton.setBackground(new java.awt.Color(255, 150, 8));
+        submitButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        submitButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitButton.setText("Đăng nhập");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
+
+        nameWarning.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        nameWarning.setForeground(new java.awt.Color(255, 0, 51));
+        nameWarning.setText("Thiếu họ tên rồi!");
+        nameWarning.setText(" ");
+
+        passwordWarning.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        passwordWarning.setForeground(new java.awt.Color(255, 0, 51));
+        passwordWarning.setText("Không có password thì đăng nhập làm sao!");
+        passwordWarning.setText(" ");
+
+        javax.swing.GroupLayout parentPaneLayout = new javax.swing.GroupLayout(parentPane);
+        parentPane.setLayout(parentPaneLayout);
+        parentPaneLayout.setHorizontalGroup(
+            parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(parentPaneLayout.createSequentialGroup()
+                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(parentPaneLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, parentPaneLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(parentPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(passwordWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                                    .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(parentPaneLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addComponent(nameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        parentPaneLayout.setVerticalGroup(
+            parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(parentPaneLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nameWarning)
+                .addGap(18, 18, 18)
+                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordWarning)
+                .addGap(10, 10, 10)
+                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
+
+        getContentPane().add(parentPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nameTextFeildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFeildActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameTextFeildActionPerformed
+
+    private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTextFieldActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +188,13 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField nameTextFeild;
+    private javax.swing.JLabel nameWarning;
+    private javax.swing.JPanel parentPane;
+    private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JLabel passwordWarning;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

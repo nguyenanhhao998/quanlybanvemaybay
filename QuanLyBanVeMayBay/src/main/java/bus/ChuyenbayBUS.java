@@ -64,4 +64,11 @@ public class ChuyenbayBUS {/*
         
         return ds;
     }*/
+
+    public static List<Chuyenbay> getListChuyenbays() {
+        List<Chuyenbay> ds = null;
+        ds = ChuyenbayDAO.getListChuyenbays();
+
+        return ds;
+    }
 }

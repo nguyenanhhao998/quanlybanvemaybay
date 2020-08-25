@@ -50,8 +50,8 @@ public class MuaVePanel extends javax.swing.JPanel {
         
         
         if(cb != null){//test for ql dat ve
-        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
-        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        jlbSBDi.setText(cb.getSanbaydi().getThanhPho() + " (" + cb.getSanbaydi().getMaSb() + ")");
+            jlbSBDen.setText(cb.getSanbayden().getThanhPho() + " (" + cb.getSanbayden().getMaSb() + ")");
         
         DateFormat df = new SimpleDateFormat("HH:mm");
         String timeStart = df.format(cb.getNgayKhoiHanh());

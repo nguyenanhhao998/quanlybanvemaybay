@@ -317,20 +317,19 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                             .addComponent(jLabel19))
                         .addGap(70, 70, 70)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(hangVePaneLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hangVePaneLayout.createSequentialGroup()
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel11))
                                 .addGap(20, 20, 20)
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel22)
-                                    .addComponent(jLabel23))
-                                .addContainerGap(92, Short.MAX_VALUE))
-                            .addGroup(hangVePaneLayout.createSequentialGroup()
+                                    .addComponent(jLabel23)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(20, 20, 20)
-                                .addComponent(jLabel21)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jLabel21)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         hangVePaneLayout.setVerticalGroup(
             hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,8 +349,7 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel22))
-                        .addGap(0, 0, 0))
+                            .addComponent(jLabel22)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(jLabel19)))
@@ -403,7 +401,7 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
                     .addComponent(jLabel25))
-                .addGap(331, 331, 331))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
         sanBayTGPane1Layout.setVerticalGroup(
             sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +452,7 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
                     .addComponent(jLabel27))
-                .addGap(324, 324, 324))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
         sanBayTGPane2Layout.setVerticalGroup(
             sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

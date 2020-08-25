@@ -37,8 +37,8 @@ public class FlightPanel extends javax.swing.JPanel {
         this.sl = sl;
         this.mahangve = mahangve;
         
-        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
-        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        jlbSBDi.setText(cb.getSanbaydi().getThanhPho() + " (" + cb.getSanbaydi().getMaSb() + ")");
+        jlbSBDen.setText(cb.getSanbayden().getThanhPho() + " (" + cb.getSanbayden().getMaSb() + ")");
         
         int sodiemdung = 0;
         if(!cb.getSanbaytrunggians().isEmpty())

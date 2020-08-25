@@ -17,22 +17,13 @@ import util.HibernateUtil;
  *
  * @author HAO
  */
-public class SanbayBUS {/*
+public class SanbayBUS {
     public static List<Sanbay> getAll(){
         List<Sanbay> listsb = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            String hql = "select sb from Sanbay sb";
-            Query query = session.createQuery(hql);
-            listsb = query.list();
-        } catch (HibernateException ex) {
-            System.err.println(ex);
-        } finally {
-            session.close();
-        } 
+        listsb = SanbayDAO.getAll();
         return listsb;
     }
-    
+    /*
     public static String getAirportNameById(String masb){
         List<Sanbay> listsb = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

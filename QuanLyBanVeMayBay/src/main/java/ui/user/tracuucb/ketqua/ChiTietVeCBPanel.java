@@ -52,8 +52,8 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
         String thu = dayOfWeek[cal.get(Calendar.DAY_OF_WEEK) - 1];
         DateFormat df1 = new SimpleDateFormat("'ngày' dd 'tháng' MM 'năm' yyyy");
         jlbNgay.setText(thu + ", " + df1.format(cb.getNgayKhoiHanh()));
-        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
-        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        jlbSBDi.setText(cb.getSanbaydi().getThanhPho() + " (" + cb.getSanbaydi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayden().getThanhPho() + " (" + cb.getSanbayden().getMaSb() +")");
         
         int sodiemdung = 0;
         if(!cb.getSanbaytrunggians().isEmpty())
