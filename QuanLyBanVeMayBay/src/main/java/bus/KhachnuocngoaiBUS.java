@@ -25,4 +25,8 @@ public class KhachnuocngoaiBUS {
     public static boolean kiemTraIdNumberKH(int makh,String idNumber){
         return KhachnuocngoaiDAO.kiemTraIdNumberKH(makh,idNumber);
     }
+    
+    public static int getIdKHbyHoChieu(String cmndOrhochieu){
+        return KhachnuocngoaiDAO.getIDKHByHoChieu(cmndOrhochieu);
+    }
 }

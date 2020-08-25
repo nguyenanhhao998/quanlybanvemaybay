@@ -7,12 +7,16 @@ package ui.user.muave;
 
 import bus.ChuyenbayBUS;
 import daos.HangveDAO;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
 import pojos.Hoadonmuave;
@@ -30,11 +34,12 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
      * Creates new form XuLyVeDaMuaPanel
      */
     Hoadonmuave hd;
+    Date ngayKhoiHanh;
     public XuLyVeDaMuaPanel(Hoadonmuave hd, String idNumber) {
         initComponents();
         this.hd = hd;
         Chuyenbay cb = ChuyenbayBUS.getChuyenBayByID(hd.getVechuyenbay().getChuyenbay().getMaCb());
-        
+        this.ngayKhoiHanh = cb.getNgayKhoiHanh();
         String[] dayOfWeek = {"Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"};
         Calendar cal = Calendar.getInstance();
         cal.setTime(cb.getNgayKhoiHanh());
@@ -405,16 +410,15 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        /*
-        if(isConVe)
-        MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve), "muave");
+        if(ngayKhoiHanh.compareTo(new Date()) >= 0)
+            MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe(hd);
         else{
-            JLabel label = new JLabel("Hiện tại vé chuyến bay đã được mua/đặt hết. Bạn có thể lập phiếu chờ.");
+            JLabel label = new JLabel("Đã quá thời hạn trả vé đối với chuyến bay này.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
-            label.setForeground(Color.blue);
-            JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
-        }*/
-        MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe(hd);
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.ERROR_MESSAGE);
+            MainForUser.getInstance().getDoiVePane().trove();
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

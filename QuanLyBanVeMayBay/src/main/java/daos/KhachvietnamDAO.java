@@ -35,6 +35,8 @@ public class KhachvietnamDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        }finally{
+            session.close();
         }
 
         return listKhachvietnam;
@@ -59,6 +61,8 @@ public class KhachvietnamDAO {
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
+        }finally{
+            session.close();
         }
         
         return id;
@@ -78,6 +82,8 @@ public class KhachvietnamDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        }finally{
+            session.close();
         }
 
         if(kh != null)
@@ -86,6 +92,7 @@ public class KhachvietnamDAO {
     }
     
     public static boolean kiemTraIdNumberKH(int makh, String idNumber){
+        boolean kq = true;
         Khachvietnam kh = null;
         Session session = null;
         try {
@@ -98,9 +105,35 @@ public class KhachvietnamDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return false;
+            kq = false;
+        }finally{
+            session.close();
         }
         
-        return true;
+        return kq;
+    }
+    
+    public static int getIDKHByCMND(String cmnd) {
+        int id = -1;
+        Khachvietnam kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachvietnam where cmnd = '%s'", cmnd);
+            Query query = session.createQuery(hql);
+            kh = (Khachvietnam)query.getSingleResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }   catch (NoResultException ex){
+            id = -1;
+        } finally{
+            session.close();
+        }
+
+        if(kh != null)
+            id = kh.getMaKh();
+        return id;
     }
 }

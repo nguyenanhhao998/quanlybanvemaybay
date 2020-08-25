@@ -5,8 +5,25 @@
  */
 package ui.user.phieu;
 
+import bus.ChuyenbayBUS;
+import bus.KhachhangBUS;
+import bus.PhieudatchoBUS;
+import daos.SanbayDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import pojos.Chuyenbay;
+import pojos.Khachhang;
+import pojos.Phieudatcho;
+import pojos.Sanbay;
 import ui.user.muave.InVePanel;
 import ui.user.muave.MuaVePanel;
 import ui.user.tracuucb.JPNTraCuu;
@@ -20,13 +37,18 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
     /**
      * Creates new form XuLyDatVePanel
      */
-    
+    List<Sanbay> listSanBay;
     MuaVePanel muave;
     InVePanel inve;
     public XuLyDatVePanel() {
         initComponents();
-        ((JTextField)jDateStart.getDateEditor().getUiComponent()).setText("Chọn ngày đi");
-        ((JTextField)jDateDatVe.getDateEditor().getUiComponent()).setText("Chọn ngày đặt vé");
+        listSanBay = SanbayDAO.getAll();
+        for(int i = 0; i < listSanBay.size(); i++){
+            Sanbay sb = listSanBay.get(i);
+            cbbSanBayDi.addItem(sb.getThanhPho() +" (" + sb.getMaSb() + ")");
+            cbbSanBayDen.addItem(sb.getThanhPho() +" (" + sb.getMaSb() + ")");
+        }
+        ((JTextField)ngaykhoihanh.getDateEditor().getUiComponent()).setText("");
         
     }
 
@@ -54,25 +76,11 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         cbbSanBayDen = new javax.swing.JComboBox<>();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbHangGhe = new javax.swing.JComboBox<>();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateStart = new com.toedter.calendar.JDateChooser();
-        filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel11 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        gio = new javax.swing.JSpinner();
-        jLabel8 = new javax.swing.JLabel();
-        phut = new javax.swing.JSpinner();
-        jLabel10 = new javax.swing.JLabel();
-        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jPanel3 = new javax.swing.JPanel();
+        ngaykhoihanh = new com.toedter.calendar.JDateChooser();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel13 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
@@ -83,13 +91,9 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         jtfcmnd = new javax.swing.JTextField();
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel15 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateDatVe = new com.toedter.calendar.JDateChooser();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         btnFind = new javax.swing.JButton();
-        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20));
         jpnKetQua = new javax.swing.JPanel();
         filler21 = new javax.swing.Box.Filler(new java.awt.Dimension(100, 0), new java.awt.Dimension(100, 0), new java.awt.Dimension(100, 0));
@@ -140,23 +144,7 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         jPanel4.add(jPanel7);
         jPanel4.add(filler5);
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
-        jPanel9.add(jLabel6);
-        jPanel9.add(filler6);
-
-        cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel9.add(cbbHangGhe);
-
-        jPanel4.add(jPanel9);
-        jPanel4.add(filler7);
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thời gian khởi hành", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel10.setMaximumSize(new java.awt.Dimension(250, 70));
         jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
         jPanel10.setPreferredSize(new java.awt.Dimension(250, 70));
@@ -166,53 +154,15 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         jPanel10.add(jLabel7);
         jPanel10.add(filler8);
 
-        jDateStart.setDateFormatString("dd/MM/yyyy");
-        jDateStart.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jDateStart.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel10.add(jDateStart);
+        ngaykhoihanh.setDateFormatString("hh:mm dd/MM/yyyy ");
+        ngaykhoihanh.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        ngaykhoihanh.setMaximumSize(new java.awt.Dimension(200, 40));
+        ngaykhoihanh.setMinimumSize(new java.awt.Dimension(200, 40));
+        ngaykhoihanh.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel10.add(ngaykhoihanh);
 
         jPanel4.add(jPanel10);
-        jPanel4.add(filler13);
-
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thời gian cất cánh", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plane_takeoff.png"))); // NOI18N
-        jPanel11.add(jLabel9);
-        jPanel11.add(filler15);
-
-        gio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        gio.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
-        gio.setMaximumSize(new java.awt.Dimension(70, 35));
-        gio.setMinimumSize(new java.awt.Dimension(70, 35));
-        gio.setPreferredSize(new java.awt.Dimension(70, 35));
-        jPanel11.add(gio);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel8.setText(" giờ ");
-        jPanel11.add(jLabel8);
-
-        phut.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        phut.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
-        phut.setMaximumSize(new java.awt.Dimension(70, 35));
-        phut.setMinimumSize(new java.awt.Dimension(70, 35));
-        phut.setPreferredSize(new java.awt.Dimension(70, 35));
-        jPanel11.add(phut);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel10.setText(" phút");
-        jPanel11.add(jLabel10);
-
-        jPanel4.add(jPanel11);
-        jPanel4.add(filler14);
-
-        jPanel2.add(jPanel4);
-
-        jPanel3.setMaximumSize(new java.awt.Dimension(32767, 100));
-        jPanel3.setPreferredSize(new java.awt.Dimension(1140, 100));
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel4.add(filler6);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tên khách hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel13.setMaximumSize(new java.awt.Dimension(250, 70));
@@ -230,8 +180,8 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         jtfTen.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel13.add(jtfTen);
 
-        jPanel3.add(jPanel13);
-        jPanel3.add(filler12);
+        jPanel4.add(jPanel13);
+        jPanel4.add(filler12);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CMND / Hộ chiếu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
         jPanel14.setMaximumSize(new java.awt.Dimension(250, 70));
@@ -249,28 +199,9 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         jtfcmnd.setPreferredSize(new java.awt.Dimension(200, 40));
         jPanel14.add(jtfcmnd);
 
-        jPanel3.add(jPanel14);
-        jPanel3.add(filler18);
-
-        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đặt", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel15.setMaximumSize(new java.awt.Dimension(250, 70));
-        jPanel15.setMinimumSize(new java.awt.Dimension(250, 70));
-        jPanel15.setPreferredSize(new java.awt.Dimension(250, 70));
-        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
-        jPanel15.add(jLabel13);
-        jPanel15.add(filler17);
-
-        jDateDatVe.setDateFormatString("dd/MM/yyyy");
-        jDateDatVe.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jDateDatVe.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateDatVe.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateDatVe.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel15.add(jDateDatVe);
-
-        jPanel3.add(jPanel15);
-        jPanel3.add(filler9);
+        jPanel4.add(jPanel14);
+        jPanel4.add(filler18);
+        jPanel4.add(filler9);
 
         btnFind.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
@@ -283,10 +214,10 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
                 btnFindActionPerformed(evt);
             }
         });
-        jPanel3.add(btnFind);
-        jPanel3.add(filler10);
+        jPanel4.add(btnFind);
+        jPanel4.add(filler14);
 
-        jPanel2.add(jPanel3);
+        jPanel2.add(jPanel4);
         jPanel2.add(filler3);
 
         jPanel12.add(jPanel2);
@@ -301,83 +232,59 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        muave = new MuaVePanel(null, 10,"");
-        jpnKetQua.add(muave);
-        jpnKetQua.invalidate();
-        jpnKetQua.revalidate();
-        jpnKetQua.repaint();
-        /*//Lấy dữ liệu từ giao diện
-        String masbdi = listSanBay.get(cbbSanBayDi.getSelectedIndex()).getMaSb();
-        String masbden = listSanBay.get(cbbSanBayDen.getSelectedIndex()).getMaSb();
-        int SL = Integer.parseInt(String.valueOf(sl.getValue()));
-        String hangghe = String.valueOf(cbbHangGhe.getSelectedItem());
-        String mahangghe = null;
-        Date DateStart = null;
-        Date DateEnd = null;
-
-        for(int i = 0; i < listHangVe.size(); i++){
-            Hangve hv = listHangVe.get(i);
-            if(hv.getTenHangVe().equalsIgnoreCase(hangghe)){
-                mahangghe = hv.getMaHangVe();
-                break;
-            }
-        }
-
+        //Lấy dữ liệu từ giao diện     
+        String tenkh = jtfTen.getText();
+        String cmndOrHoChieu = jtfcmnd.getText();
+        String Sanbaydi = String.valueOf(cbbSanBayDi.getSelectedItem());
+        String Sanbayden = String.valueOf(cbbSanBayDen.getSelectedItem());
+        Date ngayKH = null;
         try{
-            DateStart = jDateStart.getCalendar().getTime();
-            if(isKhuHoi)
-            DateEnd = jDateEnd.getCalendar().getTime();
+            ngayKH = ngaykhoihanh.getCalendar().getTime();
         }catch(NullPointerException ex){
-            JLabel label = new JLabel("Bạn phải chọn thời gian bay.");
+            JLabel label = new JLabel("Bạn phải chọn thời gian khởi hành.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label,"ERROR",JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        //kiểm tra
-        //sân bay đi trùng sân bay đến
-        if(masbdi.equalsIgnoreCase(masbden)){
-            JLabel label = new JLabel("Sân bay đi phải khác sân bay đến.");
+        
+        //kiểm tra        
+        //điền đủ thông tin
+        if(tenkh.isEmpty() || cmndOrHoChieu.isEmpty()){
+            JLabel label = new JLabel("Bạn phải điền đầy đủ thông tin.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        //ngày đi phải trước ngày về
-        if(isKhuHoi && DateStart.compareTo(DateEnd) >= 0){
-            JLabel label = new JLabel("Ngày khởi hành phải trước ngày về.");
+        
+        int id = KhachhangBUS.getIdKHbyCMNDOrHoChieu(cmndOrHoChieu);
+        
+        Khachhang kh = KhachhangBUS.getKHbyID(id);
+        
+        if(id == -1 || !kh.getHoTen().equalsIgnoreCase(tenkh)){
+            JLabel label = new JLabel("Không tìm thấy phiếu đặt vé tương ứng.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        List <Phieudatcho> listCanXuLy = PhieudatchoBUS.getListPhieudatcho(id,ngayKH,Sanbaydi,Sanbayden);
 
-        //Tìm kiếm trong database
-        List<Chuyenbay> listcbdi = ChuyenbayDAO.findFlights(masbdi, masbden, SL, mahangghe, DateStart);
-        List<Chuyenbay> listcbve = null;
-
-        if(isKhuHoi){
-            listcbve = ChuyenbayDAO.findFlights(masbden, masbdi, SL, mahangghe, DateEnd);
+        if(listCanXuLy.isEmpty()){
+            JLabel label = new JLabel("Không tìm thấy phiếu đặt vé tương ứng.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-
-        if(rbtnMotChieu.isSelected()){
-            jpnKetQua.setVisible(true);
-            jtabbedPaneKhuHoi.setVisible(false);
-            jpnKetQua.removeAll();
-            jpnKetQua.add(new MotChieuPanel(listcbdi, SL, mahangghe));
-            jpnKetQua.validate();
-            jpnKetQua.repaint();
-        } else if(rbtnKhuHoi.isSelected()){
-            jtabbedPaneKhuHoi.setVisible(true);
-            jpnKetQua.setVisible(false);
-            jtabbedPaneKhuHoi.removeAll();
-            jtabbedPaneKhuHoi.add("Chọn chuyến đi",new MotChieuPanel(listcbdi, SL, mahangghe));
-            jtabbedPaneKhuHoi.add("Chọn chuyến về",new MotChieuPanel(listcbve, SL, mahangghe));
-        }*/
-        
-        
+        String macb = listCanXuLy.get(0).getVechuyenbay().getChuyenbay().getMaCb();
+        Chuyenbay cb = ChuyenbayBUS.getChuyenBayByID(macb);
+        muave = new MuaVePanel(cb,listCanXuLy.size(),listCanXuLy.get(0).getVechuyenbay().getHangve().getMaHangVe(),listCanXuLy);
+        jpnKetQua.add(muave);
+        jpnKetQua.invalidate();
+        jpnKetQua.revalidate();
+        jpnKetQua.repaint();
     }//GEN-LAST:event_btnFindActionPerformed
 
     public void inVe(InVePanel panel){
@@ -391,10 +298,7 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
     
     public void hoanThanhInVe(){
         jpnKetQua.remove(inve);
-        ((JTextField)jDateStart.getDateEditor().getUiComponent()).setText("Chọn ngày đi");
-        ((JTextField)jDateDatVe.getDateEditor().getUiComponent()).setText("Chọn ngày đặt vé");
-        gio.setValue(0);
-        phut.setValue(0);
+        ((JTextField)ngaykhoihanh.getDateEditor().getUiComponent()).setText("");
         jtfTen.setText("");
         jtfcmnd.setText("");
         jpnKetQua.invalidate();
@@ -404,18 +308,13 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
-    private javax.swing.JComboBox<String> cbbHangGhe;
     private javax.swing.JComboBox<String> cbbSanBayDen;
     private javax.swing.JComboBox<String> cbbSanBayDi;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
-    private javax.swing.Box.Filler filler13;
     private javax.swing.Box.Filler filler14;
-    private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler16;
-    private javax.swing.Box.Filler filler17;
     private javax.swing.Box.Filler filler18;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler21;
@@ -424,39 +323,26 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
-    private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
-    private javax.swing.JSpinner gio;
-    private com.toedter.calendar.JDateChooser jDateDatVe;
-    private com.toedter.calendar.JDateChooser jDateStart;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jpnKetQua;
     private javax.swing.JTextField jtfTen;
     private javax.swing.JTextField jtfcmnd;
-    private javax.swing.JSpinner phut;
+    private com.toedter.calendar.JDateChooser ngaykhoihanh;
     // End of variables declaration//GEN-END:variables
 }

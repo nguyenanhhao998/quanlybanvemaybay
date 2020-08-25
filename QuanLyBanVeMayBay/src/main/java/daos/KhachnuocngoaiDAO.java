@@ -34,6 +34,8 @@ public class KhachnuocngoaiDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        }finally{
+            session.close();
         }
 
         return listKhachnuocngoai;
@@ -57,6 +59,8 @@ public class KhachnuocngoaiDAO {
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
+        }finally{
+            session.close();
         }
         
         return id;
@@ -77,7 +81,8 @@ public class KhachnuocngoaiDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return id;
+            ex.printStackTrace();
+            id = -1;
         } finally{
             session.close();
         }
@@ -100,8 +105,34 @@ public class KhachnuocngoaiDAO {
             ex.printStackTrace();
         } catch (NoResultException ex){
             return false;
+        }finally{
+            session.close();
         }
         
         return true;
+    }
+    
+    public static int getIDKHByHoChieu(String hochieu) {
+        int id = -1;
+        Khachnuocngoai kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachnuocngoai where hoChieu = '%s'", hochieu);
+            Query query = session.createQuery(hql);
+            kh = (Khachnuocngoai)query.getSingleResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            id = -1;
+        } finally{
+            session.close();
+        }
+
+        if(kh != null)
+            id = kh.getMaKh();
+        return id;
     }
 }

@@ -5,10 +5,18 @@
  */
 package ui.user.phieu;
 
+import bus.ChuyenbayBUS;
+import bus.PhieuchoBUS;
 import java.awt.CardLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import pojos.Chuyenbay;
+import pojos.Phieucho;
 
 /**
  *
@@ -21,12 +29,13 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
      */
     CardLayout cardLayout;
     int indexselected = -1;
+    List<Chuyenbay> listCB;
     public QuanLyPhieuChoPanel() {
         initComponents();
         cardLayout = (CardLayout)jpnContainCards.getLayout();
         cardLayout.show(jpnContainCards, "cardDSQL");
         btnChonCB.setEnabled(false);
-        
+        listCB = ChuyenbayBUS.getTatCaChuyenBay();//lấy tất cả các chuyến bay chưa khởi hành
         DefaultTableModel model = new DefaultTableModel(
                 new String[]{"Mã CB", "Sân bay đi", "Sân bay đến","Thời gian khởi hành", "Số lượng phiếu chờ cần thông báo"}, 0) {
             @Override
@@ -35,8 +44,13 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
             }
         };
         
-        for(int i = 0; i< 10; i++){
-            model.addRow(new Object[]{"VNCB1","TPHCM - Sân bay Tân Sơn Nhất", "Hà Nội - Sân bay Nội Bài", " 07h30 22/08/2020",i});
+        for(int i = 0; i< listCB.size(); i++){
+            Chuyenbay cb = listCB.get(i);
+            String sbdi = cb.getSanbayByMaSbdi().getThanhPho() +" - "+cb.getSanbayByMaSbdi().getTenSb();
+            String sbden = cb.getSanbayByMaSbden().getThanhPho() +" - "+cb.getSanbayByMaSbden().getTenSb();
+            DateFormat df = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+            model.addRow(new Object[]{cb.getMaCb(),sbdi, sbden, 
+                df.format(cb.getNgayKhoiHanh()),cb.getPhieuchos().size()});
         }
         
         jtbDSCB.setModel(model);
@@ -135,15 +149,19 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
 
     private void btnChonCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonCBActionPerformed
         indexselected = jtbDSCB.getSelectedRow();
-        jpnContainCards.add(new ThongBaoPhieuChoPanel(), "cardThongBao");
+        jpnContainCards.add(new ThongBaoPhieuChoPanel(listCB.get(indexselected)), "cardThongBao");
         cardLayout.show(jpnContainCards, "cardThongBao");
     }//GEN-LAST:event_btnChonCBActionPerformed
 
     public void hoanThanhThongBao(ThongBaoPhieuChoPanel panel, String type){
         cardLayout.removeLayoutComponent(panel);
         if(type.equals("remove")){
+            //xóa trong database
+            Iterator<Phieucho> phieucs = listCB.get(indexselected).getPhieuchos().iterator();
+            while(phieucs.hasNext()){
+                PhieuchoBUS.delete(phieucs.next());
+            }
             //xóa hàng đó trong jtable
-            
             DefaultTableModel model = (DefaultTableModel)jtbDSCB.getModel();
             model.removeRow(indexselected);
             jtbDSCB.setModel(model);

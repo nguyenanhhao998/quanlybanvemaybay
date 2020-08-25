@@ -8,6 +8,7 @@ package bus;
 import daos.*;
 import java.util.HashSet;
 import java.util.Set;
+import pojos.Chuyenbay;
 import pojos.Vechuyenbay;
 
 /**
@@ -20,4 +21,8 @@ public class VechuyenbayBUS {
         
         return VechuyenbayDAO.updateStatus(ve);
     }
+    /*
+    public static Chuyenbay getChuyenBayByMaSoVe(String mave){
+        return VechuyenbayDAO.getChuyenBayByMaSoVe(mave);
+    }*/
 }

@@ -5,9 +5,21 @@
  */
 package ui.user.phieu;
 
+import bus.HangveBUS;
+import bus.KhachhangBUS;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import pojos.Chuyenbay;
+import pojos.Giahangvetheocb;
+import pojos.Khachhang;
+import pojos.Phieucho;
 import ui.user.MainForUser;
 
 /**
@@ -19,19 +31,47 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
     /**
      * Creates new form ThongBaoPhieuChoPanel
      */
-    public ThongBaoPhieuChoPanel() {
+    List<Double> listGia;
+    List<Integer> listSL;
+    public ThongBaoPhieuChoPanel(Chuyenbay cb) {
         initComponents();
         
+        jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
+        jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
+        
+        DateFormat df1 = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+        jlbNgay.setText(df1.format(cb.getNgayKhoiHanh()));
+        
+        Iterator<Giahangvetheocb> gias = cb.getGiahangvetheocbs().iterator();
+        listGia = new ArrayList();
+        listSL = new ArrayList();
+        while(gias.hasNext()){
+            Giahangvetheocb gia = gias.next();
+            
+            cbbHangGhe.addItem(HangveBUS.getTicketLevelName(gia.getHangve().getMaHangVe()));
+            listGia.add(gia.getGiaHienTai());
+            listSL.add(cb.laySoGheTrongTheoHangVe(gia.getHangve().getMaHangVe()));
+        }
+
+        jlbGia.setText(String.format("%,.0f VND", listGia.get(0)));
+        jlbSL.setText(String.format("%d vé", listSL.get(0)));            
+        
         DefaultTableModel model = new DefaultTableModel(
-                new String[]{"STT","Tên khách hàng", "CMND/Hộ chiếu", "Số điện thoại", "Hạng vé muốn đặt"}, 0) {
+                new String[]{"STT","Tên khách hàng","Giới tính","Ngày sinh", "Số điện thoại"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         
-        for(int i = 0; i< 10; i++){
-            model.addRow(new Object[]{i + 1,"Trần Văn B","024676333","0123456789", "Phổ thông đặc biệt"});
+        int pos = 1;
+        Iterator<Phieucho> pcs = cb.getPhieuchos().iterator();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        while(pcs.hasNext()){
+            Phieucho pc = pcs.next();
+            Khachhang kh = KhachhangBUS.getKHbyID(pc.getKhachhang().getMaKh());
+            model.addRow(new Object[]{pos,kh.getHoTen(),kh.getGioiTinh(),df.format(kh.getNgaySinh()),kh.getSdt()});
+            pos++;
         }
         
         jtbDSPhieuCho.setModel(model);
@@ -41,7 +81,7 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
             jtbDSPhieuCho.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
     }
 
@@ -75,10 +115,12 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         cbbHangGhe = new javax.swing.JComboBox<>();
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jPanel11 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jlbGia = new javax.swing.JLabel();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
+        jLabel10 = new javax.swing.JLabel();
+        jlbSL = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         btnBack = new javax.swing.JButton();
@@ -112,11 +154,6 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
             }
         ));
         jtbDSPhieuCho.setRowHeight(35);
-        jtbDSPhieuCho.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtbDSPhieuChoMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtbDSPhieuCho);
 
         jpnThongTinKHs.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -200,10 +237,14 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
         cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
         cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
+        cbbHangGhe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbHangGheActionPerformed(evt);
+            }
+        });
         jPanel14.add(cbbHangGhe);
 
         jPanel10.add(jPanel14);
-        jPanel10.add(filler5);
 
         jPanel6.add(jPanel10);
 
@@ -218,6 +259,15 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         jlbGia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbGia.setText("500.000 VND");
         jPanel11.add(jlbGia);
+        jPanel11.add(filler5);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setText("Số lượng: ");
+        jPanel11.add(jLabel10);
+
+        jlbSL.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbSL.setText("01 vé");
+        jPanel11.add(jlbSL);
 
         jPanel6.add(jPanel11);
 
@@ -258,23 +308,23 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         add(jPanel5, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtbDSPhieuChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDSPhieuChoMouseClicked
-
-    }//GEN-LAST:event_jtbDSPhieuChoMouseClicked
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         MainForUser.getInstance().getqlPhieuChoPane().hoanThanhThongBao(this, "back");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //JOptionPane.showMessageDialog(null, );
-        /*int index = MainForUser.getInstance().getCurrentPaneIndex();
-        if(index == 0)
-        MainForUser.getInstance().getTraCuuPane().changeLayout(new InVePanel(), "inve");
-        if(index == 1)
-        MainForUser.getInstance().getXuLyDatVePane().inVe(new InVePanel());*/
         MainForUser.getInstance().getqlPhieuChoPane().hoanThanhThongBao(this, "remove");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cbbHangGheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbHangGheActionPerformed
+        int index = cbbHangGhe.getSelectedIndex();
+        try{
+            jlbGia.setText(String.format("%,.0f VND", listGia.get(index)));
+            jlbSL.setText(String.format("%d vé", listSL.get(index)));
+        }catch(IndexOutOfBoundsException ex){
+        }
+        
+    }//GEN-LAST:event_cbbHangGheActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -289,6 +339,7 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler8;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -308,6 +359,7 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jlbNgay;
     private javax.swing.JLabel jlbSBDen;
     private javax.swing.JLabel jlbSBDi;
+    private javax.swing.JLabel jlbSL;
     private javax.swing.JPanel jpnThongTinKHs;
     private javax.swing.JTable jtbDSPhieuCho;
     // End of variables declaration//GEN-END:variables

@@ -11,6 +11,7 @@ import bus.HoadonmuaveBUS;
 import bus.KhachhangBUS;
 import bus.KhachnuocngoaiBUS;
 import bus.KhachvietnamBUS;
+import bus.PhieudatchoBUS;
 import bus.VechuyenbayBUS;
 import daos.HangveDAO;
 import java.awt.Color;
@@ -30,6 +31,7 @@ import pojos.Hoadonmuave;
 import pojos.Khachhang;
 import pojos.Khachnuocngoai;
 import pojos.Khachvietnam;
+import pojos.Phieudatcho;
 import pojos.Vechuyenbay;
 import ui.user.MainForUser;
 
@@ -44,14 +46,16 @@ public class MuaVePanel extends javax.swing.JPanel {
      */
     List<DienThongTinKHPanel> khs;
     List<Integer> makhs;
+    List<Phieudatcho> phieudcs;
     Chuyenbay cb;
     int sl;
     String mahangve;
-    public MuaVePanel(Chuyenbay cb, int sl, String mahangve) {
+    public MuaVePanel(Chuyenbay cb, int sl, String mahangve, List<Phieudatcho> listPhieu) {
         initComponents();
         this.cb = cb;
         this.sl = sl;
         this.mahangve = mahangve;
+        phieudcs = listPhieu;
         khs = new ArrayList();
         makhs = new ArrayList();
         int index = MainForUser.getInstance().getCurrentPaneIndex();
@@ -69,15 +73,8 @@ public class MuaVePanel extends javax.swing.JPanel {
         if(index == 1){
             btnBack.setVisible(false);
             filler2.setVisible(false);
-            
-            //test for qldatve
-            for(int i = 0; i < sl; i++){                
-                jpnThongTinKHs.add(new DienThongTinKHPanel(i+1));
-            }
         }
         
-        
-        if(cb != null){//test for ql dat ve
         jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
         jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
         
@@ -109,7 +106,6 @@ public class MuaVePanel extends javax.swing.JPanel {
                 jlbGia.setText(String.format("%,.0f VND",giahv.getGiaHienTai()));
                 jlbTongTien.setText(String.format("%,.0f VND",giahv.getGiaHienTai()*sl));
             }       
-        }
         }
     }
 
@@ -354,73 +350,90 @@ public class MuaVePanel extends javax.swing.JPanel {
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         //JOptionPane.showMessageDialog(null, );
         int index = MainForUser.getInstance().getCurrentPaneIndex();
-        if(index == 0){
             //insert x khach hang vao database
-            for(int i = 0;i < khs.size(); i++){
-                try{
-                    switch (khs.get(i).getTypeKH()) {
-                        case "vn":
-                            Khachvietnam khvn = khs.get(i).layThongTinKHVN();
-                            if(khvn.getNgaySinh().compareTo(new Date()) > 0){
-                                JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
-                                label.setFont(new Font("Arial", Font.BOLD, 18));
-                                label.setForeground(Color.red);
-                                JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
-                            }else{
-                                Integer makh = KhachvietnamBUS.insertKHVN(khvn);
-                                if(makh != -1){
-                                    makhs.add(makh);
-                                }
+        for (int i = 0; i < khs.size(); i++) {
+            try {
+                switch (khs.get(i).getTypeKH()) {
+                    case "vn":
+                        Khachvietnam khvn = khs.get(i).layThongTinKHVN();
+                        if (khvn.getNgaySinh().compareTo(new Date()) > 0) {
+                            JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
+                            label.setFont(new Font("Arial", Font.BOLD, 18));
+                            label.setForeground(Color.red);
+                            JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            Integer makh = KhachvietnamBUS.insertKHVN(khvn);
+                            if (makh != -1) {
+                                makhs.add(makh);
                             }
-                            break;
-                        case "foreign":
-                            Khachnuocngoai khnn = khs.get(i).layThongTinKHNN();
-                            if(khnn.getNgaySinh().compareTo(new Date()) > 0){
-                                JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
-                                label.setFont(new Font("Arial", Font.BOLD, 18));
-                                label.setForeground(Color.red);
-                                JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
-                            }else{
-                                Integer makh = KhachnuocngoaiBUS.insertKHNN(khnn);
-                                if(makh != -1){
-                                    makhs.add(makh);
-                                }
+                        }
+                        break;
+                    case "foreign":
+                        Khachnuocngoai khnn = khs.get(i).layThongTinKHNN();
+                        if (khnn.getNgaySinh().compareTo(new Date()) > 0) {
+                            JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
+                            label.setFont(new Font("Arial", Font.BOLD, 18));
+                            label.setForeground(Color.red);
+                            JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            Integer makh = KhachnuocngoaiBUS.insertKHNN(khnn);
+                            if (makh != -1) {
+                                makhs.add(makh);
                             }
-                            break;
-                    }
-                }catch(NullPointerException ex){
-                    JLabel label = new JLabel("Bạn phải nhập đủ thông tin của khách hàng");
-                    label.setFont(new Font("Arial", Font.BOLD, 18));
-                    label.setForeground(Color.red);
-                    JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    default:
+                        JLabel label = new JLabel("Bạn phải điền thông tin khách hàng.");
+                        label.setFont(new Font("Arial", Font.BOLD, 18));
+                        label.setForeground(Color.red);
+                        JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                        return;
                 }
+            } catch (NullPointerException ex) {
+                JLabel label = new JLabel("Bạn phải nhập đủ thông tin của khách hàng");
+                label.setFont(new Font("Arial", Font.BOLD, 18));
+                label.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
             }
-            List<Khachhang> listkh = new ArrayList();
-            for(int i = 0; i < makhs.size(); i++)
-                listkh.add(KhachhangBUS.getKHbyID(makhs.get(i)));
-            //JOptionPane.showMessageDialog(null, listkh.size());
-            //lay gia ve theo hang ve
-            double giahientai = GiahangvetheocbBUS.getGiaHienTai(cb, mahangve);
-            //update status of x ves on table in database
-            List<Vechuyenbay> ves = ChuyenbayBUS.getXVe(cb,sl, mahangve);
-            //JOptionPane.showMessageDialog(null, ves.size());
-            for(int i = 0; i < ves.size(); i++){
-                VechuyenbayBUS.updateStatus(ves.get(i),"Đã được mua");
-            }
-            //insert x bills 
-            List<Integer> mahds = new ArrayList();
-            for(int i = 0; i < sl; i++){
-                Hoadonmuave hd = new Hoadonmuave(listkh.get(i),ves.get(i),new Date(),giahientai);
-                int mahd = HoadonmuaveBUS.insert(hd);
-                if(mahd != -1)
-                    mahds.add(mahd);
-            }
-            
-            MainForUser.getInstance().getTraCuuPane().changeLayout(new InVePanel(mahds), "inve");
+        }
+        List<Khachhang> listkh = new ArrayList();
+        for (int i = 0; i < makhs.size(); i++) {
+            listkh.add(KhachhangBUS.getKHbyID(makhs.get(i)));
+        }
+        //JOptionPane.showMessageDialog(null, listkh.size());
+        //lay gia ve theo hang ve
+        double giahientai = GiahangvetheocbBUS.getGiaHienTai(cb, mahangve);
+        //update status of x ves on table in database
+        List<Vechuyenbay> ves = null;
+        if(index == 0){
+            ves = ChuyenbayBUS.getXVe(cb, sl, mahangve);            
         }else if(index == 1){
-            List<Integer> mahds = new ArrayList();
-            MainForUser.getInstance().getXuLyDatVePane().inVe(new InVePanel(mahds));
-        }        
+            ves = new ArrayList();
+            for(int i = 0; i < sl; i++){
+                ves.add(phieudcs.get(i).getVechuyenbay());
+            }
+        }
+        for (int i = 0; i < ves.size(); i++) {
+                VechuyenbayBUS.updateStatus(ves.get(i), "Đã được mua");
+            }
+        //insert x bills 
+        List<Integer> mahds = new ArrayList();
+        for (int i = 0; i < sl; i++) {
+            Hoadonmuave hd = new Hoadonmuave(listkh.get(i), ves.get(i), new Date(), giahientai);
+            int mahd = HoadonmuaveBUS.insert(hd);
+            if (mahd != -1) {
+                mahds.add(mahd);
+            }
+        }           
+
+        if(index == 0)
+            MainForUser.getInstance().getTraCuuPane().changeLayout(new InVePanel(mahds), "inve");
+        else if(index == 1)
+            //xóa phiếu đặt vé
+            for(int i = 0; i < sl; i++){
+                PhieudatchoBUS.delete(phieudcs.get(i));
+            }
+            MainForUser.getInstance().getXuLyDatVePane().inVe(new InVePanel(mahds));   
         
     }//GEN-LAST:event_btnThanhToanActionPerformed
 

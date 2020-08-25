@@ -20,6 +20,7 @@ import util.HibernateUtil;
  */
 public class VechuyenbayDAO {
     public static boolean updateStatus(Vechuyenbay ve){
+        boolean kq = true;
         Session session = null;
         Transaction transaction = null;
         try {
@@ -33,9 +34,13 @@ public class VechuyenbayDAO {
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
-            return false;
+            kq = false;
+        }finally{
+            session.close();
         }
         
-        return true;
+        return kq;
     }
+    
+    //public static Chuyenbay getChuyenBayBy
 }

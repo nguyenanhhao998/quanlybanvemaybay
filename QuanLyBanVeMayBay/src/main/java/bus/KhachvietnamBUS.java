@@ -27,5 +27,8 @@ public class KhachvietnamBUS {
     public static boolean kiemTraIdNumberKH(int makh, String idNumber){
         return KhachvietnamDAO.kiemTraIdNumberKH(makh, idNumber);
     }
-    
+ 
+    public static int getIdKHbyCMND(String cmndOrhochieu){
+        return KhachvietnamDAO.getIDKHByCMND(cmndOrhochieu);
+    }
 }

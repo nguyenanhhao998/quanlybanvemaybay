@@ -5,11 +5,28 @@
  */
 package ui.user.phieu;
 
+import bus.ChuyenbayBUS;
+import bus.KhachhangBUS;
+import bus.KhachnuocngoaiBUS;
+import bus.KhachvietnamBUS;
+import bus.PhieuchoBUS;
+import bus.PhieudatchoBUS;
+import bus.VechuyenbayBUS;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import pojos.Chuyenbay;
+import pojos.Khachnuocngoai;
+import pojos.Khachvietnam;
+import pojos.Phieucho;
+import pojos.Phieudatcho;
+import pojos.Vechuyenbay;
 import ui.user.MainForUser;
 
 /**
@@ -22,9 +39,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
      * Creates new form PhieuChoPanel
      */
     CardLayout cardLayout;
+    String typeKH = "none";
+    Chuyenbay cb;
     public PhieuChoPanel(Chuyenbay cb) {
         initComponents();
-        
+        this.cb = cb;
         jlbSBDi.setText(cb.getSanbayByMaSbdi().getThanhPho() + " (" + cb.getSanbayByMaSbdi().getMaSb() +")");
         jlbSBDen.setText(cb.getSanbayByMaSbden().getThanhPho() + " (" + cb.getSanbayByMaSbden().getMaSb() +")");
         
@@ -69,10 +88,10 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jLabel21 = new javax.swing.JLabel();
         filler27 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jTextField10 = new javax.swing.JTextField();
+        jtftennn = new javax.swing.JTextField();
         filler48 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jLabel22 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        jtfsdtnn = new javax.swing.JTextField();
         filler28 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel10 = new javax.swing.JPanel();
@@ -84,49 +103,49 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel18 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         filler37 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        ngaySinhnn = new com.toedter.calendar.JDateChooser();
         filler49 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jLabel24 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        jtfQuoctich = new javax.swing.JTextField();
         filler38 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler21 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel13 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         filler19 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jTextField3 = new javax.swing.JTextField();
+        jtfHochieu = new javax.swing.JTextField();
         filler20 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpnKhachVietNam = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         filler24 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jTextField5 = new javax.swing.JTextField();
+        jtftenvn = new javax.swing.JTextField();
         filler45 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jtfsdtvn = new javax.swing.JTextField();
         filler25 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler26 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel16 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         filler30 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        cbbGioiTinh1 = new javax.swing.JComboBox<>();
+        cbbGioiTinhvn = new javax.swing.JComboBox<>();
         filler32 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler33 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel17 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         filler34 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        ngaySinhvn = new com.toedter.calendar.JDateChooser();
         filler46 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jLabel18 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jtfcmnd = new javax.swing.JTextField();
         filler35 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler36 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel19 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         filler40 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jTextField8 = new javax.swing.JTextField();
+        jtfnghe = new javax.swing.JTextField();
         filler47 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0));
         jLabel20 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        jtfdiachi = new javax.swing.JTextField();
         filler41 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler42 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10));
         jPanel6 = new javax.swing.JPanel();
@@ -210,11 +229,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel15.add(jLabel21);
         jPanel15.add(filler27);
 
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField10.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField10.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField10.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel15.add(jTextField10);
+        jtftennn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtftennn.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtftennn.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtftennn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel15.add(jtftennn);
         jPanel15.add(filler48);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -224,11 +243,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel22.setPreferredSize(new java.awt.Dimension(100, 30));
         jPanel15.add(jLabel22);
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField11.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField11.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField11.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel15.add(jTextField11);
+        jtfsdtnn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfsdtnn.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfsdtnn.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfsdtnn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel15.add(jtfsdtnn);
         jPanel15.add(filler28);
 
         jpnKhachNuocNgoai.add(jPanel15);
@@ -265,11 +284,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel18.add(jLabel23);
         jPanel18.add(filler37);
 
-        jDateChooser3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jDateChooser3.setMaximumSize(new java.awt.Dimension(300, 40));
-        jDateChooser3.setMinimumSize(new java.awt.Dimension(300, 40));
-        jDateChooser3.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel18.add(jDateChooser3);
+        ngaySinhnn.setDateFormatString("dd/MM/yyyy");
+        ngaySinhnn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        ngaySinhnn.setMaximumSize(new java.awt.Dimension(300, 40));
+        ngaySinhnn.setMinimumSize(new java.awt.Dimension(300, 40));
+        ngaySinhnn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel18.add(ngaySinhnn);
         jPanel18.add(filler49);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -279,11 +299,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel24.setPreferredSize(new java.awt.Dimension(100, 30));
         jPanel18.add(jLabel24);
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField12.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField12.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField12.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel18.add(jTextField12);
+        jtfQuoctich.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfQuoctich.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfQuoctich.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfQuoctich.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel18.add(jtfQuoctich);
         jPanel18.add(filler38);
 
         jpnKhachNuocNgoai.add(jPanel18);
@@ -299,11 +319,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel13.add(jLabel10);
         jPanel13.add(filler19);
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField3.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField3.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField3.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel13.add(jTextField3);
+        jtfHochieu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfHochieu.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfHochieu.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfHochieu.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel13.add(jtfHochieu);
         jPanel13.add(filler20);
 
         jpnKhachNuocNgoai.add(jPanel13);
@@ -322,11 +342,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel14.add(jLabel11);
         jPanel14.add(filler24);
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField5.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField5.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField5.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel14.add(jTextField5);
+        jtftenvn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtftenvn.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtftenvn.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtftenvn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel14.add(jtftenvn);
         jPanel14.add(filler45);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -336,11 +356,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel12.setPreferredSize(new java.awt.Dimension(100, 30));
         jPanel14.add(jLabel12);
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField6.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField6.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField6.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel14.add(jTextField6);
+        jtfsdtvn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfsdtvn.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfsdtvn.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfsdtvn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel14.add(jtfsdtvn);
         jPanel14.add(filler25);
 
         jpnKhachVietNam.add(jPanel14);
@@ -356,12 +376,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel16.add(jLabel13);
         jPanel16.add(filler30);
 
-        cbbGioiTinh1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbGioiTinh1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        cbbGioiTinh1.setMaximumSize(new java.awt.Dimension(100, 40));
-        cbbGioiTinh1.setMinimumSize(new java.awt.Dimension(100, 40));
-        cbbGioiTinh1.setPreferredSize(new java.awt.Dimension(100, 40));
-        jPanel16.add(cbbGioiTinh1);
+        cbbGioiTinhvn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbGioiTinhvn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbbGioiTinhvn.setMaximumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinhvn.setMinimumSize(new java.awt.Dimension(100, 40));
+        cbbGioiTinhvn.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel16.add(cbbGioiTinhvn);
         jPanel16.add(filler32);
 
         jpnKhachVietNam.add(jPanel16);
@@ -377,11 +397,12 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel17.add(jLabel17);
         jPanel17.add(filler34);
 
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jDateChooser2.setMaximumSize(new java.awt.Dimension(300, 40));
-        jDateChooser2.setMinimumSize(new java.awt.Dimension(300, 40));
-        jDateChooser2.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel17.add(jDateChooser2);
+        ngaySinhvn.setDateFormatString("dd/MM/yyyy");
+        ngaySinhvn.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        ngaySinhvn.setMaximumSize(new java.awt.Dimension(300, 40));
+        ngaySinhvn.setMinimumSize(new java.awt.Dimension(300, 40));
+        ngaySinhvn.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel17.add(ngaySinhvn);
         jPanel17.add(filler46);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -391,11 +412,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel18.setPreferredSize(new java.awt.Dimension(100, 30));
         jPanel17.add(jLabel18);
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField7.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField7.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField7.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel17.add(jTextField7);
+        jtfcmnd.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfcmnd.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfcmnd.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfcmnd.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel17.add(jtfcmnd);
         jPanel17.add(filler35);
 
         jpnKhachVietNam.add(jPanel17);
@@ -411,11 +432,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jPanel19.add(jLabel19);
         jPanel19.add(filler40);
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField8.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField8.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField8.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel19.add(jTextField8);
+        jtfnghe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfnghe.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfnghe.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfnghe.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel19.add(jtfnghe);
         jPanel19.add(filler47);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -425,11 +446,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jLabel20.setPreferredSize(new java.awt.Dimension(100, 30));
         jPanel19.add(jLabel20);
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jTextField9.setMaximumSize(new java.awt.Dimension(300, 40));
-        jTextField9.setMinimumSize(new java.awt.Dimension(300, 40));
-        jTextField9.setPreferredSize(new java.awt.Dimension(300, 40));
-        jPanel19.add(jTextField9);
+        jtfdiachi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jtfdiachi.setMaximumSize(new java.awt.Dimension(300, 40));
+        jtfdiachi.setMinimumSize(new java.awt.Dimension(300, 40));
+        jtfdiachi.setPreferredSize(new java.awt.Dimension(300, 40));
+        jPanel19.add(jtfdiachi);
         jPanel19.add(filler41);
 
         jpnKhachVietNam.add(jPanel19);
@@ -554,6 +575,11 @@ public class PhieuChoPanel extends javax.swing.JPanel {
         jButton2.setMaximumSize(new java.awt.Dimension(150, 40));
         jButton2.setMinimumSize(new java.awt.Dimension(150, 40));
         jButton2.setPreferredSize(new java.awt.Dimension(150, 40));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton2);
         jPanel5.add(filler6);
 
@@ -564,20 +590,117 @@ public class PhieuChoPanel extends javax.swing.JPanel {
 
     private void jbtnKHVNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnKHVNActionPerformed
         cardLayout.show(jpnCards, "cardKHVietNam");
+        typeKH = "vn";
     }//GEN-LAST:event_jbtnKHVNActionPerformed
 
     private void jbtnKHNuocNgoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnKHNuocNgoaiActionPerformed
         cardLayout.show(jpnCards, "cardKHNuocNgoai");
+        typeKH = "foreign";
     }//GEN-LAST:event_jbtnKHNuocNgoaiActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         MainForUser.getInstance().getTraCuuPane().changeLayout(this, "backChiTiet");
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //insert khach vao database
+        Integer makh = 0;
+        try {
+            switch (typeKH) {
+                case "vn":
+                    Khachvietnam khvn = layThongTinKHVN();
+                    if (khvn.getNgaySinh().compareTo(new Date()) > 0) {
+                        JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
+                        label.setFont(new Font("Arial", Font.BOLD, 18));
+                        label.setForeground(Color.red);
+                        JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        makh = KhachvietnamBUS.insertKHVN(khvn);
+                    }
+                    break;
+                case "foreign":
+                    Khachnuocngoai khnn = layThongTinKHNN();
+                    if (khnn.getNgaySinh().compareTo(new Date()) > 0) {
+                        JLabel label = new JLabel("Ngày sinh của khách hàng không hợp lệ.");
+                        label.setFont(new Font("Arial", Font.BOLD, 18));
+                        label.setForeground(Color.red);
+                        JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        makh = KhachnuocngoaiBUS.insertKHNN(khnn);
+                    }
+                    break;
+                default:
+                    JLabel label = new JLabel("Bạn phải điền thông tin khách hàng.");
+                    label.setFont(new Font("Arial", Font.BOLD, 18));
+                    label.setForeground(Color.red);
+                    JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+        } catch (NullPointerException ex) {
+            JLabel label = new JLabel("Bạn phải nhập đủ thông tin của khách hàng");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, label, "ERROR", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        /*Khachhang khachhang, Date ngayDat, String tinhTrang, Chuyenbay chuyenbay*/
+        //insert x forms 
+        Phieucho phieuc = new Phieucho(KhachhangBUS.getKHbyID(makh),new Date(),"Còn hiệu lực", cb);
+        int maphieu = PhieuchoBUS.insert(phieuc);
+
+        if(maphieu != 0){
+            JLabel label = new JLabel("Tạo phiếu chờ thành công.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.green);
+            JOptionPane.showMessageDialog(null, label);
+        }
+        MainForUser.getInstance().getTraCuuPane().changeLayout(this, "ketthuc");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    
+    public Khachvietnam layThongTinKHVN(){
+        String ten = jtftenvn.getText();
+        String sdt = jtfsdtvn.getText();
+        String gioitinh = String.valueOf(cbbGioiTinhvn.getSelectedItem());
+        Date ngaysinh;
+        try{
+            ngaysinh = ngaySinhvn.getCalendar().getTime();
+        }catch(NullPointerException ex){
+            throw ex;
+        }
+        String cmnd = jtfcmnd.getText();
+        String nghenghiep = jtfnghe.getText();
+        String diachi = jtfdiachi.getText();
+      
+        if(ten.isEmpty() || sdt.isEmpty() || cmnd.isEmpty() || nghenghiep.isEmpty() || diachi.isEmpty())
+            throw new NullPointerException();            
+
+        return new Khachvietnam(ten,sdt,gioitinh,ngaysinh,null,null,cmnd,nghenghiep,diachi);
+    }
+    
+    public Khachnuocngoai layThongTinKHNN(){
+        String ten = jtftennn.getText();
+        String sdt = jtfsdtnn.getText();
+        String gioitinh = String.valueOf(cbbGioiTinh.getSelectedItem());
+        Date ngaysinh;
+        try{
+            ngaysinh = ngaySinhnn.getCalendar().getTime();
+        }catch(NullPointerException ex){
+            throw ex;
+        }
+        String quoctich = jtfQuoctich.getText();
+        String hochieu = jtfHochieu.getText();      
+      
+        if(ten.isEmpty() || sdt.isEmpty() || quoctich.isEmpty() || hochieu.isEmpty())
+            throw new NullPointerException();            
+
+        return new Khachnuocngoai(ten,sdt,gioitinh,ngaysinh,null,null,quoctich,hochieu);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbbGioiTinh;
-    private javax.swing.JComboBox<String> cbbGioiTinh1;
+    private javax.swing.JComboBox<String> cbbGioiTinhvn;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
     private javax.swing.Box.Filler filler12;
@@ -616,8 +739,6 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -654,15 +775,6 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbtnKHNuocNgoai;
     private javax.swing.JButton jbtnKHVN;
     private javax.swing.JLabel jlbNgayDat;
@@ -675,5 +787,16 @@ public class PhieuChoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jpnKhachNuocNgoai;
     private javax.swing.JPanel jpnKhachVietNam;
     private javax.swing.JPanel jpnThongTinKHs;
+    private javax.swing.JTextField jtfHochieu;
+    private javax.swing.JTextField jtfQuoctich;
+    private javax.swing.JTextField jtfcmnd;
+    private javax.swing.JTextField jtfdiachi;
+    private javax.swing.JTextField jtfnghe;
+    private javax.swing.JTextField jtfsdtnn;
+    private javax.swing.JTextField jtfsdtvn;
+    private javax.swing.JTextField jtftennn;
+    private javax.swing.JTextField jtftenvn;
+    private com.toedter.calendar.JDateChooser ngaySinhnn;
+    private com.toedter.calendar.JDateChooser ngaySinhvn;
     // End of variables declaration//GEN-END:variables
 }

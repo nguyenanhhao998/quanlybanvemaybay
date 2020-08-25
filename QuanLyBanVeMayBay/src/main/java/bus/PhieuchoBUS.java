@@ -5,26 +5,20 @@
  */
 package bus;
 
+import daos.PhieuchoDAO;
+import pojos.Phieucho;
+
 /**
  *
  * @author HAO
  */
-public class PhieuchoBUS {
-
-    /*public static List<Phieucho> getListPhieuCho() {
-        List<Phieucho> listPhieucho = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-
-            String sql = "from Phieucho";
-            Query query = session.createQuery(sql);
-            listPhieucho = query.list();
-
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return listPhieucho;
-    }*/
+public class PhieuchoBUS {    
+    public static int insert(Phieucho phieuc){
+        int maphieu = PhieuchoDAO.insert(phieuc);
+        return maphieu;
+    }
+    
+    public static void delete(Phieucho phieuc){
+        PhieuchoDAO.delete(phieuc);
+    }
 }

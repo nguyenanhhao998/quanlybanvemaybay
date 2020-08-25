@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojos.Phieucho;
 import util.HibernateUtil;
 
@@ -30,8 +31,51 @@ public class PhieuchoDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        }finally{
+            session.close();
         }
 
         return listPhieucho;
+    }
+    
+    public static int insert(Phieucho phieuc) {
+        int id = 0;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            id = (Integer)session.save(phieuc);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        
+        return id;
+    }
+    
+    public static void delete(Phieucho phieuc){
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.delete(phieuc);
+
+            transaction.commit();
+            
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
     }
 }
