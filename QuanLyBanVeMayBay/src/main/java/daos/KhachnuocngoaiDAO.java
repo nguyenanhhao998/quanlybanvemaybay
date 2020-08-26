@@ -81,7 +81,6 @@ public class KhachnuocngoaiDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            ex.printStackTrace();
             id = -1;
         } finally{
             session.close();

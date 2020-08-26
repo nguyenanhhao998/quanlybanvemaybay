@@ -55,7 +55,6 @@ public class ChuyenbayDAO {
         String ngay = df.format(date);
         
         String tinhtrangcb = "Chưa khởi hành";
-        String tinhtrangve = "Chưa được mua";
         try {
             String hql = String.format("SELECT cb FROM Chuyenbay cb "                 
                     + "left join cb.giahangvetheocbs as gia "
@@ -67,12 +66,7 @@ public class ChuyenbayDAO {
                     + "GROUP BY cb.maCb "
                     + "ORDER BY NgayKhoiHanh asc",MaHangGhe,MaHangGhe,masbdi,masbden, ngay, tinhtrangcb);
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-            ds = query.list();
-            
-            for(int i = 0; i < ds.size(); i++){
-                Hibernate.initialize(ds.get(i).getSanbaydi());
-                Hibernate.initialize(ds.get(i).getSanbayden());
-            }          
+            ds = query.list();       
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
@@ -92,9 +86,6 @@ public class ChuyenbayDAO {
                     + "WHERE cb.maCb = '%s'",macb);
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             cb = (Chuyenbay)query.getSingleResult();
-
-            Hibernate.initialize(cb.getSanbaydi());
-            Hibernate.initialize(cb.getSanbayden());
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
@@ -120,13 +111,7 @@ public class ChuyenbayDAO {
                     + "left join cb.vechuyenbays as ve "
                     + "WHERE cb.ngayKhoiHanh > '%s'",df.format(new Date()));
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-            listCB = query.list();
-
-            for(int i = 0; i < listCB.size(); i++){
-                Hibernate.initialize(listCB.get(i).getSanbaydi());
-                Hibernate.initialize(listCB.get(i).getSanbayden());
-            }
-                    
+            listCB = query.list(); 
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
