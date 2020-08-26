@@ -130,8 +130,18 @@ public class Chuyenbay  implements java.io.Serializable {
         
         return res;
     }
-
-
+    
+    public int laySoGheTrong(){
+        int res = 0;
+        Iterator<Vechuyenbay> ves = this.getVechuyenbays().iterator();
+        
+        while(ves.hasNext()){
+            Vechuyenbay ve = ves.next();
+            if(ve.getTinhTrang().equals("Chưa được mua")){
+                res++;
+            }
+        }
+        
+        return res;
+    }
 }
-
-

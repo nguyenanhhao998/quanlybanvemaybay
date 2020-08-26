@@ -21,8 +21,8 @@ import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
 import pojos.Sanbaytrunggian;
 import ui.user.MainForUser;
-import ui.user.datve.DatVePanel;
-import ui.user.datve.PhieuChoPanel;
+import ui.user.phieu.DatVePanel;
+import ui.user.phieu.PhieuChoPanel;
 import ui.user.muave.MuaVePanel;
 
 /**
@@ -420,7 +420,7 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(isConVe)
-            MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve), "muave");
+            MainForUser.getInstance().getTraCuuPane().changeLayout(new MuaVePanel(cb,sl,mahangve, null), "muave");
         else{
             JLabel label = new JLabel("Hiện tại vé chuyến bay đã được mua/đặt hết. Bạn có thể lập phiếu chờ.");
             label.setFont(new Font("Arial", Font.BOLD, 18));

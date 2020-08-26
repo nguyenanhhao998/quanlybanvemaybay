@@ -5,35 +5,28 @@
  */
 package bus;
 
-import daos.*;
-import java.util.List;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import pojos.Khachvietnam;
-import util.HibernateUtil;
+import daos.KhachnuocngoaiDAO;
+import pojos.Khachnuocngoai;
+
 
 /**
  *
  * @author HAO
  */
 public class KhachnuocngoaiBUS {
-    /*
-    public static List<KhachnuocngoaiBUS> getListKhachnuocngoai() {
-        List<KhachnuocngoaiBUS> listKhachnuocngoai = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-
-            String sql = "from Khachnuocngoai";
-            Query query = session.createQuery(sql);
-            listKhachnuocngoai = query.list();
-
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return listKhachnuocngoai;
-
-    }*/
+    public static Integer insertKHNN(Khachnuocngoai khnn){
+        //1 success 3 exception
+        int idKH = KhachnuocngoaiDAO.insert(khnn);
+        //insert khach hang moi va tra ve id cua khach hang do
+        //neu khach hang da ton tai thi tra ve id
+        return idKH;
+    }
+    
+    public static boolean kiemTraIdNumberKH(int makh,String idNumber){
+        return KhachnuocngoaiDAO.kiemTraIdNumberKH(makh,idNumber);
+    }
+    
+    public static int getIdKHbyHoChieu(String cmndOrhochieu){
+        return KhachnuocngoaiDAO.getIDKHByHoChieu(cmndOrhochieu);
+    }
 }

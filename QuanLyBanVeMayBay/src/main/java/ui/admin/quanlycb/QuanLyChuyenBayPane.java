@@ -398,7 +398,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     private void setupTable() {
         setupModelForTable();
         setupUIForTable();
-        fillUpDataTable();
+        //fillUpDataTable();
     }
     private void setupModelForTable() {
         dtm = new DefaultTableModel() {
@@ -430,12 +430,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             }
         };
 
-//        dtm.addRow(new Object[]{"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"2", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"3", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"6", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"7", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"1", "Thành phố Hồ Chí Minh (SGN)", "Hà Nội (HAN)", "20/10/2020", "3 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"2", "Đà Nẵng (DAD)", "Nha Trang Cam Ranh (CXR)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"3", "Phú Quốc (PQC)", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Thành phố Vinh (VII)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+        dtm.addRow(new Object[]{"6", "Nha Trang Cam Ranh (CXR)", "Buôn Ma Thuột (BMV)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+        dtm.addRow(new Object[]{"7", "Thành phố Vinh (VII)", "Đà Lạt (DLI)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
@@ -483,7 +483,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
                 //tableColumnModel.getColumn(6).setCellRenderer(new CustomTaskButtonRenderer());
 
-                setSorterTable();
+                //setSorterTable();
             }
         });
         table.setGridColor(Color.BLACK);

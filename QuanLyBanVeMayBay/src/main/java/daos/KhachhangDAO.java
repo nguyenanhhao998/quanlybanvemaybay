@@ -6,6 +6,7 @@
 package daos;
 
 import java.util.List;
+import javax.persistence.NoResultException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -32,6 +33,8 @@ public class KhachhangDAO {
 
         } catch (HibernateException ex) {
             ex.printStackTrace();
+        }finally{
+            session.close();
         }
 
         return listKhachhang;
@@ -52,7 +55,30 @@ public class KhachhangDAO {
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
+        }finally{
+            session.close();
         }
     }
 
+    public static Khachhang getKHbyID(int id) {
+        Khachhang kh = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Khachhang where maKh = %d",id);
+            Query query = session.createQuery(hql);
+            kh = (Khachhang)query.getSingleResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            ex.printStackTrace();
+        }finally{
+            session.close();
+        }
+
+        return kh;
+    }
+    
 }

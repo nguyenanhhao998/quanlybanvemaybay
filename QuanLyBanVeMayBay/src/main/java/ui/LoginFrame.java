@@ -38,6 +38,7 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản Lý Bán Vé Máy Bay");
         setMaximumSize(new java.awt.Dimension(530, 320));
         setMinimumSize(new java.awt.Dimension(530, 320));
         setPreferredSize(new java.awt.Dimension(530, 320));

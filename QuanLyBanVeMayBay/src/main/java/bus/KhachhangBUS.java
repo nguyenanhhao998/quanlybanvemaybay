@@ -20,40 +20,20 @@ import util.HibernateUtil;
  * @author HAO
  */
 public class KhachhangBUS {
-/*
-    public static List<Khachhang> getListKhachhang() {
-        List<Khachhang> listKhachhang = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-
-            String sql = "from Khachhang";
-            Query query = session.createQuery(sql);
-            listKhachhang = query.list();
-
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return listKhachhang;
-
+    public static Khachhang getKHbyID(int id){
+        if(id == -1) return null;
+        return KhachhangDAO.getKHbyID(id);
     }
-
-    public static void themKhachhang(Khachhang khachhang) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-
-            session.saveOrUpdate(khachhang);
-
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            transaction.rollback();
-            e.printStackTrace();
-        }
-    }*/
-
+    
+    public static boolean kiemTraIdNumberKH(int makh,String idNumber){
+        boolean kq = KhachvietnamBUS.kiemTraIdNumberKH(makh,idNumber) || KhachnuocngoaiBUS.kiemTraIdNumberKH(makh,idNumber);
+        return kq;
+    }
+    
+    public static int getIdKHbyCMNDOrHoChieu(String cmndOrhochieu){
+        int id = KhachvietnamBUS.getIdKHbyCMND(cmndOrhochieu);
+        if(id == -1)
+            id = KhachnuocngoaiBUS.getIdKHbyHoChieu(cmndOrhochieu);
+        return id;
+    }
 }

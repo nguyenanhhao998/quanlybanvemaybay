@@ -32,6 +32,8 @@ public class JPNTraCuu extends javax.swing.JPanel {
     List<Sanbay> listSanBay;
     List<Hangve> listHangVe;
     boolean isKhuHoi = false;
+    boolean isComeFlightFinished = false;
+    boolean isBackFlightFinished = false;
     public JPNTraCuu() {
         initComponents();
         listSanBay = SanbayDAO.getAll();
@@ -392,7 +394,19 @@ public class JPNTraCuu extends javax.swing.JPanel {
             jtabbedPaneKhuHoi.add("Chọn chuyến về",new MotChieuPanel(listcbve, SL, mahangghe));
         }
     }//GEN-LAST:event_btnFindActionPerformed
-
+    
+    public int hoanThanhMuaVe(){
+        if(isKhuHoi && jtabbedPaneKhuHoi.getTabCount() == 2){
+            int index = jtabbedPaneKhuHoi.getSelectedIndex();
+            if(index == 0)
+                isComeFlightFinished = true;
+            else
+                isBackFlightFinished = true;
+            jtabbedPaneKhuHoi.remove(index);
+            return 1;//còn 1 tab chưa thực hiện mua vé
+        }
+        return 0; // đã thực hiện mua vé xong
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
