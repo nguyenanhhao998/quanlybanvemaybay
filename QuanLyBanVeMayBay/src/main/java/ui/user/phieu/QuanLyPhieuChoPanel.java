@@ -35,33 +35,7 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
         cardLayout = (CardLayout)jpnContainCards.getLayout();
         cardLayout.show(jpnContainCards, "cardDSQL");
         btnChonCB.setEnabled(false);
-        listCB = ChuyenbayBUS.getTatCaChuyenBay();//lấy tất cả các chuyến bay chưa khởi hành
-        DefaultTableModel model = new DefaultTableModel(
-                new String[]{"Mã CB", "Sân bay đi", "Sân bay đến","Thời gian khởi hành", "Số lượng phiếu chờ cần thông báo"}, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        
-        for(int i = 0; i< listCB.size(); i++){
-            Chuyenbay cb = listCB.get(i);
-            String sbdi = cb.getSanbayByMaSbdi().getThanhPho() +" - "+cb.getSanbayByMaSbdi().getTenSb();
-            String sbden = cb.getSanbayByMaSbden().getThanhPho() +" - "+cb.getSanbayByMaSbden().getTenSb();
-            DateFormat df = new SimpleDateFormat("hh:mm dd/MM/yyyy");
-            model.addRow(new Object[]{cb.getMaCb(),sbdi, sbden, 
-                df.format(cb.getNgayKhoiHanh()),cb.getPhieuchos().size()});
-        }
-        
-        jtbDSCB.setModel(model);
-        jtbDSCB.setFont(new java.awt.Font("Tahoma", 0, 16));
-        jtbDSCB.getTableHeader().setReorderingAllowed(false);
-        jtbDSCB.getTableHeader().setFont(new java.awt.Font("Tahoma", 1, 16));
-        
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
-        for(int i = 0; i < 5; i++)
-            jtbDSCB.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        layDuLieu();
     }
 
     /**
@@ -76,7 +50,11 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
         jpnContainCards = new javax.swing.JPanel();
         jpndsql = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jLabel3 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        btnRefresh = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbDSCB = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -92,10 +70,26 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
         jpndsql.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 1, 10, 1));
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel1.add(filler3);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("QUẢN LÝ PHIẾU CHỜ CỦA CÁC CHUYẾN BAY");
         jPanel1.add(jLabel3);
+        jPanel1.add(filler1);
+
+        btnRefresh.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/refresh.png"))); // NOI18N
+        btnRefresh.setMaximumSize(new java.awt.Dimension(50, 50));
+        btnRefresh.setMinimumSize(new java.awt.Dimension(50, 50));
+        btnRefresh.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRefresh);
+        jPanel1.add(filler2);
 
         jpndsql.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
@@ -153,6 +147,10 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
         cardLayout.show(jpnContainCards, "cardThongBao");
     }//GEN-LAST:event_btnChonCBActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        layDuLieu();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     public void hoanThanhThongBao(ThongBaoPhieuChoPanel panel, String type){
         cardLayout.removeLayoutComponent(panel);
         if(type.equals("remove")){
@@ -171,9 +169,42 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
         cardLayout.show(jpnContainCards, "cardDSQL");
     }
 
+    private void layDuLieu(){
+        listCB = ChuyenbayBUS.getTatCaChuyenBay();//lấy tất cả các chuyến bay chưa khởi hành
+        DefaultTableModel model = new DefaultTableModel(
+                new String[]{"Mã CB", "Sân bay đi", "Sân bay đến","Thời gian khởi hành", "Số lượng phiếu chờ cần thông báo"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        for(int i = 0; i< listCB.size(); i++){
+            Chuyenbay cb = listCB.get(i);
+            String sbdi = cb.getSanbayByMaSbdi().getThanhPho() +" - "+cb.getSanbayByMaSbdi().getTenSb();
+            String sbden = cb.getSanbayByMaSbden().getThanhPho() +" - "+cb.getSanbayByMaSbden().getTenSb();
+            DateFormat df = new SimpleDateFormat("hh:mm dd/MM/yyyy");
+            model.addRow(new Object[]{cb.getMaCb(),sbdi, sbden, 
+                df.format(cb.getNgayKhoiHanh()),cb.getPhieuchos().size()});
+        }
+        
+        jtbDSCB.setModel(model);
+        jtbDSCB.setFont(new java.awt.Font("Tahoma", 0, 16));
+        jtbDSCB.getTableHeader().setReorderingAllowed(false);
+        jtbDSCB.getTableHeader().setFont(new java.awt.Font("Tahoma", 1, 16));
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        for(int i = 0; i < 5; i++)
+            jtbDSCB.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonCB;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler11;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.JLabel jLabel3;

@@ -81,7 +81,7 @@ public class ThongBaoPhieuChoPanel extends javax.swing.JPanel {
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 5; i++)
             jtbDSPhieuCho.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
     }
 
