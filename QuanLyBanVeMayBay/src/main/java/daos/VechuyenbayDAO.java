@@ -162,24 +162,24 @@ public class VechuyenbayDAO {
 
     public static boolean xoaVeTheoHangChuyenBay(String maCb, int soLuongXoa, String maHangVe) {
         boolean res = true;
-        //Hangve hangve = HangveDAO.getHangVeById(maHangVe);
-        Chuyenbay chuyenbay = ChuyenbayDAO.getChuyenBayByID(maCb);
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            transaction = session.beginTransaction();
-
-            String hql = String.format("DELETE FROM Vechuyenbay vcb"
-                    + " WHERE vcb.maCb = '%s' and vcb.");
-
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            transaction.rollback();
-            res = false;
-            e.printStackTrace();
-        }
+//        //Hangve hangve = HangveDAO.getHangVeById(maHangVe);
+//        Chuyenbay chuyenbay = ChuyenbayDAO.getChuyenBayByID(maCb);
+//        Session session = null;
+//        Transaction transaction = null;
+//        try {
+//            session = HibernateUtil.getSessionFactory().openSession();
+//            transaction = session.beginTransaction();
+//
+//            String hql = String.format("DELETE FROM Vechuyenbay vcb"
+//                    + " WHERE vcb.maCb = '%s' and vcb.");
+//
+//            transaction.commit();
+//
+//        } catch (HibernateException e) {
+//            transaction.rollback();
+//            res = false;
+//            e.printStackTrace();
+//        }
         return res;
     }
 }

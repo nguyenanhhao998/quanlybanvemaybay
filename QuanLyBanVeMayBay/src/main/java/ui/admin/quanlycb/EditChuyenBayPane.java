@@ -1077,7 +1077,7 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
             Double giaHangVe2 = GiahangvetheocbBUS.getGia(idCB, "hv_ptdb");
             giaVeH2Field.setText("" + giaHangVe2);
         }
-          if (valueH3 > 0){
+        if (valueH3 > 0){
             Double giaHangVe3 = GiahangvetheocbBUS.getGia(idCB, "hv_tg");
             giaVeH3Field.setText("" + giaHangVe3);
         }

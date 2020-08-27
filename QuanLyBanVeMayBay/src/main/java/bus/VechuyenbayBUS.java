@@ -79,7 +79,7 @@ public class VechuyenbayBUS {
             if (newNum > oldNum) {
                 themVeTheoHangChuyenBay(maCb, listSoLuongVeTheoHangBanDau.get(i), newNum - oldNum, maHangVe[i]);
             } else if (newNum < oldNum) {
-                //xoaVeTheoHangChuyenBay(maCb, oldNum - newNum);
+                xoaVeTheoHangChuyenBay(maCb, oldNum - newNum, maHangVe[i]);
             }
         }
     }
@@ -101,6 +101,10 @@ public class VechuyenbayBUS {
 
         VechuyenbayDAO.themVeTheoHangChuyenBay(maCb, listNewId, maHangVe);
 
+    }
+
+    private static void xoaVeTheoHangChuyenBay(String maCb, int soLuongXoa, String maHangVe) {
+        VechuyenbayDAO.xoaVeTheoHangChuyenBay(maCb, soLuongXoa, maHangVe);
     }
 
 }

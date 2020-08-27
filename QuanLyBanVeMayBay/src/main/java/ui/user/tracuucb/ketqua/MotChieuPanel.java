@@ -289,9 +289,12 @@ public class MotChieuPanel extends javax.swing.JPanel {
             }
             Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
             calendar.setTime(date);   // assigns calendar to given date 
-
             int h = calendar.get(Calendar.HOUR_OF_DAY);
             int m = calendar.get(Calendar.MINUTE);
+            if(h == 0 && calendar.get(Calendar.AM_PM) == Calendar.AM){
+                h+=12;
+            }
+            //.showMessageDialog(null, String.format("%d h: %d - m: %d",i+1,h,m));
             switch (loctgBay) {
                 case 1:
                     if (h == 6 && m > 0 || h > 6) {
@@ -350,6 +353,9 @@ public class MotChieuPanel extends javax.swing.JPanel {
 
             int h = calendar.get(Calendar.HOUR_OF_DAY);
             int m = calendar.get(Calendar.MINUTE);
+            if(h == 0 && calendar.get(Calendar.AM_PM) == Calendar.AM){
+                h+=12;
+            }
             switch (loctgDen) {
                 case 1:
                     if (h == 6 && m > 0 || h > 6) {

@@ -5,10 +5,13 @@
  */
 package bus;
 
+import daos.AdminDAO;
 /**
  *
  * @author HAO
  */
 public class AdminBUS {
-
+    public static boolean checkAdmin(int id){
+        return AdminDAO.checkAdmin(id);
+    }
 }

@@ -18,7 +18,7 @@ import pojos.Hangve;
  */
 public class GiahangvetheocbBUS {
     public static double getGia(String macb, String mahangve){  
-        double kq = GiahangvetheocbDAO.getGiahientai(macb,mahangve);
+        double kq = GiahangvetheocbDAO.getGiahientai(macb, mahangve);
         return kq;
     }
     
