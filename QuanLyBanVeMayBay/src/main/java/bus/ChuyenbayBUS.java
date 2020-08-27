@@ -68,4 +68,17 @@ public class ChuyenbayBUS {
         }
         return ds;
     }
+    
+    public static List<Chuyenbay> getListChuyenbaysCoPhieuCho() {
+        List<Chuyenbay> ds = null;
+        ds = ChuyenbayDAO.getTatCaCB();
+        //loại các chuyến bay không có phiếu chờ nào hoặc các chuyến bay không còn chỗ trống nào
+        for (int i = 0; i < ds.size(); i++) {
+            if (ds.get(i).getPhieuchos().isEmpty() || ds.get(i).laySoGheTrong() == 0) {
+                ds.remove(i);
+                i--;
+            }
+        }
+        return ds;
+    }
 }

@@ -172,7 +172,7 @@ public class QuanLyPhieuChoPanel extends javax.swing.JPanel {
     }
 
     private void layDuLieu(){
-        listCB = ChuyenbayBUS.getTatCaChuyenBay();//lấy tất cả các chuyến bay chưa khởi hành
+        listCB = ChuyenbayBUS.getListChuyenbaysCoPhieuCho();//lấy tất cả các chuyến bay chưa khởi hành
         DefaultTableModel model = new DefaultTableModel(
                 new String[]{"Mã CB", "Sân bay đi", "Sân bay đến","Thời gian khởi hành", "Số lượng phiếu chờ cần thông báo"}, 0) {
             @Override
