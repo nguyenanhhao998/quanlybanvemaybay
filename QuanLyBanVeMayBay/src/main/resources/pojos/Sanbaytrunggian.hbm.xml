@@ -12,10 +12,10 @@
                 <column name="MaSB" />
             </key-property>
         </composite-id>
-        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" update="false" insert="false" fetch="select">
+        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" update="false" insert="false" fetch="select" lazy="false">
             <column name="MaCB" not-null="true" />
         </many-to-one>
-        <many-to-one name="sanbay" class="pojos.Sanbay" update="false" insert="false" fetch="select">
+        <many-to-one name="sanbay" class="pojos.Sanbay" update="false" insert="false" fetch="select" lazy="false">
             <column name="MaSB" not-null="true" />
         </many-to-one>
         <property name="thoiGianDung" type="float">

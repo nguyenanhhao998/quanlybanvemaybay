@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javafx.util.Pair;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -68,4 +69,43 @@ public class ChuyenbayBUS {
         }
         return ds;
     }
+
+    public static List<Chuyenbay> getListChuyenbaysForAdmin() {
+        List<Chuyenbay> ds = null;
+        ds = ChuyenbayDAO.getListChuyenbays();
+
+        return ds;
+    }
+
+    public static List<Chuyenbay> getListChuyenBaysByFilter(String maSanBayDi, String maSanBayDen, Integer soLuongHanhKhach, Date ngayKhoiHanh) {
+        List<Chuyenbay> ds = null;
+        ds = ChuyenbayDAO.getListChuyenBaysByFilter(maSanBayDi, maSanBayDen, soLuongHanhKhach, ngayKhoiHanh);
+        return ds;
+    }
+
+    public static void themChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Integer> listSoLuongVeTheoHang, List<Double> giaVeTheoHang) {
+        ChuyenbayBUS.themChuyenbay(newCB);
+        SanbaytrunggianBUS.themSanbayTrungGian(newCB.getMaCb(), listMaSBTG);
+        VechuyenbayBUS.taoListVeCuaChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang);
+        GiahangvetheocbBUS.taoGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, giaVeTheoHang);
+
+    }
+
+    private static boolean themChuyenbay(Chuyenbay newCB) {
+        boolean isSuccess = ChuyenbayDAO.themChuyenbay(newCB);
+        return isSuccess;
+    }
+
+    public static void capNhatChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Integer> listSoLuongVeTheoHang, List<Integer> listSoLuongVeTheoHangBanDau, List<Double> listGiaVeTheoHang) {
+        ChuyenbayBUS.capNhatChuyenbay(newCB);
+        SanbaytrunggianBUS.capNhatSanbayTrungGian(newCB.getMaCb(), listMaSBTG);
+        VechuyenbayBUS.capNhatListVeCuaChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listSoLuongVeTheoHangBanDau);
+//        GiahangvetheocbBUS.taoGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listGiaVeTheoHang);
+    }
+
+    private static void capNhatChuyenbay(Chuyenbay newCB) {
+
+        ChuyenbayDAO.capNhatChuyenbay(newCB);
+    }
+
 }

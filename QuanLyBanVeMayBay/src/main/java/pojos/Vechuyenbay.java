@@ -27,6 +27,13 @@ public class Vechuyenbay  implements java.io.Serializable {
         this.chuyenbay = chuyenbay;
         this.hangve = hangve;
     }
+
+    public Vechuyenbay(String maSoVe, Chuyenbay chuyenbay, Hangve hangve, String tinhTrang) {
+        this.maSoVe = maSoVe;
+        this.chuyenbay = chuyenbay;
+        this.hangve = hangve;
+        this.tinhTrang = tinhTrang;
+    }
     public Vechuyenbay(String maSoVe, Chuyenbay chuyenbay, Hangve hangve, String tinhTrang, Set phieudatchos, Set hoadonmuaves) {
        this.maSoVe = maSoVe;
        this.chuyenbay = chuyenbay;

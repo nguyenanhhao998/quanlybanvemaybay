@@ -40,4 +40,20 @@ public class SanbayBUS {
             return "";
         return listsb.get(0).getThanhPho();
     }*/
+
+    public static List<String> getListQuocGias() {
+        List<String> listQG = SanbayDAO.getListQuocGias();
+        return listQG;
+    }
+
+    public static List<Sanbay> getListSanbaysByQuocGia(String quocGia) {
+        List<Sanbay> listsb = SanbayDAO.getListSanbaysByQuocGia(quocGia);
+        return listsb;
+    }
+
+    public static Sanbay getSanbayById(String id) {
+        Sanbay sanbay = SanbayDAO.getSanbayById(id);
+        return sanbay;
+    }
+
 }

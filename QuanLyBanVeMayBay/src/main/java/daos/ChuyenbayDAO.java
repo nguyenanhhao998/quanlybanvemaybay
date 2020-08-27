@@ -17,6 +17,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
 import pojos.Phieucho;
@@ -136,4 +137,100 @@ public class ChuyenbayDAO {
         
         return listCB;
     }
+
+
+    public static List<Chuyenbay> getListChuyenBaysByFilter(String maSanBayDi, String maSanBayDen, Integer soLuongHanhKhach, Date ngayKhoiHanh) {
+        List<Chuyenbay> listCB = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            String hqlMaSanBayDi = "";
+            String hqlMaSanBayDen = "";
+            String hqlSoLuongHanhKhach = "";
+            String hqlNgayKhoiHanh = "";
+            if (maSanBayDi != null) {
+                hqlMaSanBayDi = String.format(" AND cb.sanbaydi.maSb = '%s'", maSanBayDi);
+            }
+            if (maSanBayDen != null) {
+                hqlMaSanBayDen = String.format(" AND cb.sanbayden.maSb = '%s'", maSanBayDen);
+            }
+            if (soLuongHanhKhach != -1) {
+                hqlSoLuongHanhKhach = String.format(" AND %d <= (SELECT COUNT(*) FROM cb.vechuyenbays)", soLuongHanhKhach);
+            }
+            if (ngayKhoiHanh != null) {
+                hqlNgayKhoiHanh = String.format(" AND cb.ngayKhoiHanh >= '%s'", df.format(ngayKhoiHanh));
+            }
+
+            String hql = String.format("SELECT cb FROM Chuyenbay cb "
+                    + "WHERE 1 = 1"
+                    + hqlMaSanBayDi
+                    + hqlMaSanBayDen
+                    + hqlSoLuongHanhKhach
+                    + hqlNgayKhoiHanh
+            );
+            Query query = session.createQuery(hql);
+            listCB = query.list();
+
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+
+        return listCB;
+    }
+
+    public static boolean themChuyenbay(Chuyenbay newCB) {
+        boolean res = true;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.save(newCB);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            res = false;
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return res;
+    }
+
+    public static boolean capNhatChuyenbay(Chuyenbay newCB) {
+        boolean res = true;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.update(newCB);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            res = false;
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return res;
+    }
+
 }

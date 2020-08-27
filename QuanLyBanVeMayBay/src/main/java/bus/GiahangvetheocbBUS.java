@@ -7,8 +7,10 @@ package bus;
 
 import daos.*;
 import java.util.Iterator;
+import java.util.List;
 import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
+import pojos.Hangve;
 
 /**
  *
@@ -30,4 +32,16 @@ public class GiahangvetheocbBUS {
         }
         return 0;
     }
+
+    static boolean taoGiaHangVeTheoChuyenBay(String maCb, List<Integer> listSoLuongVeTheoHang, List<Double> giaVeTheoHang) {
+        List<Hangve> listHangves = HangveDAO.getAll();
+        for (int i = 0; i < 3; i++) {
+            if (listSoLuongVeTheoHang.get(i) > 0) {
+                GiahangvetheocbDAO.themGiaHangVeTheoChuyenBay(maCb, listHangves.get(i).getMaHangVe(), giaVeTheoHang.get(i));
+            }
+        }
+
+        return true;
+    }
+
 }

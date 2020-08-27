@@ -12,13 +12,25 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -45,6 +57,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     List<Chuyenbay> listCB;
     List<Sanbay> listSBDi;
     List<Sanbay> listSBDen;
+
+    //filter values
+    String sanBayDiFilter = null;
+    String sanBayDenFilter = null;
+    Integer soLuongKhachFilter = -1;
+    Date ngayDiFilter = null;
     /**
      * Creates new form QuanLyChuyenBay
      */
@@ -53,12 +71,18 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         setupModelForControl();
         setupTable();
         setupModelForTable();
+        setupEventForFilterControls();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
+        cbbHangGhe = new javax.swing.JComboBox<>();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         parentPane = new javax.swing.JPanel();
         homePane = new javax.swing.JPanel();
         controlPanel = new javax.swing.JPanel();
@@ -66,28 +90,23 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbSanBayDi = new javax.swing.JComboBox<>();
+        sanBayDiCbbFilter = new javax.swing.JComboBox<>();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel7 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbSanBayDen = new javax.swing.JComboBox<>();
+        sanBayDenCbbFilter = new javax.swing.JComboBox<>();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel8 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        soLuongTextFieldFilter = new javax.swing.JFormattedTextField();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
-        jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        cbbHangGhe = new javax.swing.JComboBox<>();
-        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jDateStart = new com.toedter.calendar.JDateChooser();
+        ngayDiChooserFilter = new com.toedter.calendar.JDateChooser();
         filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         addButton = new javax.swing.JButton();
         tablePane = new javax.swing.JPanel();
@@ -114,6 +133,21 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         titleLabel = new javax.swing.JLabel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
+        jPanel9.setBackground(new java.awt.Color(250, 250, 250));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
+        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
+        jPanel9.add(jLabel6);
+        jPanel9.add(filler6);
+
+        cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        cbbHangGhe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hạng 1", "Hạng 2", "Hạng 3" }));
+        cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
+        cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
+        cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel9.add(cbbHangGhe);
+
         setLayout(new java.awt.BorderLayout());
 
         parentPane.setLayout(new java.awt.CardLayout());
@@ -135,12 +169,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel6.add(jLabel2);
         jPanel6.add(filler1);
 
-        cbbSanBayDi.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbSanBayDi.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDi.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDi.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel6.add(cbbSanBayDi);
+        sanBayDiCbbFilter.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sanBayDiCbbFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sanBayDiCbbFilter.setMaximumSize(new java.awt.Dimension(200, 40));
+        sanBayDiCbbFilter.setMinimumSize(new java.awt.Dimension(200, 40));
+        sanBayDiCbbFilter.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel6.add(sanBayDiCbbFilter);
 
         jPanel4.add(jPanel6);
         jPanel4.add(filler4);
@@ -153,12 +187,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel7.add(jLabel3);
         jPanel7.add(filler2);
 
-        cbbSanBayDen.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbSanBayDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbbSanBayDen.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDen.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbSanBayDen.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel7.add(cbbSanBayDen);
+        sanBayDenCbbFilter.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        sanBayDenCbbFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sanBayDenCbbFilter.setMaximumSize(new java.awt.Dimension(200, 40));
+        sanBayDenCbbFilter.setMinimumSize(new java.awt.Dimension(200, 40));
+        sanBayDenCbbFilter.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel7.add(sanBayDenCbbFilter);
 
         jPanel4.add(jPanel7);
         jPanel4.add(filler5);
@@ -175,33 +209,15 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jLabel5.setText("Số lượng: ");
         jPanel8.add(jLabel5);
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jFormattedTextField1.setMaximumSize(new java.awt.Dimension(50, 35));
-        jFormattedTextField1.setMinimumSize(new java.awt.Dimension(50, 35));
-        jFormattedTextField1.setPreferredSize(new java.awt.Dimension(50, 35));
-        jPanel8.add(jFormattedTextField1);
+        soLuongTextFieldFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        soLuongTextFieldFilter.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soLuongTextFieldFilter.setMaximumSize(new java.awt.Dimension(50, 35));
+        soLuongTextFieldFilter.setMinimumSize(new java.awt.Dimension(50, 35));
+        soLuongTextFieldFilter.setPreferredSize(new java.awt.Dimension(50, 35));
+        jPanel8.add(soLuongTextFieldFilter);
 
         jPanel4.add(jPanel8);
         jPanel4.add(filler7);
-
-        jPanel9.setBackground(new java.awt.Color(250, 250, 250));
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hạng ghế", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
-        jPanel9.add(jLabel6);
-        jPanel9.add(filler6);
-
-        cbbHangGhe.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        cbbHangGhe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hạng 1", "Hạng 2", "Hạng 3" }));
-        cbbHangGhe.setMaximumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setMinimumSize(new java.awt.Dimension(200, 40));
-        cbbHangGhe.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel9.add(cbbHangGhe);
-
-        jPanel4.add(jPanel9);
-        jPanel4.add(filler8);
 
         jPanel10.setBackground(new java.awt.Color(250, 250, 250));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ngày đi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
@@ -214,12 +230,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         jPanel10.add(jLabel7);
         jPanel10.add(filler9);
 
-        jDateStart.setDateFormatString("dd/MM/yyyy");
-        jDateStart.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jDateStart.setMaximumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setMinimumSize(new java.awt.Dimension(200, 40));
-        jDateStart.setPreferredSize(new java.awt.Dimension(200, 40));
-        jPanel10.add(jDateStart);
+        ngayDiChooserFilter.setDateFormatString("dd/MM/yyyy");
+        ngayDiChooserFilter.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        ngayDiChooserFilter.setMaximumSize(new java.awt.Dimension(200, 40));
+        ngayDiChooserFilter.setMinimumSize(new java.awt.Dimension(200, 40));
+        ngayDiChooserFilter.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel10.add(ngayDiChooserFilter);
 
         jPanel4.add(jPanel10);
         jPanel4.add(filler14);
@@ -354,8 +370,6 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JComboBox<String> cbbHangGhe;
-    private javax.swing.JComboBox<String> cbbSanBayDen;
-    private javax.swing.JComboBox<String> cbbSanBayDi;
     private javax.swing.JPanel controlPanel;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler10;
@@ -370,8 +384,6 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
     private javax.swing.JPanel homePane;
-    private com.toedter.calendar.JDateChooser jDateStart;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -387,7 +399,11 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private com.toedter.calendar.JDateChooser ngayDiChooserFilter;
     private javax.swing.JPanel parentPane;
+    private javax.swing.JComboBox<String> sanBayDenCbbFilter;
+    private javax.swing.JComboBox<String> sanBayDiCbbFilter;
+    private javax.swing.JFormattedTextField soLuongTextFieldFilter;
     private javax.swing.JTable table;
     private javax.swing.JPanel tablePane;
     private javax.swing.JScrollPane tableScrollPane;
@@ -398,7 +414,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
     private void setupTable() {
         setupModelForTable();
         setupUIForTable();
-        //fillUpDataTable();
+        fillUpDataTable();
     }
     private void setupModelForTable() {
         dtm = new DefaultTableModel() {
@@ -430,12 +446,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"1", "Thành phố Hồ Chí Minh (SGN)", "Hà Nội (HAN)", "20/10/2020", "3 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"2", "Đà Nẵng (DAD)", "Nha Trang Cam Ranh (CXR)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"3", "Phú Quốc (PQC)", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Thành phố Vinh (VII)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-        dtm.addRow(new Object[]{"6", "Nha Trang Cam Ranh (CXR)", "Buôn Ma Thuột (BMV)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-        dtm.addRow(new Object[]{"7", "Thành phố Vinh (VII)", "Đà Lạt (DLI)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"1", "Thành phố Hồ Chí Minh (SGN)", "Hà Nội (HAN)", "20/10/2020", "3 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"2", "Đà Nẵng (DAD)", "Nha Trang Cam Ranh (CXR)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"3", "Phú Quốc (PQC)", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Thành phố Vinh (VII)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
+//        dtm.addRow(new Object[]{"6", "Nha Trang Cam Ranh (CXR)", "Buôn Ma Thuột (BMV)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
+//        dtm.addRow(new Object[]{"7", "Thành phố Vinh (VII)", "Đà Lạt (DLI)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
 //        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
@@ -518,7 +534,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                listCB = ChuyenbayBUS.getListChuyenbays();
+                listCB = ChuyenbayBUS.getListChuyenbaysForAdmin();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 for (Chuyenbay chuyenbay : listCB) {
                     Sanbay sanBayDi = chuyenbay.getSanbaydi();
@@ -549,7 +565,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         for (Sanbay sanBayDi: listSBDi){
             dcbSBDi.addElement(sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")");
         }
-        cbbSanBayDi.setModel(dcbSBDi);
+        sanBayDiCbbFilter.setModel(dcbSBDi);
 
         //cbb San Bay Den
         listSBDen = SanbayBUS.getAll();
@@ -558,7 +574,108 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         for (Sanbay sanBayDen: listSBDen){
             dcbSBDen.addElement(sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")");
         }
-        cbbSanBayDen.setModel(dcbSBDen);
+        sanBayDenCbbFilter.setModel(dcbSBDen);
+    }
+
+    public void proceedToFilter() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("sanBayDiFilter  =============================== " + sanBayDiFilter);
+                System.out.println("sanBayDenFilter  =============================== " + sanBayDenFilter);
+                System.out.println("soLuongKhachFilter  =============================== " + soLuongKhachFilter);
+                System.out.println("ngayDiFilter  =============================== " + ngayDiFilter);
+                listCB = ChuyenbayBUS.getListChuyenBaysByFilter(sanBayDiFilter, sanBayDenFilter, soLuongKhachFilter, ngayDiFilter);
+                System.out.println("listCB size =============================== " + listCB.size());
+
+                dtm.setRowCount(0);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                for (Chuyenbay chuyenbay : listCB) {
+                    Sanbay sanBayDi = chuyenbay.getSanbaydi();
+                    Sanbay sanBayDen = chuyenbay.getSanbayden();
+                    Object[] row = new Object[]{
+                        chuyenbay.getMaCb(),
+                        sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")",
+                        sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")",
+                        sdf.format(chuyenbay.getNgayKhoiHanh()),
+                        chuyenbay.getThoiGianBay() + " giờ",
+                        chuyenbay.getVechuyenbays().size(),
+                        chuyenbay.getTinhTrang()
+                    };
+                    dtm.addRow(row);
+
+                }
+            }
+
+        });
+
+    }
+
+    private void setupEventForFilterControls() {
+        sanBayDiCbbFilter.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                int seletedIndex = sanBayDiCbbFilter.getSelectedIndex();
+                if (seletedIndex == 0) {
+                    sanBayDiFilter = null;
+                } else {
+                    Sanbay choosedSanbayDi = listSBDi.get(seletedIndex - 1);
+                    sanBayDiFilter = choosedSanbayDi.getMaSb();
+                }
+                proceedToFilter();
+            }
+        });
+
+        sanBayDenCbbFilter.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+
+                int seletedIndex = sanBayDenCbbFilter.getSelectedIndex();
+                if (seletedIndex == 0) {
+                    sanBayDenFilter = null;
+                } else {
+                    Sanbay choosedSanbayDi = listSBDen.get(seletedIndex - 1);
+                    sanBayDenFilter = choosedSanbayDi.getMaSb();
+                }
+                proceedToFilter();
+            }
+        });
+
+        soLuongTextFieldFilter.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                Integer newSoLuong = -1;
+                if (!soLuongTextFieldFilter.getText().isEmpty()) {
+
+                    try {
+                        newSoLuong = Integer.parseInt(soLuongTextFieldFilter.getText());
+                    } catch (NumberFormatException ex) {
+                        soLuongTextFieldFilter.setText(soLuongKhachFilter == -1 ? "" : "" + soLuongKhachFilter);
+                        return;
+                    }
+                }
+                if (!newSoLuong.equals(soLuongKhachFilter)) {
+                    soLuongKhachFilter = newSoLuong;
+                    proceedToFilter();
+                }
+
+            }
+        });
+
+
+        ngayDiChooserFilter.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                ngayDiFilter = ngayDiChooserFilter.getDate();
+                proceedToFilter();
+            }
+        });
+
     }
 
 }

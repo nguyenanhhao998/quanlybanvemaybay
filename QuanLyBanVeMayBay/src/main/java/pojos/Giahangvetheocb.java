@@ -34,6 +34,14 @@ public class Giahangvetheocb  implements java.io.Serializable {
        this.giaHienTai = giaHienTai;
        this.lichsugiahangvecbs = lichsugiahangvecbs;
     }
+
+    public Giahangvetheocb(Chuyenbay chuyenbay, Hangve hangve, Double gia) {
+        this.id = new GiahangvetheocbId(chuyenbay.getMaCb(), hangve.getMaHangVe());
+        this.chuyenbay = chuyenbay;
+        this.hangve = hangve;
+        this.giaHienTai = gia;
+    }
+
    
     public GiahangvetheocbId getId() {
         return this.id;

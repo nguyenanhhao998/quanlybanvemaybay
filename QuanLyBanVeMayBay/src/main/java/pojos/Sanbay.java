@@ -31,6 +31,7 @@ public class Sanbay  implements java.io.Serializable {
        this.chuyenbaysForMaSbdi = chuyenbaysForMaSbdi;
        this.sanbaytrunggians = sanbaytrunggians;
     }
+
    
     public String getMaSb() {
         return this.maSb;

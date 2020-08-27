@@ -45,6 +45,15 @@ public class Chuyenbay  implements java.io.Serializable {
        this.sanbaytrunggians = sanbaytrunggians;
        this.phieuchos = phieuchos;
     }
+
+    public Chuyenbay(String maCb, Sanbay sanbayden, Sanbay sanbaydi, Date ngayKhoiHanh, Float thoiGianBay, String tinhTrang) {
+        this.maCb = maCb;
+        this.sanbayden = sanbayden;
+        this.sanbaydi = sanbaydi;
+        this.ngayKhoiHanh = ngayKhoiHanh;
+        this.thoiGianBay = thoiGianBay;
+        this.tinhTrang = tinhTrang;
+    }
    
     public String getMaCb() {
         return this.maCb;

@@ -8,22 +8,22 @@
             <column name="MaSoVe" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" fetch="select">
+        <many-to-one name="chuyenbay" class="pojos.Chuyenbay" fetch="select" lazy="false">
             <column name="MaCB" not-null="true" />
         </many-to-one>
-        <many-to-one name="hangve" class="pojos.Hangve" fetch="select">
+        <many-to-one name="hangve" class="pojos.Hangve" fetch="select" lazy="false">
             <column name="MaHangVe" not-null="true" />
         </many-to-one>
         <property name="tinhTrang" type="string">
             <column name="TinhTrang" />
         </property>
-        <set name="phieudatchos" table="phieudatcho" inverse="true" lazy="true" fetch="select">
+        <set name="phieudatchos" table="phieudatcho" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="MaSoVe" not-null="true" />
             </key>
             <one-to-many class="pojos.Phieudatcho" />
         </set>
-        <set name="hoadonmuaves" table="hoadonmuave" inverse="true" lazy="true" fetch="select">
+        <set name="hoadonmuaves" table="hoadonmuave" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="MaSoVe" not-null="true" />
             </key>

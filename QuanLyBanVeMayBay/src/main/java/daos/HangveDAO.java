@@ -46,4 +46,20 @@ public class HangveDAO {
         } 
         return listhv.get(0).getTenHangVe();
     }
+
+    static Hangve getHangVeById(String maHangVe) {
+        Hangve hv = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = String.format("select hv from Hangve hv where hv.maHangVe = '%s'", maHangVe);
+            Query query = session.createQuery(hql);
+            hv = (Hangve) query.uniqueResult();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return hv;
+    }
+
 }

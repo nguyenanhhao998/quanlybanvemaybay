@@ -25,6 +25,16 @@ public class Sanbaytrunggian  implements java.io.Serializable {
         this.sanbay = sanbay;
         this.thoiGianDung = thoiGianDung;
     }
+
+    public Sanbaytrunggian(Chuyenbay chuyenbay, Sanbay sanbay, float thoiGianDung) {
+
+        SanbaytrunggianId id = new SanbaytrunggianId(chuyenbay.getMaCb(), sanbay.getMaSb());
+        this.id = id;
+        this.chuyenbay = chuyenbay;
+        this.sanbay = sanbay;
+        this.thoiGianDung = thoiGianDung;
+    }
+
     public Sanbaytrunggian(SanbaytrunggianId id, Chuyenbay chuyenbay, Sanbay sanbay, float thoiGianDung, String ghiChu) {
        this.id = id;
        this.chuyenbay = chuyenbay;

@@ -5,7 +5,13 @@
  */
 package ui.admin.quanlycb;
 
+import bus.SanbayBUS;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import pojos.Sanbay;
 
 /**
  *
@@ -13,11 +19,15 @@ import javax.swing.JButton;
  */
 public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
 
+    private List<Sanbay> listSBTG;
+    private List<String> listQG;
     /**
      * Creates new form SanBayTrungGianPane
      */
     public SanBayTrungGianItemEditPane() {
         initComponents();
+        setModelForCbb();
+        setEventForCbb();
     }
 
     /**
@@ -29,9 +39,9 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel13 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        quocGiaSanBayTGCbb = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        maSanBayTGCbb = new javax.swing.JComboBox<>();
         titleLabel = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -41,22 +51,22 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Quốc gia: ");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        quocGiaSanBayTGCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        quocGiaSanBayTGCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        quocGiaSanBayTGCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                quocGiaSanBayTGCbbActionPerformed(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Mã sân bay: ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        maSanBayTGCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maSanBayTGCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        maSanBayTGCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                maSanBayTGCbbActionPerformed(evt);
             }
         });
 
@@ -81,8 +91,8 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
                     .addComponent(jLabel13))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(quocGiaSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -103,24 +113,23 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(quocGiaSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(maSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteButton)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(deleteButton))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void quocGiaSanBayTGCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quocGiaSanBayTGCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_quocGiaSanBayTGCbbActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void maSanBayTGCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSanBayTGCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_maSanBayTGCbbActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
@@ -138,11 +147,75 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JComboBox<String> maSanBayTGCbb;
+    private javax.swing.JComboBox<String> quocGiaSanBayTGCbb;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void setModelForCbb() {
+
+        listQG = SanbayBUS.getListQuocGias();
+        DefaultComboBoxModel dcbQGSBTG = new DefaultComboBoxModel();
+        for (String quocGia : listQG) {
+            dcbQGSBTG.addElement(quocGia);
+        }
+        quocGiaSanBayTGCbb.setModel(dcbQGSBTG);
+
+        DefaultComboBoxModel dcbSBDi = new DefaultComboBoxModel();
+        maSanBayTGCbb.setModel(dcbSBDi);
+
+        if (!listQG.isEmpty()) {
+
+            listSBTG = SanbayBUS.getListSanbaysByQuocGia(listQG.get(0));
+            for (Sanbay sanBayTG : listSBTG) {
+                dcbSBDi.addElement(sanBayTG.getThanhPho() + " (" + sanBayTG.getMaSb() + ")");
+            }
+
+        }
+
+    }
+
+    private void setEventForCbb() {
+        quocGiaSanBayTGCbb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                listSBTG = SanbayBUS.getListSanbaysByQuocGia((String) quocGiaSanBayTGCbb.getSelectedItem());
+                DefaultComboBoxModel dcbSBTG = (DefaultComboBoxModel) maSanBayTGCbb.getModel();
+                dcbSBTG.removeAllElements();
+                for (Sanbay sanBayTG : listSBTG) {
+                    dcbSBTG.addElement(sanBayTG.getThanhPho() + " (" + sanBayTG.getMaSb() + ")");
+                }
+            }
+        });
+
+    }
+
+    public String getMaCB(){
+        return listSBTG.get(maSanBayTGCbb.getSelectedIndex()).getMaSb();
+    }
+
+    void fillUpData(String quocGia, String maSb) {
+        for (int i = 0; i < listQG.size(); i++) {
+            if (listQG.get(i).equals(quocGia)) {
+                quocGiaSanBayTGCbb.setSelectedIndex(i);
+            }
+        }
+
+
+        listSBTG = SanbayBUS.getListSanbaysByQuocGia(listQG.get(quocGiaSanBayTGCbb.getSelectedIndex()));
+        int maSanBayTGCbbSelectedIndex = 1;
+
+        DefaultComboBoxModel dcbSBTG = (DefaultComboBoxModel) maSanBayTGCbb.getModel();
+        for (int i = 0; i < listSBTG.size(); i++) {
+            if (listSBTG.get(i).getMaSb().equals(maSb)) {
+                maSanBayTGCbbSelectedIndex = i;
+            }
+            dcbSBTG.addElement(listSBTG.get(i).getThanhPho() + " (" + listSBTG.get(i).getMaSb() + ")");
+
+        }
+        maSanBayTGCbb.setSelectedIndex(maSanBayTGCbbSelectedIndex);
+    }
 }

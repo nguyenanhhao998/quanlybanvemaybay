@@ -5,12 +5,26 @@
  */
 package ui.admin.quanlycb;
 
+import bus.ChuyenbayBUS;
+import bus.SanbayBUS;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javafx.util.Pair;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import pojos.Chuyenbay;
+import pojos.Sanbay;
 import util.ui.ImageIconUtil;
 
 /**
@@ -25,10 +39,17 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
      */
     private QuanLyChuyenBayPane quanLyChuyenBayPane;
 
+    private List<Sanbay> listSBDi;
+    private List<Sanbay> listSBDen;
+    private List<String> listQG;
+
     public ThemChuyenBayPane(QuanLyChuyenBayPane quanLyChuyenBayPane) {
 
         this.quanLyChuyenBayPane = quanLyChuyenBayPane;
         initComponents();
+        setModelForCbb();
+        setEventForCbb();
+        setEventForSLGheField();
     }
 
     /**
@@ -55,49 +76,49 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
         jLabel2 = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        mcbTextField = new javax.swing.JTextField();
+        maCBField = new javax.swing.JTextField();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(3000, 0));
         jLabel3 = new javax.swing.JLabel();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        ngayKhoiHanhChooser = new com.toedter.calendar.JDateChooser();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        jSpinner1 = new javax.swing.JSpinner();
+        gioKhoiHanhChooser = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        phutKhoiHanhChooser = new javax.swing.JSpinner();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(3000, 0));
         jLabel5 = new javax.swing.JLabel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        jSpinner3 = new javax.swing.JSpinner();
+        thoiGianBayChooser = new javax.swing.JSpinner();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
         containerDetailsPane = new javax.swing.JPanel();
         hangVePane = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        soLuongGheTextField = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        soLuongGheTextField1 = new javax.swing.JFormattedTextField();
-        soLuongGheTextField2 = new javax.swing.JFormattedTextField();
-        soLuongGheTextField3 = new javax.swing.JFormattedTextField();
+        soLuongGheH2Field = new javax.swing.JFormattedTextField();
+        soLuongGheH3Field = new javax.swing.JFormattedTextField();
+        giaVeH1Field = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
-        soLuongGheTextField4 = new javax.swing.JFormattedTextField();
+        soLuongGheH1Field = new javax.swing.JFormattedTextField();
         jLabel11 = new javax.swing.JLabel();
-        soLuongGheTextField5 = new javax.swing.JFormattedTextField();
+        giaVeH2Field = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
-        soLuongGheTextField6 = new javax.swing.JFormattedTextField();
+        giaVeH3Field = new javax.swing.JFormattedTextField();
+        soLuongGheLabel = new javax.swing.JLabel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         sanBayPane = new javax.swing.JPanel();
         sanBayTGPane1 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        maSanBayDiCbb = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        quocGiaSanBayDiCbb = new javax.swing.JComboBox<>();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30));
         sanBayTGPane2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        quocGiaSanBayDenCbb = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        maSanBayDenCbb = new javax.swing.JComboBox<>();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         sanBayTGPane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -185,16 +206,16 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         chuyenBayPane.add(jLabel2);
         chuyenBayPane.add(filler4);
 
-        mcbTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        mcbTextField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        mcbTextField.setMaximumSize(new java.awt.Dimension(120, 40));
-        mcbTextField.setPreferredSize(new java.awt.Dimension(120, 40));
-        mcbTextField.addActionListener(new java.awt.event.ActionListener() {
+        maCBField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maCBField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        maCBField.setMaximumSize(new java.awt.Dimension(120, 40));
+        maCBField.setPreferredSize(new java.awt.Dimension(120, 40));
+        maCBField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mcbTextFieldActionPerformed(evt);
+                maCBFieldActionPerformed(evt);
             }
         });
-        chuyenBayPane.add(mcbTextField);
+        chuyenBayPane.add(maCBField);
         chuyenBayPane.add(filler5);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -202,29 +223,29 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         chuyenBayPane.add(jLabel3);
         chuyenBayPane.add(filler6);
 
-        jDateChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jDateChooser1.setMaximumSize(new java.awt.Dimension(150, 40));
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(150, 40));
-        chuyenBayPane.add(jDateChooser1);
+        ngayKhoiHanhChooser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ngayKhoiHanhChooser.setMaximumSize(new java.awt.Dimension(150, 40));
+        ngayKhoiHanhChooser.setPreferredSize(new java.awt.Dimension(150, 40));
+        chuyenBayPane.add(ngayKhoiHanhChooser);
         chuyenBayPane.add(filler7);
 
-        jSpinner1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        jSpinner1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
-        jSpinner1.setMaximumSize(new java.awt.Dimension(85, 40));
-        jSpinner1.setPreferredSize(new java.awt.Dimension(85, 40));
-        chuyenBayPane.add(jSpinner1);
+        gioKhoiHanhChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gioKhoiHanhChooser.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        gioKhoiHanhChooser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
+        gioKhoiHanhChooser.setMaximumSize(new java.awt.Dimension(85, 40));
+        gioKhoiHanhChooser.setPreferredSize(new java.awt.Dimension(85, 40));
+        chuyenBayPane.add(gioKhoiHanhChooser);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText(" : ");
         chuyenBayPane.add(jLabel4);
 
-        jSpinner2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        jSpinner2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
-        jSpinner2.setMaximumSize(new java.awt.Dimension(85, 40));
-        jSpinner2.setPreferredSize(new java.awt.Dimension(85, 40));
-        chuyenBayPane.add(jSpinner2);
+        phutKhoiHanhChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        phutKhoiHanhChooser.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        phutKhoiHanhChooser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
+        phutKhoiHanhChooser.setMaximumSize(new java.awt.Dimension(85, 40));
+        phutKhoiHanhChooser.setPreferredSize(new java.awt.Dimension(85, 40));
+        chuyenBayPane.add(phutKhoiHanhChooser);
         chuyenBayPane.add(filler8);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -232,12 +253,12 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         chuyenBayPane.add(jLabel5);
         chuyenBayPane.add(filler9);
 
-        jSpinner3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
-        jSpinner3.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
-        jSpinner3.setMaximumSize(new java.awt.Dimension(120, 40));
-        jSpinner3.setPreferredSize(new java.awt.Dimension(120, 40));
-        chuyenBayPane.add(jSpinner3);
+        thoiGianBayChooser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiGianBayChooser.setModel(new javax.swing.SpinnerNumberModel(0.0f, 0.0f, null, 1.0f));
+        thoiGianBayChooser.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5)));
+        thoiGianBayChooser.setMaximumSize(new java.awt.Dimension(120, 40));
+        thoiGianBayChooser.setPreferredSize(new java.awt.Dimension(120, 40));
+        chuyenBayPane.add(thoiGianBayChooser);
         chuyenBayPane.add(filler10);
 
         containerChuyenBayPane.add(chuyenBayPane);
@@ -260,16 +281,6 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Số ghế:");
 
-        soLuongGheTextField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField.setText("0");
-        soLuongGheTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dot.png"))); // NOI18N
         jLabel7.setText("   Số ghế hạng 1:");
@@ -285,74 +296,77 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         jLabel9.setText("   Số ghế hạng 3:");
         jLabel9.setIcon(ImageIconUtil.ResizeImage("src/main/resources/icon/dot.png", 15, 15));
 
-        soLuongGheTextField1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField1.setText("0");
-        soLuongGheTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField1.addActionListener(new java.awt.event.ActionListener() {
+        soLuongGheH2Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        soLuongGheH2Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        soLuongGheH2Field.setText("0");
+        soLuongGheH2Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soLuongGheH2Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField1ActionPerformed(evt);
+                soLuongGheH2FieldActionPerformed(evt);
             }
         });
 
-        soLuongGheTextField2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField2.setText("0");
-        soLuongGheTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField2.addActionListener(new java.awt.event.ActionListener() {
+        soLuongGheH3Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        soLuongGheH3Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        soLuongGheH3Field.setText("0");
+        soLuongGheH3Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soLuongGheH3Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField2ActionPerformed(evt);
+                soLuongGheH3FieldActionPerformed(evt);
             }
         });
 
-        soLuongGheTextField3.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField3.setText("0");
-        soLuongGheTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField3.addActionListener(new java.awt.event.ActionListener() {
+        giaVeH1Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        giaVeH1Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        giaVeH1Field.setText("0");
+        giaVeH1Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeH1Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField3ActionPerformed(evt);
+                giaVeH1FieldActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Giá vé: ");
 
-        soLuongGheTextField4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField4.setText("0");
-        soLuongGheTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField4.addActionListener(new java.awt.event.ActionListener() {
+        soLuongGheH1Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        soLuongGheH1Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        soLuongGheH1Field.setText("0");
+        soLuongGheH1Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soLuongGheH1Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField4ActionPerformed(evt);
+                soLuongGheH1FieldActionPerformed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Giá vé: ");
 
-        soLuongGheTextField5.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField5.setText("0");
-        soLuongGheTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField5.addActionListener(new java.awt.event.ActionListener() {
+        giaVeH2Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        giaVeH2Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        giaVeH2Field.setText("0");
+        giaVeH2Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeH2Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField5ActionPerformed(evt);
+                giaVeH2FieldActionPerformed(evt);
             }
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Giá vé: ");
 
-        soLuongGheTextField6.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
-        soLuongGheTextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
-        soLuongGheTextField6.setText("0");
-        soLuongGheTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        soLuongGheTextField6.addActionListener(new java.awt.event.ActionListener() {
+        giaVeH3Field.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10)));
+        giaVeH3Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("0"))));
+        giaVeH3Field.setText("0");
+        giaVeH3Field.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeH3Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soLuongGheTextField6ActionPerformed(evt);
+                giaVeH3FieldActionPerformed(evt);
             }
         });
+
+        soLuongGheLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        soLuongGheLabel.setText("0");
 
         javax.swing.GroupLayout hangVePaneLayout = new javax.swing.GroupLayout(hangVePane);
         hangVePane.setLayout(hangVePaneLayout);
@@ -363,8 +377,8 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hangVePaneLayout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(38, 38, 38)
-                        .addComponent(soLuongGheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addComponent(soLuongGheLabel))
                     .addGroup(hangVePaneLayout.createSequentialGroup()
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -372,23 +386,23 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                             .addComponent(jLabel7))
                         .addGap(38, 38, 38)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(soLuongGheTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(soLuongGheTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(soLuongGheTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(soLuongGheH3Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(soLuongGheH2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(soLuongGheH1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
-                                .addComponent(soLuongGheTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(giaVeH1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(soLuongGheTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(giaVeH2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(18, 18, 18)
-                                .addComponent(soLuongGheTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(giaVeH3Field, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         hangVePaneLayout.setVerticalGroup(
@@ -398,28 +412,28 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                     .addGroup(hangVePaneLayout.createSequentialGroup()
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(hangVePaneLayout.createSequentialGroup()
-                                .addGap(75, 75, 75)
+                                .addGap(84, 84, 84)
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel6)
-                                    .addComponent(soLuongGheTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(75, 75, 75)
+                                    .addComponent(soLuongGheLabel))
+                                .addGap(84, 84, 84)
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
-                                    .addComponent(soLuongGheTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(soLuongGheTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(soLuongGheH1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(giaVeH1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10))
                                 .addGap(75, 75, 75)
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(soLuongGheTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(giaVeH2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel11)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
-                                .addComponent(soLuongGheTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(soLuongGheH2Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(75, 75, 75)
-                        .addComponent(soLuongGheTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(giaVeH3Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(soLuongGheTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(soLuongGheH3Field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
@@ -445,22 +459,22 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Quốc gia: ");
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        maSanBayDiCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maSanBayDiCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        maSanBayDiCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                maSanBayDiCbbActionPerformed(evt);
             }
         });
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Mã sân bay: ");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        quocGiaSanBayDiCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        quocGiaSanBayDiCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        quocGiaSanBayDiCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                quocGiaSanBayDiCbbActionPerformed(evt);
             }
         });
 
@@ -475,8 +489,8 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 384, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(maSanBayDiCbb, 0, 384, Short.MAX_VALUE)
+                    .addComponent(quocGiaSanBayDiCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sanBayTGPane1Layout.setVerticalGroup(
@@ -485,12 +499,12 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 .addGap(41, 41, 41)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quocGiaSanBayDiCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(maSanBayDiCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         sanBayPane.add(sanBayTGPane1);
@@ -506,22 +520,22 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Quốc gia: ");
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        quocGiaSanBayDenCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        quocGiaSanBayDenCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        quocGiaSanBayDenCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                quocGiaSanBayDenCbbActionPerformed(evt);
             }
         });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel16.setText("Mã sân bay: ");
 
-        jComboBox4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        maSanBayDenCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maSanBayDenCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        maSanBayDenCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                maSanBayDenCbbActionPerformed(evt);
             }
         });
 
@@ -536,8 +550,8 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox4, 0, 384, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(maSanBayDenCbb, 0, 384, Short.MAX_VALUE)
+                    .addComponent(quocGiaSanBayDenCbb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         sanBayTGPane2Layout.setVerticalGroup(
@@ -546,12 +560,12 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quocGiaSanBayDenCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(maSanBayDenCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         sanBayPane.add(sanBayTGPane2);
@@ -621,53 +635,49 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         quanLyChuyenBayPane.getParentPane().remove(this);
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void mcbTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcbTextFieldActionPerformed
+    private void maCBFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maCBFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_mcbTextFieldActionPerformed
+    }//GEN-LAST:event_maCBFieldActionPerformed
 
-    private void soLuongGheTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextFieldActionPerformed
+    private void soLuongGheH2FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheH2FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextFieldActionPerformed
+    }//GEN-LAST:event_soLuongGheH2FieldActionPerformed
 
-    private void soLuongGheTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField1ActionPerformed
+    private void soLuongGheH3FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheH3FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField1ActionPerformed
+    }//GEN-LAST:event_soLuongGheH3FieldActionPerformed
 
-    private void soLuongGheTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField2ActionPerformed
+    private void giaVeH1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giaVeH1FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField2ActionPerformed
+    }//GEN-LAST:event_giaVeH1FieldActionPerformed
 
-    private void soLuongGheTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField3ActionPerformed
+    private void soLuongGheH1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheH1FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField3ActionPerformed
+    }//GEN-LAST:event_soLuongGheH1FieldActionPerformed
 
-    private void soLuongGheTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField4ActionPerformed
+    private void giaVeH2FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giaVeH2FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField4ActionPerformed
+    }//GEN-LAST:event_giaVeH2FieldActionPerformed
 
-    private void soLuongGheTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField5ActionPerformed
+    private void giaVeH3FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giaVeH3FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField5ActionPerformed
+    }//GEN-LAST:event_giaVeH3FieldActionPerformed
 
-    private void soLuongGheTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soLuongGheTextField6ActionPerformed
+    private void maSanBayDiCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSanBayDiCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_soLuongGheTextField6ActionPerformed
+    }//GEN-LAST:event_maSanBayDiCbbActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void quocGiaSanBayDiCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quocGiaSanBayDiCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_quocGiaSanBayDiCbbActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void quocGiaSanBayDenCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quocGiaSanBayDenCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_quocGiaSanBayDenCbbActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void maSanBayDenCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSanBayDenCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
-
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_maSanBayDenCbbActionPerformed
 
     private void themSBTGButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themSBTGButtonActionPerformed
         SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane();
@@ -710,7 +720,54 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
     }//GEN-LAST:event_themSBTGButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+
+        Sanbay sanbayDi = SanbayBUS.getSanbayById(listSBDi.get(maSanBayDiCbb.getSelectedIndex()).getMaSb());
+        Sanbay sanbayDen = SanbayBUS.getSanbayById(listSBDen.get(maSanBayDenCbb.getSelectedIndex()).getMaSb());
+
+        String maCB = maCBField.getText();
+        if (maCB.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            return;
+        }
+
+        Date ngayKhoiHanh = ngayKhoiHanhChooser.getDate();
+
+        if (ngayKhoiHanh == null) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            return;
+        }
+
+        ngayKhoiHanh.setHours((Integer) gioKhoiHanhChooser.getValue());
+        ngayKhoiHanh.setMinutes((Integer) phutKhoiHanhChooser.getValue());
+
+        Float thoiGianBay = (Float) thoiGianBayChooser.getValue();
+
+        Chuyenbay newCB = new Chuyenbay(maCB, sanbayDi, sanbayDen, ngayKhoiHanh, thoiGianBay, "Chưa khởi hành");
+
+        List<String> listMaSBTG = new ArrayList<>();
+        for (int i = 0; i < listSBTGItemPanes.size(); i++){
+            String maSBTG = listSBTGItemPanes.get(i).getMaCB();
+            if (listMaSBTG.contains(maSBTG)){
+                JOptionPane.showMessageDialog(null, "Các sân bay trung gian không thể trùng nhau!");
+                return;
+            }
+            listMaSBTG.add(maSBTG);
+        }
+
+        List<Integer> listSoLuongVeTheoHang = new ArrayList<>();
+        listSoLuongVeTheoHang.add(Integer.parseInt(soLuongGheH1Field.getText()));
+        listSoLuongVeTheoHang.add(Integer.parseInt(soLuongGheH2Field.getText()));
+        listSoLuongVeTheoHang.add(Integer.parseInt(soLuongGheH3Field.getText()));
+
+        List<Double> listGiaVeTheoHang = new ArrayList<>();
+        listGiaVeTheoHang.add(Double.parseDouble(giaVeH1Field.getText()));
+        listGiaVeTheoHang.add(Double.parseDouble(giaVeH2Field.getText()));
+        listGiaVeTheoHang.add(Double.parseDouble(giaVeH3Field.getText()));
+
+        ChuyenbayBUS.themChuyenBay(newCB, listMaSBTG, listSoLuongVeTheoHang, listGiaVeTheoHang);
+
         quanLyChuyenBayPane.getParentPane().remove(this);
+        quanLyChuyenBayPane.proceedToFilter();
     }//GEN-LAST:event_submitButtonActionPerformed
 
 
@@ -737,12 +794,11 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
+    private javax.swing.JFormattedTextField giaVeH1Field;
+    private javax.swing.JFormattedTextField giaVeH2Field;
+    private javax.swing.JFormattedTextField giaVeH3Field;
+    private javax.swing.JSpinner gioKhoiHanhChooser;
     private javax.swing.JPanel hangVePane;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -763,24 +819,158 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JTextField mcbTextField;
+    private javax.swing.JTextField maCBField;
+    private javax.swing.JComboBox<String> maSanBayDenCbb;
+    private javax.swing.JComboBox<String> maSanBayDiCbb;
+    private com.toedter.calendar.JDateChooser ngayKhoiHanhChooser;
+    private javax.swing.JSpinner phutKhoiHanhChooser;
+    private javax.swing.JComboBox<String> quocGiaSanBayDenCbb;
+    private javax.swing.JComboBox<String> quocGiaSanBayDiCbb;
     private javax.swing.JPanel sanBayPane;
     private javax.swing.JPanel sanBayTGInnerPane;
     private javax.swing.JPanel sanBayTGPane;
     private javax.swing.JPanel sanBayTGPane1;
     private javax.swing.JPanel sanBayTGPane2;
-    private javax.swing.JFormattedTextField soLuongGheTextField;
-    private javax.swing.JFormattedTextField soLuongGheTextField1;
-    private javax.swing.JFormattedTextField soLuongGheTextField2;
-    private javax.swing.JFormattedTextField soLuongGheTextField3;
-    private javax.swing.JFormattedTextField soLuongGheTextField4;
-    private javax.swing.JFormattedTextField soLuongGheTextField5;
-    private javax.swing.JFormattedTextField soLuongGheTextField6;
+    private javax.swing.JFormattedTextField soLuongGheH1Field;
+    private javax.swing.JFormattedTextField soLuongGheH2Field;
+    private javax.swing.JFormattedTextField soLuongGheH3Field;
+    private javax.swing.JLabel soLuongGheLabel;
     private javax.swing.JButton submitButton;
     private javax.swing.JButton themSBTGButton;
+    private javax.swing.JSpinner thoiGianBayChooser;
     private javax.swing.JPanel titlePane;
     // End of variables declaration//GEN-END:variables
+
+    private void setModelForCbb() {
+
+
+        listQG = SanbayBUS.getListQuocGias();
+        DefaultComboBoxModel dcbQGSBDi = new DefaultComboBoxModel();
+        for (String quocGia : listQG) {
+            dcbQGSBDi.addElement(quocGia);
+        }
+        quocGiaSanBayDiCbb.setModel(dcbQGSBDi);
+
+        DefaultComboBoxModel dcbQGSBDen = new DefaultComboBoxModel();
+        for (String quocGia : listQG) {
+            dcbQGSBDen.addElement(quocGia);
+        }
+        quocGiaSanBayDenCbb.setModel(dcbQGSBDen);
+
+        DefaultComboBoxModel dcbSBDi = new DefaultComboBoxModel();
+        maSanBayDiCbb.setModel(dcbSBDi);
+        DefaultComboBoxModel dcbSBDen = new DefaultComboBoxModel();
+        maSanBayDenCbb.setModel(dcbSBDen);
+
+        if (!listQG.isEmpty()) {
+
+            listSBDi = SanbayBUS.getListSanbaysByQuocGia(listQG.get(0));
+            for (Sanbay sanBayDi : listSBDi) {
+                dcbSBDi.addElement(sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")");
+            }
+
+            listSBDen = SanbayBUS.getListSanbaysByQuocGia(listQG.get(0));
+            for (Sanbay sanBayDen : listSBDen) {
+                dcbSBDen.addElement(sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")");
+            }
+        }
+
+    }
+
+    private void setEventForCbb() {
+        quocGiaSanBayDiCbb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                listSBDi = SanbayBUS.getListSanbaysByQuocGia((String) quocGiaSanBayDiCbb.getSelectedItem());
+                DefaultComboBoxModel dcbSBDi = (DefaultComboBoxModel) maSanBayDiCbb.getModel();
+                dcbSBDi.removeAllElements();
+                for (Sanbay sanBayDi : listSBDi) {
+                    dcbSBDi.addElement(sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")");
+                }
+            }
+        });
+
+        quocGiaSanBayDenCbb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                listSBDen = SanbayBUS.getListSanbaysByQuocGia((String) quocGiaSanBayDenCbb.getSelectedItem());
+                DefaultComboBoxModel dcbSBDen = (DefaultComboBoxModel) maSanBayDenCbb.getModel();
+                dcbSBDen.removeAllElements();
+                for (Sanbay sanBayDen : listSBDen) {
+                    dcbSBDen.addElement(sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")");
+                }
+            }
+        });
+    }
+
+    private void setEventForSLGheField() {
+        soLuongGheH1Field.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                Integer soLuongH1 = 0;
+                try {
+                    soLuongH1 = Integer.parseInt(soLuongGheH1Field.getText());
+                } catch (NumberFormatException ex) {
+                    soLuongH1 = 0;
+                    soLuongGheH1Field.setText("0");
+                } finally {
+                    Integer soLuongH2 = Integer.parseInt(soLuongGheH2Field.getText());
+                    Integer soLuongH3 = Integer.parseInt(soLuongGheH3Field.getText());
+
+                    soLuongGheLabel.setText((soLuongH1 + soLuongH2 + soLuongH3) + "");
+                }
+            }
+        });
+
+        soLuongGheH2Field.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                Integer soLuongH2 = 0;
+                try {
+                    soLuongH2 = Integer.parseInt(soLuongGheH2Field.getText());
+                } catch (NumberFormatException ex) {
+                    soLuongH2 = 0;
+                    soLuongGheH2Field.setText("0");
+                } finally {
+                    Integer soLuongH1 = Integer.parseInt(soLuongGheH1Field.getText());
+                    Integer soLuongH3 = Integer.parseInt(soLuongGheH3Field.getText());
+
+                    soLuongGheLabel.setText((soLuongH1 + soLuongH2 + soLuongH3) + "");
+                }
+            }
+        });
+
+        soLuongGheH3Field.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                Integer soLuongH3 = 0;
+                try {
+                    soLuongH3 = Integer.parseInt(soLuongGheH3Field.getText());
+                } catch (NumberFormatException ex) {
+                    soLuongH3 = 0;
+                    soLuongGheH3Field.setText("0");
+                } finally {
+                    Integer soLuongH1 = Integer.parseInt(soLuongGheH1Field.getText());
+                    Integer soLuongH2 = Integer.parseInt(soLuongGheH2Field.getText());
+
+                    soLuongGheLabel.setText((soLuongH1 + soLuongH2 + soLuongH3) + "");
+                }
+            }
+        });
+    }
 }
