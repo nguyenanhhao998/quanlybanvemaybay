@@ -5,6 +5,16 @@
  */
 package ui;
 
+import bus.TaikhoanBUS;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import ui.admin.MainForAdmin;
+import ui.user.MainForUser;
+
 /**
  *
  * @author HAO
@@ -29,173 +39,186 @@ public class LoginFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         parentPane = new javax.swing.JPanel();
+        jpnThongBao = new javax.swing.JPanel();
+        jlbThongBao = new javax.swing.JLabel();
+        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jPanel5 = new javax.swing.JPanel();
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel2 = new javax.swing.JLabel();
+        filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(100, 0));
+        jtfname = new javax.swing.JTextField();
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 15), new java.awt.Dimension(0, 15), new java.awt.Dimension(0, 15));
+        jPanel7 = new javax.swing.JPanel();
+        filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jLabel3 = new javax.swing.JLabel();
-        nameTextFeild = new javax.swing.JTextField();
-        passwordTextField = new javax.swing.JPasswordField();
+        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(100, 0));
+        jtfpass = new javax.swing.JPasswordField();
+        filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 15), new java.awt.Dimension(0, 15), new java.awt.Dimension(0, 15));
+        jPanel6 = new javax.swing.JPanel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(150, 0), new java.awt.Dimension(150, 0), new java.awt.Dimension(150, 0));
+        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         submitButton = new javax.swing.JButton();
-        nameWarning = new javax.swing.JLabel();
-        passwordWarning = new javax.swing.JLabel();
+        filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản Lý Bán Vé Máy Bay");
-        setMaximumSize(new java.awt.Dimension(530, 320));
-        setMinimumSize(new java.awt.Dimension(530, 320));
+        setMaximumSize(new java.awt.Dimension(700, 400));
+        setMinimumSize(new java.awt.Dimension(700, 300));
         setPreferredSize(new java.awt.Dimension(530, 320));
 
         parentPane.setBackground(new java.awt.Color(18, 18, 18));
+        parentPane.setLayout(new javax.swing.BoxLayout(parentPane, javax.swing.BoxLayout.Y_AXIS));
+
+        jpnThongBao.setBackground(new java.awt.Color(18, 18, 18));
+        jpnThongBao.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 1, 10, 1));
+        jpnThongBao.setLayout(new javax.swing.BoxLayout(jpnThongBao, javax.swing.BoxLayout.LINE_AXIS));
+
+        jlbThongBao.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jlbThongBao.setForeground(new java.awt.Color(255, 0, 0));
+        jlbThongBao.setMaximumSize(new java.awt.Dimension(600, 35));
+        jlbThongBao.setMinimumSize(new java.awt.Dimension(600, 35));
+        jlbThongBao.setPreferredSize(new java.awt.Dimension(600, 35));
+        jpnThongBao.add(jlbThongBao);
+        jpnThongBao.add(filler17);
+
+        parentPane.add(jpnThongBao);
+
+        jPanel5.setBackground(new java.awt.Color(18, 18, 18));
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel5.add(filler8);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Username:");
+        jLabel2.setText("Username: ");
+        jLabel2.setMaximumSize(new java.awt.Dimension(150, 25));
+        jLabel2.setMinimumSize(new java.awt.Dimension(150, 25));
+        jLabel2.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel5.add(jLabel2);
+        jPanel5.add(filler9);
+
+        jtfname.setBackground(new java.awt.Color(0, 0, 0));
+        jtfname.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jtfname.setForeground(new java.awt.Color(255, 255, 255));
+        jtfname.setMaximumSize(new java.awt.Dimension(500, 60));
+        jtfname.setMinimumSize(new java.awt.Dimension(500, 60));
+        jtfname.setPreferredSize(new java.awt.Dimension(500, 60));
+        jPanel5.add(jtfname);
+        jPanel5.add(filler10);
+
+        parentPane.add(jPanel5);
+        parentPane.add(filler3);
+
+        jPanel7.setBackground(new java.awt.Color(18, 18, 18));
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel7.add(filler14);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Password:");
+        jLabel3.setText("Password: ");
+        jLabel3.setMaximumSize(new java.awt.Dimension(150, 25));
+        jLabel3.setMinimumSize(new java.awt.Dimension(150, 25));
+        jLabel3.setPreferredSize(new java.awt.Dimension(150, 25));
+        jPanel7.add(jLabel3);
+        jPanel7.add(filler15);
 
-        nameTextFeild.setBackground(new java.awt.Color(0, 0, 0));
-        nameTextFeild.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        nameTextFeild.setForeground(new java.awt.Color(255, 255, 255));
-        nameTextFeild.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFeildActionPerformed(evt);
-            }
-        });
+        jtfpass.setBackground(new java.awt.Color(0, 0, 0));
+        jtfpass.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jtfpass.setForeground(new java.awt.Color(255, 255, 255));
+        jtfpass.setMaximumSize(new java.awt.Dimension(500, 60));
+        jtfpass.setMinimumSize(new java.awt.Dimension(500, 60));
+        jtfpass.setPreferredSize(new java.awt.Dimension(500, 60));
+        jPanel7.add(jtfpass);
+        jPanel7.add(filler16);
 
-        passwordTextField.setBackground(new java.awt.Color(0, 0, 0));
-        passwordTextField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        passwordTextField.setForeground(new java.awt.Color(255, 255, 255));
-        passwordTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTextFieldActionPerformed(evt);
-            }
-        });
+        parentPane.add(jPanel7);
+        parentPane.add(filler2);
+
+        jPanel6.setBackground(new java.awt.Color(18, 18, 18));
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel6.add(filler1);
+        jPanel6.add(filler11);
 
         submitButton.setBackground(new java.awt.Color(255, 150, 8));
         submitButton.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         submitButton.setForeground(new java.awt.Color(255, 255, 255));
         submitButton.setText("Đăng nhập");
+        submitButton.setMaximumSize(new java.awt.Dimension(200, 40));
+        submitButton.setMinimumSize(new java.awt.Dimension(200, 40));
+        submitButton.setPreferredSize(new java.awt.Dimension(200, 40));
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
             }
         });
+        jPanel6.add(submitButton);
+        jPanel6.add(filler13);
 
-        nameWarning.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        nameWarning.setForeground(new java.awt.Color(255, 0, 51));
-        nameWarning.setText("Thiếu họ tên rồi!");
-        nameWarning.setText(" ");
-
-        passwordWarning.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        passwordWarning.setForeground(new java.awt.Color(255, 0, 51));
-        passwordWarning.setText("Không có password thì đăng nhập làm sao!");
-        passwordWarning.setText(" ");
-
-        javax.swing.GroupLayout parentPaneLayout = new javax.swing.GroupLayout(parentPane);
-        parentPane.setLayout(parentPaneLayout);
-        parentPaneLayout.setHorizontalGroup(
-            parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(parentPaneLayout.createSequentialGroup()
-                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(parentPaneLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nameWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, parentPaneLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(parentPaneLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(passwordWarning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                                    .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(parentPaneLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addComponent(nameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
-        parentPaneLayout.setVerticalGroup(
-            parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(parentPaneLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nameWarning)
-                .addGap(18, 18, 18)
-                .addGroup(parentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(passwordWarning)
-                .addGap(10, 10, 10)
-                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
+        parentPane.add(jPanel6);
 
         getContentPane().add(parentPane, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameTextFeildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFeildActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameTextFeildActionPerformed
-
-    private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTextFieldActionPerformed
-
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        String name = jtfname.getText();
+        String pass = String.valueOf(jtfpass.getPassword());
         
+        if(name.isEmpty() || pass.isEmpty()){
+            jlbThongBao.setText("Bạn phải điền đầy đủ thông tin tài khoản");
+            return;
+        }
+        
+        switch(TaikhoanBUS.login(name, pass)){
+            case "admin":
+                this.dispose();//setVisible(false//tắt dialog
+                MainForAdmin.getInstance().runFrame();
+                break;
+            case "nvbanve":
+                this.dispose();//setVisible(false//tắt dialog
+                MainForUser.getInstance().runFrame();
+                break;
+            default:
+                jlbThongBao.setText("Sai tên đăng nhập hoặc mật khẩu");
+                return;
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler11;
+    private javax.swing.Box.Filler filler13;
+    private javax.swing.Box.Filler filler14;
+    private javax.swing.Box.Filler filler15;
+    private javax.swing.Box.Filler filler16;
+    private javax.swing.Box.Filler filler17;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
+    private javax.swing.Box.Filler filler9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField nameTextFeild;
-    private javax.swing.JLabel nameWarning;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel jlbThongBao;
+    private javax.swing.JPanel jpnThongBao;
+    private javax.swing.JTextField jtfUsername;
+    private javax.swing.JTextField jtfUsername1;
+    private javax.swing.JTextField jtfname;
+    private javax.swing.JPasswordField jtfpass;
     private javax.swing.JPanel parentPane;
-    private javax.swing.JPasswordField passwordTextField;
-    private javax.swing.JLabel passwordWarning;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

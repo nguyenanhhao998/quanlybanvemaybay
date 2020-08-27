@@ -5,10 +5,35 @@
  */
 package daos;
 
+import javax.persistence.NoResultException;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import pojos.Admin;
+import util.HibernateUtil;
+
 /**
  *
  * @author HAO
  */
 public class AdminDAO {
+    public static boolean checkAdmin(int id){
+        Admin ad = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
 
+            String hql = String.format("from Admin where idNhanVien = %d",id);
+            Query query = session.createQuery(hql);
+            ad = (Admin)query.getSingleResult();
+            
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            return false;
+        }finally{
+            session.close();
+        }
+        return true;
+    }
 }

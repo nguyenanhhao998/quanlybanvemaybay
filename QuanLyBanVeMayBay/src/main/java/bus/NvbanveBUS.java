@@ -5,10 +5,14 @@
  */
 package bus;
 
+import daos.NvbanveDAO;
+
 /**
  *
  * @author HAO
  */
 public class NvbanveBUS {
-
+    public static boolean checkNvBanve(int id){
+        return NvbanveDAO.checkNvbanve(id);
+    }
 }
