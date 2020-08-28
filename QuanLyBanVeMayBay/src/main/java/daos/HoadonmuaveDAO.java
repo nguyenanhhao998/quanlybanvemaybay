@@ -72,7 +72,6 @@ public class HoadonmuaveDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            ex.printStackTrace();
             return null;
         }finally{
             session.close();

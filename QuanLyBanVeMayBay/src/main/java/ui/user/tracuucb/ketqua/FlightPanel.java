@@ -207,9 +207,9 @@ public class FlightPanel extends javax.swing.JPanel {
 
         add(jPanel12);
 
-        jPanel9.setMaximumSize(new java.awt.Dimension(150, 90));
-        jPanel9.setMinimumSize(new java.awt.Dimension(150, 90));
-        jPanel9.setPreferredSize(new java.awt.Dimension(150, 90));
+        jPanel9.setMaximumSize(new java.awt.Dimension(200, 90));
+        jPanel9.setMinimumSize(new java.awt.Dimension(200, 90));
+        jPanel9.setPreferredSize(new java.awt.Dimension(200, 90));
         jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel10.setMaximumSize(new java.awt.Dimension(150, 40));
@@ -233,7 +233,7 @@ public class FlightPanel extends javax.swing.JPanel {
 
         jlbHangVe.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jlbHangVe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/seat_level.png"))); // NOI18N
-        jlbHangVe.setText("Phổ thông");
+        jlbHangVe.setText("Phổ thông đặc biệt");
         jlbHangVe.setMaximumSize(new java.awt.Dimension(200, 40));
         jlbHangVe.setMinimumSize(new java.awt.Dimension(200, 40));
         jlbHangVe.setPreferredSize(new java.awt.Dimension(200, 40));

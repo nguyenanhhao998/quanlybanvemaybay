@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import pojos.Chuyenbay;
@@ -355,7 +356,21 @@ public class JPNTraCuu extends javax.swing.JPanel {
         //kiểm tra
         //sân bay đi trùng sân bay đến
         if(masbdi.equalsIgnoreCase(masbden)){
+            jpnKetQua.setVisible(false);
+            jtabbedPaneKhuHoi.setVisible(false);
             JLabel label = new JLabel("Sân bay đi phải khác sân bay đến.");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //ngày đi không được trước ngày hiện tại
+        long delay = 10;
+        Date ngay = new Date(new Date().getTime() - TimeUnit.SECONDS.toMillis(delay));
+        if(DateStart.compareTo(ngay) < 0){
+            jpnKetQua.setVisible(false);
+            jtabbedPaneKhuHoi.setVisible(false);
+            JLabel label = new JLabel("Ngày khởi hành không hợp lệ.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);
@@ -363,8 +378,10 @@ public class JPNTraCuu extends javax.swing.JPanel {
         }
 
         //ngày đi phải trước ngày về
-        if(isKhuHoi && DateStart.compareTo(DateEnd) >= 0){
-            JLabel label = new JLabel("Ngày khởi hành phải trước ngày về.");
+        if(isKhuHoi && DateEnd.compareTo(DateStart) <= 0){
+            jpnKetQua.setVisible(false);
+            jtabbedPaneKhuHoi.setVisible(false);
+            JLabel label = new JLabel("Ngày về phải sau ngày khởi hành.");
             label.setFont(new Font("Arial", Font.BOLD, 18));
             label.setForeground(Color.red);
             JOptionPane.showMessageDialog(null,label , "Error", JOptionPane.ERROR_MESSAGE);

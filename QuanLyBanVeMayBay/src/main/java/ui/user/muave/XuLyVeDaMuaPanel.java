@@ -6,6 +6,7 @@
 package ui.user.muave;
 
 import bus.ChuyenbayBUS;
+import bus.QuydinhBUS;
 import daos.HangveDAO;
 import java.awt.Color;
 import java.awt.Font;
@@ -410,7 +411,7 @@ public class XuLyVeDaMuaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(ngayKhoiHanh.compareTo(new Date()) >= 0)
+        if(QuydinhBUS.ktThoiHanHuyVe(ngayKhoiHanh))
             MainForUser.getInstance().getDoiVePane().hoanThanhHuyVe(hd);
         else{
             JLabel label = new JLabel("Đã quá thời hạn trả vé đối với chuyến bay này.");
