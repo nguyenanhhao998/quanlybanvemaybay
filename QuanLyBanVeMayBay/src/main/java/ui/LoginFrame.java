@@ -180,6 +180,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 this.dispose();//setVisible(false//tắt dialog
                 MainForUser.getInstance().runFrame();
                 break;
+            case "disable":
+                jlbThongBao.setText("Tài khoản đã bị vô hiệu hóa");
+                break;
             default:
                 jlbThongBao.setText("Sai tên đăng nhập hoặc mật khẩu");
                 return;

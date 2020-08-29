@@ -29,11 +29,20 @@ public class TaikhoanBUS {
     }
     
     public static String login(String name, String pass){
-        int id = checkAccount(name, pass);
+        int id = checkAccount(name, pass);        
         String res = "";
         if(id != 0){
-            res = getPermission(id);
+            if(checkTinhTrangNV(id))
+                res = getPermission(id);
+            else
+                res = "disable";
         }
         return res;
-    } 
+    }
+    
+    //true: còn làm việc
+    //false: đã nghỉ việc
+    public static boolean checkTinhTrangNV(int id){
+        return NhanvienDAO.checkTinhTrangNV(id);
+    }
 }
