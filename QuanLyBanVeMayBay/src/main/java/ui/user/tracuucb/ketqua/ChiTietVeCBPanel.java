@@ -5,6 +5,7 @@
  */
 package ui.user.tracuucb.ketqua;
 
+import bus.QuydinhBUS;
 import daos.HangveDAO;
 import java.awt.Color;
 import java.awt.Font;
@@ -430,6 +431,16 @@ public class ChiTietVeCBPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        boolean conThoiHan = QuydinhBUS.ktThoiHanDatVe(cb.getNgayKhoiHanh());
+        
+        if(!conThoiHan){
+            JLabel label = new JLabel("Đã hết thời hạn đặt vé. Xin hãy mua vé");
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setForeground(Color.blue);
+            JOptionPane.showMessageDialog(null,label,"Warning",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         JPanel phieu;
         if(isConVe){
             phieu = new DatVePanel(cb,sl,mahangve);

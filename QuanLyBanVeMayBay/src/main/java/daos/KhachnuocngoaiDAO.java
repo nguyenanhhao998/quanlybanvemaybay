@@ -92,6 +92,7 @@ public class KhachnuocngoaiDAO {
     }
     
     public static boolean kiemTraIdNumberKH(int makh, String idNumber){
+        boolean res = true;
         Khachnuocngoai kh = null;
         Session session = null;
         try {
@@ -103,12 +104,12 @@ public class KhachnuocngoaiDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return false;
+            res = false;
         }finally{
             session.close();
         }
         
-        return true;
+        return res;
     }
     
     public static int getIDKHByHoChieu(String hochieu) {

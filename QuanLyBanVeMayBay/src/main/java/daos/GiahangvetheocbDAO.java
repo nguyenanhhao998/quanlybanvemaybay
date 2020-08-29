@@ -22,6 +22,7 @@ import util.HibernateUtil;
  */
 public class GiahangvetheocbDAO {
     public static double getGiahientai(String macb, String mahangve){
+        double giahientai = 0;
         Giahangvetheocb gia = null;
         Session session = null;
         try {
@@ -33,12 +34,14 @@ public class GiahangvetheocbDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch(NoResultException ex){
-            ex.printStackTrace();
+            System.err.println(ex);
         } finally {
             session.close();
         }
 
-        return gia.getGiaHienTai();
+        if(gia != null)
+            giahientai = gia.getGiaHienTai();
+        return giahientai;
     } 
 
     public static boolean updateGiaHangVeTheoChuyenBay(String maCb, String maHangve, Double gia) {
