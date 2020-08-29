@@ -23,10 +23,10 @@ public class EditNhanVienPane extends javax.swing.JPanel {
     /**
      * Creates new form EditChuyenBayPane
      */
-    private String idNv;
+    private Integer idNv;
     private QuanLyNhanVienPane quanLyNhanVienPane;
 
-    public EditNhanVienPane(String idNv, QuanLyNhanVienPane rootPane) {
+    public EditNhanVienPane(Integer idNv, QuanLyNhanVienPane rootPane) {
         this.idNv = idNv;
         this.quanLyNhanVienPane = rootPane;
         initComponents();

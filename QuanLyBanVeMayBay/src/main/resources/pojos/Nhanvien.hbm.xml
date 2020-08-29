@@ -23,6 +23,16 @@
         <property name="cmnd" type="string">
             <column name="CMND" />
         </property>
-        <one-to-one name="taikhoan" class="pojos.Taikhoan"></one-to-one>
+        
+        <property name="email" type="string">
+            <column name="Email" />
+        </property>
+        
+        <property name="trangThai" type="string">
+            <column name="TrangThai" />
+        </property>
+        
+        
+        <one-to-one name="taikhoan" class="pojos.Taikhoan" lazy="false"></one-to-one>
     </class>
 </hibernate-mapping>

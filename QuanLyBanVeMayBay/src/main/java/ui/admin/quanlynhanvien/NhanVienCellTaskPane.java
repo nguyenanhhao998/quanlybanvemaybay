@@ -99,7 +99,7 @@ public class NhanVienCellTaskPane extends javax.swing.JPanel {
         QuanLyNhanVienPane quanLyNhanVienPane
                 = (QuanLyNhanVienPane) SwingUtilities.getAncestorOfClass(QuanLyNhanVienPane.class, (Component) evt.getSource());
 
-        EditNhanVienPane editNhanVienPane = new EditNhanVienPane((String) table.getValueAt(row, 0), quanLyNhanVienPane);
+        EditNhanVienPane editNhanVienPane = new EditNhanVienPane((Integer) table.getValueAt(row, 0), quanLyNhanVienPane);
         quanLyNhanVienPane.getParentPane().add(editNhanVienPane, editNhanVienPane.getName());
         CardLayout cl = (CardLayout) quanLyNhanVienPane.getParentPane().getLayout();
         cl.show(quanLyNhanVienPane.getParentPane(), editNhanVienPane.getName());

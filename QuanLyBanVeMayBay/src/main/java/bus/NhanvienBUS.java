@@ -6,11 +6,20 @@
 package bus;
 
 import daos.*;
+import java.util.List;
+
+import pojos.Nhanvien;
 
 /**
  *
  * @author HAO
  */
 public class NhanvienBUS {
+    public static List<Nhanvien> getListNhanVien() {
+        return NhanvienDAO.getListNhanVien();
+    }
 
+    public static List<Nhanvien> getListNhanVien(int searchCriteria, String keyWord) {
+        return NhanvienDAO.getListNhanVien(searchCriteria, keyWord);
+    }
 }

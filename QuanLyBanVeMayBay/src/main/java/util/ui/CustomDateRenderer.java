@@ -6,10 +6,8 @@
 package util.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
+import java.text.SimpleDateFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -20,11 +18,12 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author HAO
  */
-public class CustomCenterAlignmentRenderer extends JPanel implements TableCellRenderer {
+public class CustomDateRenderer extends JPanel implements TableCellRenderer {
 
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
     JLabel label;
 
-    public CustomCenterAlignmentRenderer() {
+    public CustomDateRenderer() {
         setLayout(new BorderLayout());
 
         label = new JLabel();
@@ -32,17 +31,13 @@ public class CustomCenterAlignmentRenderer extends JPanel implements TableCellRe
         label.setHorizontalAlignment(CENTER);
 
         add(label, BorderLayout.CENTER);
-        //setOpaque(false);
-        //setPreferredSize(new Dimension(200, 40));
-        //setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        if (value != null) {
-            label.setText(value.toString());
-        }
+        label.setText(SDF.format(value));
         return this;
     }
+
 
 }

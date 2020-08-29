@@ -5,21 +5,30 @@
  */
 package ui.admin.quanlynhanvien;
 
+import bus.NhanvienBUS;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
+import pojos.Nhanvien;
 
 import util.ui.CustomCenterAlignmentRenderer;
+import util.ui.CustomDateRenderer;
 import util.ui.CustomLeftAlignmentRenderer;
 import util.ui.ImageIconUtil;
 
@@ -28,6 +37,11 @@ import util.ui.ImageIconUtil;
  * @author HAO
  */
 public class QuanLyNhanVienPane extends javax.swing.JPanel {
+
+//    private static final int SEARCH_BY_NAME = 0;
+//    private static final int SEARCH_BY_USERNAME = 1;
+//    private static final int SEARCH_BY_PHONE = 2;
+//    private static final int SEARCH_BY_CMND = 3;
 
     /**
      * Creates new form QuanLyNhanVien
@@ -38,10 +52,16 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
     public static final Color EVEN_COLOR = new Color(255, 255, 255);
     public static final Color ODD_COLOR = new Color(230, 230, 230);
 
+    private List<Nhanvien> listNhanviens;
+
+    private int searchCriteria = 0;
+
     public QuanLyNhanVienPane() {
         initComponents();
         setupTable();
         setupModelForTable();
+        fillUpData();
+        setEventForFilterControl();
     }
 
     /**
@@ -60,8 +80,8 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
         searchPanel = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         iconSearchLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        searchCriteriaCbb = new javax.swing.JComboBox<>();
+        searchField = new javax.swing.JTextField();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
@@ -108,7 +128,6 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
 
         searchPanel.setBackground(new java.awt.Color(255, 255, 255));
         searchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        searchPanel.setAlignmentY(0.5F);
         searchPanel.setMaximumSize(new java.awt.Dimension(600, 60));
         searchPanel.setPreferredSize(new java.awt.Dimension(600, 60));
         searchPanel.setLayout(new javax.swing.BoxLayout(searchPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -120,16 +139,16 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
         iconSearchLabel.setIcon(ImageIconUtil.ResizeImage("src/main/resources/icon/search_60px.png", 45, 45));
         searchPanel.add(iconSearchLabel);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo tên", "Theo username", "Theo SĐT", "Theo CMND" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.setMaximumSize(new java.awt.Dimension(210, 60));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(210, 60));
-        searchPanel.add(jComboBox1);
+        searchCriteriaCbb.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        searchCriteriaCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Theo Tên", "Theo Username", "Theo SĐT", "Theo CMND" }));
+        searchCriteriaCbb.setBorder(null);
+        searchCriteriaCbb.setMaximumSize(new java.awt.Dimension(210, 60));
+        searchCriteriaCbb.setPreferredSize(new java.awt.Dimension(210, 60));
+        searchPanel.add(searchCriteriaCbb);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 7, 0, 7));
-        searchPanel.add(jTextField1);
+        searchField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        searchField.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 7, 0, 7));
+        searchPanel.add(searchField);
 
         jPanel4.add(searchPanel);
         jPanel4.add(filler4);
@@ -274,13 +293,13 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler8;
     private javax.swing.JPanel homePane;
     private javax.swing.JLabel iconSearchLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel parentPane;
+    private javax.swing.JComboBox<String> searchCriteriaCbb;
+    private javax.swing.JTextField searchField;
     private javax.swing.JPanel searchPanel;
     private javax.swing.JTable table;
     private javax.swing.JPanel tablePane;
@@ -299,7 +318,7 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
                 "Mã nhân viên", "Họ tên", "Tên tài khoản", "Giới tính", "Ngày sinh", "SDT", "Email", "CMND", "Trạng thái", "Tác vụ"
             };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.util.Date.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, Object.class
             };
 
             @Override
@@ -323,10 +342,10 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"1", "Nguyễn Anh Hào", "nguyenanhhaous", "Nam", "27-03-1999", "022390239", "nguyenanhhao.hcmus@gmail.com", "232313112312", "Đang hoạt động"});
-        dtm.addRow(new Object[]{"2", "Nguyễn Anh Hào", "nguyenanhhaous1", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
-        dtm.addRow(new Object[]{"3", "Nguyễn Anh Hào", "nguyenanhhaous2", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
-        dtm.addRow(new Object[]{"4", "Nguyễn Anh Hào", "ushcm", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Đang hoạt động"});
+//        dtm.addRow(new Object[]{"1", "Nguyễn Anh Hào", "nguyenanhhaous", "Nam", "27-03-1999", "022390239", "nguyenanhhao.hcmus@gmail.com", "232313112312", "Đang hoạt động"});
+//        dtm.addRow(new Object[]{"2", "Nguyễn Anh Hào", "nguyenanhhaous1", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
+//        dtm.addRow(new Object[]{"3", "Nguyễn Anh Hào", "nguyenanhhaous2", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Nghỉ việc"});
+//        dtm.addRow(new Object[]{"4", "Nguyễn Anh Hào", "ushcm", "Nam", "27-03-1999", "022390239", "nguyenanhhao.xx@gmail.com", "232313112312", "Đang hoạt động"});
 
         table.setModel(dtm);
 
@@ -352,8 +371,11 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
                 tableColumnModel.getColumn(9).setPreferredWidth(250);
                 tableColumnModel.getColumn(0).setCellRenderer(new CustomLeftAlignmentRenderer());
                 for (int i = 1; i <= 8; i++) {
-                    tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
+                    if (i != 4) {
+                        tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
+                    }
                 }
+                tableColumnModel.getColumn(4).setCellRenderer(new CustomDateRenderer());
 
                 NhanVienPanelCellEditorRenderer nhanVienPanelCellEditorRenderer = new NhanVienPanelCellEditorRenderer();
                 int finalIndex = tableColumnModel.getColumnCount() - 1;
@@ -388,6 +410,88 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
 
     public JPanel getParentPane() {
         return parentPane;
+    }
+
+    private void fillUpData() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                listNhanviens = NhanvienBUS.getListNhanVien();
+                for (Nhanvien nhanvien : listNhanviens) {
+                    dtm.addRow(new Object[]{
+                        nhanvien.getIdNhanVien(),
+                        nhanvien.getHoTen(),
+                        nhanvien.getTaikhoan().getTenTaiKhoan(),
+                        nhanvien.getGioiTinh(),
+                        nhanvien.getNgaySinh(),
+                        nhanvien.getSdt(),
+                        nhanvien.getEmail(),
+                        nhanvien.getCmnd(),
+                        nhanvien.getTrangThai(),
+                        null
+                    });
+                }
+
+            }
+        });
+    }
+
+    private void setEventForFilterControl() {
+        searchCriteriaCbb.addItemListener((ItemEvent e) -> {
+            searchCriteria = searchCriteriaCbb.getSelectedIndex();
+        });
+
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                proceedToFilter();
+            }
+        });
+    }
+
+    public void proceedToFilter() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                System.out.println("======================================= " + searchCriteria);
+                System.out.println("======================================= " + searchField.getText());
+
+                listNhanviens = NhanvienBUS.getListNhanVien(searchCriteria, searchField.getText());
+
+                System.out.println(listNhanviens.size());
+
+                table.removeEditor();
+                dtm.setRowCount(0);
+
+                for (Nhanvien nhanvien : listNhanviens) {
+                    dtm.addRow(new Object[]{
+                        nhanvien.getIdNhanVien(),
+                        nhanvien.getHoTen(),
+                        nhanvien.getTaikhoan().getTenTaiKhoan(),
+                        nhanvien.getGioiTinh(),
+                        nhanvien.getNgaySinh(),
+                        nhanvien.getSdt(),
+                        nhanvien.getEmail(),
+                        nhanvien.getCmnd(),
+                        nhanvien.getTrangThai(),
+                        null
+                    });
+
+                }
+            }
+
+        });
     }
 
 }

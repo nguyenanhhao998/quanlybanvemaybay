@@ -5,6 +5,9 @@
  */
 package ui.admin.quanlycb;
 
+import pojos.Sanbay;
+import pojos.Sanbaytrunggian;
+
 /**
  *
  * @author HAO
@@ -27,15 +30,15 @@ public class SanBayTrungGianItemViewPane extends javax.swing.JPanel {
     private void initComponents() {
 
         sttLabel = new javax.swing.JLabel();
-        STTLabel1 = new javax.swing.JLabel();
+        sbtgInfoLabel = new javax.swing.JLabel();
 
         setOpaque(false);
 
         sttLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         sttLabel.setText("1.");
 
-        STTLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        STTLabel1.setText("Hồ Chí Minh (HCM) - Việt Nam");
+        sbtgInfoLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        sbtgInfoLabel.setText("Hồ Chí Minh (HCM) - Việt Nam");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -45,7 +48,7 @@ public class SanBayTrungGianItemViewPane extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(sttLabel)
                 .addGap(40, 40, 40)
-                .addComponent(STTLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
+                .addComponent(sbtgInfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -54,7 +57,7 @@ public class SanBayTrungGianItemViewPane extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sttLabel)
-                    .addComponent(STTLabel1))
+                    .addComponent(sbtgInfoLabel))
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -63,8 +66,13 @@ public class SanBayTrungGianItemViewPane extends javax.swing.JPanel {
         sttLabel.setText("" + index + ". ");
     }
 
+    public void fillUpdata(Sanbaytrunggian sbtg) {
+        Sanbay sb = sbtg.getSanbay();
+        sbtgInfoLabel.setText(sb.getThanhPho() + " (" + sb.getMaSb() + ") - " + sb.getQuocGia());
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel STTLabel1;
+    private javax.swing.JLabel sbtgInfoLabel;
     private javax.swing.JLabel sttLabel;
     // End of variables declaration//GEN-END:variables
 }

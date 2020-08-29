@@ -446,26 +446,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             }
         };
 
-//        dtm.addRow(new Object[]{"1", "Thành phố Hồ Chí Minh (SGN)", "Hà Nội (HAN)", "20/10/2020", "3 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"2", "Đà Nẵng (DAD)", "Nha Trang Cam Ranh (CXR)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"3", "Phú Quốc (PQC)", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"5", "Tân Sơn Nhất", "Thành phố Vinh (VII)", "20/10/2020", "3.5 giờ", 30, "Đã bay"});
-//        dtm.addRow(new Object[]{"6", "Nha Trang Cam Ranh (CXR)", "Buôn Ma Thuột (BMV)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"7", "Thành phố Vinh (VII)", "Đà Lạt (DLI)", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"8", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"9", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Đang bay"});
-//        dtm.addRow(new Object[]{"10", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"11", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"12", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"13", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"14", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3.5 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"15", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"16", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"17", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"18", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"19", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"20", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
-//        dtm.addRow(new Object[]{"21", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Sắp khởi hành"});
+
 
         table.setModel(dtm);
 
@@ -588,6 +569,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                 listCB = ChuyenbayBUS.getListChuyenBaysByFilter(sanBayDiFilter, sanBayDenFilter, soLuongKhachFilter, ngayDiFilter);
                 System.out.println("listCB size =============================== " + listCB.size());
 
+                table.removeEditor();
                 dtm.setRowCount(0);
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 for (Chuyenbay chuyenbay : listCB) {
@@ -605,6 +587,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                     dtm.addRow(row);
 
                 }
+
             }
 
         });

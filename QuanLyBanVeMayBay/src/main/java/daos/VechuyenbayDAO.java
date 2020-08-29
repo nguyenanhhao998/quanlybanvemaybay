@@ -123,8 +123,6 @@ public class VechuyenbayDAO {
             Query query = session.createQuery(hql);
             res = ((Long) query.uniqueResult()).intValue();
 
-            System.out.println("======================================" + res);
-
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -162,24 +160,51 @@ public class VechuyenbayDAO {
 
     public static boolean xoaVeTheoHangChuyenBay(String maCb, int soLuongXoa, String maHangVe) {
         boolean res = true;
-//        //Hangve hangve = HangveDAO.getHangVeById(maHangVe);
-//        Chuyenbay chuyenbay = ChuyenbayDAO.getChuyenBayByID(maCb);
-//        Session session = null;
-//        Transaction transaction = null;
-//        try {
-//            session = HibernateUtil.getSessionFactory().openSession();
-//            transaction = session.beginTransaction();
-//
-//            String hql = String.format("DELETE FROM Vechuyenbay vcb"
-//                    + " WHERE vcb.maCb = '%s' and vcb.");
-//
-//            transaction.commit();
-//
-//        } catch (HibernateException e) {
-//            transaction.rollback();
-//            res = false;
-//            e.printStackTrace();
-//        }
+        //Hangve hangve = HangveDAO.getHangVeById(maHangVe);
+        Chuyenbay chuyenbay = ChuyenbayDAO.getChuyenBayByID(maCb);
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            String sql = String.format("DELETE FROM vechuyenbay vcb"
+                    + " where vcb.MaCB = '%s'"
+                    + " and vcb.MaHangVe = '%s'"
+                    + " and vcb.TinhTrang = '%s'"
+                    + " ORDER by vcb.MaSoVe DESC"
+                    + " limit %d", maCb, maHangVe, "Chưa được mua", soLuongXoa);
+            Query query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            transaction.rollback();
+            res = false;
+            e.printStackTrace();
+        }
         return res;
+    }
+
+    public static List<String> getListIdVe(String maCB, String maHangVe) {
+        List<String> listIdVeTheoHangCB = null;
+        Session session = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            String hql = String.format("select vcb.maSoVe from Vechuyenbay vcb where vcb.chuyenbay.maCb = '%s' and vcb.hangve.maHangVe = '%s'", maCB, maHangVe);
+            Query query = session.createQuery(hql);
+            listIdVeTheoHangCB = query.list();
+
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return listIdVeTheoHangCB;
     }
 }

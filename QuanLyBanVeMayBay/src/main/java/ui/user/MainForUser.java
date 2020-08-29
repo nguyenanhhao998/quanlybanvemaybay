@@ -82,7 +82,15 @@ public class MainForUser extends javax.swing.JFrame {
     public int getCurrentPaneIndex(){
         return tabbedPane.getSelectedIndex();
     }
-    
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                MainForUser.getInstance().setVisible(true);
+            }
+        });
+    }
+
     public void runFrame(){
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

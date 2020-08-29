@@ -41,7 +41,7 @@ public class GiahangvetheocbDAO {
         return gia.getGiaHienTai();
     } 
 
-    public static boolean themGiaHangVeTheoChuyenBay(String maCb, String maHangve, Double gia) {
+    public static boolean updateGiaHangVeTheoChuyenBay(String maCb, String maHangve, Double gia) {
         boolean res = true;
         Chuyenbay chuyenbay = ChuyenbayDAO.getChuyenBayByID(maCb);
         Hangve hangve = HangveDAO.getHangVeById(maHangve);
@@ -52,7 +52,7 @@ public class GiahangvetheocbDAO {
             transaction = session.beginTransaction();
 
             Giahangvetheocb giahangvetheocb = new Giahangvetheocb(chuyenbay, hangve, gia);
-            session.save(giahangvetheocb);
+            session.saveOrUpdate(giahangvetheocb);
 
             transaction.commit();
 
@@ -69,5 +69,31 @@ public class GiahangvetheocbDAO {
         return res;
     }
 
+    public static boolean xoaGiaHangVeTheoChuyenBay(String maCb, String maHangVe) {
+        boolean res = true;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            String sql = String.format("DELETE FROM giahangvetheocb WHERE MaCB = '%s' AND MaHangVe = '%s'", maCb, maHangVe);
+            Query query = session.createSQLQuery(sql);
+            query.executeUpdate();
+
+            transaction.commit();
+
+        } catch (HibernateException ex) {
+            res = false;
+            transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+
+        }
+        return res;
+    }
 
 }

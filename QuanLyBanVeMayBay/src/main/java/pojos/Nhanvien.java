@@ -16,6 +16,8 @@ public class Nhanvien  implements java.io.Serializable {
     protected Date ngaySinh;
     protected String sdt;
     protected String cmnd;
+    protected String email;
+    protected String trangThai;
 
     protected Taikhoan taikhoan;
 
@@ -27,13 +29,15 @@ public class Nhanvien  implements java.io.Serializable {
     public Nhanvien(String hoTen) {
         this.hoTen = hoTen;
     }
-    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Taikhoan taikhoan) {
-       this.hoTen = hoTen;
-       this.gioiTinh = gioiTinh;
-       this.ngaySinh = ngaySinh;
-       this.sdt = sdt;
+    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, Taikhoan taikhoan, String email, String trangThai) {
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
         this.cmnd = cmnd;
         this.taikhoan = taikhoan;
+        this.email = email;
+        this.trangThai = trangThai;
     }
    
     public Integer getIdNhanVien() {
@@ -86,6 +90,23 @@ public class Nhanvien  implements java.io.Serializable {
     public void setTaikhoan(Taikhoan taikhoan) {
         this.taikhoan = taikhoan;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
 
 
 }

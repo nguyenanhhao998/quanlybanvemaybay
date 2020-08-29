@@ -59,6 +59,64 @@ public class VechuyenbayBUS {
         }
         return res;
     }
+
+    private static List<String> generateVeIdForCapNhatChuyenBay(String maCb, String maHangVe, int soLuongThemVao) {
+        List<String> listOldId = getListIdVe(maCb, maHangVe);
+        List<String> listNewId = new ArrayList<>();
+        String mid = "";
+        if (maHangVe.equals("hv_pt")) {
+            mid = "PT";
+        } else if (maHangVe.equals("hv_ptdb")) {
+            mid = "DB";
+        } else {
+            mid = "TG";
+        }
+//        for (int i = soLuongHienTai; i < soLuongHienTai + soLuongThemVao; i++) {
+//            String idVe = maCb + mid + String.format("V%04d", i + 1);
+//            listNewId.add(idVe);
+//            "CB010PTV0001"
+//        }
+
+        Integer cur = 0, next;
+        String s;
+
+        if (listOldId.size() > 0) {
+            s = listOldId.get(0);
+            cur = Integer.parseInt(s.substring(s.length() - 4));
+
+            for (int i = 0; i < listOldId.size() - 1; i++) {
+                s = listOldId.get(i + 1);
+                next = Integer.parseInt(s.substring(s.length() - 4));
+
+                for (int j = cur + 1; j < next; j++) {
+                    String idVe = maCb + mid + String.format("V%04d", j);
+                    listNewId.add(idVe);
+
+                    if (listNewId.size() >= soLuongThemVao) {
+                        return listNewId;
+                    }
+                }
+
+                cur = next;
+            }
+
+            s = listOldId.get(listOldId.size() - 1);
+            cur = Integer.parseInt(s.substring(s.length() - 4));
+
+        } else {
+            cur = 0;
+        }
+
+        while (listNewId.size() < soLuongThemVao) {
+            String idVe = maCb + mid + String.format("V%04d", cur + 1);
+            listNewId.add(idVe);
+            cur++;
+        }
+
+        return listNewId;
+
+    }
+
     public static int getSoVeDaMuaTheoHangCB(String maCB, String maHangVe) {
         int res = -1;
         res = VechuyenbayDAO.getSoVeDaMuaTheoHangCB(maCB, maHangVe);
@@ -84,20 +142,10 @@ public class VechuyenbayBUS {
         }
     }
 
+
     private static void themVeTheoHangChuyenBay(String maCb, int soLuongHienTai, int soLuongThemVao, String maHangVe) {
-        List<String> listNewId = new ArrayList<>();
-        String mid = "";
-        if (maHangVe.equals("hv_pt")) {
-            mid = "PT";
-        } else if (maHangVe.equals("hv_ptdb")) {
-            mid = "DB";
-        } else {
-            mid = "TG";
-        }
-        for (int i = soLuongHienTai; i < soLuongHienTai + soLuongThemVao; i++) {
-            String idVe = maCb + mid + String.format("V%04d", i + 1);
-            listNewId.add(idVe);
-        }
+
+        List<String> listNewId = generateVeIdForCapNhatChuyenBay(maCb, maHangVe, soLuongThemVao);
 
         VechuyenbayDAO.themVeTheoHangChuyenBay(maCb, listNewId, maHangVe);
 
@@ -105,6 +153,10 @@ public class VechuyenbayBUS {
 
     private static void xoaVeTheoHangChuyenBay(String maCb, int soLuongXoa, String maHangVe) {
         VechuyenbayDAO.xoaVeTheoHangChuyenBay(maCb, soLuongXoa, maHangVe);
+    }
+
+    public static List<String> getListIdVe(String maCB, String maHangVe) {
+        return VechuyenbayDAO.getListIdVe(maCB, maHangVe);
     }
 
 }

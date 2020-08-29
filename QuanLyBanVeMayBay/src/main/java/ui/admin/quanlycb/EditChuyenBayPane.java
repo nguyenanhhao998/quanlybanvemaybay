@@ -677,6 +677,8 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
 
         quanLyChuyenBayPane.getParentPane().remove(this);
         quanLyChuyenBayPane.proceedToFilter();
+
+        JOptionPane.showMessageDialog(null, "Đã cập nhật chuyến bay " + maCB);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void maCBFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maCBFieldActionPerformed

@@ -19,6 +19,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
 import pojos.Phieucho;
@@ -100,7 +101,7 @@ public class ChuyenbayBUS {
         ChuyenbayBUS.capNhatChuyenbay(newCB);
         SanbaytrunggianBUS.capNhatSanbayTrungGian(newCB.getMaCb(), listMaSBTG);
         VechuyenbayBUS.capNhatListVeCuaChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listSoLuongVeTheoHangBanDau);
-//        GiahangvetheocbBUS.taoGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listGiaVeTheoHang);
+        GiahangvetheocbBUS.updateGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listGiaVeTheoHang);
     }
 
     private static void capNhatChuyenbay(Chuyenbay newCB) {
@@ -120,5 +121,9 @@ public class ChuyenbayBUS {
             }
         }
         return ds;
+    }
+
+    public static boolean huyChuyenBay(String maCb) {
+        return ChuyenbayDAO.huyChuyenBay(maCb);
     }
 }

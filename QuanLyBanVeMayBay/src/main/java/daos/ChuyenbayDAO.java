@@ -35,7 +35,7 @@ public class ChuyenbayDAO {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         try {
-            String hql = "From Chuyenbay";
+            String hql = "From Chuyenbay cb WHERE cb.tinhTrang != 'Đã hủy'";
             Query query = session.createQuery(hql);
             ds = query.list();
         } catch (HibernateException ex) {
@@ -110,7 +110,8 @@ public class ChuyenbayDAO {
                     + "left join cb.sanbaytrunggians as sbtg "
                     + "left join cb.phieuchos as pc "
                     + "left join cb.vechuyenbays as ve "
-                    + "WHERE cb.ngayKhoiHanh > '%s'",df.format(new Date()));
+                    + "WHERE cb.ngayKhoiHanh > '%s'"
+                    + "and cb.tinhTrang != 'Đã hủy'", df.format(new Date()));
             Query query = session.createQuery(hql).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             listCB = query.list(); 
         } catch (HibernateException ex) {
@@ -147,7 +148,7 @@ public class ChuyenbayDAO {
             }
 
             String hql = String.format("SELECT cb FROM Chuyenbay cb "
-                    + "WHERE 1 = 1"
+                    + "WHERE cb.tinhTrang != 'Đã hủy'"
                     + hqlMaSanBayDi
                     + hqlMaSanBayDen
                     + hqlSoLuongHanhKhach
@@ -202,6 +203,34 @@ public class ChuyenbayDAO {
             transaction = session.beginTransaction();
 
             session.update(newCB);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            res = false;
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return res;
+    }
+
+    public static boolean huyChuyenBay(String maCb) {
+        boolean res = true;
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            String hql = String.format("UPDATE Chuyenbay cb SET cb.tinhTrang = 'Đã hủy' WHERE cb.maCb = '%s'", maCb);
+            Query query = session.createQuery(hql);
+            query.executeUpdate();
 
             transaction.commit();
 

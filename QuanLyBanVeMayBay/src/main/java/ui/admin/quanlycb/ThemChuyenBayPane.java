@@ -730,6 +730,12 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
             return;
         }
 
+        Chuyenbay checkChuyenbay = ChuyenbayBUS.getChuyenBayByID(maCB);
+        if (checkChuyenbay != null){
+            JOptionPane.showMessageDialog(null, "Đã có chuyến bay với mã chuyến bay là " + maCB + " trong cơ sở dữ liệu!");
+            return;
+        }
+
         Date ngayKhoiHanh = ngayKhoiHanhChooser.getDate();
 
         if (ngayKhoiHanh == null) {
@@ -768,6 +774,8 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
 
         quanLyChuyenBayPane.getParentPane().remove(this);
         quanLyChuyenBayPane.proceedToFilter();
+
+        JOptionPane.showMessageDialog(null, "Đã thêm chuyến bay " + maCB);
     }//GEN-LAST:event_submitButtonActionPerformed
 
 

@@ -5,12 +5,18 @@
  */
 package ui.admin.quanlycb;
 
+import bus.ChuyenbayBUS;
+import bus.GiahangvetheocbBUS;
+import bus.VechuyenbayBUS;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import pojos.Chuyenbay;
+import pojos.Sanbaytrunggian;
 import util.ui.ImageIconUtil;
 
 /**
@@ -26,27 +32,15 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
 
     private String idCB;
     private QuanLyChuyenBayPane quanLyChuyenBayPane;
+    private Chuyenbay chuyenbay;
 
     public ChiTietChuyenBayPane(String idCB, QuanLyChuyenBayPane rootPane) {
         this.idCB = idCB;
         this.quanLyChuyenBayPane = rootPane;
+        chuyenbay = ChuyenbayBUS.getChuyenBayByID(idCB);
         initComponents();
 
-        for (int i = 0; i < 3; i++) {
-            SanBayTrungGianItemViewPane sbtgivp = new SanBayTrungGianItemViewPane();
-            sbtgivp.setMaximumSize(new Dimension(520, 50));
-            sbtgivp.setPreferredSize(new Dimension(520, 50));
-            sbtgivp.setAlignmentX(0);
-            sbtgivp.setTitle(i + 1);
-
-            sanBayTGInnerPane.add(sbtgivp);
-            listSBTGItemPanes.add(sbtgivp);
-
-            sanBayTGInnerPane.invalidate();
-            sanBayTGInnerPane.revalidate();
-            sanBayTGInnerPane.repaint();
-        }
-
+        fillUpData();
 
     }
 
@@ -63,6 +57,7 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         submitButton = new javax.swing.JButton();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(80, 0), new java.awt.Dimension(80, 0), new java.awt.Dimension(80, 0));
@@ -72,17 +67,17 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         containerChuyenBayPane = new javax.swing.JPanel();
         chuyenBayPane = new javax.swing.JPanel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
-        maCBLabel = new javax.swing.JLabel();
+        maCBLabelPre = new javax.swing.JLabel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        maCBLabel1 = new javax.swing.JLabel();
+        maCBLabel = new javax.swing.JLabel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(3000, 0));
-        thoiDiemKhoiHanhLabel = new javax.swing.JLabel();
+        thoiDiemKhoiHanhLabelPre = new javax.swing.JLabel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        maCBLabel2 = new javax.swing.JLabel();
+        thoiDiemKhoiHanhLabel = new javax.swing.JLabel();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(3000, 0));
-        thoiGianBayLabel = new javax.swing.JLabel();
+        thoiGianBayLabelPre = new javax.swing.JLabel();
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0), new java.awt.Dimension(25, 0));
-        thoiGianBayLabel1 = new javax.swing.JLabel();
+        thoiGianBayLabel = new javax.swing.JLabel();
         filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
         containerDetailsPane = new javax.swing.JPanel();
         hangVePane = new javax.swing.JPanel();
@@ -93,26 +88,26 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        soGheLabel = new javax.swing.JLabel();
+        soGheHang1Label = new javax.swing.JLabel();
+        soGheHang2Label = new javax.swing.JLabel();
+        soGheHang3Label = new javax.swing.JLabel();
+        giaVeHang1Label = new javax.swing.JLabel();
+        giaVeHang2Label = new javax.swing.JLabel();
+        giaVeHang3Label = new javax.swing.JLabel();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         sanBayPane = new javax.swing.JPanel();
         sanBayTGPane1 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        quocGiaSanBayDiLabel = new javax.swing.JLabel();
+        maSanBayDiLabel = new javax.swing.JLabel();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30));
         sanBayTGPane2 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        quocGiaSanBayDenLabel = new javax.swing.JLabel();
+        maSanBayDenLabel = new javax.swing.JLabel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         sanBayTGPane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,8 +142,13 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(56, 89, 98));
-        jLabel1.setText("| Chi tiết chuyến bay MS001");
+        jLabel1.setText("| Chi tiết chuyến bay ");
         titlePane.add(jLabel1);
+
+        titleLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(56, 89, 98));
+        titleLabel.setText("MS001");
+        titlePane.add(titleLabel);
         titlePane.add(filler15);
 
         submitButton.setBackground(new java.awt.Color(204, 204, 0));
@@ -194,34 +194,34 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         chuyenBayPane.setLayout(new javax.swing.BoxLayout(chuyenBayPane, javax.swing.BoxLayout.LINE_AXIS));
         chuyenBayPane.add(filler3);
 
-        maCBLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        maCBLabel.setText("Mã chuyến bay:");
-        chuyenBayPane.add(maCBLabel);
+        maCBLabelPre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maCBLabelPre.setText("Mã chuyến bay:");
+        chuyenBayPane.add(maCBLabelPre);
         chuyenBayPane.add(filler4);
 
-        maCBLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        maCBLabel1.setText("MS001");
-        chuyenBayPane.add(maCBLabel1);
+        maCBLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maCBLabel.setText("MS001");
+        chuyenBayPane.add(maCBLabel);
         chuyenBayPane.add(filler5);
 
-        thoiDiemKhoiHanhLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        thoiDiemKhoiHanhLabel.setText("Thời điểm khởi hành:");
-        chuyenBayPane.add(thoiDiemKhoiHanhLabel);
+        thoiDiemKhoiHanhLabelPre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiDiemKhoiHanhLabelPre.setText("Thời điểm khởi hành:");
+        chuyenBayPane.add(thoiDiemKhoiHanhLabelPre);
         chuyenBayPane.add(filler7);
 
-        maCBLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        maCBLabel2.setText("10/10/2020 6:00");
-        chuyenBayPane.add(maCBLabel2);
+        thoiDiemKhoiHanhLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiDiemKhoiHanhLabel.setText("10/10/2020 6:00");
+        chuyenBayPane.add(thoiDiemKhoiHanhLabel);
         chuyenBayPane.add(filler8);
 
-        thoiGianBayLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        thoiGianBayLabel.setText("Thời gian bay:");
-        chuyenBayPane.add(thoiGianBayLabel);
+        thoiGianBayLabelPre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiGianBayLabelPre.setText("Thời gian bay:");
+        chuyenBayPane.add(thoiGianBayLabelPre);
         chuyenBayPane.add(filler9);
 
-        thoiGianBayLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        thoiGianBayLabel1.setText("3.5 giờ");
-        chuyenBayPane.add(thoiGianBayLabel1);
+        thoiGianBayLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiGianBayLabel.setText("3.5 giờ");
+        chuyenBayPane.add(thoiGianBayLabel);
         chuyenBayPane.add(filler10);
 
         containerChuyenBayPane.add(chuyenBayPane);
@@ -267,26 +267,29 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Giá vé: ");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel17.setText("40");
+        soGheLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soGheLabel.setText("40");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel18.setText("40");
+        soGheHang1Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soGheHang1Label.setText("40");
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel19.setText("40");
+        soGheHang2Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soGheHang2Label.setText("40");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel20.setText("40");
+        soGheHang3Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        soGheHang3Label.setText("40");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel21.setText("400.000");
+        giaVeHang1Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeHang1Label.setText("0");
+        giaVeHang1Label.setText("");
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel22.setText("500.000");
+        giaVeHang2Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeHang2Label.setText("0");
+        giaVeHang2Label.setText("");
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel23.setText("600.000");
+        giaVeHang3Label.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        giaVeHang3Label.setText("0");
+        giaVeHang3Label.setText("");
 
         javax.swing.GroupLayout hangVePaneLayout = new javax.swing.GroupLayout(hangVePane);
         hangVePane.setLayout(hangVePaneLayout);
@@ -300,7 +303,7 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                             .addGroup(hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel17))
+                                .addComponent(soGheLabel))
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)))
                     .addGroup(hangVePaneLayout.createSequentialGroup()
@@ -309,12 +312,12 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hangVePaneLayout.createSequentialGroup()
-                        .addComponent(jLabel20)
+                        .addComponent(soGheHang3Label)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(hangVePaneLayout.createSequentialGroup()
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel19))
+                            .addComponent(soGheHang1Label)
+                            .addComponent(soGheHang2Label))
                         .addGap(70, 70, 70)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hangVePaneLayout.createSequentialGroup()
@@ -323,12 +326,12 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                                     .addComponent(jLabel11))
                                 .addGap(20, 20, 20)
                                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel23)))
+                                    .addComponent(giaVeHang2Label)
+                                    .addComponent(giaVeHang3Label)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hangVePaneLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(20, 20, 20)
-                                .addComponent(jLabel21)))
+                                .addComponent(giaVeHang1Label)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         hangVePaneLayout.setVerticalGroup(
@@ -339,26 +342,26 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel17))
+                            .addComponent(soGheLabel))
                         .addGap(30, 30, 30)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel21))
+                            .addComponent(soGheHang1Label)
+                            .addComponent(giaVeHang1Label))
                         .addGap(30, 30, 30)
                         .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel22)))
+                            .addComponent(giaVeHang2Label)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jLabel19)))
+                        .addComponent(soGheHang2Label)))
                 .addGap(30, 30, 30)
                 .addGroup(hangVePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel20)
+                    .addComponent(soGheHang3Label)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel23))
+                    .addComponent(giaVeHang3Label))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
@@ -382,11 +385,11 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Mã sân bay: ");
 
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel24.setText("Việt Nam");
+        quocGiaSanBayDiLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        quocGiaSanBayDiLabel.setText("Việt Nam");
 
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel25.setText("VN2001");
+        maSanBayDiLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maSanBayDiLabel.setText("VN2001");
 
         javax.swing.GroupLayout sanBayTGPane1Layout = new javax.swing.GroupLayout(sanBayTGPane1);
         sanBayTGPane1.setLayout(sanBayTGPane1Layout);
@@ -399,8 +402,8 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                     .addComponent(jLabel14))
                 .addGap(25, 25, 25)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
+                    .addComponent(quocGiaSanBayDiLabel)
+                    .addComponent(maSanBayDiLabel))
                 .addContainerGap(331, Short.MAX_VALUE))
         );
         sanBayTGPane1Layout.setVerticalGroup(
@@ -409,11 +412,11 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel24))
+                    .addComponent(quocGiaSanBayDiLabel))
                 .addGap(30, 30, 30)
                 .addGroup(sanBayTGPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel25))
+                    .addComponent(maSanBayDiLabel))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -433,11 +436,11 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel16.setText("Mã sân bay: ");
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel26.setText("Mỹ");
+        quocGiaSanBayDenLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        quocGiaSanBayDenLabel.setText("Mỹ");
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel27.setText("US303");
+        maSanBayDenLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        maSanBayDenLabel.setText("US303");
 
         javax.swing.GroupLayout sanBayTGPane2Layout = new javax.swing.GroupLayout(sanBayTGPane2);
         sanBayTGPane2.setLayout(sanBayTGPane2Layout);
@@ -450,8 +453,8 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                     .addComponent(jLabel16))
                 .addGap(25, 25, 25)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel27))
+                    .addComponent(quocGiaSanBayDenLabel)
+                    .addComponent(maSanBayDenLabel))
                 .addContainerGap(351, Short.MAX_VALUE))
         );
         sanBayTGPane2Layout.setVerticalGroup(
@@ -460,11 +463,11 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jLabel26))
+                    .addComponent(quocGiaSanBayDenLabel))
                 .addGap(30, 30, 30)
                 .addGroup(sanBayTGPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel27))
+                    .addComponent(maSanBayDenLabel))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -550,6 +553,9 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler7;
     private javax.swing.Box.Filler filler8;
     private javax.swing.Box.Filler filler9;
+    private javax.swing.JLabel giaVeHang1Label;
+    private javax.swing.JLabel giaVeHang2Label;
+    private javax.swing.JLabel giaVeHang3Label;
     private javax.swing.JPanel hangVePane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -559,17 +565,6 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -579,17 +574,79 @@ public class ChiTietChuyenBayPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel maCBLabel;
-    private javax.swing.JLabel maCBLabel1;
-    private javax.swing.JLabel maCBLabel2;
+    private javax.swing.JLabel maCBLabelPre;
+    private javax.swing.JLabel maSanBayDenLabel;
+    private javax.swing.JLabel maSanBayDiLabel;
+    private javax.swing.JLabel quocGiaSanBayDenLabel;
+    private javax.swing.JLabel quocGiaSanBayDiLabel;
     private javax.swing.JPanel sanBayPane;
     private javax.swing.JPanel sanBayTGInnerPane;
     private javax.swing.JPanel sanBayTGPane;
     private javax.swing.JPanel sanBayTGPane1;
     private javax.swing.JPanel sanBayTGPane2;
+    private javax.swing.JLabel soGheHang1Label;
+    private javax.swing.JLabel soGheHang2Label;
+    private javax.swing.JLabel soGheHang3Label;
+    private javax.swing.JLabel soGheLabel;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel thoiDiemKhoiHanhLabel;
+    private javax.swing.JLabel thoiDiemKhoiHanhLabelPre;
     private javax.swing.JLabel thoiGianBayLabel;
-    private javax.swing.JLabel thoiGianBayLabel1;
+    private javax.swing.JLabel thoiGianBayLabelPre;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePane;
     // End of variables declaration//GEN-END:variables
+
+    private void fillUpData() {
+        titleLabel.setText(idCB);
+        maCBLabel.setText(idCB);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        thoiDiemKhoiHanhLabel.setText(sdf.format(chuyenbay.getNgayKhoiHanh()));
+        thoiGianBayLabel.setText(chuyenbay.getThoiGianBay() + " giờ");
+
+        quocGiaSanBayDiLabel.setText(chuyenbay.getSanbaydi().getQuocGia());
+        maSanBayDiLabel.setText(chuyenbay.getSanbaydi().getThanhPho() + " (" + chuyenbay.getSanbaydi().getMaSb() + ")");
+
+        quocGiaSanBayDenLabel.setText(chuyenbay.getSanbayden().getQuocGia());
+        maSanBayDenLabel.setText(chuyenbay.getSanbayden().getThanhPho() + " (" + chuyenbay.getSanbayden().getMaSb() + ")");
+
+        int valueH1 = VechuyenbayBUS.getSoVeTheoHangCB(idCB, "hv_pt");
+        int valueH2 = VechuyenbayBUS.getSoVeTheoHangCB(idCB, "hv_ptdb");
+        int valueH3 = VechuyenbayBUS.getSoVeTheoHangCB(idCB, "hv_tg");
+
+        soGheHang1Label.setText("" + valueH1);
+        soGheHang2Label.setText("" + valueH2);
+        soGheHang3Label.setText("" + valueH3);
+
+        if (valueH1 > 0) {
+            Double giaHangVe1 = GiahangvetheocbBUS.getGia(idCB, "hv_pt");
+            giaVeHang1Label.setText("" + giaHangVe1);
+        }
+        if (valueH2 > 0) {
+            Double giaHangVe2 = GiahangvetheocbBUS.getGia(idCB, "hv_ptdb");
+            giaVeHang2Label.setText("" + giaHangVe2);
+        }
+        if (valueH3 > 0) {
+            Double giaHangVe3 = GiahangvetheocbBUS.getGia(idCB, "hv_tg");
+            giaVeHang3Label.setText("" + giaHangVe3);
+        }
+
+        int stt = 1;
+        for (Object sanbaytrunggian: chuyenbay.getSanbaytrunggians()){
+            Sanbaytrunggian sbtg = (Sanbaytrunggian) sanbaytrunggian;
+            SanBayTrungGianItemViewPane sbtgivp = new SanBayTrungGianItemViewPane();
+            sbtgivp.setMaximumSize(new Dimension(520, 50));
+            sbtgivp.setPreferredSize(new Dimension(520, 50));
+            sbtgivp.setAlignmentX(0);
+
+            sbtgivp.setTitle(stt);
+            sbtgivp.fillUpdata(sbtg);
+
+            sanBayTGInnerPane.add(sbtgivp);
+            listSBTGItemPanes.add(sbtgivp);
+
+            stt++;
+        }
+
+    }
 }

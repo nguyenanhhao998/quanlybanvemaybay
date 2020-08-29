@@ -37,11 +37,28 @@ public class GiahangvetheocbBUS {
         List<Hangve> listHangves = HangveDAO.getAll();
         for (int i = 0; i < 3; i++) {
             if (listSoLuongVeTheoHang.get(i) > 0) {
-                GiahangvetheocbDAO.themGiaHangVeTheoChuyenBay(maCb, listHangves.get(i).getMaHangVe(), giaVeTheoHang.get(i));
+                GiahangvetheocbDAO.updateGiaHangVeTheoChuyenBay(maCb, listHangves.get(i).getMaHangVe(), giaVeTheoHang.get(i));
             }
         }
 
         return true;
+    }
+
+    static boolean updateGiaHangVeTheoChuyenBay(String maCb, List<Integer> listSoLuongVeTheoHang, List<Double> listGiaVeTheoHang) {
+        List<Hangve> listHangves = HangveDAO.getAll();
+        for (int i = 0; i < 3; i++) {
+            if (listSoLuongVeTheoHang.get(i) > 0) {
+                GiahangvetheocbDAO.updateGiaHangVeTheoChuyenBay(maCb, listHangves.get(i).getMaHangVe(), listGiaVeTheoHang.get(i));
+            } else {
+                GiahangvetheocbBUS.xoaGiaHangVeTheoChuyenBay(maCb, listHangves.get(i).getMaHangVe());
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean xoaGiaHangVeTheoChuyenBay(String maCb, String maHangVe) {
+        return GiahangvetheocbDAO.xoaGiaHangVeTheoChuyenBay(maCb, maHangVe);
     }
 
 }
