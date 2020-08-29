@@ -5,12 +5,18 @@
  */
 package ui.admin.quanlynhanvien;
 
+import bus.NhanvienBUS;
+import bus.TaikhoanBUS;
 import ui.admin.quanlycb.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
+import pojos.Nhanvien;
+import pojos.Taikhoan;
 import util.ui.ImageIconUtil;
 
 /**
@@ -26,10 +32,16 @@ public class EditNhanVienPane extends javax.swing.JPanel {
     private Integer idNv;
     private QuanLyNhanVienPane quanLyNhanVienPane;
 
+    private Nhanvien nhanvien;
+
     public EditNhanVienPane(Integer idNv, QuanLyNhanVienPane rootPane) {
         this.idNv = idNv;
         this.quanLyNhanVienPane = rootPane;
         initComponents();
+
+        nhanvien = NhanvienBUS.getNhanvienById(idNv);
+
+        fillUpData();
     }
 
     /**
@@ -45,6 +57,7 @@ public class EditNhanVienPane extends javax.swing.JPanel {
         backButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         submitButton = new javax.swing.JButton();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(80, 0), new java.awt.Dimension(80, 0), new java.awt.Dimension(80, 0));
@@ -52,21 +65,21 @@ public class EditNhanVienPane extends javax.swing.JPanel {
         contentPane = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        hoTenField = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        tenDangNhapField = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        ngaySinhChooser = new com.toedter.calendar.JDateChooser();
         jLabel27 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        tinhTrangCbb = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        sdtField = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        cmndField = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        gioiTinhCbb = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
 
@@ -96,8 +109,13 @@ public class EditNhanVienPane extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(56, 89, 98));
-        jLabel1.setText("| Cập nhật nhân viên Nguyễn Anh Hào");
+        jLabel1.setText("| Cập nhật nhân viên ");
         titlePane.add(jLabel1);
+
+        titleLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(56, 89, 98));
+        titleLabel.setText("Nguyễn Anh Hào");
+        titlePane.add(titleLabel);
         titlePane.add(filler15);
 
         submitButton.setBackground(new java.awt.Color(140, 197, 66));
@@ -131,29 +149,29 @@ public class EditNhanVienPane extends javax.swing.JPanel {
         jLabel24.setForeground(new java.awt.Color(56, 89, 98));
         jLabel24.setText("Họ Tên: ");
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        hoTenField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(56, 89, 98));
         jLabel25.setText("Tên đăng nhập:");
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tenDangNhapField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(56, 89, 98));
         jLabel26.setText("Ngày sinh: ");
 
-        jDateChooser2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        ngaySinhChooser.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(56, 89, 98));
         jLabel27.setText("Giới tính:");
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hoạt động", "Nghỉ việc" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        tinhTrangCbb.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        tinhTrangCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang hoạt động", "Nghỉ việc" }));
+        tinhTrangCbb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                tinhTrangCbbActionPerformed(evt);
             }
         });
 
@@ -161,22 +179,22 @@ public class EditNhanVienPane extends javax.swing.JPanel {
         jLabel28.setForeground(new java.awt.Color(56, 89, 98));
         jLabel28.setText("Số điện thoại: ");
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        sdtField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(56, 89, 98));
         jLabel29.setText("Số CMND:");
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        cmndField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(56, 89, 98));
         jLabel30.setText("Email:");
 
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        emailField.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
 
@@ -184,8 +202,8 @@ public class EditNhanVienPane extends javax.swing.JPanel {
         jLabel31.setForeground(new java.awt.Color(56, 89, 98));
         jLabel31.setText("Tình trạng:");
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        gioiTinhCbb.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        gioiTinhCbb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,7 +216,7 @@ public class EditNhanVienPane extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel31)
                             .addGap(51, 51, 51)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tinhTrangCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel26)
@@ -206,27 +224,27 @@ public class EditNhanVienPane extends javax.swing.JPanel {
                                 .addComponent(jLabel24))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(hoTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sdtField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ngaySinhChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(138, 138, 138)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel29)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmndField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel25)
                                         .addComponent(jLabel27))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(gioiTinhCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tenDangNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel30)
                         .addGap(101, 101, 101)
-                        .addComponent(jTextField10)))
+                        .addComponent(emailField)))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -235,32 +253,33 @@ public class EditNhanVienPane extends javax.swing.JPanel {
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hoTenField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tenDangNhapField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(ngaySinhChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(12, 12, 12)
                             .addComponent(jLabel26)))
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(gioiTinhCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel27)))
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sdtField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmndField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tinhTrangCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75))
         );
 
@@ -299,29 +318,65 @@ public class EditNhanVienPane extends javax.swing.JPanel {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        String hoTen = hoTenField.getText();
+        String tenDangNhap = tenDangNhapField.getText();
+        Date ngaySinh = ngaySinhChooser.getDate();
+        String gioiTinh = (String) gioiTinhCbb.getSelectedItem();
+        String sdt = sdtField.getText();
+        String cmnd = cmndField.getText();
+        String email = emailField.getText();
+        String tinhTrang = (String) tinhTrangCbb.getSelectedItem();
+
+        if (hoTen.isEmpty() || tenDangNhap.isEmpty() || ngaySinh == null || sdt.isEmpty() || cmnd.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vui lòng nhập đầy đủ thông tin");
+            return;
+        }
+
+        if (!tenDangNhap.equals(nhanvien.getTaikhoan().getTenTaiKhoan())){
+            int id = TaikhoanBUS.checkAccount(tenDangNhap);
+            if (id != 0) {
+                JOptionPane.showMessageDialog(null, "Đã tồn tại tên đăng nhập " + tenDangNhap);
+                return;
+            }
+        }
+        nhanvien.setHoTen(hoTen);
+        nhanvien.setGioiTinh(gioiTinh);
+        nhanvien.setSdt(sdt);
+        nhanvien.setEmail(email);
+        nhanvien.setCmnd(cmnd);
+        nhanvien.setTrangThai(tinhTrang);
+
+        nhanvien.getTaikhoan().setTenTaiKhoan(tenDangNhap);
+
+        NhanvienBUS.themOrUpdateNhanvien(nhanvien);
+
+        quanLyNhanVienPane.proceedToFilter();
         quanLyNhanVienPane.getParentPane().remove(this);
+
+        JOptionPane.showMessageDialog(null, "Đã cập nhật thông tin nhân viên " + hoTen);
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_emailFieldActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void tinhTrangCbbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tinhTrangCbbActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_tinhTrangCbbActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JTextField cmndField;
     private javax.swing.JPanel containerContentPane;
     private javax.swing.JPanel contentPane;
+    private javax.swing.JTextField emailField;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler15;
     private javax.swing.Box.Filler filler16;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JComboBox<String> gioiTinhCbb;
+    private javax.swing.JTextField hoTenField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -334,12 +389,28 @@ public class EditNhanVienPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private com.toedter.calendar.JDateChooser ngaySinhChooser;
+    private javax.swing.JTextField sdtField;
     private javax.swing.JButton submitButton;
+    private javax.swing.JTextField tenDangNhapField;
+    private javax.swing.JComboBox<String> tinhTrangCbb;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePane;
     // End of variables declaration//GEN-END:variables
+
+    private void fillUpData() {
+        titleLabel.setText(nhanvien.getHoTen());
+
+        hoTenField.setText(nhanvien.getHoTen());
+        tenDangNhapField.setText(nhanvien.getTaikhoan().getTenTaiKhoan());
+        ngaySinhChooser.setDate(nhanvien.getNgaySinh());
+
+        gioiTinhCbb.setSelectedIndex(nhanvien.getGioiTinh().equals("Nam") ? 0 : 1);
+        sdtField.setText(nhanvien.getSdt());
+        cmndField.setText(nhanvien.getCmnd());
+        emailField.setText(nhanvien.getEmail());
+
+        tinhTrangCbb.setSelectedIndex(nhanvien.getTrangThai().equals("Đang hoạt động") ? 0 : 1);
+
+    }
 }

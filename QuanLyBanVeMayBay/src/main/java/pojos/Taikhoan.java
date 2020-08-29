@@ -22,7 +22,12 @@ public class Taikhoan  implements java.io.Serializable {
        this.tenTaiKhoan = tenTaiKhoan;
        this.matKhau = matKhau;
     }
-   
+
+    public Taikhoan(String tenDangNhap, String matKhau) {
+        this.tenTaiKhoan = tenTaiKhoan;
+        this.matKhau = matKhau;
+    }
+
     public int getIdNhanVien() {
         return this.idNhanVien;
     }

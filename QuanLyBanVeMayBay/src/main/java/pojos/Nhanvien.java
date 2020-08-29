@@ -39,7 +39,17 @@ public class Nhanvien  implements java.io.Serializable {
         this.email = email;
         this.trangThai = trangThai;
     }
-   
+
+    public Nhanvien(String hoTen, String gioiTinh, Date ngaySinh, String sdt, String cmnd, String email, String tenDangNhap) {
+        this.hoTen = hoTen;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.cmnd = cmnd;
+        this.email = email;
+        this.trangThai = "Đang hoạt động";
+    }
+
     public Integer getIdNhanVien() {
         return this.idNhanVien;
     }

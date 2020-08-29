@@ -25,6 +25,7 @@ import pojos.Giahangvetheocb;
 import pojos.Phieucho;
 import pojos.Vechuyenbay;
 import util.HibernateUtil;
+import util.ui.DateUtil;
 
 /**
  *
@@ -126,4 +127,50 @@ public class ChuyenbayBUS {
     public static boolean huyChuyenBay(String maCb) {
         return ChuyenbayDAO.huyChuyenBay(maCb);
     }
+
+    public static Integer getSoLuongChuyenBayTrongKhoangThoiGian(Date from, Date to) {
+        Integer res = 0;
+        res = ChuyenbayDAO.getSoLuongChuyenBayTrongKhoangThoiGian(from, to);
+        return res;
+    }
+
+    public static List<Integer> getListSoChuyenBayTungThang(Date from, Date to) {
+        List<Integer> listSoLuong = new ArrayList<>();
+
+        Date curStart, curEnd;
+        curStart = DateUtil.getTheBeginningOfCurrentMonth(from);
+        curEnd = DateUtil.getTheEndOfCurrentMonth(from);
+
+        while (true) {
+            if (curStart.compareTo(to) > 0) {
+                break;
+            }
+            int nextMonthRes = getSoLuongChuyenBayTrongKhoangThoiGian(curStart, curEnd);
+            listSoLuong.add(nextMonthRes);
+
+            curStart = DateUtil.getTheBeginningOfNextMonth(curStart);
+            curEnd = DateUtil.getTheEndOfCurrentMonth(curStart);
+        }
+
+        return listSoLuong;
+    }
+
+    public static List<Integer> getListSoChuyenBayTungNam(int from, int to) {
+        List<Integer> listSoLuong = new ArrayList<>();
+
+        Date curStart, curEnd;
+
+        for (int i = from; i <= to; i++) {
+
+            curStart = DateUtil.getTheBeginningOfCurrentYear(i);
+            curEnd = DateUtil.getTheEndOfCurrentYear(i);
+
+            int nextMonthRes = getSoLuongChuyenBayTrongKhoangThoiGian(curStart, curEnd);
+            listSoLuong.add(nextMonthRes);
+
+        }
+
+        return listSoLuong;
+    }
+
 }

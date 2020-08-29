@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojos.Nhanvien;
 import util.HibernateUtil;
 
@@ -62,10 +63,8 @@ public class NhanvienDAO {
             }
 
             String hql = String.format("select nv from Nhanvien nv where %s LIKE '%%%s%%'", criteria, keyWord);
-            System.out.println(hql);
             Query query = session.createQuery(hql);
             listNhanviens = query.list();
-            System.out.println("DAo size ========================= " + listNhanviens.size());
 
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -73,5 +72,71 @@ public class NhanvienDAO {
 
         return listNhanviens;
 
+    }
+
+    public static boolean themOrUpdateNhanvien(Nhanvien nv) {
+        boolean res = true;
+
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.saveOrUpdate(nv);
+
+            transaction.commit();
+
+        } catch (HibernateException ex) {
+            res = false;
+            transaction.rollback();
+            ex.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return res;
+    }
+
+    public static Nhanvien getNhanvienById(Integer idNhanVien) {
+
+        Nhanvien nv = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = String.format("From Nhanvien nv where nv.idNhanVien = '%s'", idNhanVien);
+            Query query = session.createQuery(hql);
+            nv = (Nhanvien) query.uniqueResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nv;
+
+    }
+
+    public static boolean deleteNhanvien(Nhanvien nhanvien) {
+        boolean res = true;
+
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            session.delete(nhanvien);
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            res = false;
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+
+        return res;
     }
 }

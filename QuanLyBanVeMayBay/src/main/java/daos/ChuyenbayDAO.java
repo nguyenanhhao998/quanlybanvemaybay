@@ -247,4 +247,25 @@ public class ChuyenbayDAO {
         return res;
     }
 
+    public static Integer getSoLuongChuyenBayTrongKhoangThoiGian(Date from, Date to) {
+        Integer res = 0;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            String hql = String.format("SELECT COUNT(*)"
+                    + " FROM Chuyenbay cb"
+                    + " WHERE cb.ngayKhoiHanh >= '%s' AND cb.ngayKhoiHanh <= '%s'",
+                    df.format(from), df.format(to));
+
+            Query query = session.createQuery(hql);
+            Long lres = (Long) query.uniqueResult();
+            res = lres.intValue();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
 }

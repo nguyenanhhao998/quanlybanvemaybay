@@ -5,10 +5,16 @@
  */
 package ui.admin.statistic;
 
+import bus.ChuyenbayBUS;
+import bus.HoadonmuaveBUS;
+import daos.ChuyenbayDAO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,7 +24,10 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import util.ui.CustomCenterAlignmentRenderer;
+import util.ui.CustomDateRenderer;
 import util.ui.CustomLeftAlignmentRenderer;
+import util.ui.CustomMonthRenderer;
+import util.ui.DateUtil;
 
 /**
  *
@@ -39,7 +48,7 @@ public class BCDTThangPane extends javax.swing.JPanel {
         initComponents();
 
         setupTable();
-        setupModelForTable();
+        setupControl();
     }
 
     /**
@@ -56,15 +65,15 @@ public class BCDTThangPane extends javax.swing.JPanel {
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
         monthSpinnerFrom = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        yearChoosesFrom = new com.toedter.calendar.JYearChooser();
+        yearChooserFrom = new com.toedter.calendar.JYearChooser();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
         jPanel12 = new javax.swing.JPanel();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        monthSpinnerFrom1 = new javax.swing.JSpinner();
+        monthSpinnerTo = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-        yearChoosesFrom1 = new com.toedter.calendar.JYearChooser();
+        yearChooserTo = new com.toedter.calendar.JYearChooser();
         filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        addButton = new javax.swing.JButton();
+        processButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         titlePane = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
@@ -102,7 +111,6 @@ public class BCDTThangPane extends javax.swing.JPanel {
 
         jPanel10.setBackground(new java.awt.Color(250, 250, 250));
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Từ tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16))); // NOI18N
-        jPanel10.setAlignmentY(0.5F);
         jPanel10.setMaximumSize(new java.awt.Dimension(300, 70));
         jPanel10.setMinimumSize(new java.awt.Dimension(250, 70));
         jPanel10.setPreferredSize(new java.awt.Dimension(300, 70));
@@ -119,10 +127,10 @@ public class BCDTThangPane extends javax.swing.JPanel {
         jLabel1.setText(" / ");
         jPanel10.add(jLabel1);
 
-        yearChoosesFrom.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        yearChoosesFrom.setMaximumSize(new java.awt.Dimension(150, 40));
-        yearChoosesFrom.setPreferredSize(new java.awt.Dimension(150, 40));
-        jPanel10.add(yearChoosesFrom);
+        yearChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        yearChooserFrom.setMaximumSize(new java.awt.Dimension(150, 40));
+        yearChooserFrom.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel10.add(yearChooserFrom);
 
         jPanel5.add(jPanel10);
         jPanel5.add(filler3);
@@ -135,36 +143,36 @@ public class BCDTThangPane extends javax.swing.JPanel {
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
         jPanel12.add(filler16);
 
-        monthSpinnerFrom1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        monthSpinnerFrom1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-        monthSpinnerFrom1.setMaximumSize(new java.awt.Dimension(100, 40));
-        monthSpinnerFrom1.setPreferredSize(new java.awt.Dimension(100, 40));
-        jPanel12.add(monthSpinnerFrom1);
+        monthSpinnerTo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        monthSpinnerTo.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        monthSpinnerTo.setMaximumSize(new java.awt.Dimension(100, 40));
+        monthSpinnerTo.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel12.add(monthSpinnerTo);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText(" / ");
         jPanel12.add(jLabel2);
 
-        yearChoosesFrom1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        yearChoosesFrom1.setMaximumSize(new java.awt.Dimension(150, 40));
-        yearChoosesFrom1.setPreferredSize(new java.awt.Dimension(150, 40));
-        jPanel12.add(yearChoosesFrom1);
+        yearChooserTo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        yearChooserTo.setMaximumSize(new java.awt.Dimension(150, 40));
+        yearChooserTo.setPreferredSize(new java.awt.Dimension(150, 40));
+        jPanel12.add(yearChooserTo);
 
         jPanel5.add(jPanel12);
         jPanel5.add(filler14);
 
-        addButton.setBackground(new java.awt.Color(140, 197, 66));
-        addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Tìm kiếm");
-        addButton.setMaximumSize(new java.awt.Dimension(250, 50));
-        addButton.setPreferredSize(new java.awt.Dimension(250, 50));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        processButton.setBackground(new java.awt.Color(140, 197, 66));
+        processButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        processButton.setForeground(new java.awt.Color(255, 255, 255));
+        processButton.setText("Tìm kiếm");
+        processButton.setMaximumSize(new java.awt.Dimension(250, 50));
+        processButton.setPreferredSize(new java.awt.Dimension(250, 50));
+        processButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                processButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(addButton);
+        jPanel5.add(processButton);
 
         add(jPanel5, java.awt.BorderLayout.PAGE_START);
 
@@ -262,13 +270,38 @@ public class BCDTThangPane extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
 
-    }//GEN-LAST:event_addButtonActionPerformed
+        Date from, to;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, yearChooserFrom.getYear());
+        calendar.set(Calendar.MONTH, (Integer) monthSpinnerFrom.getValue() - 1);
+        from = calendar.getTime();
+
+        calendar.set(Calendar.YEAR, yearChooserTo.getYear());
+        calendar.set(Calendar.MONTH, (Integer) monthSpinnerTo.getValue() - 1);
+        to = calendar.getTime();
+
+        List<Date> listDates = DateUtil.getListDateStepByEachMonth(from, to);
+        List<Integer> listSoLuongChuyenBay = ChuyenbayBUS.getListSoChuyenBayTungThang(from, to);
+        List<Integer> listDoanhSo = HoadonmuaveBUS.getListSoVeBanDuocTungThang(from, to);
+        List<Double> listDoanhThu = HoadonmuaveBUS.getListDoanhThuTungThang(from, to);
+
+
+        dtm.setRowCount(0);
+        for (int i = 0; i < listDates.size(); i++) {
+            dtm.addRow(new Object[]{
+                listDates.get(i),
+                listSoLuongChuyenBay.get(i),
+                listDoanhSo.get(i),
+                listDoanhThu.get(i)
+            });
+        }
+
+    }//GEN-LAST:event_processButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler13;
     private javax.swing.Box.Filler filler14;
@@ -286,18 +319,20 @@ public class BCDTThangPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSpinner monthSpinnerFrom;
-    private javax.swing.JSpinner monthSpinnerFrom1;
+    private javax.swing.JSpinner monthSpinnerTo;
+    private javax.swing.JButton processButton;
     private javax.swing.JTable table;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePane;
-    private com.toedter.calendar.JYearChooser yearChoosesFrom;
-    private com.toedter.calendar.JYearChooser yearChoosesFrom1;
+    private com.toedter.calendar.JYearChooser yearChooserFrom;
+    private com.toedter.calendar.JYearChooser yearChooserTo;
     // End of variables declaration//GEN-END:variables
 
     private void setupTable() {
         setupModelForTable();
         setupUIForTable();
+        
     }
 
     private void setupModelForTable() {
@@ -306,7 +341,7 @@ public class BCDTThangPane extends javax.swing.JPanel {
                 "Tháng", "Tổng chuyến bay", "Tổng số vé bán ra", "Tổng doanh thu"
             };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                Date.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             @Override
@@ -330,10 +365,10 @@ public class BCDTThangPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"10/2019", 345, 27230, 30202203});
-        dtm.addRow(new Object[]{"11/2019", 620, 32032, 20203403});
-        dtm.addRow(new Object[]{"12/2019", 376, 25000, 32322203});
-        dtm.addRow(new Object[]{"01/2020", 655, 40230, 40123203});
+//        dtm.addRow(new Object[]{"10/2019", 345, 27230, 30202203});
+//        dtm.addRow(new Object[]{"11/2019", 620, 32032, 20203403});
+//        dtm.addRow(new Object[]{"12/2019", 376, 25000, 32322203});
+//        dtm.addRow(new Object[]{"01/2020", 655, 40230, 40123203});
 
         table.setModel(dtm);
 
@@ -351,7 +386,8 @@ public class BCDTThangPane extends javax.swing.JPanel {
                 tableColumnModel.getColumn(2).setPreferredWidth(250);
                 tableColumnModel.getColumn(3).setPreferredWidth(300);
 
-                for (int i = 0; i < 4; i++) {
+                tableColumnModel.getColumn(0).setCellRenderer(new CustomMonthRenderer());
+                for (int i = 1; i < 4; i++) {
                     tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
                 }
 
@@ -378,6 +414,16 @@ public class BCDTThangPane extends javax.swing.JPanel {
     private void setSorterTable() {
         sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);
+    }
+
+    private void setupControl() {
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        monthSpinnerFrom.setValue(date.getMonth() + 1);
+        yearChooserFrom.setYear(c.get(Calendar.YEAR));
+        monthSpinnerTo.setValue(date.getMonth() + 1);
+        yearChooserTo.setYear(c.get(Calendar.YEAR));
     }
 
 }

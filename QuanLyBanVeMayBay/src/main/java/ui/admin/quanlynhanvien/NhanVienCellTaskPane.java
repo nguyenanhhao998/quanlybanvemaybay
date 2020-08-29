@@ -5,10 +5,12 @@
  */
 package ui.admin.quanlynhanvien;
 
+import bus.NhanvienBUS;
 import ui.admin.quanlycb.*;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -80,7 +82,20 @@ public class NhanVienCellTaskPane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
+        JTable table = (JTable) SwingUtilities.getAncestorOfClass(JTable.class, (Component) evt.getSource());
+        int row = table.getEditingRow();
+        Integer idNhanVien = (Integer) table.getValueAt(row, 0);
+        String hoTen = (String) table.getValueAt(row, 1);
+
+        int res = JOptionPane.showConfirmDialog(null, String.format("Bạn thực sự muốn xóa nhân viên %s ?", hoTen), "", JOptionPane.YES_NO_OPTION);
+
+        if (res == 0) {
+            NhanvienBUS.deleteNhanvienById(idNhanVien);
+            QuanLyNhanVienPane quanLyNhanVienPane = (QuanLyNhanVienPane) SwingUtilities.getAncestorOfClass(QuanLyNhanVienPane.class, (Component) evt.getSource());
+            quanLyNhanVienPane.proceedToFilter();
+            table.removeEditor();
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseEntered

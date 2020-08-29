@@ -26,6 +26,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import pojos.Nhanvien;
+import pojos.Taikhoan;
 
 import util.ui.CustomCenterAlignmentRenderer;
 import util.ui.CustomDateRenderer;
@@ -417,11 +418,19 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
             @Override
             public void run() {
                 listNhanviens = NhanvienBUS.getListNhanVien();
+
                 for (Nhanvien nhanvien : listNhanviens) {
+
+                    Taikhoan taikhoan = nhanvien.getTaikhoan();
+                    String tdn = "";
+                    if (taikhoan != null) {
+                        tdn = taikhoan.getTenTaiKhoan();
+                    }
+
                     dtm.addRow(new Object[]{
                         nhanvien.getIdNhanVien(),
                         nhanvien.getHoTen(),
-                        nhanvien.getTaikhoan().getTenTaiKhoan(),
+                        tdn,
                         nhanvien.getGioiTinh(),
                         nhanvien.getNgaySinh(),
                         nhanvien.getSdt(),
@@ -464,21 +473,25 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
             @Override
             public void run() {
 
-                System.out.println("======================================= " + searchCriteria);
-                System.out.println("======================================= " + searchField.getText());
-
                 listNhanviens = NhanvienBUS.getListNhanVien(searchCriteria, searchField.getText());
-
-                System.out.println(listNhanviens.size());
 
                 table.removeEditor();
                 dtm.setRowCount(0);
 
+
+
                 for (Nhanvien nhanvien : listNhanviens) {
+
+                    Taikhoan taikhoan = nhanvien.getTaikhoan();
+                    String tdn = "";
+                    if (taikhoan != null) {
+                        tdn = taikhoan.getTenTaiKhoan();
+                    }
+
                     dtm.addRow(new Object[]{
                         nhanvien.getIdNhanVien(),
                         nhanvien.getHoTen(),
-                        nhanvien.getTaikhoan().getTenTaiKhoan(),
+                        tdn,
                         nhanvien.getGioiTinh(),
                         nhanvien.getNgaySinh(),
                         nhanvien.getSdt(),

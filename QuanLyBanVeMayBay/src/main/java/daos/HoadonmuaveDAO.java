@@ -5,6 +5,9 @@
  */
 package daos;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.NoResultException;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -101,5 +104,47 @@ public class HoadonmuaveDAO {
         }
         
         return res;
+    }
+
+    public static Integer getSoLuongVeBanDuocTrongKhoangThoiGian(Date from, Date to) {
+        Integer res = 0;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            String hql = String.format("SELECT COUNT(*)"
+                    + " FROM Hoadonmuave hd"
+                    + " WHERE hd.ngayMua >= '%s' AND hd.ngayMua <= '%s'",
+                    df.format(from), df.format(to));
+
+            Query query = session.createQuery(hql);
+            Long lres = (Long) query.uniqueResult();
+            res = lres.intValue();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static Double getTongDoanhTrongKhoangThoiGian(Date from, Date to) {
+        Double res = 0d;
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            String hql = String.format("SELECT SUM(hd.giaVe)"
+                    + " FROM Hoadonmuave hd"
+                    + " WHERE hd.ngayMua >= '%s' AND hd.ngayMua <= '%s'",
+                    df.format(from), df.format(to));
+
+            Query query = session.createQuery(hql);
+            res = (Double) query.uniqueResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return (res == null ? 0d : res);
     }
 }

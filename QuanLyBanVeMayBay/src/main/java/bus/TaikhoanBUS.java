@@ -36,4 +36,11 @@ public class TaikhoanBUS {
         }
         return res;
     } 
+
+    public static int checkAccount(String tenDangNhap) {
+        int id = 0;
+        id = TaikhoanDAO.checkAccount(tenDangNhap);
+        return id;
+    }
+
 }

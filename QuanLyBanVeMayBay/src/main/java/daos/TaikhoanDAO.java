@@ -39,4 +39,28 @@ public class TaikhoanDAO {
             id = tk.getIdNhanVien();
         return id;
     }
+
+    public static int checkAccount(String tenDangNhap) {
+        int id = 0;
+        Taikhoan tk = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Taikhoan where tenTaiKhoan = '%s'", tenDangNhap);
+            Query query = session.createQuery(hql);
+            tk = (Taikhoan) query.getSingleResult();
+
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        if (tk != null) {
+            id = tk.getIdNhanVien();
+        }
+        return id;
+    }
 }

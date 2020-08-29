@@ -33,6 +33,6 @@
         </property>
         
         
-        <one-to-one name="taikhoan" class="pojos.Taikhoan" lazy="false"></one-to-one>
+        <one-to-one name="taikhoan" class="pojos.Taikhoan" lazy="false" cascade="save-update, delete"></one-to-one>
     </class>
 </hibernate-mapping>

@@ -5,10 +5,16 @@
  */
 package ui.admin.statistic;
 
+import bus.ChuyenbayBUS;
+import bus.HoadonmuaveBUS;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +23,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import util.ui.CustomCenterAlignmentRenderer;
+import util.ui.CustomYearRenderer;
+import util.ui.DateUtil;
 
 /**
  *
@@ -37,7 +45,7 @@ public class BCDTNamPane extends javax.swing.JPanel {
         initComponents();
 
         setupTable();
-        setupModelForTable();
+        setupControl();
     }
 
     /**
@@ -53,14 +61,14 @@ public class BCDTNamPane extends javax.swing.JPanel {
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        yearChooserFrom = new com.toedter.calendar.JYearChooser();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0), new java.awt.Dimension(40, 0));
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0));
-        jYearChooser2 = new com.toedter.calendar.JYearChooser();
+        yearChooserTo = new com.toedter.calendar.JYearChooser();
         filler14 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        addButton = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         titlePane = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
@@ -105,9 +113,7 @@ public class BCDTNamPane extends javax.swing.JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
         jPanel10.add(jLabel7);
         jPanel10.add(filler13);
-
-        jYearChooser1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jPanel10.add(jYearChooser1);
+        jPanel10.add(yearChooserFrom);
 
         jPanel5.add(jPanel10);
         jPanel5.add(filler3);
@@ -122,25 +128,23 @@ public class BCDTNamPane extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
         jPanel11.add(jLabel8);
         jPanel11.add(filler15);
-
-        jYearChooser2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jPanel11.add(jYearChooser2);
+        jPanel11.add(yearChooserTo);
 
         jPanel5.add(jPanel11);
         jPanel5.add(filler14);
 
-        addButton.setBackground(new java.awt.Color(140, 197, 66));
-        addButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        addButton.setForeground(new java.awt.Color(255, 255, 255));
-        addButton.setText("Tìm kiếm");
-        addButton.setMaximumSize(new java.awt.Dimension(250, 50));
-        addButton.setPreferredSize(new java.awt.Dimension(250, 50));
-        addButton.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setBackground(new java.awt.Color(140, 197, 66));
+        submitButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        submitButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitButton.setText("Tìm kiếm");
+        submitButton.setMaximumSize(new java.awt.Dimension(250, 50));
+        submitButton.setPreferredSize(new java.awt.Dimension(250, 50));
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addButtonActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(addButton);
+        jPanel5.add(submitButton);
 
         add(jPanel5, java.awt.BorderLayout.PAGE_START);
 
@@ -238,13 +242,30 @@ public class BCDTNamPane extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
 
-    }//GEN-LAST:event_addButtonActionPerformed
+        int from = yearChooserFrom.getYear();
+
+        int to = yearChooserTo.getYear();
+
+        List<Date> listDates = DateUtil.getListDateStepByEachYear(from, to);
+        List<Integer> listSoLuongChuyenBay = ChuyenbayBUS.getListSoChuyenBayTungNam(from, to);
+        List<Integer> listDoanhSo = HoadonmuaveBUS.getListSoVeBanDuocTungNam(from, to);
+        List<Double> listDoanhThu = HoadonmuaveBUS.getListDoanhThuTungNam(from, to);
+
+        dtm.setRowCount(0);
+        for (int i = 0; i < listDates.size(); i++) {
+            dtm.addRow(new Object[]{
+                listDates.get(i),
+                listSoLuongChuyenBay.get(i),
+                listDoanhSo.get(i),
+                listDoanhThu.get(i)
+            });
+        }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler13;
     private javax.swing.Box.Filler filler14;
@@ -261,12 +282,13 @@ public class BCDTNamPane extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
-    private com.toedter.calendar.JYearChooser jYearChooser2;
+    private javax.swing.JButton submitButton;
     private javax.swing.JTable table;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JPanel titlePane;
+    private com.toedter.calendar.JYearChooser yearChooserFrom;
+    private com.toedter.calendar.JYearChooser yearChooserTo;
     // End of variables declaration//GEN-END:variables
 
     private void setupTable() {
@@ -280,7 +302,7 @@ public class BCDTNamPane extends javax.swing.JPanel {
                 "Năm", "Tổng chuyến bay", "Tổng số vé bán ra", "Tổng doanh thu"
             };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                Date.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             @Override
@@ -304,9 +326,9 @@ public class BCDTNamPane extends javax.swing.JPanel {
             }
         };
 
-        dtm.addRow(new Object[]{"2018", 345, 27230, 30202203});
-        dtm.addRow(new Object[]{"2019", 620, 32032, 20203403});
-        dtm.addRow(new Object[]{"2020", 376, 25000, 32322203});
+//        dtm.addRow(new Object[]{"2018", 345, 27230, 30202203});
+//        dtm.addRow(new Object[]{"2019", 620, 32032, 20203403});
+//        dtm.addRow(new Object[]{"2020", 376, 25000, 32322203});
 
         table.setModel(dtm);
 
@@ -324,7 +346,8 @@ public class BCDTNamPane extends javax.swing.JPanel {
                 tableColumnModel.getColumn(2).setPreferredWidth(250);
                 tableColumnModel.getColumn(3).setPreferredWidth(300);
 
-                for (int i = 0; i < 4; i++) {
+                tableColumnModel.getColumn(0).setCellRenderer(new CustomYearRenderer());
+                for (int i = 1; i < 4; i++) {
                     tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
                 }
 
@@ -351,5 +374,14 @@ public class BCDTNamPane extends javax.swing.JPanel {
     private void setSorterTable() {
         sorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(sorter);
+    }
+
+    private void setupControl() {
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+
+        yearChooserFrom.setYear(c.get(Calendar.YEAR));
+        yearChooserTo.setYear(c.get(Calendar.YEAR));
     }
 }
