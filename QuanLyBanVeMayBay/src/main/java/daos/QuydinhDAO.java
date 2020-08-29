@@ -34,7 +34,7 @@ public class QuydinhDAO {
             ex.printStackTrace();
         } catch (NoResultException ex){
             ex.printStackTrace();
-            return null;
+            qd = null;
         }finally{
             session.close();
         }

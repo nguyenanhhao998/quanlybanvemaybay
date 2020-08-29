@@ -18,6 +18,7 @@ import util.HibernateUtil;
  */
 public class TaikhoanDAO {
     public static int checkAccount(String name, String pass){
+        int id = 0;
         Taikhoan tk = null;
         Session session = null;
         try {
@@ -30,10 +31,12 @@ public class TaikhoanDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return 0;
+            System.err.println(ex);
         }finally{
             session.close();
         }
-        return tk.getIdNhanVien();
+        if(tk != null)
+            id = tk.getIdNhanVien();
+        return id;
     }
 }

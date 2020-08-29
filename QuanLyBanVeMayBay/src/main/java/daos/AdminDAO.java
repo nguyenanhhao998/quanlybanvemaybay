@@ -18,6 +18,7 @@ import util.HibernateUtil;
  */
 public class AdminDAO {
     public static boolean checkAdmin(int id){
+        boolean res = true;
         Admin ad = null;
         Session session = null;
         try {
@@ -30,10 +31,10 @@ public class AdminDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return false;
+            res = false;
         }finally{
             session.close();
         }
-        return true;
+        return res;
     }
 }

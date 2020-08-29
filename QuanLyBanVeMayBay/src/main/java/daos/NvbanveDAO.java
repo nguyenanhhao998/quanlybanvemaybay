@@ -19,6 +19,7 @@ import util.HibernateUtil;
  */
 public class NvbanveDAO {
     public static boolean checkNvbanve(int id){
+        boolean res = true;
         Nvbanve nv = null;
         Session session = null;
         try {
@@ -31,10 +32,10 @@ public class NvbanveDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return false;
+            res = false;
         }finally{
             session.close();
         }
-        return true;
+        return res;
     }
 }

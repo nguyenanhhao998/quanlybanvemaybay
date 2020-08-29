@@ -72,7 +72,7 @@ public class HoadonmuaveDAO {
         } catch (HibernateException ex) {
             ex.printStackTrace();
         } catch (NoResultException ex){
-            return null;
+            hd = null;
         }finally{
             session.close();
         }
@@ -81,6 +81,7 @@ public class HoadonmuaveDAO {
     }
     
     public static boolean delete(Hoadonmuave hd){
+        boolean res = true;
         Session session = null;
         Transaction transaction = null;
         try {
@@ -94,9 +95,11 @@ public class HoadonmuaveDAO {
         } catch (HibernateException e) {
             transaction.rollback();
             e.printStackTrace();
-            return false;
+            res = false;
+        }finally{
+            session.close();
         }
         
-        return true;
+        return res;
     }
 }
