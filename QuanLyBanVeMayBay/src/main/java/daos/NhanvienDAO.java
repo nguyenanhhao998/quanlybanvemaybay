@@ -6,6 +6,7 @@
 package daos;
 
 import java.util.List;
+import javax.persistence.NoResultException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -135,6 +136,27 @@ public class NhanvienDAO {
                 transaction.rollback();
             }
             e.printStackTrace();
+        }
+        return res;
+    }
+
+    public static boolean checkTinhTrangNV(int id){
+        boolean res = true;
+        Nhanvien nv = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Nhanvien where idNhanVien = %d and trangThai = '%s'",id, "Đang hoạt động");
+            Query query = session.createQuery(hql);
+            nv = (Nhanvien)query.getSingleResult();
+            
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            res = false;
+        }finally{
+            session.close();
         }
 
         return res;
