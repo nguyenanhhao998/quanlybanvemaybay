@@ -155,23 +155,7 @@ public class MainForAdmin extends javax.swing.JFrame {
     public void setAdmin(Admin ad){
         this.admin = ad;
     }
-
-    public static void main(String[] args) {
-
-        try {
-            //UIManager.setLookAndFeel(new FlatDarkLaf());
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
-        } catch (UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace();
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                MainForAdmin.getInstance().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.Box.Filler filler1;
