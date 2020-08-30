@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import pojos.Nvbanve;
 import ui.LoginFrame;
+import ui.changePassword.ChangePasswordDialog;
 import ui.user.phieu.QuanLyPhieuChoPanel;
 import ui.user.phieu.XuLyDatVePanel;
 import ui.user.muave.DoiVePanel;
@@ -35,6 +37,7 @@ public class MainForUser extends javax.swing.JFrame {
     private XuLyDatVePanel xuLyDatVePane;
     private DoiVePanel doiVePane;
     private QuanLyPhieuChoPanel qlPhieuCho;
+    private Nvbanve nv;
     private MainForUser() {
         initComponents();
 
@@ -61,6 +64,13 @@ public class MainForUser extends javax.swing.JFrame {
             instance = new MainForUser();
         }
         return instance;
+    }
+    
+    public static boolean checkInstance(){
+        if(instance == null){
+            return false;
+        }
+        return true;
     }
     
     public TraCuuChuyenBayPane getTraCuuPane(){
@@ -99,7 +109,15 @@ public class MainForUser extends javax.swing.JFrame {
             }
         });
     }
-        
+    
+    public Nvbanve getNV(){
+        return this.nv;
+    }
+    
+    public void setNV(Nvbanve nv){
+        this.nv = nv;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +132,8 @@ public class MainForUser extends javax.swing.JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jLabel1 = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jButton1 = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0));
         btnLogout = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0));
 
@@ -127,6 +147,19 @@ public class MainForUser extends javax.swing.JFrame {
         jLabel1.setText("Phần mềm quản lý bán vé máy bay");
         jPanel1.add(jLabel1);
         jPanel1.add(filler3);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Đổi mật khẩu");
+        jButton1.setMaximumSize(new java.awt.Dimension(170, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(170, 50));
+        jButton1.setPreferredSize(new java.awt.Dimension(170, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jPanel1.add(filler2);
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         btnLogout.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -146,15 +179,22 @@ public class MainForUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        instance = null;
         this.dispose();
         new LoginFrame().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new ChangePasswordDialog(MainForUser.getInstance(),true).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane tabbedPane;

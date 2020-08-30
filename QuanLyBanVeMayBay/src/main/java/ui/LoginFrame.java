@@ -5,6 +5,8 @@
  */
 package ui;
 
+import bus.AdminBUS;
+import bus.NvbanveBUS;
 import bus.TaikhoanBUS;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import java.util.logging.Level;
@@ -12,6 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import pojos.Admin;
+import pojos.Nvbanve;
 import ui.admin.MainForAdmin;
 import ui.user.MainForUser;
 
@@ -173,12 +177,16 @@ public class LoginFrame extends javax.swing.JFrame {
         
         switch(TaikhoanBUS.login(name, pass)){
             case "admin":
-                this.dispose();//setVisible(false//tắt dialog
+                this.dispose();//tắt dialog
+                Admin ad = AdminBUS.getNVbyID(TaikhoanBUS.checkAccount(name, pass));
                 MainForAdmin.getInstance().runFrame();
+                MainForAdmin.getInstance().setAdmin(ad);
                 break;
             case "nvbanve":
-                this.dispose();//setVisible(false//tắt dialog
+                this.dispose();//tắt dialog
+                Nvbanve nv = NvbanveBUS.getNVbyID(TaikhoanBUS.checkAccount(name, pass));
                 MainForUser.getInstance().runFrame();
+                MainForUser.getInstance().setNV(nv);
                 break;
             case "disable":
                 jlbThongBao.setText("Tài khoản đã bị vô hiệu hóa");

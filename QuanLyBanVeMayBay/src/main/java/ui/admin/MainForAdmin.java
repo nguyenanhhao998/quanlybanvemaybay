@@ -16,11 +16,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableRowSorter;
+import pojos.Admin;
 import ui.LoginFrame;
 import ui.admin.quanlycb.QuanLyChuyenBayPane;
 import ui.admin.quanlynhanvien.QuanLyNhanVienPane;
 import ui.admin.quanlyquidinh.QuanLyQuyDinhPane;
 import ui.admin.statistic.ThongKePane;
+import ui.changePassword.ChangePasswordDialog;
 
 /**
  *
@@ -40,6 +42,7 @@ public class MainForAdmin extends javax.swing.JFrame {
         return INSTANCE;
     }
 
+    private Admin admin;
     private QuanLyChuyenBayPane quanLyChuyenBayPane;
     private QuanLyNhanVienPane quanLyNhanVienPane;
     private ThongKePane thongKePane;
@@ -71,19 +74,18 @@ public class MainForAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jLabel1 = new javax.swing.JLabel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jButton1 = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0));
         btnLogout = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0), new java.awt.Dimension(50, 0));
+        tabbedPane = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 700));
-
-        tabbedPane.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -93,6 +95,19 @@ public class MainForAdmin extends javax.swing.JFrame {
         jLabel1.setText("Phần mềm quản lý bán vé máy bay");
         jPanel1.add(jLabel1);
         jPanel1.add(filler3);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Đổi mật khẩu");
+        jButton1.setMaximumSize(new java.awt.Dimension(170, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(170, 50));
+        jButton1.setPreferredSize(new java.awt.Dimension(170, 50));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jPanel1.add(filler2);
 
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
         btnLogout.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -108,13 +123,21 @@ public class MainForAdmin extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        tabbedPane.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        getContentPane().add(tabbedPane, java.awt.BorderLayout.CENTER);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        INSTANCE = null;
         this.dispose();
         new LoginFrame().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new ChangePasswordDialog(MainForAdmin.getInstance(),true).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void runFrame(){
         /* Create and display the form */
@@ -123,6 +146,14 @@ public class MainForAdmin extends javax.swing.JFrame {
                 MainForAdmin.getInstance().setVisible(true);
             }
         });
+    }
+    
+    public Admin getAdmin(){
+        return this.admin;
+    }
+    
+    public void setAdmin(Admin ad){
+        this.admin = ad;
     }
 
     public static void main(String[] args) {
@@ -144,8 +175,10 @@ public class MainForAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane tabbedPane;

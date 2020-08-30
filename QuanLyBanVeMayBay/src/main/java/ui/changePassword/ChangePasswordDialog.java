@@ -5,6 +5,17 @@
  */
 package ui.changePassword;
 
+import bus.NvbanveBUS;
+import bus.TaikhoanBUS;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import pojos.Admin;
+import pojos.Nvbanve;
+import pojos.Taikhoan;
+import ui.admin.MainForAdmin;
+import ui.user.MainForUser;
+
 /**
  *
  * @author DELL
@@ -33,6 +44,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         filler21 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20));
         filler25 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20));
         jPanel4 = new javax.swing.JPanel();
+        jlbThongBao = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20), new java.awt.Dimension(0, 20));
         jPanel3 = new javax.swing.JPanel();
@@ -58,9 +70,9 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 400));
-        setMinimumSize(new java.awt.Dimension(700, 400));
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setMaximumSize(new java.awt.Dimension(700, 500));
+        setMinimumSize(new java.awt.Dimension(700, 500));
+        setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,6 +91,14 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel7, java.awt.BorderLayout.PAGE_START);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jlbThongBao.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jlbThongBao.setForeground(new java.awt.Color(255, 0, 0));
+        jlbThongBao.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        jlbThongBao.setMaximumSize(new java.awt.Dimension(200, 40));
+        jlbThongBao.setMinimumSize(new java.awt.Dimension(200, 40));
+        jlbThongBao.setPreferredSize(new java.awt.Dimension(200, 40));
+        jPanel4.add(jlbThongBao, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setMinimumSize(new java.awt.Dimension(600, 310));
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 310));
@@ -153,6 +173,11 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         btnChange.setMaximumSize(new java.awt.Dimension(200, 50));
         btnChange.setMinimumSize(new java.awt.Dimension(200, 50));
         btnChange.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnChange);
         jPanel6.add(filler2);
 
@@ -167,6 +192,58 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
+        String oldPass = String.valueOf(jpfOldPass.getPassword());
+        String newPass = String.valueOf(jpfNewPass.getPassword());
+        String confirm = String.valueOf(jpfConfirm.getPassword());
+        
+        if(oldPass.isEmpty() || newPass.isEmpty() || confirm.isEmpty()){
+            jlbThongBao.setText("Bạn phải điền đầy đủ các thông tin.");
+            return;
+        }
+                
+        Nvbanve nv = null;
+        Admin ad = null;
+        Taikhoan tk;
+        if(MainForUser.checkInstance()){
+            nv = MainForUser.getInstance().getNV();
+            tk = nv.getTaikhoan();
+        }else{
+            ad = MainForAdmin.getInstance().getAdmin();
+            tk = ad.getTaikhoan();
+        }
+
+        if(!oldPass.equals(tk.getMatKhau())){
+            jlbThongBao.setText("Mật khẩu cũ không chính xác.");
+            return;
+        }
+        
+        if(!newPass.equals(confirm)){
+            jlbThongBao.setText("Mật khẩu xác nhận lại không khớp");
+            return;
+        }
+        
+        //đổi mật khẩu
+        tk.setMatKhau(newPass);
+        
+        if(TaikhoanBUS.ChangePass(tk)){
+            if(MainForUser.checkInstance()){
+                nv.setTaikhoan(tk);
+                MainForUser.getInstance().setNV(nv);
+            } else{
+                ad.setTaikhoan(tk);
+                MainForAdmin.getInstance().setAdmin(ad);
+            }
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Đổi mật khẩu thành công");
+            
+        }else{
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Đổi mật khẩu thất bại", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnChangeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +313,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JLabel jlbThongBao;
     private javax.swing.JPasswordField jpfConfirm;
     private javax.swing.JPasswordField jpfNewPass;
     private javax.swing.JPasswordField jpfOldPass;

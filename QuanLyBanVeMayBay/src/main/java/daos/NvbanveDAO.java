@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import pojos.Admin;
+import org.hibernate.Transaction;
 import pojos.Nvbanve;
 import util.HibernateUtil;
 
@@ -37,5 +37,25 @@ public class NvbanveDAO {
             session.close();
         }
         return res;
+    }
+    
+    public static Nvbanve getNVbyID(int id){
+        Nvbanve nv = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Nvbanve where idNhanVien = %d",id);
+            Query query = session.createQuery(hql);
+            nv = (Nvbanve)query.getSingleResult();
+            
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            nv = null;
+        }finally{
+            session.close();
+        }
+        return nv;
     }
 }

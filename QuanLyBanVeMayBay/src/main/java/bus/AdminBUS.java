@@ -6,6 +6,7 @@
 package bus;
 
 import daos.AdminDAO;
+import pojos.Admin;
 /**
  *
  * @author HAO
@@ -13,5 +14,9 @@ import daos.AdminDAO;
 public class AdminBUS {
     public static boolean checkAdmin(int id){
         return AdminDAO.checkAdmin(id);
+    }
+    
+    public static Admin getNVbyID(int id){
+        return AdminDAO.getNVbyID(id);
     }
 }
