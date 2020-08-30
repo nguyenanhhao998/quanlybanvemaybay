@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 29/08/2020 17:23:27
+ Date: 30/08/2020 23:07:21
 */
 
 SET NAMES utf8mb4;
@@ -54,7 +54,7 @@ CREATE TABLE `chuyenbay`  (
 -- ----------------------------
 -- Records of chuyenbay
 -- ----------------------------
-INSERT INTO `chuyenbay` VALUES ('CB001', 'DAD', 'ICN', '2020-08-29 05:00:00.000000', 3.5, 'Chưa khởi hành');
+INSERT INTO `chuyenbay` VALUES ('CB001', 'DAD', 'ICN', '2020-07-30 05:00:00.000000', 3.5, 'Chưa khởi hành');
 INSERT INTO `chuyenbay` VALUES ('CB002', 'SGN', 'HAN', '2020-08-28 10:00:00.000000', 2.0, 'Chưa khởi hành');
 INSERT INTO `chuyenbay` VALUES ('CB003', 'SGN', 'HAN', '2020-08-28 12:30:00.000000', 2.0, 'Chưa khởi hành');
 INSERT INTO `chuyenbay` VALUES ('CB004', 'HAN', 'SGN', '2020-08-30 16:00:00.000000', 2.0, 'Chưa khởi hành');
@@ -65,7 +65,8 @@ INSERT INTO `chuyenbay` VALUES ('CB008', 'SGN', 'MEL', '2020-08-29 13:30:00.0000
 INSERT INTO `chuyenbay` VALUES ('CB009', 'SGN', 'HKG', '2020-08-28 18:00:00.000000', 2.5, 'Chưa khởi hành');
 INSERT INTO `chuyenbay` VALUES ('CB010', 'SGN', 'DAD', '2020-08-28 07:30:00.000000', 1.5, 'Chưa khởi hành');
 INSERT INTO `chuyenbay` VALUES ('CB029', 'DAD', 'DAD', '2020-08-22 00:00:07.504000', 0.0, 'Đã hủy');
-INSERT INTO `chuyenbay` VALUES ('CB045', 'DAD', 'DAD', '2020-08-07 00:00:37.376000', 4.0, 'Đã hủy');
+INSERT INTO `chuyenbay` VALUES ('CB044', 'HAN', 'SGN', '2020-08-21 00:00:53.677000', 2.0, 'Đã hủy');
+INSERT INTO `chuyenbay` VALUES ('CB045', 'DAD', 'DAD', '2020-09-07 00:00:37.000000', 4.0, 'Đã hủy');
 
 -- ----------------------------
 -- Table structure for giahangvetheocb
@@ -142,7 +143,7 @@ CREATE TABLE `hoadonmuave`  (
 -- ----------------------------
 INSERT INTO `hoadonmuave` VALUES (1, '2020-08-26 20:47:23.368000', 450000, 1, 'CB001PTV0002');
 INSERT INTO `hoadonmuave` VALUES (2, '2020-08-26 20:47:23.462000', 450000, 2, 'CB001PTV0001');
-INSERT INTO `hoadonmuave` VALUES (3, '2020-08-26 20:52:16.031000', 500000, 3, 'CB005PTV0002');
+INSERT INTO `hoadonmuave` VALUES (3, '2020-07-22 20:52:16.000000', 500000, 3, 'CB005PTV0002');
 INSERT INTO `hoadonmuave` VALUES (4, '2020-08-26 20:52:16.041000', 500000, 4, 'CB005PTV0001');
 INSERT INTO `hoadonmuave` VALUES (5, '2020-08-26 20:54:11.182000', 600000, 5, 'CB009PTV0001');
 
@@ -249,7 +250,7 @@ CREATE TABLE `nhanvien`  (
   `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `TrangThai` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idNhanVien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of nhanvien
@@ -364,13 +365,16 @@ CREATE TABLE `quydinh`  (
   `GiaTri` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `TinhTrang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`idQuyDinh`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of quydinh
 -- ----------------------------
-INSERT INTO `quydinh` VALUES (1, 'Thời hạn hủy vé trước giờ bay', 'Number', '24', 'Còn hiệu lực');
-INSERT INTO `quydinh` VALUES (2, 'Thời hạn đặt vé trước giờ bay', 'Number', '48', 'Còn hiệu lực');
+INSERT INTO `quydinh` VALUES (1, 'Thời hạn hủy vé trước giờ bay', 'Giờ', '24', 'Còn hiệu lực');
+INSERT INTO `quydinh` VALUES (2, 'Thời hạn đặt vé trước giờ bay', 'Giờ', '48', 'Còn hiệu lực');
+INSERT INTO `quydinh` VALUES (3, 'Số sân bay trung gian tối đa', 'Số lượng', '5', 'Còn hiệu lực');
+INSERT INTO `quydinh` VALUES (4, 'Thời gian dừng tối thiểu', 'Giờ', '1', 'Còn hiệu lực');
+INSERT INTO `quydinh` VALUES (5, 'Thời gian dừng tối đa', 'Giờ', '3', 'Còn hiệu lực');
 
 -- ----------------------------
 -- Table structure for sanbay
@@ -412,12 +416,13 @@ CREATE TABLE `sanbaytrunggian`  (
 -- ----------------------------
 -- Records of sanbaytrunggian
 -- ----------------------------
-INSERT INTO `sanbaytrunggian` VALUES ('CB006', 'HAN', 0.0, NULL);
-INSERT INTO `sanbaytrunggian` VALUES ('CB006', 'ICN', 0.0, NULL);
-INSERT INTO `sanbaytrunggian` VALUES ('CB007', 'HKG', 0.0, NULL);
-INSERT INTO `sanbaytrunggian` VALUES ('CB007', 'MEL', 0.0, NULL);
-INSERT INTO `sanbaytrunggian` VALUES ('CB008', 'DAD', 0.5, 'Tiếp nhiên liệu');
-INSERT INTO `sanbaytrunggian` VALUES ('CB008', 'HKG', 0.5, 'Tiếp nhiên liệu');
+INSERT INTO `sanbaytrunggian` VALUES ('CB006', 'ICN', 2.5, 'Tiếp nhiên liệu');
+INSERT INTO `sanbaytrunggian` VALUES ('CB007', 'MEL', 1.0, 'Tiếp nhiên liệu');
+INSERT INTO `sanbaytrunggian` VALUES ('CB008', 'DAD', 2.5, NULL);
+INSERT INTO `sanbaytrunggian` VALUES ('CB008', 'HKG', 1.0, NULL);
+INSERT INTO `sanbaytrunggian` VALUES ('CB008', 'ICN', 3.0, NULL);
+INSERT INTO `sanbaytrunggian` VALUES ('CB044', 'DAD', 2.0, NULL);
+INSERT INTO `sanbaytrunggian` VALUES ('CB044', 'ICN', 1.5, NULL);
 
 -- ----------------------------
 -- Table structure for taikhoan
