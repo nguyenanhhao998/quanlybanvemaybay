@@ -28,7 +28,7 @@ public class QuydinhBUS {
         
         if(thoihan != -1){
             //ngày sau khi cộng thêm thời hạn có thể đặt vé vào ngày hiện tại
-            Date ngay = new Date(ngayKhoiHanh.getTime() + TimeUnit.HOURS.toMillis((long) thoihan));
+            Date ngay = new Date((new Date()).getTime() + TimeUnit.HOURS.toMillis((long) thoihan));
             if(ngayKhoiHanh.compareTo(ngay) <= 0){
                 kq = false;
             }
@@ -50,7 +50,7 @@ public class QuydinhBUS {
         
         if(thoihan != -1){
             //ngày sau khi cộng thêm thời hạn có thể đặt vé vào ngày hiện tại
-            Date ngay = new Date(ngayKhoiHanh.getTime() + TimeUnit.HOURS.toMillis((long) thoihan));
+            Date ngay = new Date((new Date()).getTime() + TimeUnit.HOURS.toMillis((long) thoihan));
             if(ngayKhoiHanh.compareTo(ngay) <= 0){
                 kq = false;
             }

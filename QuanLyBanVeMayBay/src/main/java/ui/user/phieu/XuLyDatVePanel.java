@@ -154,7 +154,7 @@ public class XuLyDatVePanel extends javax.swing.JPanel {
         jPanel10.add(jLabel7);
         jPanel10.add(filler8);
 
-        ngaykhoihanh.setDateFormatString("hh:mm dd/MM/yyyy ");
+        ngaykhoihanh.setDateFormatString("HH:mm dd/MM/yyyy ");
         ngaykhoihanh.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ngaykhoihanh.setMaximumSize(new java.awt.Dimension(200, 40));
         ngaykhoihanh.setMinimumSize(new java.awt.Dimension(200, 40));
