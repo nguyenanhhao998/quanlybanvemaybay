@@ -37,4 +37,24 @@ public class AdminDAO {
         }
         return res;
     }
+    
+    public static Admin getNVbyID(int id){
+        Admin ad = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = String.format("from Admin where idNhanVien = %d",id);
+            Query query = session.createQuery(hql);
+            ad = (Admin)query.getSingleResult();
+            
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } catch (NoResultException ex){
+            ad = null;
+        }finally{
+            session.close();
+        }
+        return ad;
+    }
 }

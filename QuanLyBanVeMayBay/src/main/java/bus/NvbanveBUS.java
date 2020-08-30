@@ -6,6 +6,7 @@
 package bus;
 
 import daos.NvbanveDAO;
+import pojos.Nvbanve;
 
 /**
  *
@@ -14,5 +15,9 @@ import daos.NvbanveDAO;
 public class NvbanveBUS {
     public static boolean checkNvBanve(int id){
         return NvbanveDAO.checkNvbanve(id);
+    }
+    
+    public static Nvbanve getNVbyID(int id){
+        return NvbanveDAO.getNVbyID(id);
     }
 }

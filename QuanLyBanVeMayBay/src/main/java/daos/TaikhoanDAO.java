@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojos.Taikhoan;
 import util.HibernateUtil;
 
@@ -62,5 +63,28 @@ public class TaikhoanDAO {
             id = tk.getIdNhanVien();
         }
         return id;
+    }
+
+    public static boolean changePass(Taikhoan tk){
+        boolean kq = true;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.update(tk);
+
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+            kq = false;
+        }finally{
+            session.close();
+        }
+        
+        return kq;
     }
 }

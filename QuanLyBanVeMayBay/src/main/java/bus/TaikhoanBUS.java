@@ -6,6 +6,8 @@
 package bus;
 
 import daos.*;
+import pojos.Nhanvien;
+import pojos.Taikhoan;
 
 /**
  *
@@ -36,7 +38,7 @@ public class TaikhoanBUS {
                 res = getPermission(id);
             else
                 res = "disable";
-        }
+        }        
         return res;
     } 
 
@@ -46,10 +48,13 @@ public class TaikhoanBUS {
         return id;
     }
 
-    
     //true: còn làm việc
     //false: đã nghỉ việc
     public static boolean checkTinhTrangNV(int id){
         return NhanvienDAO.checkTinhTrangNV(id);
+    }
+   
+    public static boolean ChangePass(Taikhoan tk){
+        return TaikhoanDAO.changePass(tk);
     }
 }
