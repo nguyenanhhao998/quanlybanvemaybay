@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class SanbaytrunggianBUS {
 
-    static boolean themSanbayTrungGian(String maCb, List<String> listMaSBTG) {
-        boolean res = SanbaytrunggianDAO.themSanbayTrungGian(maCb, listMaSBTG);
+    static boolean themSanbayTrungGian(String maCb, List<String> listMaSBTG, List<Double> listThoiGianDung) {
+        boolean res = SanbaytrunggianDAO.themSanbayTrungGian(maCb, listMaSBTG, listThoiGianDung);
         return res;
     }
 
-    static void capNhatSanbayTrungGian(String maCb, List<String> listMaSBTG) {
+    static void capNhatSanbayTrungGian(String maCb, List<String> listMaSBTG, List<Double> listThoiGianDung) {
         SanbaytrunggianDAO.xoaSanbayTrungGian(maCb);
-        SanbaytrunggianDAO.themSanbayTrungGian(maCb, listMaSBTG);
+        SanbaytrunggianDAO.themSanbayTrungGian(maCb, listMaSBTG, listThoiGianDung);
 
     }
 

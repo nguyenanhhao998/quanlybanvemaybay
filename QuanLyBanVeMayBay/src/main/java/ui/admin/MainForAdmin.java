@@ -19,6 +19,7 @@ import javax.swing.table.TableRowSorter;
 import ui.LoginFrame;
 import ui.admin.quanlycb.QuanLyChuyenBayPane;
 import ui.admin.quanlynhanvien.QuanLyNhanVienPane;
+import ui.admin.quanlyquidinh.QuanLyQuyDinhPane;
 import ui.admin.statistic.ThongKePane;
 
 /**
@@ -42,6 +43,7 @@ public class MainForAdmin extends javax.swing.JFrame {
     private QuanLyChuyenBayPane quanLyChuyenBayPane;
     private QuanLyNhanVienPane quanLyNhanVienPane;
     private ThongKePane thongKePane;
+    private QuanLyQuyDinhPane quanLyQuyDinhPane;
 
     private MainForAdmin() {
         initComponents();
@@ -52,10 +54,12 @@ public class MainForAdmin extends javax.swing.JFrame {
         quanLyChuyenBayPane = new QuanLyChuyenBayPane();
         quanLyNhanVienPane = new QuanLyNhanVienPane();
         thongKePane = new ThongKePane();
+        quanLyQuyDinhPane = new QuanLyQuyDinhPane();
 
         tabbedPane.addTab("Quản lý chuyến bay".toUpperCase(), quanLyChuyenBayPane);
-        tabbedPane.add("Quản lý nhân viên".toUpperCase(), quanLyNhanVienPane);
-        tabbedPane.add("Thống kê doanh thu".toUpperCase(), thongKePane);
+        tabbedPane.addTab("Quản lý nhân viên".toUpperCase(), quanLyNhanVienPane);
+        tabbedPane.addTab("Thống kê doanh thu".toUpperCase(), thongKePane);
+        tabbedPane.addTab("Quy định".toUpperCase(), quanLyQuyDinhPane);
     }
 
     /**

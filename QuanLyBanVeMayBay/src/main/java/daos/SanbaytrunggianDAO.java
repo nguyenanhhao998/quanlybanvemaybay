@@ -19,7 +19,7 @@ import util.HibernateUtil;
  */
 public class SanbaytrunggianDAO {
 
-    public static boolean themSanbayTrungGian(String maCb, List<String> listMaSBTG) {
+    public static boolean themSanbayTrungGian(String maCb, List<String> listMaSBTG, List<Double> listThoiGianDung) {
         boolean res = true;
         Session session = null;
         Transaction transaction = null;
@@ -28,8 +28,11 @@ public class SanbaytrunggianDAO {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            for (String maSBTG : listMaSBTG) {
-                Sanbaytrunggian sanbaytrunggian = new Sanbaytrunggian(ChuyenbayDAO.getChuyenBayByID(maCb), SanbayDAO.getSanbayById(maSBTG), 0);
+            for (int i = 0; i < listMaSBTG.size(); i++) {
+                Sanbaytrunggian sanbaytrunggian = new Sanbaytrunggian(
+                        ChuyenbayDAO.getChuyenBayByID(maCb),
+                        SanbayDAO.getSanbayById(listMaSBTG.get(i)),
+                        listThoiGianDung.get(i).floatValue());
                 session.save(sanbaytrunggian);
             }
 

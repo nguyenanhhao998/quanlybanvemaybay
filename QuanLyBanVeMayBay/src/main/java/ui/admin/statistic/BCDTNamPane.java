@@ -113,6 +113,8 @@ public class BCDTNamPane extends javax.swing.JPanel {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
         jPanel10.add(jLabel7);
         jPanel10.add(filler13);
+
+        yearChooserFrom.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jPanel10.add(yearChooserFrom);
 
         jPanel5.add(jPanel10);
@@ -128,6 +130,8 @@ public class BCDTNamPane extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calendar.png"))); // NOI18N
         jPanel11.add(jLabel8);
         jPanel11.add(filler15);
+
+        yearChooserTo.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jPanel11.add(yearChooserTo);
 
         jPanel5.add(jPanel11);

@@ -6,6 +6,7 @@
 package ui.admin.quanlycb;
 
 import bus.ChuyenbayBUS;
+import bus.QuydinhBUS;
 import bus.SanbayBUS;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import pojos.Chuyenbay;
+import pojos.Quydinh;
 import pojos.Sanbay;
 import util.ui.ImageIconUtil;
 
@@ -43,13 +45,37 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
     private List<Sanbay> listSBDen;
     private List<String> listQG;
 
+    private Double thoiGianDungMin = 0d;
+    private Double thoiGianDungMax = 10d;
+    private Integer soSbTGMax = 50;
+
     public ThemChuyenBayPane(QuanLyChuyenBayPane quanLyChuyenBayPane) {
 
         this.quanLyChuyenBayPane = quanLyChuyenBayPane;
         initComponents();
+
+        Quydinh thoiGianDungMinQd = QuydinhBUS.getQuydinh(4);
+        Quydinh thoiGianDungMaxQd = QuydinhBUS.getQuydinh(5);
+        Quydinh soSbTGMaxQd = QuydinhBUS.getQuydinh(3);
+
+        try {
+            thoiGianDungMin = thoiGianDungMinQd != null ? Double.parseDouble(thoiGianDungMinQd.getGiaTri()) : 0d;
+            thoiGianDungMax = thoiGianDungMaxQd != null ? Double.parseDouble(thoiGianDungMaxQd.getGiaTri()) : 10d;
+        } catch (NumberFormatException ex) {
+            thoiGianDungMin = 0d;
+            thoiGianDungMax = 10d;
+        }
+
+        try {
+            soSbTGMax = soSbTGMaxQd != null ? Integer.parseInt(soSbTGMaxQd.getGiaTri()) : 50;
+        } catch (NumberFormatException ex) {
+            soSbTGMax = 50;
+        }
+
         setModelForCbb();
         setEventForCbb();
         setEventForSLGheField();
+
     }
 
     /**
@@ -680,14 +706,17 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
     }//GEN-LAST:event_maSanBayDenCbbActionPerformed
 
     private void themSBTGButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themSBTGButtonActionPerformed
-        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane();
-        sbtgItemPane.setMaximumSize(new Dimension(520, 190));
-        sbtgItemPane.setPreferredSize(new Dimension(520, 190));
+        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane(thoiGianDungMin, thoiGianDungMax);
+        sbtgItemPane.setMaximumSize(new Dimension(520, 240));
+        sbtgItemPane.setPreferredSize(new Dimension(520, 240));
         sbtgItemPane.setAlignmentX(0);
         sbtgItemPane.setTitle(listSBTGItemPanes.size() + 1);
 
         sanBayTGInnerPane.add(sbtgItemPane, sanBayTGInnerPane.getComponentCount() - 1);
         listSBTGItemPanes.add(sbtgItemPane);
+        if (listSBTGItemPanes.size() >= soSbTGMax){
+            themSBTGButton.setEnabled(false);
+        }
 
         sbtgItemPane.getDeleteButton().addActionListener(new ActionListener() {
             @Override
@@ -698,12 +727,15 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 for (i = 0; i < listSBTGItemPanes.size(); i++) {
                     if (listSBTGItemPanes.get(i) == sbtgItemPane) {
                         listSBTGItemPanes.remove(i);
-                        System.out.println("i ===========" + i);
                         break;
                     }
                 }
                 for (; i < listSBTGItemPanes.size(); i++){
                     listSBTGItemPanes.get(i).setTitle(i + 1);
+                }
+
+                if (listSBTGItemPanes.size() < soSbTGMax && !themSBTGButton.isEnabled()) {
+                    themSBTGButton.setEnabled(true);
                 }
 
                 sanBayTGInnerPane.invalidate();
@@ -751,6 +783,7 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         Chuyenbay newCB = new Chuyenbay(maCB, sanbayDi, sanbayDen, ngayKhoiHanh, thoiGianBay, "Chưa khởi hành");
 
         List<String> listMaSBTG = new ArrayList<>();
+        List<Double> listThoiGianDung = new ArrayList<>();
         for (int i = 0; i < listSBTGItemPanes.size(); i++){
             String maSBTG = listSBTGItemPanes.get(i).getMaCB();
             if (listMaSBTG.contains(maSBTG)){
@@ -758,6 +791,7 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
                 return;
             }
             listMaSBTG.add(maSBTG);
+            listThoiGianDung.add(listSBTGItemPanes.get(i).getThoiGianDung());
         }
 
         List<Integer> listSoLuongVeTheoHang = new ArrayList<>();
@@ -770,7 +804,7 @@ public class ThemChuyenBayPane extends javax.swing.JPanel {
         listGiaVeTheoHang.add(Double.parseDouble(giaVeH2Field.getText()));
         listGiaVeTheoHang.add(Double.parseDouble(giaVeH3Field.getText()));
 
-        ChuyenbayBUS.themChuyenBay(newCB, listMaSBTG, listSoLuongVeTheoHang, listGiaVeTheoHang);
+        ChuyenbayBUS.themChuyenBay(newCB, listMaSBTG, listThoiGianDung, listSoLuongVeTheoHang, listGiaVeTheoHang);
 
         quanLyChuyenBayPane.getParentPane().remove(this);
         quanLyChuyenBayPane.proceedToFilter();

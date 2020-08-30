@@ -85,9 +85,9 @@ public class ChuyenbayBUS {
         return ds;
     }
 
-    public static void themChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Integer> listSoLuongVeTheoHang, List<Double> giaVeTheoHang) {
+    public static void themChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Double> listThoiGianDung, List<Integer> listSoLuongVeTheoHang, List<Double> giaVeTheoHang) {
         ChuyenbayBUS.themChuyenbay(newCB);
-        SanbaytrunggianBUS.themSanbayTrungGian(newCB.getMaCb(), listMaSBTG);
+        SanbaytrunggianBUS.themSanbayTrungGian(newCB.getMaCb(), listMaSBTG, listThoiGianDung);
         VechuyenbayBUS.taoListVeCuaChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang);
         GiahangvetheocbBUS.taoGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, giaVeTheoHang);
 
@@ -98,9 +98,9 @@ public class ChuyenbayBUS {
         return isSuccess;
     }
 
-    public static void capNhatChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Integer> listSoLuongVeTheoHang, List<Integer> listSoLuongVeTheoHangBanDau, List<Double> listGiaVeTheoHang) {
+    public static void capNhatChuyenBay(Chuyenbay newCB, List<String> listMaSBTG, List<Double> listThoiGianDung, List<Integer> listSoLuongVeTheoHang, List<Integer> listSoLuongVeTheoHangBanDau, List<Double> listGiaVeTheoHang) {
         ChuyenbayBUS.capNhatChuyenbay(newCB);
-        SanbaytrunggianBUS.capNhatSanbayTrungGian(newCB.getMaCb(), listMaSBTG);
+        SanbaytrunggianBUS.capNhatSanbayTrungGian(newCB.getMaCb(), listMaSBTG, listThoiGianDung);
         VechuyenbayBUS.capNhatListVeCuaChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listSoLuongVeTheoHangBanDau);
         GiahangvetheocbBUS.updateGiaHangVeTheoChuyenBay(newCB.getMaCb(), listSoLuongVeTheoHang, listGiaVeTheoHang);
     }

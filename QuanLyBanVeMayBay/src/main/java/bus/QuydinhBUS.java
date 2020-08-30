@@ -7,8 +7,13 @@ package bus;
 
 import daos.*;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import pojos.Quydinh;
+import util.HibernateUtil;
 
 /**
  *
@@ -57,4 +62,21 @@ public class QuydinhBUS {
         }        
         return kq;
     }
+
+    public static List<Quydinh> getListQuyDinh() {
+        return QuydinhDAO.getListQuyDinh();
+    }
+
+    public static Quydinh getQuydinh(int id) {
+        return QuydinhDAO.getQuydinh(id);
+    }
+
+    public static boolean capNhatQuyDinh(Quydinh quydinh) {
+        return QuydinhDAO.capNhatQuyDinh(quydinh);
+    }
+
+    public static Quydinh getQuydinhForAdmin(int id) {
+        return QuydinhDAO.getQuydinhForAdmin(id);
+    }
+
 }

@@ -39,6 +39,7 @@ import javax.swing.table.TableRowSorter;
 import pojos.Chuyenbay;
 import pojos.Sanbay;
 import util.ui.CustomCenterAlignmentRenderer;
+import util.ui.CustomDateRenderer;
 import util.ui.CustomLeftAlignmentRenderer;
 import util.ui.CustomTaskButtonRenderer;
 
@@ -70,7 +71,6 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         initComponents();
         setupModelForControl();
         setupTable();
-        setupModelForTable();
         setupEventForFilterControls();
     }
 
@@ -422,7 +422,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                 "Mã chuyến bay", "Sân bay đi", "Sân bay đến", "Ngày khởi hành", "Thời gian bay", "SL ghế", "Tình trạng", "Tác vụ"
             };
             Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, Integer.class, Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, Integer.class, Object.class
             };
 
             @Override
@@ -470,8 +470,11 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
                 tableColumnModel.getColumn(0).setCellRenderer(new CustomLeftAlignmentRenderer());
                 for (int i = 1; i <= 6; i++) {
-                    tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
+                    if (i != 3){
+                        tableColumnModel.getColumn(i).setCellRenderer(new CustomCenterAlignmentRenderer());
+                    }
                 }
+                tableColumnModel.getColumn(3).setCellRenderer(new CustomDateRenderer(new SimpleDateFormat("dd/MM/yyyy HH:mm")));
 
                 PanelCellEditorRenderer PanelCellEditorRenderer = new PanelCellEditorRenderer();
                 int finalIndex = tableColumnModel.getColumnCount() - 1;
@@ -480,7 +483,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
 
                 //tableColumnModel.getColumn(6).setCellRenderer(new CustomTaskButtonRenderer());
 
-                //setSorterTable();
+                setSorterTable();
             }
         });
         table.setGridColor(Color.BLACK);
@@ -516,7 +519,6 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
             @Override
             public void run() {
                 listCB = ChuyenbayBUS.getListChuyenbaysForAdmin();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 for (Chuyenbay chuyenbay : listCB) {
                     Sanbay sanBayDi = chuyenbay.getSanbaydi();
                     Sanbay sanBayDen = chuyenbay.getSanbayden();
@@ -524,13 +526,12 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                         chuyenbay.getMaCb(),
                         sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")",
                         sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")",
-                        sdf.format(chuyenbay.getNgayKhoiHanh()),
+                        chuyenbay.getNgayKhoiHanh(),
                         chuyenbay.getThoiGianBay() + " giờ",
                         chuyenbay.getVechuyenbays().size(),
                         chuyenbay.getTinhTrang()
                     };
                     dtm.addRow(row);
-                    //        dtm.addRow(new Object[]{"1", "Tân Sơn Nhất", "Hà Nội", "20/10/2020", "3 giờ", 30, "Đang bay"});
                 }
             }
         });
@@ -562,16 +563,11 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("sanBayDiFilter  =============================== " + sanBayDiFilter);
-                System.out.println("sanBayDenFilter  =============================== " + sanBayDenFilter);
-                System.out.println("soLuongKhachFilter  =============================== " + soLuongKhachFilter);
-                System.out.println("ngayDiFilter  =============================== " + ngayDiFilter);
+
                 listCB = ChuyenbayBUS.getListChuyenBaysByFilter(sanBayDiFilter, sanBayDenFilter, soLuongKhachFilter, ngayDiFilter);
-                System.out.println("listCB size =============================== " + listCB.size());
 
                 table.removeEditor();
                 dtm.setRowCount(0);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 for (Chuyenbay chuyenbay : listCB) {
                     Sanbay sanBayDi = chuyenbay.getSanbaydi();
                     Sanbay sanBayDen = chuyenbay.getSanbayden();
@@ -579,7 +575,7 @@ public class QuanLyChuyenBayPane extends javax.swing.JPanel {
                         chuyenbay.getMaCb(),
                         sanBayDi.getThanhPho() + " (" + sanBayDi.getMaSb() + ")",
                         sanBayDen.getThanhPho() + " (" + sanBayDen.getMaSb() + ")",
-                        sdf.format(chuyenbay.getNgayKhoiHanh()),
+                        chuyenbay.getNgayKhoiHanh(),
                         chuyenbay.getThoiGianBay() + " giờ",
                         chuyenbay.getVechuyenbays().size(),
                         chuyenbay.getTinhTrang()

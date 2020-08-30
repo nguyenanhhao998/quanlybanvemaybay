@@ -20,10 +20,21 @@ import javax.swing.table.TableCellRenderer;
  */
 public class CustomDateRenderer extends JPanel implements TableCellRenderer {
 
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
     JLabel label;
 
     public CustomDateRenderer() {
+        setLayout(new BorderLayout());
+
+        label = new JLabel();
+        label.setFont(new java.awt.Font("Tahoma", 0, 16));
+        label.setHorizontalAlignment(CENTER);
+
+        add(label, BorderLayout.CENTER);
+    }
+
+    public CustomDateRenderer(SimpleDateFormat sdf) {
+        this.SDF = sdf;
         setLayout(new BorderLayout());
 
         label = new JLabel();

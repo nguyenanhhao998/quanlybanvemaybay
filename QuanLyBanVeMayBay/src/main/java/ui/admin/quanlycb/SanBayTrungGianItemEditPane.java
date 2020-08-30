@@ -11,6 +11,7 @@ import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.SpinnerNumberModel;
 import pojos.Sanbay;
 
 /**
@@ -21,13 +22,20 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
 
     private List<Sanbay> listSBTG;
     private List<String> listQG;
+
+    private Double thoiGianDungMin;
+    private Double thoiGianDungMax;
     /**
      * Creates new form SanBayTrungGianPane
      */
-    public SanBayTrungGianItemEditPane() {
+    public SanBayTrungGianItemEditPane(Double thoiGianDungMin, Double thoiGianDungMax) {
+        this.thoiGianDungMin = thoiGianDungMin;
+        this.thoiGianDungMax = thoiGianDungMax;
         initComponents();
         setModelForCbb();
+        setModelForSpinner();
         setEventForCbb();
+
     }
 
     /**
@@ -45,6 +53,9 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
         titleLabel = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        thoiGianDungSpinner = new javax.swing.JSpinner();
+        jLabel16 = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -81,18 +92,19 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setText("TG dừng: ");
+
+        thoiGianDungSpinner.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        thoiGianDungSpinner.setModel(new javax.swing.SpinnerNumberModel(0.5d, null, null, 0.5d));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setText("(Giờ)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel13))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(quocGiaSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,6 +113,19 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(quocGiaSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(thoiGianDungSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,12 +139,21 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(quocGiaSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(maSanBayTGCbb, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)))
                     .addComponent(deleteButton))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(thoiGianDungSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,9 +183,12 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> maSanBayTGCbb;
     private javax.swing.JComboBox<String> quocGiaSanBayTGCbb;
+    private javax.swing.JSpinner thoiGianDungSpinner;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -197,13 +234,12 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
         return listSBTG.get(maSanBayTGCbb.getSelectedIndex()).getMaSb();
     }
 
-    void fillUpData(String quocGia, String maSb) {
+    void fillUpData(String quocGia, String maSb, Double thoiGianDung) {
         for (int i = 0; i < listQG.size(); i++) {
             if (listQG.get(i).equals(quocGia)) {
                 quocGiaSanBayTGCbb.setSelectedIndex(i);
             }
         }
-
 
         listSBTG = SanbayBUS.getListSanbaysByQuocGia(listQG.get(quocGiaSanBayTGCbb.getSelectedIndex()));
         int maSanBayTGCbbSelectedIndex = 1;
@@ -217,5 +253,22 @@ public class SanBayTrungGianItemEditPane extends javax.swing.JPanel {
 
         }
         maSanBayTGCbb.setSelectedIndex(maSanBayTGCbbSelectedIndex);
+
+        setThoiGianDung(thoiGianDung);
+    }
+
+    private void setModelForSpinner() {
+        SpinnerNumberModel spm = (SpinnerNumberModel) thoiGianDungSpinner.getModel();
+        spm.setMinimum(thoiGianDungMin);
+        spm.setMaximum(thoiGianDungMax);
+        spm.setValue(thoiGianDungMin);
+    }
+
+    public Double getThoiGianDung() {
+        return (Double) thoiGianDungSpinner.getValue();
+    }
+
+    public void setThoiGianDung(Double thoiGianDung) {
+        thoiGianDungSpinner.setValue(Math.max(thoiGianDungMin, thoiGianDung));
     }
 }

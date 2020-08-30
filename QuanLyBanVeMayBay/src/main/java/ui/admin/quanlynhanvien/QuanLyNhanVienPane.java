@@ -60,7 +60,6 @@ public class QuanLyNhanVienPane extends javax.swing.JPanel {
     public QuanLyNhanVienPane() {
         initComponents();
         setupTable();
-        setupModelForTable();
         fillUpData();
         setEventForFilterControl();
     }

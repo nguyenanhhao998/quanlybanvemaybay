@@ -7,6 +7,7 @@ package ui.admin.quanlycb;
 
 import bus.ChuyenbayBUS;
 import bus.GiahangvetheocbBUS;
+import bus.QuydinhBUS;
 import bus.SanbayBUS;
 import bus.VechuyenbayBUS;
 import daos.ChuyenbayDAO;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import pojos.Chuyenbay;
 import pojos.Giahangvetheocb;
+import pojos.Quydinh;
 import pojos.Sanbay;
 import pojos.Sanbaytrunggian;
 import util.ui.ImageIconUtil;
@@ -50,16 +52,42 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
     private List<Sanbay> listSBDen;
     private List<String> listQG;
 
+    private Double thoiGianDungMin = 0d;
+    private Double thoiGianDungMax = 10d;
+    private Integer soSbTGMax = 50;
+
     public EditChuyenBayPane(String idCB, QuanLyChuyenBayPane rootPane) {
         this.idCB = idCB;
         this.quanLyChuyenBayPane = rootPane;
         initComponents();
+
+        Quydinh thoiGianDungMinQd = QuydinhBUS.getQuydinh(4);
+        Quydinh thoiGianDungMaxQd = QuydinhBUS.getQuydinh(5);
+
+        try {
+            thoiGianDungMin = thoiGianDungMinQd != null ? Double.parseDouble(thoiGianDungMinQd.getGiaTri()) : 0d;
+            thoiGianDungMax = thoiGianDungMaxQd != null ? Double.parseDouble(thoiGianDungMaxQd.getGiaTri()) : 10d;
+        } catch (NumberFormatException ex) {
+            thoiGianDungMin = 0d;
+            thoiGianDungMax = 10d;
+        }
+
+        Quydinh soSbTGMaxQd = QuydinhBUS.getQuydinh(3);
+
+        try {
+            soSbTGMax = soSbTGMaxQd != null ? Integer.parseInt(soSbTGMaxQd.getGiaTri()) : 50;
+        } catch (NumberFormatException ex) {
+            soSbTGMax = 50;
+        }
 
         setModelForCbb();
         setEventForCbb();
         setEventForSLGheField();
 
         fillUpDataChuyenBay();
+
+
+
     }
 
     /**
@@ -654,6 +682,7 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
         chuyenbay.setThoiGianBay(thoiGianBay);
 
         List<String> listMaSBTG = new ArrayList<>();
+        List<Double> listThoiGianDung = new ArrayList<>();
         for (int i = 0; i < listSBTGItemPanes.size(); i++) {
             String maSBTG = listSBTGItemPanes.get(i).getMaCB();
             if (listMaSBTG.contains(maSBTG)) {
@@ -661,6 +690,7 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
                 return;
             }
             listMaSBTG.add(maSBTG);
+            listThoiGianDung.add(listSBTGItemPanes.get(i).getThoiGianDung());
         }
 
         List<Integer> listSoLuongVeTheoHang = new ArrayList<>();
@@ -673,7 +703,7 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
         listGiaVeTheoHang.add(Double.parseDouble(giaVeH2Field.getText()));
         listGiaVeTheoHang.add(Double.parseDouble(giaVeH3Field.getText()));
 
-        ChuyenbayBUS.capNhatChuyenBay(chuyenbay, listMaSBTG, listSoLuongVeTheoHang, listSoLuongVeTheoHangBanDau, listGiaVeTheoHang);
+        ChuyenbayBUS.capNhatChuyenBay(chuyenbay, listMaSBTG, listThoiGianDung, listSoLuongVeTheoHang, listSoLuongVeTheoHangBanDau, listGiaVeTheoHang);
 
         quanLyChuyenBayPane.getParentPane().remove(this);
         quanLyChuyenBayPane.proceedToFilter();
@@ -714,14 +744,17 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
     }//GEN-LAST:event_maSanBayDenCbbActionPerformed
 
     private void themSBTGButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themSBTGButtonActionPerformed
-        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane();
-        sbtgItemPane.setMaximumSize(new Dimension(520, 190));
-        sbtgItemPane.setPreferredSize(new Dimension(520, 190));
+        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane(thoiGianDungMin, thoiGianDungMax);
+        sbtgItemPane.setMaximumSize(new Dimension(520, 240));
+        sbtgItemPane.setPreferredSize(new Dimension(520, 240));
         sbtgItemPane.setAlignmentX(0);
         sbtgItemPane.setTitle(listSBTGItemPanes.size() + 1);
 
         sanBayTGInnerPane.add(sbtgItemPane, sanBayTGInnerPane.getComponentCount() - 1);
         listSBTGItemPanes.add(sbtgItemPane);
+        if (listSBTGItemPanes.size() >= soSbTGMax){
+            themSBTGButton.setEnabled(false);
+        }
 
         sbtgItemPane.getDeleteButton().addActionListener(new ActionListener() {
             @Override
@@ -737,6 +770,10 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
                 }
                 for (; i < listSBTGItemPanes.size(); i++){
                     listSBTGItemPanes.get(i).setTitle(i + 1);
+                }
+
+                if (listSBTGItemPanes.size() < soSbTGMax && !themSBTGButton.isEnabled()) {
+                    themSBTGButton.setEnabled(true);
                 }
 
                 sanBayTGInnerPane.invalidate();
@@ -1002,18 +1039,20 @@ public class EditChuyenBayPane extends javax.swing.JPanel {
     private void fillUpDataSanBayTrungGian() {
         for (Object sanbaytrunggian : chuyenbay.getSanbaytrunggians()) {
             Sanbaytrunggian sbtg = (Sanbaytrunggian) sanbaytrunggian;
-            addSanBayTrungGianPane(sbtg.getSanbay().getQuocGia(), sbtg.getSanbay().getMaSb());
+            Float tgdFloat = sbtg.getThoiGianDung();
+            Double tgDouble = tgdFloat.doubleValue();
+            addSanBayTrungGianPane(sbtg.getSanbay().getQuocGia(), sbtg.getSanbay().getMaSb(), tgDouble);
         }
     }
 
-    private void addSanBayTrungGianPane(String quocGia, String maSb) {
-        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane();
-        sbtgItemPane.setMaximumSize(new Dimension(520, 190));
-        sbtgItemPane.setPreferredSize(new Dimension(520, 190));
+    private void addSanBayTrungGianPane(String quocGia, String maSb, Double thoiGianDung) {
+        SanBayTrungGianItemEditPane sbtgItemPane = new SanBayTrungGianItemEditPane(thoiGianDungMin, thoiGianDungMax);
+        sbtgItemPane.setMaximumSize(new Dimension(520, 240));
+        sbtgItemPane.setPreferredSize(new Dimension(520, 240));
         sbtgItemPane.setAlignmentX(0);
         sbtgItemPane.setTitle(listSBTGItemPanes.size() + 1);
 
-        sbtgItemPane.fillUpData(quocGia, maSb);
+        sbtgItemPane.fillUpData(quocGia, maSb, thoiGianDung);
 
         sanBayTGInnerPane.add(sbtgItemPane, sanBayTGInnerPane.getComponentCount() - 1);
         listSBTGItemPanes.add(sbtgItemPane);
